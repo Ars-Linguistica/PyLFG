@@ -1,5 +1,5 @@
 # Lexicon
-
+# TODO: Check typos in POS tags
 # Determiners
 a: D
 an: D
@@ -1221,7 +1221,452 @@ malevolent: Adj
 spiteful: Adj
 vicious: Adj
 mean: Adj
-malicious: Ad
+malicious: Adj
+# Lexicon (continued)
+
+# Adjectives (continued)
+fatal: Adj
+deadly: Adj
+venomous: Adj
+poisonous: Adj
+toxic: Adj
+harmful: Adj
+dangerous: Adj
+risky: Adj
+perilous: Adj
+life-threatening: Adj
+harmful: Adj
+destructive: Adj
+damaging: Adj
+brutal: Adj
+violent: Adj
+bloodthirsty: Adj
+murderous: Adj
+homicidal: Adj
+deadly: Adj
+fatal: Adj
+cruel: Adj
+callous: Adj
+unfeeling: Adj
+unemotional: Adj
+uncaring: Adj
+insensitive: Adj
+negligible: Adj
+inconsequential: Adj
+unimportant: Adj
+trivial: Adj
+insubstantial: Adj
+minor: Adj
+insignificant: Adj
+frivolous: Adj
+shallow: Adj
+superficial: Adj
+vacuous: Adj
+hollow: Adj
+empty: Adj
+worthless: Adj
+useless: Adj
+pointless: Adj
+meaningless: Adj
+irrelevant: Adj
+invalid: Adj
+inept: Adj
+inefficient: Adj
+ineffective: Adj
+incompetent: Adj
+inadequate: Adj
+unappreciated: Adj
+unvalued: Adj
+unloved: Adj
+disfavored: Adj
+disliked: Adj
+disrespected: Adj
+unrecognized: Adj
+unofficial: Adj
+unauthorized: Adj
+illegitimate: Adj
+invalid: Adj
+vulnerable: Adj
+weak: Adj
+unhealthy: Adj
+depressed: Adj
+blue: Adj
+down: Adj
+sad: Adj
+upset: Adj
+distressed: Adj
+traumatized: Adj
+scarred: Adj
+injured: Adj
+wounded: Adj
+hurt: Adj
+insulted: Adj
+offended: Adj
+incensed: Adj
+outraged: Adj
+furious: Adj
+enraged: Adj
+angry: Adj
+annoyed: Adj
+irritated: Adj
+# Lexicon (continued)
+
+# Adjectives (continued)
+frustrated: Adj
+dissatisfied: Adj
+displeased: Adj
+dismayed: Adj
+disappointed: Adj
+disheartened: Adj
+despondent: Adj
+depressed: Adj
+dejected: Adj
+cheerless: Adj
+joyless: Adj
+unlucky: Adj
+unfortunate: Adj
+blessingless: Adj
+thankless: Adj
+ungrateful: Adj
+unpleased: Adj
+dissatisfied: Adj
+discontented: Adj
+unhappy: Adj
+
+# Adverbs
+here: Adv
+there: Adv
+now: Adv
+then: Adv
+today: Adv
+tomorrow: Adv
+yesterday: Adv
+tonight: Adv
+this: Adv
+that: Adv
+these: Adv
+those: Adv
+away: Adv
+off: Adv
+abroad: Adv
+far: Adv
+near: Adv
+somewhere: Adv
+anywhere: Adv
+nowhere: Adv
+elsewhere: Adv
+everywhere: Adv
+anytime: Adv
+sometimes: Adv
+often: Adv
+usually: Adv
+always: Adv
+never: Adv
+rarely: Adv
+seldom: Adv
+occasionally: Adv
+infrequently: Adv
+hardly: Adv
+scarcely: Adv
+barely: Adv
+mildly: Adv
+gently: Adv
+lightly: Adv
+tenderly: Adv
+faintly: Adv
+softly: Adv
+delicately: Adv
+quietly: Adv
+silently: Adv
+whisperingly: Adv
+mutely: Adv
+hush: Adv
+shh: Adv
+sshh: Adv
+be quiet: Adv
+shut up: Adv
+button it: Adv
+keep it down: Adv
+lower your voice: Adv
+quieten down: Adv
+keep the noise down: Adv
+keep the volume down: Adv
+turn the volume down: Adv
+turn it down: Adv
+reduce the volume: Adv
+lower the volume: Adv
+mute: Adv
+silence: Adv
+muffle: Adv
+dampen: Adv
+diminish: Adv
+deaden: Adv
+dull: Adv
+numb: Adv
+stifle: Adv
+suppress: Adv
+conceal: Adv
+hide: Adv
+cover: Adv
+mask: Adv
+obscure: Adv
+veil: Adv
+camouflage: Adv
+disguise: Adv
+cloak: Adv
+shroud: Adv
+envelop: Adv
+wrap: Adv
+encircle: Adv
+surround: Adv
+enclose: Adv
+ring: Adv
+circle: Adv
+loop: Adv
+wrap around: Adv
+wrap up: Adv
+coil: Adv
+roll: Adv
+bundle: Adv
+pack: Adv
+fold: Adv
+crimp: Adv
+curl: Adv
+crinkle: Adv
+# Lexicon (continued)
+
+# Adverbs (continued)
+fold up: Adv
+tuck: Adv
+pleat: Adv
+pinch: Adv
+squeeze: Adv
+crush: Adv
+compress: Adv
+flatten: Adv
+iron: Adv
+smooth: Adv
+polish: Adv
+shine: Adv
+buff: Adv
+wipe: Adv
+clean: Adv
+scrub: Adv
+wash: Adv
+rinse: Adv
+rinse off: Adv
+rinse away: Adv
+rinse out: Adv
+rinse clean: Adv
+rinse off: Adv
+rinse away: Adv
+rinse out: Adv
+rinse clean: Adv
+cleanse: Adv
+purify: Adv
+sterilize: Adv
+disinfect: Adv
+sanitize: Adv
+fumigate: Adv
+deodorize: Adv
+disenfect: Adv
+deodorize: Adv
+scour: Adv
+scrape: Adv
+scratch: Adv
+scratch off: Adv
+scratch away: Adv
+scratch out: Adv
+scratch clean: Adv
+abrade: Adv
+erase: Adv
+wipe off: Adv
+wipe away: Adv
+wipe out: Adv
+wipe clean: Adv
+rub: Adv
+rub off: Adv
+rub away: Adv
+rub out: Adv
+rub clean: Adv
+brush: Adv
+brush off: Adv
+brush away: Adv
+brush out: Adv
+brush clean: Adv
+sweep: Adv
+sweep off: Adv
+sweep away: Adv
+sweep out: Adv
+sweep clean: Adv
+swipe: Adv
+swipe off: Adv
+swipe away: Adv
+swipe out: Adv
+swipe clean: Adv
+wipe down: Adv
+wipe up: Adv
+clean up: Adv
+tidy up: Adv
+straighten up: Adv
+organize: Adv
+arrange: Adv
+order: Adv
+neatness: Adv
+tidiness: Adv
+cleanliness: Adv
+sanitation: Adv
+hygiene: Adv
+wholesomeness: Adv
+healthiness: Adv
+well-being: Adv
+comfort: Adv
+ease: Adv
+convenience: Adv
+luxury: Adv
+leisure: Adv
+relaxation: Adv
+relax: Adv
+unwind: Adv
+decompress: Adv
+destress: Adv
+calm down: Adv
+settle down: Adv
+cool down: Adv
+slow down: Adv
+relax: Adv
+rest: Adv
+repose: Adv
+sleep: Adv
+nap: Adv
+doze: Adv
+drowse: Adv
+slumber: Adv
+snooze: Adv
+siesta: Adv
+rest: Adv
+repose: Adv
+recover: Adv
+recuperate: Adv
+regenerate: Adv
+refresh: Adv
+renew: Adv
+revive: Adv
+awaken: Adv
+arise: Adv
+get up: Adv
+rise: Adv
+stand up: Adv
+come to: Adv
+recover: Adv
+rally: Adv
+snap out of it: Adv
+snap out of it: Adv
+snap out of it: Adv
+snap out of it: Adv
+recover: Adv
+rally: Adv
+regain strength: Adv
+# Lexicon (continued)
+
+# Adverbs (continued)
+regain energy: Adv
+get back on track: Adv
+get back on your feet: Adv
+pull yourself together: Adv
+pick yourself up: Adv
+get over it: Adv
+get over yourself: Adv
+move on: Adv
+move on with your life: Adv
+move forward: Adv
+move ahead: Adv
+move ahead with your life: Adv
+proceed: Adv
+continue: Adv
+go on: Adv
+carry on: Adv
+keep going: Adv
+keep moving: Adv
+keep progressing: Adv
+keep advancing: Adv
+keep striving: Adv
+keep trying: Adv
+keep pushing: Adv
+keep pushing forward: Adv
+keep pushing ahead: Adv
+keep climbing: Adv
+keep climbing up: Adv
+keep climbing higher: Adv
+keep reaching: Adv
+keep reaching higher: Adv
+keep striving for more: Adv
+keep striving for better: Adv
+keep working: Adv
+keep working hard: Adv
+keep working towards: Adv
+keep working towards your goals: Adv
+keep working towards your dreams: Adv
+keep working towards your aspirations: Adv
+keep working towards your ambitions: Adv
+keep working towards your objectives: Adv
+keep working towards your targets: Adv
+keep working towards your aims: Adv
+keep working towards your intentions: Adv
+keep working towards your desires: Adv
+keep working towards your longings: Adv
+keep working towards your wishes: Adv
+keep working towards your goals: Adv
+keep working towards your objectives: Adv
+keep working towards your targets: Adv
+keep working towards your aims: Adv
+keep working towards your intentions: Adv
+keep working towards your desires: Adv
+keep working towards your longings: Adv
+keep working towards your wishes: Adv
+keep working towards your goals: Adv
+keep working towards your objectives: Adv
+keep working towards your targets: Adv
+keep working towards your aims: Adv
+keep working towards your intentions: Adv
+keep working towards your desires: Adv
+keep working towards your longings: Adv
+keep working towards your wishes: Adv
+
+# Prepositions
+at: Prep
+in: Prep
+on: Prep
+with: Prep
+for: Prep
+to: Prep
+by: Prep
+from: Prep
+of: Prep
+about: Prep
+over: Prep
+under: Prep
+through: Prep
+around: Prep
+before: Prep
+behind: Prep
+after: Prep
+during: Prep
+above: Prep
+below: Prep
+near: Prep
+between: Prep
+among: Prep
+inside: Prep
+outside: Prep
+toward: Prep
+towards: Prep
+up: Prep
+down: Prep
+off: Prep
+on: Prep
+
+
 
 
 
