@@ -1,66 +1,59 @@
-import Re
+import re
+from typing import Dict, List
 
-def parse_lfgs(s):
-    tokens = re.findall()...
+class LFGParseTreeNode:
+    def __init__(self, type, value=None, children=None, c_structure=None, f_structure=None):
+        self.type = type
+        self.value = value
+        self.children = children or []
+        self.c_structure = c_structure
+        self.f_structure = f_structure
 
-# Read the lexicon and the production rules
-lexicon = {}
-with open("lexicon.txt", "r") as f:
-    for line in f:
-        # Ignore empty lines and lines starting with '#'
-        if not line.strip() or line.startswith("#"):
-            continue
+class LFGParseTree:
+    def __init__(self, root):
+        self.root = root
 
-        word, pos = line.split(":")
-        word = word.strip()
-        pos = pos.strip()
-
-        if word in lexicon:
-            lexicon[word].append(pos)
-        else:
-            lexicon[word] = [pos]
-
-rules = {}
-with open("grammar.txt", "r") as f:
-    for line in f:
-        # Ignore empty lines and lines starting with '#'
-        if not line.strip() or line.startswith("#"):
-            continue
-
-        lhs, rhs = line.split("->")
-        lhs = lhs.strip()
-        rhs = [r.strip() for r in rhs.split()]
-
-        if lhs in rules:
-            rules[lhs].append(rhs)
-        else:
-            rules[lhs] = [rhs]
-
-# Build the parse tree
-def build_subtree(parent):
-    while tokens:
-        token = tokens.pop(0)
-        if token == "(":
-            # Start a new subtree with the type specified by the next token
-            node_type = tokens.pop(0)
-            subtree = build_subtree(LFGParseTreeNode(node_type))
-            parent.children.append(subtree)
-        elif token == ")":
-            # End the current subtree and return the parent node
-            return parent
-        else:
-            # Create a new leaf node for the current token
-            if token in lexicon:
-                # The token is in the lexicon, so it must be a word
-                node_type = lexicon[token][0]  # Assume the word has only one POS
+def build_parse_tree(tokens):
+    def build_subtree(parent):
+        while tokens:
+            token = tokens.pop(0)
+            if token == "(":
+                node_type = tokens.pop(0)
+                subtree = build_subtree(LFGParseTreeNode(node_type))
+                parent.children.append(subtree)
+            elif token == ")":
+                return parent
             else:
-                # The token is not in the lexicon, so it must be a nonterminal
-                node_type = token
-            parent.children.append(LFGParseTreeNode(node_type, value=token))
-    return parent
+                parent.children.append(LFGParseTreeNode("word", value=token))
+        return parent
 
-# Initialize the parse tree with the start symbol
-start_symbol = list(rules.keys())[0]  # Assume there is only one start symbol
-return LFGParseTree(build_subtree(LFGParseTreeNode(start_symbol)))
+    root_type = tokens.pop(0)
+    return LFGParseTree(build_subtree(LFGParseTreeNode(root_type)))
 
-....
+def parse_lfg(s):
+    tokens = re.findall(r"\(|\)|[\w'-]+", s)
+    return build_parse_tree(tokens)
+
+def parse_sentence(sentence: str, lexicon: Dict[str, str], grammar: Dict[str, List[str]]) -> LFGParseTree:
+    # Use the POS tagger to get the tagged sentence
+    tagged_sentence = pos_tagger(sentence, lexicon)
+    print(f"Tagged sentence: {tagged_sentence}")
+
+    # Parse the tagged sentence using the LFG parser
+    parse_tree = parse_lfg(tagged_sentence)
+    print_parse_tree(parse_tree.root)
+
+    # Validate the parse tree using the grammar
+    validate_parse_tree(parse_tree.root, grammar)
+
+    # Generate the c-structure and f-structure for the parse tree
+    generate_c_structure(parse_tree.root, lexicon)
+    generate_f_structure(parse_tree.root, lexicon)
+
+    return parse_tree
+
+def validate_parse_tree(node, grammar: Dict[str, List[str]]):
+    # If this node is a terminal symbol (i.e. a word), check that it is in the lexicon
+    if node.type == "word":
+        if node.value not in lexicon:
+            raise ValueError(f
