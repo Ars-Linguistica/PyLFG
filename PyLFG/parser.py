@@ -244,3 +244,35 @@ def parse_grammar(filename):
                 grammar[lhs] = [rhs]
     return grammar
 
+def parse_annotated_grammar(filename: str) -> Dict[str, List[str]]:
+    """
+    Load an annotated LFG grammar from the specified file.
+    
+    Args:
+    - filename: string, the name of the file containing the grammar
+    
+    Returns:
+    - dictionary: a dictionary representing the grammar, where keys are non-terminal symbols and values are lists of strings representing the productions for that non-terminal symbol
+    """
+    grammar = {}
+    
+    # Open the file and read the lines
+    with open(filename, "r") as f:
+        lines = f.readlines()
+    
+    # Iterate through the lines and extract the non-terminal and production from each line
+    for line in lines:
+        # Split the line on the "->" symbol
+        parts = line.split("->")
+        
+        # Extract the non-terminal and production
+        non_terminal = parts[0].strip()
+        production = parts[1].strip()
+        
+        # Add the production to the list of productions for the non-terminal
+        if non_terminal in grammar:
+            grammar[non_terminal].append(production)
+        else:
+            grammar[non_terminal] = [production]
+    
+    return grammar
