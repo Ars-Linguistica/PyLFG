@@ -23,8 +23,15 @@ def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]]) -> LFGPar
         # Find all productions that can be created using the current token
         next_productions = []
         for non_terminal, productions in grammar.items():
-            if token in productions:
-                next_productions.append(non_terminal)
+            for production in productions:
+                # Check if the current token matches the RHS of the production
+                if isinstance(production, str) and production == token:
+                    next_productions.append(non_terminal)
+                # Check if the current token matches a functional annotation
+                elif isinstance(production, tuple) and len(production) == 2:
+                    annotation, rhs = production
+                    if rhs == token:
+                        next_productions.append((non_terminal, annotation))
         
         # If no productions were found, this is a parse error
         if not next_productions:
@@ -33,7 +40,10 @@ def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]]) -> LFGPar
         # Create new parse tree nodes for each possible production
         new_nodes = []
         for production in next_productions:
-            new_node = LFGParseTreeNode(production, token)
+            if isinstance(production, str):
+                new_node = LFGParseTreeNode(production, token)
+            elif isinstance(production, tuple):
+                new_node = LFGParseTreeNode(production[0], token, functional_annotation=production[1])
             new_nodes.append(new_node)
         
         # Add the new nodes to the list of parse tree nodes
@@ -42,25 +52,33 @@ def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]]) -> LFGPar
     # Return the parse tree rooted at the dummy node
     return LFGParseTree(nodes[0])
 
+
 def validate_parse_tree(tree: LFGParseTree, grammar: dict) -> bool:
-"""Validate a parse tree according to the given grammar rules.
-Parameters:
-tree (LFGParseTree): The parse tree to validate.
-grammar (dict): A dictionary of the grammar rules. The keys are the left-hand sides of the rules and the values are the lists of right-hand sides.
+    """Validate a parse tree according to the given grammar rules.
+    Parameters:
+    tree (LFGParseTree): The parse tree to validate.
+    grammar (dict): A dictionary of the grammar rules. The keys are the left-hand sides of the rules and the values are lists of right-hand sides.
 
-Returns:
-bool: True if the parse tree is valid according to the grammar, False otherwise.
-"""
-# Base case: If the tree is a leaf node, it must be a terminal symbol
-if tree.is_leaf():
-    return tree.label in grammar["terminals"]
+    Returns:
+    bool: True if the parse tree is valid according to the grammar, False otherwise.
+    """
+    # Base case: If the tree is a leaf node, it must be a terminal symbol
+    if tree.is_leaf():
+        return tree.label in grammar["terminals"]
 
-# Recursive case: Check that the node's label is a non-terminal and that its children's labels are in the list of valid rules
-if tree.label in grammar["nonterminals"]:
-    return all(validate_parse_tree(child, grammar) for child in tree.children)
+    # Recursive case: Check that the node's label is a non-terminal and that its children's labels are in the list of valid rules
+    if tree.label in grammar["nonterminals"]:
+        if tree.functional_annotations:
+            for annotation, child in zip(tree.functional_annotations, tree.children):
+                if not validate_parse_tree(child, grammar) or annotation not in grammar["functional_annotations"]:
+                    return False
+            return True
+        else:
+            return all(validate_parse_tree(child, grammar) for child in tree.children)
 
-# If the tree is neither a leaf node nor a non-terminal, it is invalid
-return False
+    # If the tree is neither a leaf node nor a non-terminal, it is invalid
+    return False
+
 
 
 def cyk_parse(sentence, grammar):
@@ -73,39 +91,52 @@ grammar (dict): A dictionary of production rules, where the keys are the left-ha
 Returns:
 list[LFGParseTree]: A list of parse trees, one for each valid parse of the sentence. If the sentence is not in the language defined by the grammar, an empty list is returned.
 """
+def cyk_parse(sentence, grammar):
+    """
+    Parse a sentence using the CYK algorithm.
+    
+    Parameters:
+    - sentence (str): The sentence to parse.
+    - grammar (dict): A dictionary of production rules, where the keys are the left-hand sides of the rules and the values are lists of right-hand sides.
+    
+    Returns:
+    - list[LFGParseTree]: A list of parse trees, one for each valid parse of the sentence. If the sentence is not in the language defined by the grammar, an empty list is returned.
+    """
 
-# Tokenize the input
-words = sentence.split()
-n = len(words)
+    # Tokenize the input
+    words = sentence.split()
+    n = len(words)
 
-# Initialize the parse table
-table = [[set() for i in range(n - j)] for j in range(n)]
+    # Initialize the parse table
+    table = [[set() for i in range(n - j)] for j in range(n)]
 
-# Fill in the base cases
-for i in range(n):
+    # Fill in the base cases
+    for i in range(n):
+        for production in grammar.values():
+            for rhs in production:
+                if rhs == words[i]:
+                    table[0][i].add(rhs)
+
+    # Fill in the rest of the table
+    for j in range(1, n):
+        for i in range(n - j):
+            for k in range(j):
+                for A in table[k][i]:
+                    for B in table[j - k - 1][i + k + 1]:
+                        for production in grammar.values():
+                            for rhs in production:
+                                if A in rhs and B in rhs:
+                                    table[j][i].add(rhs)
+
+    # Check for valid parse(s)
+    parses = []
     for production in grammar.values():
         for rhs in production:
-            if rhs == words[i]:
-                table[0][i].add(rhs)
+            if rhs in table[-1][0]:
+                parses.append(LFGParseTree(rhs))
 
-# Fill in the rest of the table
-for j in range(1, n):
-    for i in range(n - j):
-        for k in range(j):
-            for symbol1 in table[k][i]:
-                for symbol2 in table[j - k - 1][i + k + 1]:
-                    for lhs, rhs in grammar.items():
-                        if (symbol1, symbol2) in rhs:
-                            table[j][i].add(lhs)
+    return parses
 
-# Generate the parse trees
-parse_trees = []
-for lhs in table[-1][0]:
-    parse_tree = build_parse_tree(words, table, lhs, 0, n - 1, grammar)
-    if parse_tree is not None:
-        parse_trees.append(parse_tree)
-
-return parse_trees
 
 
 
