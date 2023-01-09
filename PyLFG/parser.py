@@ -128,13 +128,35 @@ def parse_lfg(sentence: str, grammar: dict, memo: dict = {}) -> Iterator[LFGPars
         memo[sentence] = list(parse_lfg(sentence, grammar, memo))
 
 
-def parse_sentence(sentence: str, grammar: Grammar, max_parses: int = 1) -> Union[LFGParseTree, List[LFGParseTree]]:
+def parse_sentence(sentence: str, lexicon: dict, grammar: dict) -> List[LFGParseTree]:
     """
-    Parse the given sentence using the given grammar. If `max_parses` is 1, return a single parse tree. If `max_parses`
-    is greater than 1, return a list of up to `max_parses` parse trees.
+    Parse a given sentence and return a list of all possible valid parse trees.
+    If the sentence is invalid or there are no valid parse trees, return an empty list.
+    
+    Parameters:
+    sentence (str): The sentence to parse.
+    lexicon (dict): The lexicon for the parser, mapping words to a list of possible parts of speech.
+    grammar (dict): The grammar rules for the parser, mapping parts of speech to a list of possible production rules.
+    
+    Returns:
+    List[LFGParseTree]: A list of all valid parse trees for the given sentence.
     """
-    words = sentence.split()
-    return parse_lfg(words, grammar, max_parses)
+    
+    # Tag the sentence with parts of speech
+    tagged_sentence = pos_tagger(sentence, lexicon)
+    
+    # Parse the tagged sentence using our LFG parser
+    parse_trees = parse_lfg(tagged_sentence, grammar)
+    
+    # Validate all parse trees to ensure they are valid
+    valid_trees = []
+    for tree in parse_trees:
+        if validate_parse_tree(tree, grammar):
+            valid_trees.append(tree)
+    
+    # Return the list of valid parse trees
+    return valid_trees
+
 
 
 def pos_tagger(sentence: str, lexicon: dict) -> str:
@@ -203,3 +225,22 @@ def parse_lexicon(filename: str) -> Dict[str, List[str]]:
             else:
                 lexicon[word] = [pos]
     return lexicon
+
+def parse_grammar(filename):
+    grammar = {}
+    with open(filename, 'r') as f:
+        for line in f:
+            # Ignore empty lines and lines starting with '#'
+            if not line.strip() or line.startswith('#'):
+                continue
+
+            lhs, rhs = line.split('->')
+            lhs = lhs.strip()
+            rhs = rhs.strip()
+
+            if lhs in grammar:
+                grammar[lhs].append(rhs)
+            else:
+                grammar[lhs] = [rhs]
+    return grammar
+
