@@ -1,6 +1,6 @@
 import pytest
 
-from our_package import parser
+from PyLFG import parser
 
 @pytest.mark.parametrize("sentence,expected_parse", test_sentences)
 def test_parse(sentence, expected_parse):
