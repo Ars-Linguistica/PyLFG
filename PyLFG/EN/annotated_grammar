@@ -1,0 +1,78 @@
+# Types
+
+D = "Determiner"  # a, an, the
+N = "Noun"  # cat, mat, dog, book, house, tree
+V = "Verb"  # sit, sleep, run, read, live, climb
+P = "Preposition"  # on, in, under, with, by, near
+Adv = "Adverb"  # quickly, slowly, carefully, happily, silently
+Adj = "Adjective"  # big, small, red, blue, happy, green
+Pro = "Pronoun"  # I, you, he, she, it, we, they, me, him, her
+Conj = "Conjunction"  # and, or, but, because, while
+
+# Production rules
+
+# Simple sentences
+S[+FIN] -> NP[+NOM] VP[+FIN]
+S[+FIN] -> NP[+NOM] VP[+FIN] Adv[+MOD]
+S[+FIN] -> NP[+NOM] VP[+FIN] PP[+LOC]
+S[+FIN] -> NP[+NOM] VP[+FIN] PP[+LOC] Adv[+MOD]
+
+# Noun phrases
+NP[+NOM] -> D[+DEF] N[+NOM]
+NP[+NOM] -> D[+DEF] N[+NOM] PP[+LOC]
+NP[+NOM] -> D[+DEF] N[+NOM] Adj[+MOD]
+NP[+NOM] -> D[+DEF] N[+NOM] Adj[+MOD] N[+NOM]
+NP[+NOM] -> D[+DEF] N[+NOM] PP[+LOC] Adj[+MOD] N[+NOM]
+NP[+NOM] -> D[+DEF] N[+NOM] Adj[+MOD] N[+NOM] PP[+LOC]
+NP[+NOM] -> Pro[+NOM]
+NP[+NOM] -> N[+NOM]
+
+# Verb phrases
+VP[+FIN] -> V[+FIN]
+VP[+FIN] -> V[+FIN] NP[+ACC]
+VP[+FIN] -> V[+FIN] NP[+ACC] Adv[+MOD]
+VP[+FIN] -> V[+FIN] NP[+ACC] PP[+LOC]
+VP[+FIN] -> V[+FIN] NP[+ACC] PP[+LOC] Adv[+MOD]
+VP[+FIN] -> V[+FIN] NP[+ACC] NP[+ACC]
+VP[+FIN] -> V[+FIN] NP[+ACC] NP[+ACC] Adv[+MOD]
+VP[+FIN] -> V[+FIN] NP[+ACC] NP[+ACC] PP[+LOC]
+VP[+FIN] -> V[+FIN] NP[+ACC] NP[+ACC] PP[+LOC] Adv[+MOD]
+VP[+FIN] -> V[+FIN] PP[+LOC]
+
+# Prepositional phrases
+PP[+LOC] -> P[+LOC] NP[+ACC]
+
+# Compound sentences
+
+S -> S Conj S[FOCUS=True, CONJ=True]
+
+# Complex sentences
+
+S -> S Conj VP[FOCUS=True, CONJ=True]
+S -> S Conj NP VP[FOCUS=True, CONJ=True]
+S -> S Conj NP VP Adv[FOCUS=True, CONJ=True]
+S -> S Conj NP VP PP[FOCUS=True, CONJ=True]
+S -> S Conj NP VP PP Adv[FOCUS=True, CONJ=True]
+
+# Modal auxiliaries
+
+VP -> Mod V[FOCUS=True]
+VP -> Mod V NP[FOCUS=True]
+VP -> Mod V NP Adv[FOCUS=True]
+VP -> Mod V NP PP[FOCUS=True]
+VP -> Mod V NP PP Adv[FOCUS=True]
+VP -> Mod V NP NP[FOCUS=True]
+VP -> Mod V NP NP Adv[FOCUS=True]
+VP -> Mod V NP NP PP[FOCUS=True]
+VP -> Mod V NP NP PP Adv[FOCUS=True]
+VP -> Mod V PP[FOCUS=True]
+
+Mod -> 'can'
+Mod -> 'could'
+Mod -> 'may'
+Mod -> 'might'
+Mod -> 'must'
+Mod -> 'shall'
+Mod -> 'should'
+Mod -> 'will'
+Mod -> 'would'
