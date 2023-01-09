@@ -1,0 +1,72 @@
+# Types
+
+D = "Determiner"  # un, une, le, la, les
+N = "Noun"  # chat, tapis, chien, livre, maison, arbre
+V = "Verb"  # être, avoir, parler, jouer, manger, porter
+P = "Preposition"  # sur, dans, sous, avec, par, près
+Adv = "Adverb"  # rapidement, lentement, soigneusement, heureusement, silencieusement
+Adj = "Adjective"  # grand, petit, rouge, bleu, heureux, vert
+Pro = "Pronoun"  # je, tu, il, elle, on, nous, vous, elles, moi, lui, elle
+Conj = "Conjunction"  # et, ou, mais, parce que, tandis que
+
+# Production rules
+
+# Simple sentences
+S -> NP VP
+S -> NP VP Adv
+S -> NP VP PP
+S -> NP VP PP Adv
+
+# Noun phrases
+NP -> D N
+NP -> D N PP
+NP -> D N Adj
+NP -> D N Adj N
+NP -> D N PP Adj N
+NP -> D N Adj N PP
+NP -> Pro
+NP -> N
+
+# Verb phrases
+VP -> V
+VP -> V NP
+VP -> V NP Adv
+VP -> V NP PP
+VP -> V NP PP Adv
+VP -> V NP NP
+VP -> V NP NP Adv
+VP -> V NP NP PP
+VP -> V NP NP PP Adv
+VP -> V PP
+
+# Prepositional phrases
+PP -> P NP
+
+# Compound sentences
+S -> S Conj S
+
+# Complex sentences
+S -> S Conj VP
+S -> S Conj NP VP
+S -> S Conj NP VP Adv
+S -> S Conj NP VP PP
+S -> S Conj NP VP PP Adv
+
+# Modal auxiliaries
+VP -> Mod V
+VP -> Mod V NP
+VP -> Mod V NP Adv
+VP -> Mod V NP PP
+VP -> Mod V NP PP Adv
+VP -> Mod V NP NP
+VP -> Mod V NP NP Adv
+VP -> Mod V NP NP PP
+VP -> Mod V NP NP PP Adv
+VP -> Mod V PP
+
+Mod -> 'peut'
+Mod -> 'pourrait'
+Mod -> 'doit'
+Mod -> 'devrait'
+Mod -> 'va'
+Mod -> 'veut'
