@@ -1,31 +1,19 @@
 class LFGParseTreeNode:
-    """A node in an LFG parse tree.
-
-    Each node has a label, a list of child nodes, and a start and end position
-    in the original sentence.
-
-    Attributes:
-        label: The label of the node.
-        children: The child nodes of the node.
-        start: The start position of the node in the original sentence.
-        end: The end position of the node in the original sentence.
-    """
-    def __init__(self, label, children, start, end):
+    def __init__(self, label, token, functional_annotation=None):
         self.label = label
-        self.children = children
-        self.start = start
-        self.end = end
+        self.token = token
+        self.functional_annotation = functional_annotation
+        self.children = []
+
+    def is_leaf(self):
+        return not self.children
 
     def __repr__(self):
-        """Return a string representation of the parse tree rooted at this node."""
-        return self._repr(0)
+        if self.functional_annotation:
+            return f"{self.label} ({self.functional_annotation})"
+        else:
+            return self.label
 
-    def _repr(self, indent):
-        """Helper function for __repr__."""
-        s = '  ' * indent + self.label + '\n'
-        for child in self.children:
-            s += child._repr(indent + 1)
-        return s
 
 class LFGParseTree:
     def __init__(self, root: LFGParseTreeNode):
