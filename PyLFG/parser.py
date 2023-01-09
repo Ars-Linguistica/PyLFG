@@ -23,24 +23,35 @@ def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]]) -> LFGPar
         # Find all productions that can be created using the current token
         next_productions = []
         for non_terminal, productions in grammar.items():
-            if token in productions:
-                next_productions.append(non_terminal)
+            for production in productions:
+                # Check if the current token matches the RHS of the production
+                if isinstance(production, str) and production == token:
+                    next_productions.append(non_terminal)
+                # Check if the current token matches a functional annotation
+                elif isinstance(production, tuple) and len(production) == 2:
+                    annotation, rhs = production
+                    if rhs == token:
+                        next_productions.append((non_terminal, annotation))
         
         # If no productions were found, this is a parse error
         if not next_productions:
             raise ValueError(f"No productions found for token: {token}")
         
-        # Create new parse tree nodes for each possible production
+         # Create new parse tree nodes for each possible production
         new_nodes = []
         for production in next_productions:
-            new_node = LFGParseTreeNode(production, token)
+            if isinstance(production, str):
+                new_node = LFGParseTreeNode(production, token)
+            elif isinstance(production, tuple):
+                new_node = LFGParseTreeNode(production[0], token, functional_annotation=production[1])
+            elif isinstance(production, list):
+                new_node = LFGParseTreeNode(production, token)
             new_nodes.append(new_node)
         
-        # Add the new nodes to the list of parse tree nodes
+        # Add the new nodes to the list of parse tree
         nodes.extend(new_nodes)
-    
-    # Return the parse tree rooted at the dummy node
     return LFGParseTree(nodes[0])
+
 
 def validate_parse_tree(tree: LFGParseTree, grammar: dict) -> bool:
 """Validate a parse tree according to the given grammar rules.
