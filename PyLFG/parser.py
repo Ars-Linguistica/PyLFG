@@ -1,10 +1,10 @@
 import re
-
+from typing import List, Dict
 from .parse_tree import LFGParseTree, LFGParseTreeNode
 
 def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, str]]) -> LFGParseTree:
     """
-    Build a parse tree for a given list of tokens using the specified grammar rules and lexicon.
+    Build a parse tree for a given list of tokens using the specified Earley parser, grammar rules and lexicon.
 
     Args:
     - tokens: list of strings, representing the words in the sentence to parse
@@ -17,62 +17,41 @@ def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: 
     - LFGParseTree: object representing the parse tree for the input sentence
 
     """
-    nodes = [LFGParseTreeNode(None, None)]
-    for token in tokens:
-        next_productions = []
-        for non_terminal, productions in grammar.items():
-            for production in productions:
-                if isinstance(production, str) and production in lexicon and token in lexicon[production]:
-                    next_productions.append((non_terminal, lexicon[production][token]))
-                elif isinstance(production, tuple) and len(production) == 2:
-                    annotation, rhs = production
-                    if rhs in lexicon and token in lexicon[rhs]:
-                        next_productions.append((non_terminal, annotation, lexicon[rhs][token]))
-        if not next_productions:
-            raise ValueError(f"No productions found for token: {token}")
-        new_nodes = []
-        for production in next_productions:
-            if len(production) == 2:
-                new_node = LFGParseTreeNode(production[0], token, functional_annotation=production[1])
-            elif len(production) == 3:
-                new_node = LFGParseTreeNode(production[0], token, functional_annotation={'type': production[1], 'subtype': production[2]})
-            new_nodes.append(new_node)
-        nodes.extend(new_nodes)
-    return LFGParseTree(nodes[0])
-
-
-def validate_parse_tree(tree: LFGParseTree, grammar: dict, lexicon: dict) -> bool:
-    """
-    Validate a parse tree according to the given grammar rules and lexicon entries.
-    Parameters:
-    - tree (LFGParseTree): The parse tree to validate.
-    - grammar (dict): A dictionary of the grammar rules. The keys are the non-terminal symbols and the values are the lists of right-hand sides.
-    - lexicon (dict): A dictionary of the lexicon entries. The keys are the grammatical categories and the values are the lists of words in that category along with their functional annotations
-    Returns:
-    - bool: True if the parse tree is valid according to the grammar and lexicon, False otherwise.
-    """
-    # Base case: If the tree is a leaf node, it must be a terminal symbol
-    if tree.is_leaf():
-        if tree.label in grammar["terminals"] and tree.label in lexicon:
-            #Checking if the token also exist in the lexicon
-            if tree.token in lexicon[tree.label]:
-                if tree.functional_annotation == lexicon[tree.label][tree.token]:
-                    return True
-                else:
-                    return False
+    chart = [[] for _ in range(len(tokens)+1)]
+    chart[0].append((0, "S", 0))
+    for i in range(len(tokens)):
+        for state in chart[i]:
+            j, X, k = state
+            if X in grammar:
+                for production in grammar[X]:
+                    if isinstance(production, str) and production in lexicon and tokens[i] in lexicon[production]:
+                        functional_annotations = lexicon[production][tokens[i]]
+                        next_state = (j, production, k+1, i, tokens[i], functional_annotations)
+                        chart[k+1].append(next_state)
+                    elif isinstance(production, tuple) and len(production) == 2:
+                        annotation, rhs = production
+                        if rhs in lexicon and tokens[i] in lexicon[rhs]:
+                            functional_annotations = lexicon[rhs][tokens[i]]
+                            next_state = (j, rhs, k+1, i, tokens[i], functional_annotations)
+                            chart[k+1].append(next_state)
             else:
-                return False
-        else:
-            return False
-    # Recursive case: Check that the node's label is a non-terminal,
-    # its children's labels are in the list of valid rules, and that their annotations match with the lexicon
-    if tree.label in grammar["nonterminals"]:
-        for child in tree.children:
-            if validate_parse_tree(child, grammar, lexicon) == False:
-                return False
-        return True
-    # If the tree is neither a leaf node nor a non-terminal, it is invalid
-    return False
+                for state2 in chart[j]:
+                    j2, Y, k2 = state2
+                    if X == Y:
+                        next_state = (j2, Y, k2, i, X, "")
+                        chart[k].append(next_state)
+    parse_tree_nodes = []
+    for state in chart[-1]:
+        j, X, k, i, value, functional_annotations = state
+        parse_tree_nodes.append(LFGParseTreeNode(X, value, functional_annotations))
+    parse_tree_nodes.append(LFGParseTreeNode(None, None))
+    for i in range(len(chart)-1, 0, -1):
+        for state in chart[i]:
+            j, X, k, i, value, functional_annotations = state
+            for state2 in chart[j]:
+                if state2[1] == X:
+                    parse_tree_nodes[state2[2]-1].children.append(parse_tree_nodes[i])
+    return LFGParseTree(parse_tree_nodes[0])
 
 def cyk_parse(sentence, grammar):
 """
