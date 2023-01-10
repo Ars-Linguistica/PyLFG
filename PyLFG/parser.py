@@ -116,17 +116,13 @@ def parse_grammar(filename):
 
 if __name__ == '__main__':
     sentence = "the cat slept on the mat"
-    grammar = {
-        "S": ["NP VP"],
-        "NP": ["D N", "D N PP"],
-        "VP": ["V", "V NP"]
-    }
-    lexicon = {
-        "the": {"D": {"DEF": True}},
-        "cat": {"N": {"SG": True, "NUM": "SG", "GEND": "FEM"}},
-        "slept": {"V": {"TENSE": "PAST"}},
-        "on": {"P": {"LOC": True}},
-        "mat": {"N": {"SG": True, "NUM": "SG", "GEND": "NEUT"}}
-    }
+    # Set the current language to English
+    language = "EN"
+    
+    # Load the default grammar
+    grammar = parse_grammar("{language}/grammar.txt")
+    
+    # Load the default lexicon
+    lexicon = parse_lexicon("{language}/lexicon.txt")
     parse_tree = build_parse_trees(sentence, grammar, lexicon)[0]
     print(parse_tree)
