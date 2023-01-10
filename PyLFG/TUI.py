@@ -1,8 +1,8 @@
 import textual
 import matplotlib.pyplot as plt
 
-from .parse_tree import LFGParseTree, LFGParseTreeNode
-from .parser import build_parse_tree
+from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
+from .parser import build_parse_trees
 
 # Create the main window
 window = textual.Window("PyLFG")
@@ -114,7 +114,7 @@ while True:
                 grammar = load_grammar("FR")
     else:
         # get parse tree
-        trees = build_parse_tree(input_text, grammar)
+        trees = build_parse_trees(input_text, grammar)
         for i, tree in enumerate(trees):
             print(f"Tree {i+1}:")
             tree_panel.clear()
