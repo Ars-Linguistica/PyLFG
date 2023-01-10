@@ -127,3 +127,20 @@ def parse_grammar(filename):
             else:
                 grammar[lhs] = [rhs]
     return grammar
+
+if __name__ == '__main__':
+    sentence = "the cat slept on the mat"
+    grammar = {
+        "S": ["NP VP"],
+        "NP": ["D N", "D N PP"],
+        "VP": ["V", "V NP"]
+    }
+    lexicon = {
+        "the": {"D": {"DEF": True}},
+        "cat": {"N": {"SG": True, "NUM": "SG", "GEND": "FEM"}},
+        "slept": {"V": {"TENSE": "PAST"}},
+        "on": {"P": {"LOC": True}},
+        "mat": {"N": {"SG": True, "NUM": "SG", "GEND": "NEUT"}}
+    }
+    parse_tree = parse_sentence(sentence, grammar, lexicon)
+    print(parse_tree)
