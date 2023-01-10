@@ -8,43 +8,36 @@ import matplotlib.pyplot as plt
 
 
 class LFGParseTreeNode:
-    def __init__(self, label: str, token: str, functional_annotation=None, children=None):
+    def __init__(self, label: str, token: str, functional_labels=None, children=None):
         """
         Construct a new LFG parse tree node.
         Parameters:
         - label (str): The label of the node, typically a non-terminal symbol or a terminal symbol.
         - token (str): The token the node represents, if any.
-        - functional_annotation(str): functional_annotation of the lexical item
+        - functional_labels (Dict[str, str]): functional labels of the lexical item
         - children (List[LFGParseTreeNode]): The children of the node.
     """
         self.label = label
         self.token = token
-        self.functional_annotation = functional_annotation
-        self.children = children or []
-        self.f_labels = f_labels if f_labels is not None else {}
-
-    class LFGParseTreeNode:
-    def __init__(self, symbol, children=None, functional_labels=None):
-        self.symbol = symbol
-        self.children = children if children is not None else []
         self.functional_labels = functional_labels if functional_labels is not None else {}
+        self.children = children or []
 
     def add_child(self, child):
         self.children.append(child)
 
-    def add_functional_label(self, label, value):
+    def add_functional_label(self, label: str, value: str):
         self.functional_labels[label] = value
-    
-    def get_functional_label(self, label):
+
+    def get_functional_label(self, label: str):
         return self.functional_labels.get(label)
 
-    def remove_functional_label(self, label):
+    def remove_functional_label(self, label: str):
         self.functional_labels.pop(label, None)
 
     def get_all_functional_labels(self):
         return self.functional_labels
 
-    def has_functional_label(self, label):
+    def has_functional_label(self, label: str):
         return label in self.functional_labels
     
     def is_leaf(self):
@@ -61,40 +54,21 @@ class LFGParseTreeNode:
         Returns:
         - str: A string representation of the node.
     """
-        return f"LFGParseTreeNode(label={self.label}, token={self.token}, children={self.children})"
+        return f"LFGParseTreeNode(label={self.label}, token={self.token}, functional_labels={self.functional_labels}, children={self.children})"
 
 
 class LFGParseTree:
     def __init__(self, root: LFGParseTreeNode):
-        """
-        Initialize the parse tree with its root node.
-        Args:
-        - root: a LFGParseTreeNode object
-        """
         self.root = root
         self.sentence = ""
 
     def set_sentence(self, sentence: str):
-        """
-        Set the original sentence of the parse tree
-        Args:
-        - sentence (str): original sentence
-        """
         self.sentence = sentence
 
     def is_leaf(self):
-        """
-        Check if the current parse tree is a leaf node
-        Returns:
-        - True if the tree is a leaf node, False otherwise.
-        """
         return not self.children
 
     def to_string(self) -> str:
-        """Convert the parse tree into a string representation using the original sentence as a template.
-        Returns:
-        str: The string representation of the parse tree.
-        """
         if self.is_leaf():
             return self.token
 
@@ -102,82 +76,37 @@ class LFGParseTree:
         return f"({self.label} {' '.join(child_strings)})"
     
     def to_networkx(self):
-        """Convert the parse tree into a NetworkX DiGraph object
-        Returns:
-        - A NetworkX DiGraph object representing the parse tree
-        """
         graph = nx.DiGraph()
-        queue = [(self.root, None)]
-        while queue:
-            node, parent = queue.pop(0)
-            graph.add_node(node)
-            if parent:
-                graph.add_edge(parent, node)
-            queue.extend([(child, node) for child in node.children])
+        stack = [(self.root, None)]
+        while stack:
+            node, parent = stack.pop()
+            graph.add_edge(parent, node.label)
+            for child in node.children:
+                stack.append((child, node.label))
         return graph
 
-
-    def visualize(self, mode: str = "ascii"):
-        """Visualize the parse tree.
-        Args:
-        mode (str): The visualization mode. Can be "ascii" or "matplotlib".
-        """
-        if mode == "ascii":
-            self._visualize_ascii()
-        elif mode == "matplotlib":
-            self._visualize_matplotlib()
-        else:
-            raise ValueError(f"Invalid visualization mode: {mode}")
-
-    def _visualize_ascii(self):
-        """
-        Generate an ASCII art representation of the parse tree.
-        """
-        # Initialize the ASCII art string
-        ascii_art = ""
-    
-        # Recursive function to generate the ASCII art for a subtree
-        def generate_ascii(node, depth):
-            # Add the label for the current node
-            ascii_art = " " * (depth * 2) + node.label + "\n"
-            # Add functional annotation information
-            if node.functional_annotation:
-                ascii_art += " " * (depth * 2) + node.functional_annotation + "\n"
-            # Add the ASCII art for each child
-            for child in node.children:
-                ascii_art += generate_ascii(child, depth + 1)
-            return ascii_art
-    
-        # Generate the ASCII art for the root node
-        ascii_art += generate_ascii(self.root, 0)
-    
-        return ascii_art
-
-    def _visualize_matplotlib(self):
-        """
-        Visualize the parse tree using matplotlib library.
-        The functional annotations of the lexical items are shown in the label of the node.
-        """
-        # Create a figure and axis
-        fig, ax = plt.subplots()
-
-        # Create a tree layout
-        pos = nx.drawing.nx_agraph.graphviz_layout(self.to_networkx(), prog='dot')
-
-        # Draw the nodes and edges
-        nx.draw_networkx_nodes(self.to_networkx(), pos, ax=ax)
-        nx.draw_networkx_edges(self.to_networkx(), pos, ax=ax)
-
-        # Add labels to the nodes
-        labels = {}
-        for node in self.to_networkx().nodes:
-            functional_annotations = ""
-            if node.functional_annotation:
-                functional_annotations = "\n".join([f"{k}:{v}" for k,v in node.functional_annotation.items()])
-                labels[node] = f"{node.label}\n{node.token}\n{functional_annotations}"
+    def draw(self, show_labels=True, show_annotations=False, labels=None, font_size=12, font_color='black'):
+        graph = self.to_networkx()
+        pos = nx.spring_layout(graph)
+        nx.draw_networkx_nodes(graph, pos, node_size=1000, node_color='lightblue', alpha=0.8)
+        nx.draw_networkx_edges(graph, pos, edge_color='gray')
+        if show_labels:
+            if labels:
+                nx.draw_networkx_labels(graph, pos, labels, font_size=font_size, font_color=font_color)
             else:
-                labels[node] = f"{node.label}\n{node.token}"
-        nx.draw_networkx_labels(self.to_networkx(), pos, labels, ax=ax)
-
-        # Show the plot
+                nx.draw_networkx_labels(graph, pos, font_size=font_size, font_color=font_color)
+        if show_annotations:
+            nx.draw_networkx_edge_labels(graph, pos, edge_labels=self.get_annotations())
         plt.show()
+
+    def get_annotations(self):
+        annotations = {}
+        stack = [(self.root, None)]
+        while stack:
+            node, parent = stack.pop()
+            for label, value in node.get_all_functional_labels().items():
+                annotations[(parent, node.label)] = f"{label}={value}"
+            for child in node.children:
+                stack.append((child, node.label))
+        return annotations
+
