@@ -4,15 +4,33 @@ import matplotlib.pyplot as plt
 
 class LFGParseTreeNode:
     def __init__(self, label: str, token: str, functional_annotation=None, children=None):
+        """
+        Construct a new LFG parse tree node.
+        Parameters:
+        - label (str): The label of the node, typically a non-terminal symbol or a terminal symbol.
+        - token (str): The token the node represents, if any.
+        - functional_annotation(str): functional_annotation of the lexical item
+        - children (List[LFGParseTreeNode]): The children of the node.
+    """
         self.label = label
         self.token = token
         self.functional_annotation = functional_annotation
         self.children = children or []
 
     def is_leaf(self):
+        """
+        Determine if the node is a leaf node (i.e., has no children).
+        Returns:
+        - bool: True if the node is a leaf node, False otherwise.
+    """
         return not self.children
 
     def __repr__(self):
+        """
+        Return a string representation of the node.
+        Returns:
+        - str: A string representation of the node.
+    """
         return f"LFGParseTreeNode(label={self.label}, token={self.token}, children={self.children})"
 
 
