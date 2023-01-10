@@ -100,3 +100,10 @@ while True:
             elif language == "FR":
                 language = "FR"
                 grammar = load_grammar("FR")
+    else:
+        # get parse tree
+        parse_tree = build_parse_tree(input_text.split(), grammar)
+        
+        # Draw parse tree
+        tree_panel.clear()
+        tree_panel.add(parse_tree.to_ascii())
