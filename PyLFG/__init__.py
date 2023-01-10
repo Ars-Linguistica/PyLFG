@@ -1,2 +1,2 @@
 
-from .parser import load_lexicon, load_grammar, build_parse_trees
+from .parser import parse_lexicon, parse_grammar, build_parse_trees
