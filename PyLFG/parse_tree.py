@@ -1,18 +1,15 @@
 class LFGParseTreeNode:
-    def __init__(self, label, token, functional_annotation=None):
+    def __init__(self, label: str, token: str, functional_annotation=None, children=None):
         self.label = label
         self.token = token
         self.functional_annotation = functional_annotation
-        self.children = []
+        self.children = children or []
 
     def is_leaf(self):
         return not self.children
 
     def __repr__(self):
-        if self.functional_annotation:
-            return f"{self.label} ({self.functional_annotation})"
-        else:
-            return self.label
+        return f"LFGParseTreeNode(label={self.label}, token={self.token}, children={self.children})"
 
 
 class LFGParseTree:
