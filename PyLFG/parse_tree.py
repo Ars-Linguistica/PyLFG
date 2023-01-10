@@ -110,3 +110,25 @@ class LFGParseTree:
                 stack.append((child, node.label))
         return annotations
 
+
+class FStructure:
+    def __init__(self, sentence: str):
+        self.labels = {}
+        self.children = []
+        self.sentence = sentence
+
+    def add_label(self, label: str, value: str):
+        self.labels[label] = value
+
+    def get_label(self, label: str):
+        return self.labels.get(label, None)
+
+    def add_child(self, child: 'FStructure'):
+        self.children.append(child)
+
+    def get_children(self) -> List['FStructure']:
+        return self.children
+
+    def to_string(self):
+        label_str = ', '.join([f'{label}:{value}' for label, value in self.labels.items()])
+        return f'({self.sentence}, {label_str}, [{", ".join([child.to_string() for child in self.children])}])'
