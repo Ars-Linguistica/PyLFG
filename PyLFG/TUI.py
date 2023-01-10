@@ -114,8 +114,9 @@ while True:
                 grammar = load_grammar("FR")
     else:
         # get parse tree
-        parse_tree = build_parse_tree(input_text.split(), grammar)
-        
-        # Draw parse tree
-        tree_panel.clear()
-        tree_panel.add(parse_tree.to_ascii())
+        trees = build_parse_tree(input_text, grammar)
+        for i, tree in enumerate(trees):
+            print(f"Tree {i+1}:")
+            tree_panel.clear()
+            tree_panel.add(tree.visualize("matplotlib"))
+            history.append((input_text, tree))
