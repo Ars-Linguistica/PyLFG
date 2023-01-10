@@ -2,7 +2,9 @@ import textual
 import matplotlib.pyplot as plt
 
 from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
-from .parser import build_parse_trees
+from .parser import build_parse_trees, parse_lexicon, parse_grammar
+
+supported_languages = ["EN", "FR", "ES", "IT"]
 
 # Create the main window
 window = textual.Window("PyLFG")
@@ -16,11 +18,16 @@ tree_panel = textual.Panel()
 # Add the input prompt and tree panel to the main window
 window.add(prompt, tree_panel)
 
-# Load the default grammar
-grammar = load_grammar("EN")
-
 # Set the current language to English
 language = "EN"
+
+# Load the default grammar
+grammar = parse_grammar("{language}/grammar.txt")
+
+# Load the default lexicon
+lexicon = parse_lexicon("{language}/lexicon.txt")
+
+
 
 # Initialize the history
 history = []
@@ -100,18 +107,16 @@ while True:
 
         # Toggle between languages
         elif command == "language":
-            if language == "EN":
-                language = "EN"
-                grammar = load_grammar("EN")
-            elif language == "ES":
-                language = "ES"
-                grammar = load_grammar("ES")
-            elif language == "IT":
-                language = "IT"
-                grammar = load_grammar("IT")
-            elif language == "FR":
-                language = "FR"
-                grammar = load_grammar("FR")
+            if len(args) != 1:
+                print("Invalid number of arguments for /language command")
+                continue
+            if args[0] not in supported_languages:
+                print("The language {args[0]} is not supported by PyLFG")
+                continue
+            else:
+                language = args[0]
+                grammar = parse_grammar("{language}/grammar.txt")
+                lexicon = parse_lexicon("{language}/lexicon.txt")
     else:
         # get parse tree
         trees = build_parse_trees(input_text, grammar, lexicon)
