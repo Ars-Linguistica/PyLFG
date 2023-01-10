@@ -55,21 +55,6 @@ def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: 
                     parse_tree_nodes[state2[2]-1].children.append(parse_tree_nodes[i])
     return LFGParseTree(parse_tree_nodes[0])
 
-def parse_sentence(sentence: str, lexicon: dict, grammar: dict) -> List[LFGParseTree]:
-    """
-    Parse a given sentence and return a list of all possible valid parse trees.
-    If the sentence is invalid or there are no valid parse trees, return an empty list.
-    
-    Parameters:
-    sentence (str): The sentence to parse.
-    lexicon (dict): The lexicon for the parser, mapping words to a list of possible parts of speech.
-    grammar (dict): The grammar rules for the parser, mapping parts of speech to a list of possible production rules.
-    
-    Returns:
-    List[LFGParseTree]: A list of all valid parse trees for the given sentence.
-    """
-    ...
-
 
 def parse_lexicon(filename: str) -> Dict[str, List[str]]:
     """
@@ -124,3 +109,18 @@ def parse_grammar(filename):
             else:
                 grammar[lhs] = [rhs]
     return grammar
+
+def parse_sentence(sentence: str, lexicon: dict, grammar: dict) -> List[LFGParseTree]:
+    """
+    Parse a given sentence and return a list of all possible valid parse trees.
+    If the sentence is invalid or there are no valid parse trees, return an empty list.
+    
+    Parameters:
+    sentence (str): The sentence to parse.
+    lexicon (dict): The lexicon for the parser, mapping words to a list of possible parts of speech.
+    grammar (dict): The grammar rules for the parser, mapping parts of speech to a list of possible production rules.
+    
+    Returns:
+    List[LFGParseTree]: A list of all valid parse trees for the given sentence.
+    """
+    ...
