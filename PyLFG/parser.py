@@ -55,71 +55,6 @@ def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: 
                     parse_tree_nodes[state2[2]-1].children.append(parse_tree_nodes[i])
     return LFGParseTree(parse_tree_nodes[0])
 
-def cyk_parse(sentence, grammar):
-"""
-Parse a sentence using the CYK algorithm.
-Parameters:
-sentence (str): The sentence to parse.
-grammar (dict): A dictionary of production rules, where the keys are the left-hand sides of the rules and the values are lists of right-hand sides.
-
-Returns:
-list[LFGParseTree]: A list of parse trees, one for each valid parse of the sentence. If the sentence is not in the language defined by the grammar, an empty list is returned.
-"""
-
-# Tokenize the input
-words = sentence.split()
-n = len(words)
-
-# Initialize the parse table
-table = [[set() for i in range(n - j)] for j in range(n)]
-
-# Fill in the base cases
-for i in range(n):
-    for production in grammar.values():
-        for rhs in production:
-            if rhs == words[i]:
-                table[0][i].add(rhs)
-
-# Fill in the rest of the table
-for j in range(1, n):
-    for i in range(n - j):
-        for k in range(j):
-            for symbol1 in table[k][i]:
-                for symbol2 in table[j - k - 1][i + k + 1]:
-                    for lhs, rhs in grammar.items():
-                        if (symbol1, symbol2) in rhs:
-                            table[j][i].add(lhs)
-
-# Generate the parse trees
-parse_trees = []
-for lhs in table[-1][0]:
-    parse_tree = build_parse_tree(words, table, lhs, 0, n - 1, grammar)
-    if parse_tree is not None:
-        parse_trees.append(parse_tree)
-
-return parse_trees
-
-
-
-def parse_lfg(sentence: str, grammar: dict, memo: dict = {}) -> Iterator[LFGParseTree]:
-    """
-    Parse the given sentence using the given context-free grammar.
-    Yields all valid parse trees as LFGParseTree objects.
-    Uses memoization to avoid recomputing parse trees for the same input.
-    """
-    if sentence in memo:
-        yield from memo[sentence]
-    elif not sentence:
-        yield LFGParseTree(symbol="ROOT")
-    else:
-        for i, word in enumerate(sentence.split()):
-            if word in grammar:
-                for production in grammar[word]:
-                    for parse in parse_lfg(sentence[i + 1:], grammar, memo):
-                        yield LFGParseTree(symbol=production, children=(LFGParseTree(symbol=word), parse))
-        memo[sentence] = list(parse_lfg(sentence, grammar, memo))
-
-
 def parse_sentence(sentence: str, lexicon: dict, grammar: dict) -> List[LFGParseTree]:
     """
     Parse a given sentence and return a list of all possible valid parse trees.
@@ -133,54 +68,8 @@ def parse_sentence(sentence: str, lexicon: dict, grammar: dict) -> List[LFGParse
     Returns:
     List[LFGParseTree]: A list of all valid parse trees for the given sentence.
     """
-    
-    # Tag the sentence with parts of speech
-    tagged_sentence = pos_tagger(sentence, lexicon)
-    
-    # Parse the tagged sentence using our LFG parser
-    parse_trees = parse_lfg(tagged_sentence, grammar)
-    
-    # Validate all parse trees to ensure they are valid
-    valid_trees = []
-    for tree in parse_trees:
-        if validate_parse_tree(tree, grammar):
-            valid_trees.append(tree)
-    
-    # Return the list of valid parse trees
-    return valid_trees
+    ...
 
-
-
-def pos_tagger(sentence: str, lexicon: dict) -> str:
-    """
-    Generate all possible parses for the given sentence by considering all possible parts of speech for each word.
-
-    Args:
-    - sentence: the sentence to parse, a string
-    - lexicon: a dictionary with words as keys and a list of parts of speech tags as values
-
-    Returns:
-    - a generator yielding all possible parses for the sentence, as LFG parse trees
-    """
-    words = sentence.split()
-    tags = []
-    for word in words:
-        if word in lexicon:
-            tags.append((word, lexicon[word]))
-        else:
-            # Default to noun if unknown word
-            tags.append((word, "N"))
-
-    def generate_parses(tags, index=0):
-        if index == len(tags):
-            yield "(S)"
-        else:
-            word, possibles = tags[index]
-            for pos in possibles:
-                for parse in generate_parses(tags, index + 1):
-                    yield f"(S ({pos} {word}){parse}"
-
-    return generate_parses(tags)
 
 def parse_lexicon(filename: str) -> Dict[str, List[str]]:
     """
