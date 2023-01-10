@@ -35,8 +35,20 @@ while True:
         # Split the command and its arguments
         command, *args = input_text[1:].split()
 
+        if command == "help":
+            print("The following commands are available:")
+            print("\t/clear - Clear the parse tree")
+            print("\t/save [filename] - Save the parse tree to a file")
+            print("\t/load [filename] - Load a parse tree from a file")
+            print("\t/grammar - Display the current grammar")
+            print("\t/set_grammar [language] - Set the current grammar to the specified language (EN, ES, IT, FR)")
+            print("\t/history - Display the parse history")
+            print("\t/export_history [filename] - Export the parse history to a file")
+            print("\t/load_history [filename] - Load a parse history from a file")
+            print("\t/language [EN,ES,IT,FR] - Switch between languages")
+            print("\t/help - Display this help menu")
         # Clear the tree panel
-        if command == "clear":
+        elif command == "clear":
             tree_panel.clear()
 
         # Save the current tree to a file
