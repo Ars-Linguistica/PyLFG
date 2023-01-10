@@ -254,4 +254,3 @@ def parse_grammar(filename):
             else:
                 grammar[lhs] = [rhs]
     return grammar
-
