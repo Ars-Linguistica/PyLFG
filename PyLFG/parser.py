@@ -2,20 +2,22 @@ import re
 from typing import List, Dict
 from .parse_tree import LFGParseTree, LFGParseTreeNode
 
-def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, str]]) -> LFGParseTree:
+def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, Dict[str,str]]]) -> LFGParseTree:
     """
-    Build a parse tree for a given list of tokens using the specified Earley parser, grammar rules and lexicon.
-
+    Build a parse tree for a given list of tokens using the specified grammar rules and lexicon.
+    This implementation uses the Earley parsing algorithm, which is a top-down, chart-based parsing
+    algorithm that is capable of handling a wide range of context-free grammars.
+    
     Args:
     - tokens: list of strings, representing the words in the sentence to parse
     - grammar: dictionary containing the grammar rules, where keys are non-terminal symbols and values
-    are lists of strings representing the productions for that non-terminal symbol
-    - lexicon: dictionary containing the lexicon, where keys are words and values are dictionaries with
-    grammatical information (e.g. {"cat": {"a": "SG", "NUM": "SG", "GEND": "FEM"}})
-
+    are lists of strings or tuples representing the productions for that non-terminal symbol
+    - lexicon: dictionary containing the lexicon, where keys are words and values are dictionaries
+    with grammatical information. The structure is {word: {pos: {grammatical_info: value}}} 
+    (e.g. {"cat": {"N": {"SG": True, "NUM": "SG", "GEND": "FEM"}})
+   
     Returns:
     - LFGParseTree: object representing the parse tree for the input sentence
-
     """
     chart = [[] for _ in range(len(tokens)+1)]
     chart[0].append((0, "S", 0))
