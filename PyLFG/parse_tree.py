@@ -1,3 +1,8 @@
+"""
+This module provides classes to represent and visualize LFG parse trees.
+The LFGParseTree class provides a visualization of the tree structure of the sentence, as well as functional annotations in the lexical items.
+"""
+
 import networkx as nx
 import matplotlib.pyplot as plt
 
