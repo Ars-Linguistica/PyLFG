@@ -26,12 +26,10 @@ def parse_sentence(sentence: str, grammar: Dict[str, List[str]], lexicon: Dict[s
     (e.g. {"cat": {"N": {"SG": True, "NUM": "SG", "GEND": "FEM"}})
    
     Returns:
-    - LFGParseTree: object representing the parse tree for the input sentence
+    - Yields LFGParseTree: object representing the parse tree for the input sentence
     """
     tokens = re.findall(r"[\w']+", sentence)
-    parse_tree = build_parse_tree(tokens, grammar, lexicon)
-    parse_tree.set_sentence(sentence)
-    return parse_tree
+    yield from build_parse_tree(tokens, grammar, lexicon)
 
 def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, Dict[str,str]]]) -> LFGParseTree:
     """
@@ -48,7 +46,7 @@ def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: 
     (e.g. {"cat": {"N": {"SG": True, "NUM": "SG", "GEND": "FEM"}})
    
     Returns:
-    - LFGParseTree: object representing the parse tree for the input sentence
+    - A generator of LFGParseTree: object representing the parse tree for the input sentence
     """
     chart = [[] for _ in range(len(tokens)+1)]
     chart[0].append((0, "S", 0))
@@ -63,28 +61,17 @@ def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: 
                         chart[k+1].append(next_state)
                     elif isinstance(production, tuple) and len(production) == 2:
                         annotation, rhs = production
-                        if rhs in lexicon and tokens[i] in lexicon[rhs]:
-                            functional_annotations = lexicon[rhs][tokens[i]]
-                            next_state = (j, rhs, k+1, i, tokens[i], functional_annotations)
-                            chart[k+1].append(next_state)
-            else:
-                for state2 in chart[j]:
-                    j2, Y, k2 = state2
-                    if X == Y:
-                        next_state = (j2, Y, k2, i, X, "")
-                        chart[k].append(next_state)
-    parse_tree_nodes = []
-    for state in chart[-1]:
-        j, X, k, i, value, functional_annotations = state
-        parse_tree_nodes.append(LFGParseTreeNode(X, value, functional_annotations))
-    parse_tree_nodes.append(LFGParseTreeNode(None, None))
-    for i in range(len(chart)-1, 0, -1):
-        for state in chart[i]:
-            j, X, k, i, value, functional_annotations = state
-            for state2 in chart[j]:
-                if state2[1] == X:
-                    parse_tree_nodes[state2[2]-1].children.append(parse_tree_nodes[i])
-    return LFGParseTree(parse_tree_nodes[0])
+                        for state2 in chart[j]:
+                            j2, Y, k2, i2, token2, annotations2 = state2
+                            if Y == rhs and (not annotation or check_annotations(annotations2, annotation)):
+                                next_state = (j2, rhs, k2, i2, token2, annotations2)
+                                chart[k].append(next_state)
+    complete_states = [state for state in chart[-1] if state[2] == len(tokens) and state[1] == "S"]
+    parse_trees = []
+    for complete_state in complete_states:
+        parse_tree = extract_tree(complete_state, chart)
+        parse_trees.append(parse_tree)
+    yield parse_trees
 
 
 def parse_lexicon(filename: str) -> Dict[str, List[str]]:
