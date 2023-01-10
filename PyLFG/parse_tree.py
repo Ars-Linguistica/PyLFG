@@ -1,3 +1,7 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+
+
 class LFGParseTreeNode:
     def __init__(self, label: str, token: str, functional_annotation=None, children=None):
         self.label = label
@@ -14,13 +18,28 @@ class LFGParseTreeNode:
 
 class LFGParseTree:
     def __init__(self, root: LFGParseTreeNode):
+        """
+        Initialize the parse tree with its root node.
+        Args:
+        - root: a LFGParseTreeNode object
+        """
         self.root = root
         self.sentence = ""
 
     def set_sentence(self, sentence: str):
+        """
+        Set the original sentence of the parse tree
+        Args:
+        - sentence (str): original sentence
+        """
         self.sentence = sentence
 
     def is_leaf(self):
+        """
+        Check if the current parse tree is a leaf node
+        Returns:
+        - True if the tree is a leaf node, False otherwise.
+        """
         return not self.children
 
     def to_string(self) -> str:
