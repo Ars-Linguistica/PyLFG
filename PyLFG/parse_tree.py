@@ -57,6 +57,12 @@ class LFGParseTreeNode:
         return f"LFGParseTreeNode(label={self.label}, token={self.token}, functional_labels={self.functional_labels}, children={self.children})"
 
 
+class LFGParseTreeNodeF:
+    def __init__(self, label, terminals, children=None, f_structure = None):
+        super().__init__(label, terminals, children)
+        self.f_structure = f_structure or FStructure(label)
+
+
 class LFGParseTree:
     def __init__(self, root: LFGParseTreeNode):
         self.root = root
