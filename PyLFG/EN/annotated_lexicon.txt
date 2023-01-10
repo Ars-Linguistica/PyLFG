@@ -1,0 +1,36 @@
+# Lexicon
+
+# Determiners
+a: {'DEF': 'SG', 'GEND': 'NEUT'}
+an: {'DEF': 'SG', 'GEND': 'NEUT'}
+the: {'DEF': 'DEF', 'GEND': 'NEUT'}
+
+# Nouns
+cat: {'NUM': 'SG', 'GEND': 'FEM'}
+dog: {'NUM': 'SG', 'GEND': 'MASC'}
+book: {'NUM': 'SG', 'GEND': 'NEUT'}
+
+# Verbs
+sit: {'TENSE': 'PRES', 'NUM': 'SG', 'PERS': '3RD'}
+run: {'TENSE': 'PRES', 'NUM': 'PL', 'PERS': '3RD'}
+read: {'TENSE': 'PAST', 'NUM': 'SG', 'PERS': '1ST'}
+
+# Prepositions
+on: {'TYPE': 'LOC'}
+in: {'TYPE': 'LOC'}
+under: {'TYPE': 'LOC'}
+
+# Adverbs
+quickly: {'TYPE': 'MANNER'}
+carefully: {'TYPE': 'MANNER'}
+happily: {'TYPE': 'MANNER'}
+
+# Adjectives
+big: {'TYPE': 'SIZE'}
+small: {'TYPE': 'SIZE'}
+red: {'TYPE': 'COLOR'}
+
+# Pronouns
+I: {'TYPE': 'PERS', 'NUM': 'SG', 'PERS': '1ST'}
+he: {'TYPE': 'PERS', 'NUM': 'SG', 'PERS': '3RD'}
+
