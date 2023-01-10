@@ -81,6 +81,36 @@ class LFGParseTree:
         child_strings = [child.to_string() for child in self.children]
         return f"({self.label} {' '.join(child_strings)})"
     
+    def f_structure_matrix(self):
+        """
+        Returns the f-structure represented as an attribute-value matrix.
+        """
+        # Initialize the matrix
+        matrix = []
+        
+        # Recursive function to traverse the parse tree
+        def traverse(node):
+            # Get the functional labels of the current node
+            labels = node.get_all_functional_labels()
+            
+            # If the node has children, recursively traverse them
+            if node.children:
+                for child in node.children:
+                    traverse(child)
+                    
+            # If the node is a leaf, add its functional labels to the matrix
+            else:
+                row = []
+                for key, value in labels.items():
+                    row.append((key, value))
+                matrix.append(row)
+
+        # Start traversing the tree
+        traverse(self.root)
+        
+        # Return the matrix
+        return matrix
+    
     def to_networkx(self):
         graph = nx.DiGraph()
         stack = [(self.root, None)]
