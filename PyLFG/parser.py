@@ -12,13 +12,12 @@ class to represent the f-structure of the analyzed sentence.
 
 import re
 from typing import List, Dict
-from .parse_tree import LFGParseTree, LFGParseTreeNode
+from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
 
 
-def build_parse_trees(sentence, grammar):
+def build_parse_trees(sentence, grammar, lexicon):
     all_trees = []
     stack = ["0", "S"]
-    lexicon = load_lexicon(language)
     tokens = sentence.split()
     i = 0
     while stack:
