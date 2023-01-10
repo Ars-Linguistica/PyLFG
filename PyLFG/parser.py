@@ -110,17 +110,22 @@ def parse_grammar(filename):
                 grammar[lhs] = [rhs]
     return grammar
 
-def parse_sentence(sentence: str, lexicon: dict, grammar: dict) -> List[LFGParseTree]:
+def parse_sentence(sentence: str, grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, Dict[str,str]]]) -> LFGParseTree:
     """
-    Parse a given sentence and return a list of all possible valid parse trees.
-    If the sentence is invalid or there are no valid parse trees, return an empty list.
+    Parse a sentence and return the corresponding parse tree using a given grammar and lexicon.
     
-    Parameters:
-    sentence (str): The sentence to parse.
-    lexicon (dict): The lexicon for the parser, mapping words to a list of possible parts of speech.
-    grammar (dict): The grammar rules for the parser, mapping parts of speech to a list of possible production rules.
-    
+    Args:
+    - sentence (str): The sentence to parse
+    - grammar: dictionary containing the grammar rules, where keys are non-terminal symbols and values
+    are lists of strings or tuples representing the productions for that non-terminal symbol
+    - lexicon: dictionary containing the lexicon, where keys are words and values are dictionaries
+    with grammatical information. The structure is {word: {pos: {grammatical_info: value}}} 
+    (e.g. {"cat": {"N": {"SG": True, "NUM": "SG", "GEND": "FEM"}})
+   
     Returns:
-    List[LFGParseTree]: A list of all valid parse trees for the given sentence.
+    - LFGParseTree: object representing the parse tree for the input sentence
     """
-    ...
+    tokens = re.findall(r"[\w']+", sentence)
+    parse_tree = build_parse_tree(tokens, grammar, lexicon)
+    parse_tree.set_sentence(sentence)
+    return parse_tree
