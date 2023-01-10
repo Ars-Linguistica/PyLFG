@@ -33,6 +33,22 @@ class LFGParseTree:
 
         child_strings = [child.to_string() for child in self.children]
         return f"({self.label} {' '.join(child_strings)})"
+    
+    def to_networkx(self):
+        """Convert the parse tree into a NetworkX DiGraph object
+        Returns:
+        - A NetworkX DiGraph object representing the parse tree
+        """
+        graph = nx.DiGraph()
+        queue = [(self.root, None)]
+        while queue:
+            node, parent = queue.pop(0)
+            graph.add_node(node)
+            if parent:
+                graph.add_edge(parent, node)
+            queue.extend([(child, node) for child in node.children])
+        return graph
+
 
     def visualize(self, mode: str = "ascii"):
         """Visualize the parse tree.
