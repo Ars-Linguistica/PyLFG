@@ -2,53 +2,27 @@ import re
 
 from .parse_tree import LFGParseTree, LFGParseTreeNode
 
-def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]]) -> LFGParseTree:
-    """
-    Build a parse tree for a given list of tokens using the specified grammar rules.
-    
-    Args:
-    - tokens: list of strings, representing the words in the sentence to parse
-    - grammar: dictionary containing the grammar rules, where keys are non-terminal symbols and values
-    are lists of strings representing the productions for that non-terminal symbol
-    
-    Returns:
-    - LFGParseTree: object representing the parse tree for the input sentence
-    
-    """
-    # Initialize list of parse tree nodes, with a dummy node at the beginning
+def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, str]]) -> LFGParseTree:
     nodes = [LFGParseTreeNode(None, None)]
-    
-    # Iterate through the list of tokens
     for token in tokens:
-        # Find all productions that can be created using the current token
         next_productions = []
         for non_terminal, productions in grammar.items():
             for production in productions:
-                # Check if the current token matches the RHS of the production
-                if isinstance(production, str) and production == token:
-                    next_productions.append(non_terminal)
-                # Check if the current token matches a functional annotation
+                if isinstance(production, str) and production in lexicon and token in lexicon[production]:
+                    next_productions.append((non_terminal, lexicon[production][token]))
                 elif isinstance(production, tuple) and len(production) == 2:
                     annotation, rhs = production
-                    if rhs == token:
-                        next_productions.append((non_terminal, annotation))
-        
-        # If no productions were found, this is a parse error
+                    if rhs in lexicon and token in lexicon[rhs]:
+                        next_productions.append((non_terminal, annotation, lexicon[rhs][token]))
         if not next_productions:
             raise ValueError(f"No productions found for token: {token}")
-        
-         # Create new parse tree nodes for each possible production
         new_nodes = []
         for production in next_productions:
-            if isinstance(production, str):
-                new_node = LFGParseTreeNode(production, token)
-            elif isinstance(production, tuple):
+            if len(production) == 2:
                 new_node = LFGParseTreeNode(production[0], token, functional_annotation=production[1])
-            elif isinstance(production, list):
-                new_node = LFGParseTreeNode(production, token)
+            elif len(production) == 3:
+                new_node = LFGParseTreeNode(production[0], token, functional_annotation={'type': production[1], 'subtype': production[2]})
             new_nodes.append(new_node)
-        
-        # Add the new nodes to the list of parse tree
         nodes.extend(new_nodes)
     return LFGParseTree(nodes[0])
 
