@@ -116,7 +116,7 @@ def handle_set_grammar_command(client, command, arguments):
 def handle_visualize_command(client, command, arguments):
     # Parse the arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument("-m", "--mode", choices=["ascii", "matplotlib"], default="ascii")
+    parser.add_argument("-m", "--mode", choices=["ascii", "matplotlib"], default="matplotlib")
     args = parser.parse_args(arguments)
     
     # Visualize the parse tree
@@ -132,3 +132,65 @@ def handle_history_command(client, command, arguments):
         print(f"{i}: {c}")
         print(o)
 
+@command_handler("/export_history")
+def handle_export_history_command(client, command, arguments):
+    """Export the command history to a file."""
+    # Check if a filename was provided
+    if not arguments:
+        client.print("Error: No filename provided")
+        return
+
+    # Export the command history to the specified file
+    try:
+        with open(arguments, "w") as f:
+            for command in client.history:
+                f.write(command + "\n")
+        client.print(f"Command history exported to {arguments}")
+    except IOError:
+        client.print(f"Error: Unable to export command history to {arguments}")
+@command_handler.command("/import_history")
+def handle_import_history_command(client, command, arguments):
+    """Import the command history from a file.
+    Parameters:
+    - client (TextualClient): The Textual client instance.
+    - command (str): The name of the command.
+    - arguments (str): The arguments passed to the command.
+    """
+    # Validate arguments
+    if not arguments:
+        client.print("Please specify a file to import the command history from.")
+        return
+    
+    # Import the command history from the specified file
+    try:
+        with open(arguments, "r") as f:
+            command_history = json.load(f)
+    except Exception as e:
+        client.print(f"Error importing command history from file {arguments}: {e}")
+        return
+    
+    # Update the client's command history
+    client.command_history = command_history
+    client.print(f"Successfully imported command history from file {arguments}.")
+
+@command_handler.command("/help")
+def handle_help_command(client, command, arguments):
+    """Show a list of available commands and their descriptions."""
+    commands = [
+        ("/clear", "Clear the screen"),
+        ("/exit", "Exit the program"),
+        ("/language", "Toggle the language of the parser"),
+        ("/save", "Save the parse tree to a file"),
+        ("/load", "Load a parse tree from a file"),
+        ("/grammar", "Show the current grammar"),
+        ("/set_grammar", "Set the grammar for the parser"),
+        ("/visualize", "Set the visualization mode. Can set the value to ascii or matplotlib"),
+        ("/history", "Show the history of entered sentences"),
+        ("/export_history", "Export the history of entered sentences to a file"),
+        ("/load_history", "Load a history of entered sentences from a file"),
+        ("/help", "Show this help message"),
+    ]
+    
+    client.println("Available commands:")
+    for command, description in commands:
+        client.println(f"{command}: {description}")
