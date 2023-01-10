@@ -4,10 +4,11 @@ This module provides an implementation of the Earley parsing algorithm for build
 from sentences and grammar rules specified in LFG.
 
 The primary entry point for the module is the `build_parse_trees` function, which takes a sentence string and
-a set of grammar rules and lexicon and returns a parse tree for the sentence.
+a set of grammar rules and lexicon and returns a list of parse trees for the sentence.
+
 The package also provides helper functions for loading grammar rules and lexicon from files,
-and a `LFGParseTree` and `LFGParseTreeNode` class for representing and visualizing parse trees, as well as a FStructure
-class to represent the f-structure of the analyzed sentence.
+and a `LFGParseTree` and `LFGParseTreeNode` class for representing and visualizing parse trees,
+as well as a FStructure class to represent the f-structure of the analyzed sentence.
 """
 
 import re
@@ -127,5 +128,5 @@ if __name__ == '__main__':
         "on": {"P": {"LOC": True}},
         "mat": {"N": {"SG": True, "NUM": "SG", "GEND": "NEUT"}}
     }
-    parse_tree = build_parse_trees(sentence, grammar)[0]
+    parse_tree = build_parse_trees(sentence, grammar, lexicon)[0]
     print(parse_tree)
