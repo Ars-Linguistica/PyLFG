@@ -2,7 +2,7 @@ import textual
 import matplotlib.pyplot as plt
 
 from .parse_tree import LFGParseTree, LFGParseTreeNode
-from .parser import build_parse_tree, validate_parse_tree, cyk_parse
+from .parser import build_parse_tree
 
 # Create the main window
 window = textual.Window("PyLFG")
