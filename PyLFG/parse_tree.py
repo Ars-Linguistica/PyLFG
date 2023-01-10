@@ -21,7 +21,32 @@ class LFGParseTreeNode:
         self.token = token
         self.functional_annotation = functional_annotation
         self.children = children or []
+        self.f_labels = f_labels if f_labels is not None else {}
 
+    class LFGParseTreeNode:
+    def __init__(self, symbol, children=None, functional_labels=None):
+        self.symbol = symbol
+        self.children = children if children is not None else []
+        self.functional_labels = functional_labels if functional_labels is not None else {}
+
+    def add_child(self, child):
+        self.children.append(child)
+
+    def add_functional_label(self, label, value):
+        self.functional_labels[label] = value
+    
+    def get_functional_label(self, label):
+        return self.functional_labels.get(label)
+
+    def remove_functional_label(self, label):
+        self.functional_labels.pop(label, None)
+
+    def get_all_functional_labels(self):
+        return self.functional_labels
+
+    def has_functional_label(self, label):
+        return label in self.functional_labels
+    
     def is_leaf(self):
         """
         Determine if the node is a leaf node (i.e., has no children).
