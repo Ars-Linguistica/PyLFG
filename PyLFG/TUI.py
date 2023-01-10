@@ -114,7 +114,7 @@ while True:
                 grammar = load_grammar("FR")
     else:
         # get parse tree
-        trees = build_parse_trees(input_text, grammar)
+        trees = build_parse_trees(input_text, grammar, lexicon)
         for i, tree in enumerate(trees):
             print(f"Tree {i+1}:")
             tree_panel.clear()
