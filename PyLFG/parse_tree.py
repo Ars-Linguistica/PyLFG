@@ -88,3 +88,65 @@ class LFGParseTree:
     # Show the plot
     plt.show()
     return
+
+
+class LFGParseTree:
+    def __init__(self, root: LFGParseTreeNode):
+        self.root = root
+        self.sentence = ""
+
+    def set_sentence(self, sentence: str):
+        self.sentence = sentence
+
+    def is_leaf(self):
+        return not self.children
+
+    def to_string(self) -> str:
+        """Convert the parse tree into a string representation using the original sentence as a template.
+        Returns:
+        str: The string representation of the parse tree.
+        """
+        if self.is_leaf():
+            return self.token
+
+        child_strings = [child.to_string() for child in self.children]
+        return f"({self.label} {' '.join(child_strings)})"
+
+    def visualize(self, mode: str = "ascii"):
+        """Visualize the parse tree.
+        Args:
+        mode (str): The visualization mode. Can be "ascii" or "matplotlib".
+        """
+        if mode == "ascii":
+            self._visualize_ascii()
+        elif mode == "matplotlib":
+            self._visualize_matplotlib()
+        else:
+            raise ValueError(f"Invalid visualization mode: {mode}")
+
+    def _visualize_ascii(self):
+        """
+        Generate an ASCII art representation of the parse tree.
+        """
+        # Initialize the ASCII art string
+        ascii_art = ""
+
+        # Recursive function to generate the ASCII art for a subtree
+        def generate_ascii(node, depth):
+            # Add the label for the current node
+            ascii_art = " " * (depth * 2) + node.label + "\n"
+
+            # Add the functional annotation for the current node
+            if node.functional_annotation:
+                ascii_art += " " * (depth * 2) + str(node.functional_annotation) + "\n"
+
+            # Add the ASCII art for each child
+            for child in node.children:
+                ascii_art += generate_ascii(child, depth + 1)
+
+            return ascii_art
+
+        # Generate the ASCII art for the root node
+        ascii_art += generate_ascii(self.root, 0)
+
+        return ascii_art
