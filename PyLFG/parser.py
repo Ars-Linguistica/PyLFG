@@ -13,66 +13,75 @@ import re
 from typing import List, Dict
 from .parse_tree import LFGParseTree, LFGParseTreeNode
 
-def parse_sentence(sentence: str, grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, Dict[str,str]]]) -> LFGParseTree:
-    """
-    Parse a sentence and return the corresponding parse tree using a given grammar and lexicon.
-    
-    Args:
-    - sentence (str): The sentence to parse
-    - grammar: dictionary containing the grammar rules, where keys are non-terminal symbols and values
-    are lists of strings or tuples representing the productions for that non-terminal symbol
-    - lexicon: dictionary containing the lexicon, where keys are words and values are dictionaries
-    with grammatical information. The structure is {word: {pos: {grammatical_info: value}}} 
-    (e.g. {"cat": {"N": {"SG": True, "NUM": "SG", "GEND": "FEM"}})
-   
-    Returns:
-    - Yields LFGParseTree: object representing the parse tree for the input sentence
-    """
-    tokens = re.findall(r"[\w']+", sentence)
-    yield from build_parse_tree(tokens, grammar, lexicon)
 
-def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, Dict[str,str]]]) -> LFGParseTree:
-    """
-    Build a parse tree for a given list of tokens using the specified grammar rules and lexicon.
-    This implementation uses the Earley parsing algorithm, which is a top-down, chart-based parsing
-    algorithm that is capable of handling a wide range of context-free grammars.
-    
-    Args:
-    - tokens: list of strings, representing the words in the sentence to parse
-    - grammar: dictionary containing the grammar rules, where keys are non-terminal symbols and values
-    are lists of strings or tuples representing the productions for that non-terminal symbol
-    - lexicon: dictionary containing the lexicon, where keys are words and values are dictionaries
-    with grammatical information. The structure is {word: {pos: {grammatical_info: value}}} 
-    (e.g. {"cat": {"N": {"SG": True, "NUM": "SG", "GEND": "FEM"}})
-   
-    Returns:
-    - A generator of LFGParseTree: object representing the parse tree for the input sentence
-    """
-    chart = [[] for _ in range(len(tokens)+1)]
-    chart[0].append((0, "S", 0))
-    for i in range(len(tokens)):
-        for state in chart[i]:
-            j, X, k = state
-            if X in grammar:
-                for production in grammar[X]:
-                    if isinstance(production, str) and production in lexicon and tokens[i] in lexicon[production]:
-                        functional_annotations = lexicon[production][tokens[i]]
-                        next_state = (j, production, k+1, i, tokens[i], functional_annotations)
-                        chart[k+1].append(next_state)
-                    elif isinstance(production, tuple) and len(production) == 2:
-                        annotation, rhs = production
-                        for state2 in chart[j]:
-                            j2, Y, k2, i2, token2, annotations2 = state2
-                            if Y == rhs and (not annotation or check_annotations(annotations2, annotation)):
-                                next_state = (j2, rhs, k2, i2, token2, annotations2)
-                                chart[k].append(next_state)
-    complete_states = [state for state in chart[-1] if state[2] == len(tokens) and state[1] == "S"]
-    parse_trees = []
-    for complete_state in complete_states:
-        parse_tree = extract_tree(complete_state, chart)
-        parse_trees.append(parse_tree)
-    yield parse_trees
+def build_parse_tree(sentence, grammar):
+    # Initialize a list to store all valid parse trees
+    all_trees = []
 
+    # Initialize the stack
+    stack = ["0", "S"]
+    lexicon = load_lexicon(language)
+    tokens = sentence.split()
+    i = 0
+
+    while stack:
+        print(stack)
+        # Get the top item from the stack
+        top = stack[-1]
+
+        # If the top item is a non-terminal symbol
+        if top in grammar:
+            # If the next token is in the lexicon
+            if i < len(tokens) and tokens[i] in lexicon:
+                # Add the token to the stack
+                stack.append(tokens[i])
+                i += 1
+            else:
+                # Otherwise, try to expand the non-terminal symbol
+                found = False
+                for rule in grammar[top]:
+                    if i < len(tokens) and tokens[i] in lexicon and lexicon[tokens[i]] in rule[1:]:
+                        # Create a new parse tree node for the non-terminal symbol
+                        children = []
+                        for child in rule[1:]:
+                            children.append(LFGParseTreeNode(child, None))
+                        non_term_node = LFGParseTreeNode(top, None, children=children)
+
+                        # Remove the non-terminal symbol from the stack
+                        stack.pop()
+                        # Add the children of the non-terminal to the stack in reverse order
+                        for child in reversed(children):
+                            stack.append(child.label)
+                        # Add the non-terminal node to the stack
+                        stack.append(non_term_node)
+
+                        found = True
+                        break
+                if not found:
+                    stack.pop()
+        else:
+            # If the top item is a token
+            if top in lexicon:
+                # Create a new parse tree node for the token
+                leaf_node = LFGParseTreeNode(lexicon[top], top)
+                # Remove the token from the stack
+                stack.pop()
+                # Add the token node to the stack
+                stack.append(leaf_node)
+            # If the top item is a parse tree node
+            elif isinstance(top, LFGParseTreeNode):
+                # remove the parse tree node from the stack
+                node = stack.pop()
+                # if the stack is empty, this is the root node, create a new parse tree and append it to the list of all parse trees
+                if not stack:
+                    tree = LFGParseTree(node)
+                    tree.set_sentence(sentence)
+                    all_trees.append(tree)
+                # Otherwise, add the node to its parent's children list
+                else:
+                    parent = stack[-1]
+                    parent.add_child(node)
+    return all_trees
 
 def parse_lexicon(filename: str) -> Dict[str, List[str]]:
     """
