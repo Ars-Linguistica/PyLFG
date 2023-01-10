@@ -3,10 +3,11 @@ PyLFG is a package for parsing sentences using Lexical Functional Grammar (LFG).
 This module provides an implementation of the Earley parsing algorithm for building parse trees
 from sentences and grammar rules specified in LFG.
 
-The primary entry point for the module is the `parse_sentence` function, which takes a sentence string and
+The primary entry point for the module is the `build_parse_trees` function, which takes a sentence string and
 a set of grammar rules and lexicon and returns a parse tree for the sentence.
 The package also provides helper functions for loading grammar rules and lexicon from files,
-and a `LFGParseTree` and `LFGParseTreeNode` class for representing and visualizing parse trees.
+and a `LFGParseTree` and `LFGParseTreeNode` class for representing and visualizing parse trees, as well as a FStructure
+class to represent the f-structure of the analyzed sentence.
 """
 
 import re
@@ -14,74 +15,50 @@ from typing import List, Dict
 from .parse_tree import LFGParseTree, LFGParseTreeNode
 
 
-def build_parse_tree(sentence, grammar):
-    # Initialize a list to store all valid parse trees
+def build_parse_trees(sentence, grammar):
     all_trees = []
-
-    # Initialize the stack
     stack = ["0", "S"]
     lexicon = load_lexicon(language)
     tokens = sentence.split()
     i = 0
-
     while stack:
-        print(stack)
-        # Get the top item from the stack
         top = stack[-1]
-
-        # If the top item is a non-terminal symbol
         if top in grammar:
-            # If the next token is in the lexicon
             if i < len(tokens) and tokens[i] in lexicon:
-                # Add the token to the stack
                 stack.append(tokens[i])
                 i += 1
             else:
-                # Otherwise, try to expand the non-terminal symbol
                 found = False
                 for rule in grammar[top]:
                     if i < len(tokens) and tokens[i] in lexicon and lexicon[tokens[i]] in rule[1:]:
-                        # Create a new parse tree node for the non-terminal symbol
                         children = []
                         for child in rule[1:]:
-                            children.append(LFGParseTreeNode(child, None))
-                        non_term_node = LFGParseTreeNode(top, None, children=children)
-
-                        # Remove the non-terminal symbol from the stack
+                            children.append(LFGParseTreeNodeF(child, None))
+                        non_term_node = LFGParseTreeNodeF(top, None, children=children)
                         stack.pop()
-                        # Add the children of the non-terminal to the stack in reverse order
                         for child in reversed(children):
                             stack.append(child.label)
-                        # Add the non-terminal node to the stack
                         stack.append(non_term_node)
-
                         found = True
                         break
                 if not found:
                     stack.pop()
         else:
-            # If the top item is a token
             if top in lexicon:
-                # Create a new parse tree node for the token
-                leaf_node = LFGParseTreeNode(lexicon[top], top)
-                # Remove the token from the stack
+                leaf_node = LFGParseTreeNodeF(lexicon[top], top)
                 stack.pop()
-                # Add the token node to the stack
                 stack.append(leaf_node)
-            # If the top item is a parse tree node
-            elif isinstance(top, LFGParseTreeNode):
-                # remove the parse tree node from the stack
+            elif isinstance(top, LFGParseTreeNodeF):
                 node = stack.pop()
-                # if the stack is empty, this is the root node, create a new parse tree and append it to the list of all parse trees
                 if not stack:
                     tree = LFGParseTree(node)
                     tree.set_sentence(sentence)
                     all_trees.append(tree)
-                # Otherwise, add the node to its parent's children list
                 else:
                     parent = stack[-1]
                     parent.add_child(node)
     return all_trees
+
 
 def parse_lexicon(filename: str) -> Dict[str, List[str]]:
     """
@@ -151,5 +128,5 @@ if __name__ == '__main__':
         "on": {"P": {"LOC": True}},
         "mat": {"N": {"SG": True, "NUM": "SG", "GEND": "NEUT"}}
     }
-    parse_tree = parse_sentence(sentence, grammar, lexicon)
+    parse_tree = build_parse_trees(sentence, grammar)[0]
     print(parse_tree)
