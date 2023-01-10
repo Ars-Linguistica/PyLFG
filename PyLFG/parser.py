@@ -41,26 +41,38 @@ def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: 
     return LFGParseTree(nodes[0])
 
 
-def validate_parse_tree(tree: LFGParseTree, grammar: dict) -> bool:
-"""Validate a parse tree according to the given grammar rules.
-Parameters:
-tree (LFGParseTree): The parse tree to validate.
-grammar (dict): A dictionary of the grammar rules. The keys are the left-hand sides of the rules and the values are the lists of right-hand sides.
-
-Returns:
-bool: True if the parse tree is valid according to the grammar, False otherwise.
-"""
-# Base case: If the tree is a leaf node, it must be a terminal symbol
-if tree.is_leaf():
-    return tree.label in grammar["terminals"]
-
-# Recursive case: Check that the node's label is a non-terminal and that its children's labels are in the list of valid rules
-if tree.label in grammar["nonterminals"]:
-    return all(validate_parse_tree(child, grammar) for child in tree.children)
-
-# If the tree is neither a leaf node nor a non-terminal, it is invalid
-return False
-
+def validate_parse_tree(tree: LFGParseTree, grammar: dict, lexicon: dict) -> bool:
+    """
+    Validate a parse tree according to the given grammar rules and lexicon entries.
+    Parameters:
+    - tree (LFGParseTree): The parse tree to validate.
+    - grammar (dict): A dictionary of the grammar rules. The keys are the non-terminal symbols and the values are the lists of right-hand sides.
+    - lexicon (dict): A dictionary of the lexicon entries. The keys are the grammatical categories and the values are the lists of words in that category along with their functional annotations
+    Returns:
+    - bool: True if the parse tree is valid according to the grammar and lexicon, False otherwise.
+    """
+    # Base case: If the tree is a leaf node, it must be a terminal symbol
+    if tree.is_leaf():
+        if tree.label in grammar["terminals"] and tree.label in lexicon:
+            #Checking if the token also exist in the lexicon
+            if tree.token in lexicon[tree.label]:
+                if tree.functional_annotation == lexicon[tree.label][tree.token]:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+        else:
+            return False
+    # Recursive case: Check that the node's label is a non-terminal,
+    # its children's labels are in the list of valid rules, and that their annotations match with the lexicon
+    if tree.label in grammar["nonterminals"]:
+        for child in tree.children:
+            if validate_parse_tree(child, grammar, lexicon) == False:
+                return False
+        return True
+    # If the tree is neither a leaf node nor a non-terminal, it is invalid
+    return False
 
 def cyk_parse(sentence, grammar):
 """
