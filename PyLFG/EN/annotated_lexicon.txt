@@ -1,5 +1,16 @@
 # Lexicon
 
+# Types
+
+D = "Determiner"  # a, an, the
+N = "Noun"  # cat, mat, dog, book, house, tree
+V = "Verb"  # sit, sleep, run, read, live, climb
+P = "Preposition"  # on, in, under, with, by, near
+Adv = "Adverb"  # quickly, slowly, carefully, happily, silently
+Adj = "Adjective"  # big, small, red, blue, happy, green
+Pro = "Pronoun"  # I, you, he, she, it, we, they, me, him, her
+Conj = "Conjunction"  # and, or, but, because, while
+
 # Determiners
 a: {'DEF': 'SG', 'GEND': 'NEUT'}
 an: {'DEF': 'SG', 'GEND': 'NEUT'}
