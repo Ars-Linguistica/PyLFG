@@ -1,6 +1,37 @@
+"""
+PyLFG is a package for parsing sentences using Lexical Functional Grammar (LFG).
+This module provides an implementation of the Earley parsing algorithm for building parse trees
+from sentences and grammar rules specified in LFG.
+
+The primary entry point for the module is the `parse_sentence` function, which takes a sentence string and
+a set of grammar rules and lexicon and returns a parse tree for the sentence.
+The package also provides helper functions for loading grammar rules and lexicon from files,
+and a `LFGParseTree` and `LFGParseTreeNode` class for representing and visualizing parse trees.
+"""
+
 import re
 from typing import List, Dict
 from .parse_tree import LFGParseTree, LFGParseTreeNode
+
+def parse_sentence(sentence: str, grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, Dict[str,str]]]) -> LFGParseTree:
+    """
+    Parse a sentence and return the corresponding parse tree using a given grammar and lexicon.
+    
+    Args:
+    - sentence (str): The sentence to parse
+    - grammar: dictionary containing the grammar rules, where keys are non-terminal symbols and values
+    are lists of strings or tuples representing the productions for that non-terminal symbol
+    - lexicon: dictionary containing the lexicon, where keys are words and values are dictionaries
+    with grammatical information. The structure is {word: {pos: {grammatical_info: value}}} 
+    (e.g. {"cat": {"N": {"SG": True, "NUM": "SG", "GEND": "FEM"}})
+   
+    Returns:
+    - LFGParseTree: object representing the parse tree for the input sentence
+    """
+    tokens = re.findall(r"[\w']+", sentence)
+    parse_tree = build_parse_tree(tokens, grammar, lexicon)
+    parse_tree.set_sentence(sentence)
+    return parse_tree
 
 def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, Dict[str,str]]]) -> LFGParseTree:
     """
@@ -109,23 +140,3 @@ def parse_grammar(filename):
             else:
                 grammar[lhs] = [rhs]
     return grammar
-
-def parse_sentence(sentence: str, grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, Dict[str,str]]]) -> LFGParseTree:
-    """
-    Parse a sentence and return the corresponding parse tree using a given grammar and lexicon.
-    
-    Args:
-    - sentence (str): The sentence to parse
-    - grammar: dictionary containing the grammar rules, where keys are non-terminal symbols and values
-    are lists of strings or tuples representing the productions for that non-terminal symbol
-    - lexicon: dictionary containing the lexicon, where keys are words and values are dictionaries
-    with grammatical information. The structure is {word: {pos: {grammatical_info: value}}} 
-    (e.g. {"cat": {"N": {"SG": True, "NUM": "SG", "GEND": "FEM"}})
-   
-    Returns:
-    - LFGParseTree: object representing the parse tree for the input sentence
-    """
-    tokens = re.findall(r"[\w']+", sentence)
-    parse_tree = build_parse_tree(tokens, grammar, lexicon)
-    parse_tree.set_sentence(sentence)
-    return parse_tree
