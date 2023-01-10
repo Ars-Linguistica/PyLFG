@@ -3,6 +3,20 @@ import re
 from .parse_tree import LFGParseTree, LFGParseTreeNode
 
 def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]], lexicon: Dict[str, Dict[str, str]]) -> LFGParseTree:
+    """
+    Build a parse tree for a given list of tokens using the specified grammar rules and lexicon.
+
+    Args:
+    - tokens: list of strings, representing the words in the sentence to parse
+    - grammar: dictionary containing the grammar rules, where keys are non-terminal symbols and values
+    are lists of strings representing the productions for that non-terminal symbol
+    - lexicon: dictionary containing the lexicon, where keys are words and values are dictionaries with
+    grammatical information (e.g. {"cat": {"a": "SG", "NUM": "SG", "GEND": "FEM"}})
+
+    Returns:
+    - LFGParseTree: object representing the parse tree for the input sentence
+
+    """
     nodes = [LFGParseTreeNode(None, None)]
     for token in tokens:
         next_productions = []
