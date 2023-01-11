@@ -188,33 +188,35 @@ def parse_lexicon(file):
                 entries[word] = [{"category": category, "f_struct": f_struct}]
     return entries
 
-def parse_grammar(file_name):
+def parse_xlfg_rule(rule: str) -> Tuple[str, List[str], Dict[str, str], Dict[str, Dict[str, str]]]:
     """
-    Parse a file that contains a context-free grammar in the XLFG format and
-    return a dictionary that maps each non-terminal to a list of its possible
-    expansions.
-
-    :param file_name: The name of the file that contains the grammar.
-    :return: A dictionary that maps each non-terminal to a list of its possible
-    expansions.
+    Given a string representation of a XLFG phrase structure rule, returns a tuple of 
+    the rule in the format "LHS → RHS", c-structure constraints, and f-structure constraints.
     """
-    with open(file_name) as f:
-        lines = f.readlines()
 
-    # remove comments and blank lines
-    lines = [line.strip() for line in lines if not line.strip().startswith("//") and line.strip()]
-    # join all the lines of the file in a single string
-    grammar_string = " ".join(lines)
+    # Split the rule by '{' and '}' to separate the rule and the constraints
+    rule_parts = re.split(r'[{}]', rule)
+    # Assign the first part to lhs and rhs
+    lhs, rhs = rule_parts[0].strip().split("→")
+    # Assign the second part to c-structure constraints
+    c_constraints = {}
+    if len(rule_parts) > 1:
+        c_constraints = parse_c_constraints(rule_parts[1])
+    # Assign the third part to f-structure constraints
+    f_constraints = {}
+    if len(rule_parts) > 2:
+        f_constraints = parse_f_constraints(rule_parts[2])
+    rhs = [x.strip() for x in rhs.split()]
+    return lhs.strip(), rhs
 
-    grammar_dict = {}
-    for rule in grammar_string.split(";"):
-        # Split the rule into its components
-        lhs, rhs, constraints = re.split(r"\s*->\s*|{", rule)
-        rhs = rhs.strip()
-        constraints = constraints.strip("}")
-        # Add the rule to the dictionary
-        if lhs not in grammar_dict:
-            grammar_dict[lhs] = []
-        grammar_dict[lhs].append((rhs, constraints))
-
-    return grammar_dict
+def parse_grammar(file: str) -> Dict[str, List[Tuple[str, List[str], Dict[str, str], Dict[str, Dict[str, str]]]]]:
+    grammar = {}
+    with open(file) as f:
+        rules = f.read().split('\n')
+        for rule in rules:
+            rule_lhs, rule_rhs, rule_c_constraints, rule_f_constraints = parse_xlfg_rule(rule)
+            if rule_lhs in grammar:
+                grammar[rule_lhs].append((rule_rhs, rule_c_constraints, rule_f_constraints))
+            else:
+                grammar[rule_lhs] = [(rule_rhs, rule_c_constraints, rule_f_constraints)]
+    return grammar
