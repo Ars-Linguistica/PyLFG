@@ -34,7 +34,7 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
                     if i < len(tokens) and tokens[i] in lexicon:
                         lexicon_entry = lexicon[tokens[i]]
                         lexicon_entry = parse_lexicon_entry(lexicon_entry) # parse the lexicon entry using XLFG standard syntax
-                        if match_constraints(rule, lexicon_entry):
+                        if match_c_constraints(rule, tokens, i) and match_constraints(rule, lexicon_entry):
                             children = []
                             for child in rule.rhs:
                                 child_node = None
@@ -68,36 +68,42 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
                         all_trees.append(LFGParseTree(stack[-1]))
     return all_trees
 
-def parse_rule(rule: str) -> str:
+def parse_rule(rule: str) -> Tuple[str, List[str]]:
     """
-    Given a string representation of a XLFG phrase structure rule, returns a string in the format
-    "LHS → RHS" where LHS is the left-hand side of the rule and RHS is the right-hand side of the rule.
+    Given a string representation of a XLFG phrase structure rule, returns a tuple of 
+    the rule in the format "LHS → RHS" and a list of c-structure constraints.
 
     :param rule: the string representation of a XLFG phrase structure rule
-    :return: the rule in the format "LHS → RHS"
+    :return: a tuple of the rule in the format "LHS → RHS" and a list of c-structure constraints
     """
-    parts = rule.split('→')
+    c_structure_constraints = re.findall(r"{.*?}", rule)
+    for constraint in c_structure_constraints:
+        rule = rule.replace(constraint, "")
+    parts = rule.split("→")
     lhs = parts[0].strip()
     rhs = parts[1].strip()
-    rhs = rhs.replace("[", "").replace("]", "").replace(";", "")
+    return lhs + " → " + rhs, c_structure_constraints
 
-    return f"{lhs} → {rhs}"
-
-def parse_lexicon_entry(lexicon_entry: str) -> Tuple:
+def parse_lexicon_entry(lexicon_entry: str) -> Tuple[str, dict, dict]:
+    """
+    Given a string representation of a lexicon entry in the XLFG standard format,
+    returns a tuple of the form (word, f_labels, c_structure_constraints) where
+    - word: the word
+    - f_labels: a dictionary of the form {f_label: f_label_value}
+    - c_structure_constraints: a dictionary of the form {c_structure_constraint: c_structure_constraint_value}
+    """
     parts = lexicon_entry.split()
-    category = parts[0]
-    f_structure = None
-    constraints = None
+    word = parts[0].strip()
+    f_labels = {}
+    c_structure_constraints = {}
     for part in parts[1:]:
-        if part.startswith("["):
-            f_structure = part
-        elif part.startswith("{"):
-            constraints = part
-    if f_structure:
-        f_structure = f_structure[1:-1].split(",")
-    if constraints:
-        constraints = constraints[1:-1].split(";")
-    return category, f_structure, constraints
+        if part.startswith('c('):
+            constraint, value = part.strip('c()').split('=')
+            c_structure_constraints[constraint] = value
+        else:
+            label, value = part.strip('[]').split('=')
+            f_labels[label] = value
+    return word, f_labels, c_structure_constraints
 
 def match_constraints(rule: str, lexicon_entry: dict) -> bool:
     # Extract the functional constraints from the rule
@@ -107,6 +113,36 @@ def match_constraints(rule: str, lexicon_entry: dict) -> bool:
     else:
         # If there are no constraints specified in the rule, return True
         return True
+
+def match_c_constraints(rule, tokens, i):
+    # Regular expression for matching variable-binding notation
+    var_binding_re = re.compile(r"\[[A-Z]+\]")
+    
+    # Split the rule's RHS into a list of symbols
+    rhs_symbols = rule.rhs.split()
+    
+    # Iterate through the RHS symbols and check for c-structure constraints
+    for j, symbol in enumerate(rhs_symbols):
+        # Check if the symbol is a variable-binding notation
+        match = var_binding_re.match(symbol)
+        if match:
+            # Extract the variable name
+            var_name = match.group()[1:-1]
+            
+            # Check if the variable is already bound to a symbol
+            if var_name in rule.var_bindings:
+                # Check if the variable is bound to the current token
+                if rule.var_bindings[var_name] != tokens[i+j]:
+                    return False
+            else:
+                # Bind the variable to the current token
+                rule.var_bindings[var_name] = tokens[i+j]
+        else:
+            # Check if the symbol is the same as the current token
+            if symbol != tokens[i+j]:
+                return False
+    return True
+
 
     # Check if each constraint in the rule is satisfied by the lexicon entry
     for constraint in constraints.split(';'):
