@@ -1,47 +1,22 @@
 # Lexicon
 
-# Types
+"." DOT;
 
-D = "Determiner"  # a, an, the
-N = "Noun"  # cat, mat, dog, book, house, tree
-V = "Verb"  # sit, sleep, run, read, live, climb
-P = "Preposition"  # on, in, under, with, by, near
-Adv = "Adverb"  # quickly, slowly, carefully, happily, silently
-Adj = "Adjective"  # big, small, red, blue, happy, green
-Pro = "Pronoun"  # I, you, he, she, it, we, they, me, him, her
-Conj = "Conjunction"  # and, or, but, because, while
+the D[PRED:'the'];
+cat N[PRED:'cat'];
+dog N[PRED:'dog'];
+book N[PRED:'book'];
+house N[PRED:'house'];
+tree N[PRED:'tree'];
 
-# Determiners
-a: {'DEF': 'SG', 'GEND': 'NEUT'}
-an: {'DEF': 'SG', 'GEND': 'NEUT'}
-the: {'DEF': 'DEF', 'GEND': 'NEUT'}
+sit V[PRED:'sit<SUBJ.sit_1stArg>', TENSED:-, ASPECT:IMPERFECTIVE];
+sleep V[PRED:'sleep<SUBJ.sleep_1stArg>', TENSED:-, ASPECT:IMPERFECTIVE];
+run V[PRED:'run<SUBJ.run_1stArg>', TENSED:-, ASPECT:IMPERFECTIVE];
+read V[PRED:'read<SUBJ.read_1stArg, OBJ.read_2ndArg>', TENSED:-, ASPECT:IMPERFECTIVE];
+live V[PRED:'live<SUBJ.live_1stArg>', TENSED:-, ASPECT:IMPERFECTIVE];
+climb V[PRED:'climb<SUBJ.climb_1stArg>', TENSED:-, ASPECT:IMPERFECTIVE];
 
-# Nouns
-cat: {'NUM': 'SG', 'GEND': 'FEM'}
-dog: {'NUM': 'SG', 'GEND': 'MASC'}
-book: {'NUM': 'SG', 'GEND': 'NEUT'}
-
-# Verbs
-sit: {'TENSE': 'PRES', 'NUM': 'SG', 'PERS': '3RD'}
-run: {'TENSE': 'PRES', 'NUM': 'PL', 'PERS': '3RD'}
-read: {'TENSE': 'PAST', 'NUM': 'SG', 'PERS': '1ST'}
-
-# Prepositions
-on: {'TYPE': 'LOC'}
-in: {'TYPE': 'LOC'}
-under: {'TYPE': 'LOC'}
-
-# Adverbs
-quickly: {'TYPE': 'MANNER'}
-carefully: {'TYPE': 'MANNER'}
-happily: {'TYPE': 'MANNER'}
-
-# Adjectives
-big: {'TYPE': 'SIZE'}
-small: {'TYPE': 'SIZE'}
-red: {'TYPE': 'COLOR'}
-
-# Pronouns
-I: {'TYPE': 'PERS', 'NUM': 'SG', 'PERS': '1ST'}
-he: {'TYPE': 'PERS', 'NUM': 'SG', 'PERS': '3RD'}
-
+on P[PRED:'on'];
+in P[PRED:'in'];
+under P[PRED:'under'];
+with P[PRED:'with']];
