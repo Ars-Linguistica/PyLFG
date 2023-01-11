@@ -59,25 +59,20 @@ def build_parse_trees(sentence, grammar, lexicon):
                     parent.add_child(node)
     return all_trees
 
-
 def parse_lexicon(filename: str) -> Dict[str, List[str]]:
     """
     Load the lexicon from the given file and return it as a dictionary.
-    
+
     The file is expected to contain one word and its part of speech tag per line, separated by a colon.
     Lines starting with '#' and empty lines are ignored.
-    
+
     If a word appears multiple times in the file, all its tags are stored in a list in the dictionary.
-    
+
     Args:
         filename (str): The name of the file to load the lexicon from.
-    
+
     Returns:
         Dict[str, List[str]]: The lexicon as a dictionary.
-    
-    Examples:
-        >>> parse_lexicon('lexicon.txt')
-        {'the': ['D'], 'cat': ['N'], 'sat': ['V'], 'on': ['P'], 'mat': ['N'], 'fish': ['V', 'N']}
     """
     lexicon = {}
     with open(filename, 'r') as f:
@@ -86,14 +81,13 @@ def parse_lexicon(filename: str) -> Dict[str, List[str]]:
             if not line.strip() or line.startswith('#'):
                 continue
 
-            word, pos = line.split(':')
+            word, pos_annotations = re.split("\s", line, 1)
             word = word.strip()
-            pos = pos.strip()
-
+            pos_annotations = pos_annotations.strip()
             if word in lexicon:
-                lexicon[word].append(pos)
+                lexicon[word].append(pos_annotations)
             else:
-                lexicon[word] = [pos]
+                lexicon[word] = [pos_annotations]
     return lexicon
 
 def parse_grammar(filename):
