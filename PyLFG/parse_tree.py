@@ -196,25 +196,86 @@ class LFGParseTree:
                 stack.append((child, node.label))
         return annotations
 
-
+    
 class FStructure:
     def __init__(self):
+        """
+        Construct a new FStructure object.
+        """
         self.attributes = {}
-    
+
     def add(self, attribute: str, value: str):
+        """
+        Add an attribute-value pair to the FStructure.
+        :param attribute: (str) attribute name
+        :param value: (str) attribute value
+        """
         self.attributes[attribute] = value
 
     def set(self, attribute: str, value: str):
+        """
+        set an attribute-value pair to the FStructure, replacing any existing value with the new value
+        :param attribute: (str) attribute name
+        :param value: (str) attribute value
+        """
         self.attributes[attribute] = value
-        
+
+    def get(self, attribute: str):
+        """
+        get the value of the attribute
+        :param attribute: (str) attribute name
+        :return: (str) value of the attribute
+        """
+        return self.attributes.get(attribute)
+
     def remove(self, attribute: str):
+        """
+        remove the specified attribute from the f-structure
+        :param attribute: (str) attribute name
+        """
         self.attributes.pop(attribute, None)
 
-    def get(self, attribute: str) -> str:
-        return self.attributes.get(attribute)
-    
-    def get_all(self) -> Dict[str,str]:
+    def get_all(self):
+        """
+        get all the attributes
+        :return: dict of attributes in the XLFG standard format
+        """
         return self.attributes
-    
-    def has(self, attribute: str) -> bool:
+
+    def has_attribute(self, attribute: str):
+        """
+        check if the f-structure has the specified attribute
+        :param attribute: (str) attribute name
+        :return: (bool) True if has the attribute, False otherwise
+        """
         return attribute in self.attributes
+
+    def add_functional_label(self, label: str, value: str):
+        """
+        Add a new functional label
+        :param label: (str) functional label
+        :param value: (str) corresponding label value
+        """
+        self.attributes[label] = value
+
+    def get_functional_label(self, label: str):
+        """
+        get the value of the functional label specified
+        :param label: (str) functional label
+        :return: (str) corresponding label value
+        """
+        return self.attributes.get(label)
+
+    def remove_functional_label(self, label: str):
+        """
+        remove the specified functional label from the f-structure
+        :param label: (str) functional label
+        """
+        self.attributes.pop(label, None)
+
+    def get_all_functional_labels(self):
+        """
+        get all functional labels
+        :return: dict of functional labels in the XLFG standard format
+        """
+        return self.attributes
