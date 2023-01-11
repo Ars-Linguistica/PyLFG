@@ -78,6 +78,7 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
     return all_trees
 
 
+
 def parse_lexicon(filename: str) -> Dict[str, List[str]]:
     """
     Load the lexicon from the given file and return it as a dictionary.
@@ -142,3 +143,4 @@ if __name__ == '__main__':
     lexicon = parse_lexicon("{language}/lexicon.txt")
     parse_tree = build_parse_trees(sentence, grammar, lexicon)[0]
     print(parse_tree)
+
