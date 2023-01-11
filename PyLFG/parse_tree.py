@@ -74,6 +74,24 @@ class LFGParseTreeNode:
 
 
 class LFGParseTreeNodeF(LFGParseTreeNode):
+    def __init__(self, label: str, token: str, functional_labels: dict = None, children=None):
+        super().__init__(label, token, functional_labels, children)
+        self.f_structure = FStructure()
+
+    def add_to_f_structure(self, attribute: str, value: str):
+        self.f_structure.add(attribute, value)
+
+    def set_in_f_structure(self, attribute: str, value: str):
+        self.f_structure.set(attribute, value)
+
+    def get_from_f_structure(self, attribute: str):
+        return self.f_structure.get(attribute)
+
+    def remove_from_f_structure(self, attribute: str):
+        self
+
+
+class LFGParseTreeNodeF(LFGParseTreeNode):
     def __init__(self, label: str, token: str, functional_labels=None, children=None):
         super().__init__(label, token, functional_labels, children)
         self.f_structure = FStructure()
