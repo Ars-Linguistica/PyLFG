@@ -74,24 +74,6 @@ class LFGParseTreeNode:
 
 
 class LFGParseTreeNodeF(LFGParseTreeNode):
-    def __init__(self, label: str, token: str, functional_labels: dict = None, children=None):
-        super().__init__(label, token, functional_labels, children)
-        self.f_structure = FStructure()
-
-    def add_to_f_structure(self, attribute: str, value: str):
-        self.f_structure.add(attribute, value)
-
-    def set_in_f_structure(self, attribute: str, value: str):
-        self.f_structure.set(attribute, value)
-
-    def get_from_f_structure(self, attribute: str):
-        return self.f_structure.get(attribute)
-
-    def remove_from_f_structure(self, attribute: str):
-        self
-
-
-class LFGParseTreeNodeF(LFGParseTreeNode):
     def __init__(self, label: str, token: str, functional_labels=None, children=None):
         super().__init__(label, token, functional_labels, children)
         self.f_structure = FStructure()
@@ -123,6 +105,53 @@ class LFGParseTreeNodeF(LFGParseTreeNode):
 
     def get_path_stm(self):
         return self.path_stm
+
+class LFGParseTreeNodeE(LFGParseTreeNode):
+    def __init__(self, label: str, token: str, children=None):
+        super().__init__(label, token, children)
+        self.syntactic_category = None
+        self.tense = None
+        self.aspect = None
+        self.semantic_role = None
+        self.lexical_head = None
+        self.logical_form = None
+        self.mood = None
+
+    def set_syntactic_category(self, category: str):
+        self.syntactic_category = category
+
+    def get_syntactic_category(self):
+        return self.syntactic_category
+
+    def set_tense(self, tense: str):
+        self.tense = tense
+
+    def get_tense(self):
+        return self.tense
+
+    def set_aspect(self, aspect: str):
+        self.aspect = aspect
+
+    def get_aspect(self):
+        return self.aspect
+    
+    def set_mood(self, aspect: str):
+        self.mood = aspect
+
+    def get_mood(self):
+        return self.mood
+
+    def set_semantic_role(self, role: str):
+        self.semantic_role = role
+
+    def get_semantic_role(self):
+        return self.semantic_role
+
+    def set_lexical_head(self, head: str):
+        self.lexical_head = head
+
+    def get_lexical_head
+        return self.lexical_head
 
 
 class LFGParseTree:
