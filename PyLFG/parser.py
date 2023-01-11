@@ -17,23 +17,6 @@ from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
 
 
 def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
-    """
-    Builds parse trees for the given sentence using the provided grammar and lexicon.
-    Extracts information from the annotations and use them in PyLFG
-    
-    Args:
-        sentence (str): The sentence to parse.
-        grammar (dict): The grammar to use, represented as a dictionary.
-        lexicon (dict): The lexicon to use, represented as a dictionary.
-    
-    Returns:
-        list: A list of LFG parse trees for the sentence.
-    
-    Examples:
-        >>> build_parse_trees("Jim yearns for Fred", {'S': [['N', 'VP'], ['PRO', 'VP']], 'VP': [['V2', '[NP]', '[S2]']]}, {'Jim': 'N', 'yearns': 'V', 'Fred': 'N'})
-        [LFGParseTree(S (N (Jim)) (VP (V2 (yearns)) (NP (Fred))))]
-    """
-
     all_trees = []
     stack = ["0", "S"]
     tokens = sentence.split()
@@ -61,7 +44,12 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
                             non_term_node = LFGParseTreeNodeF(top, None, children=children)
                             stack.pop()
                             for child in reversed(children):
-                                stack.append(child.label)
+                                if '<' in child.label:
+                                    func_label = child.label.split('<')[1][:-1]
+                                    for func in func_label.split('.'):
+                                        func_items = func.split('_')
+                                        child.add_functional_label(func_items[0], func_items[1])
+                                stack.append(child)
                             stack.append(non_term_node)
                             found = True
                             break
@@ -88,6 +76,7 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
                     parent = stack[-1]
                     parent.add_child(node)
     return all_trees
+
 
 def parse_lexicon(filename: str) -> Dict[str, List[str]]:
     """
