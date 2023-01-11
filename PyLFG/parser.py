@@ -16,7 +16,24 @@ from typing import List, Dict
 from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
 
 
-def build_parse_trees(sentence, grammar, lexicon):
+def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
+    """
+    Builds parse trees for the given sentence using the provided grammar and lexicon.
+    Extracts information from the annotations and use them in PyLFG
+    
+    Args:
+        sentence (str): The sentence to parse.
+        grammar (dict): The grammar to use, represented as a dictionary.
+        lexicon (dict): The lexicon to use, represented as a dictionary.
+    
+    Returns:
+        list: A list of LFG parse trees for the sentence.
+    
+    Examples:
+        >>> build_parse_trees("Jim yearns for Fred", {'S': [['N', 'VP'], ['PRO', 'VP']], 'VP': [['V2', '[NP]', '[S2]']]}, {'Jim': 'N', 'yearns': 'V', 'Fred': 'N'})
+        [LFGParseTree(S (N (Jim)) (VP (V2 (yearns)) (NP (Fred))))]
+    """
+
     all_trees = []
     stack = ["0", "S"]
     tokens = sentence.split()
@@ -30,22 +47,35 @@ def build_parse_trees(sentence, grammar, lexicon):
             else:
                 found = False
                 for rule in grammar[top]:
-                    if i < len(tokens) and tokens[i] in lexicon and lexicon[tokens[i]] in rule[1:]:
-                        children = []
-                        for child in rule[1:]:
-                            children.append(LFGParseTreeNodeF(child, None))
-                        non_term_node = LFGParseTreeNodeF(top, None, children=children)
-                        stack.pop()
-                        for child in reversed(children):
-                            stack.append(child.label)
-                        stack.append(non_term_node)
-                        found = True
-                        break
+                    if i < len(tokens) and tokens[i] in lexicon:
+                        match = re.search(f"{lexicon[tokens[i]]}\\[(.*?)\\]", rule)
+                        if match:
+                            annotation = match.group(1)
+                            annotation_dict = dict(item.split(':') for item in annotation.split(','))
+                            children = []
+                            for child in rule.split():
+                                if child in lexicon:
+                                    children.append(LFGParseTreeNodeF(child, None, annotation_dict))
+                                else:
+                                    children.append(LFGParseTreeNodeF(child, None))
+                            non_term_node = LFGParseTreeNodeF(top, None, children=children)
+                            stack.pop()
+                            for child in reversed(children):
+                                stack.append(child.label)
+                            stack.append(non_term_node)
+                            found = True
+                            break
                 if not found:
                     stack.pop()
         else:
             if top in lexicon:
-                leaf_node = LFGParseTreeNodeF(lexicon[top], top)
+                annotation_dict = {}
+                for tag in lexicon[top]:
+                    match = re.search("\\[(.*?)\\]", tag)
+                    if match:
+                        annotation = match.group(1)
+                        annotation_dict = dict(item.split(':') for item in annotation.split(','))
+                leaf_node = LFGParseTreeNodeF(lexicon[top], top, annotation_dict)
                 stack.pop()
                 stack.append(leaf_node)
             elif isinstance(top, LFGParseTreeNodeF):
