@@ -62,9 +62,12 @@ class LFGParseTreeNodeF(LFGParseTreeNode):
     def __init__(self, label: str, token: str, functional_labels=None, children=None, f_structure=None):
         super().__init__(label, token, functional_labels, children)
         self.f_structure = f_structure or FStructure()
-        
+
     def add_to_f_structure(self, attribute: str, value: str):
         self.f_structure.add(attribute, value)
+        
+    def set_in_f_structure(self, attribute: str, value: str):
+        self.f_structure.set(attribute, value)
         
     def get_from_f_structure(self, attribute: str):
         return self.f_structure.get(attribute)
@@ -77,6 +80,10 @@ class LFGParseTreeNodeF(LFGParseTreeNode):
         
     def has_in_f_structure(self, attribute: str):
         return self.f_structure.has(attribute)
+
+    def display_f_structure(self):
+        return self.f_structure.display()
+
 
 
 
@@ -165,21 +172,27 @@ class LFGParseTree:
 
 
 class FStructure:
-    def __init__(self, label):
-        self.label = label
+    def __init__(self):
         self.attributes = {}
 
-    def add_attribute(self, attribute, value):
+    def add(self, attribute: str, value: str):
         self.attributes[attribute] = value
 
-    def get_attribute(self, attribute):
+    def get(self, attribute: str):
         return self.attributes.get(attribute)
 
-    def remove_attribute(self, attribute):
+    def set(self, attribute: str, value: str):
+        self.attributes[attribute] = value
+
+    def remove(self, attribute: str):
         self.attributes.pop(attribute, None)
 
-    def get_all_attributes(self):
+    def get_all(self):
         return self.attributes
 
-    def has_attribute(self, attribute):
+    def has(self, attribute: str):
         return attribute in self.attributes
+        
+    def display(self):
+        for attribute, value in self.attributes.items():
+            print(f"{attribute} : {value}")
