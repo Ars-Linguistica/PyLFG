@@ -30,13 +30,13 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
             else:
                 found = False
                 for rule in grammar[top]:
-                    rule = parse_rule(rule)  # parse the rule using XLFG standard syntax
+                    rule_lhs, rule_rhs, rule_c_constraints, rule_f_constraints = parse_rule(rule)
                     if i < len(tokens) and tokens[i] in lexicon:
                         lexicon_entry = lexicon[tokens[i]]
-                        lexicon_entry = parse_lexicon_entry(lexicon_entry) # parse the lexicon entry using XLFG standard syntax
-                        if match_c_constraints(rule, tokens, i) and match_constraints(rule, lexicon_entry):
+                        lexicon_entry_c, lexicon_entry_f = parse_lexicon_entry(lexicon_entry)
+                        if match_c_constraints(rule_c_constraints, tokens, i) and match_f_constraints(rule_f_constraints, lexicon_entry_f):
                             children = []
-                            for child in rule.rhs:
+                            for child in rule_rhs:
                                 child_node = None
                                 if child in lexicon:
                                     child_node = LFGParseTreeNodeF(child, None)
@@ -66,6 +66,8 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
                     stack.extend(reversed(children))
                     if stack[-1].label == "S":
                         all_trees.append(LFGParseTree(stack[-1]))
+    impose_constraints_in_tree(all_trees)
+    remove_unused_constraints(all_trees)
     return all_trees
 
 def parse_rule(rule: str) -> Tuple[str, List[str]]:
@@ -77,33 +79,28 @@ def parse_rule(rule: str) -> Tuple[str, List[str]]:
     :return: a tuple of the rule in the format "LHS → RHS" and a list of c-structure constraints
     """
     c_structure_constraints = re.findall(r"{.*?}", rule)
-    for constraint in c_structure_constraints:
-        rule = rule.replace(constraint, "")
-    parts = rule.split("→")
-    lhs = parts[0].strip()
-    rhs = parts[1].strip()
-    return lhs + " → " + rhs, c_structure_constraints
+    rule = rule.replace(" ".join(c_structure_constraints),"").strip()
+    lhs, rhs = rule.split("→")
+    lhs = lhs.strip()
+    rhs = [x.strip() for x in rhs.split()]
+    return lhs, rhs, c_structure_constraints
 
-def parse_lexicon_entry(lexicon_entry: str) -> Tuple[str, dict, dict]:
+def parse_lexicon_entry(lexicon_entry: str) -> dict:
     """
-    Given a string representation of a lexicon entry in the XLFG standard format,
-    returns a tuple of the form (word, f_labels, c_structure_constraints) where
-    - word: the word
-    - f_labels: a dictionary of the form {f_label: f_label_value}
-    - c_structure_constraints: a dictionary of the form {c_structure_constraint: c_structure_constraint_value}
+    Given a string representation of a XLFG lexicon entry, returns a dictionary of
+    functional labels and their values.
+
+    :param lexicon_entry: the string representation of a XLFG lexicon entry
+    :return: a dictionary of functional labels and their values
     """
-    parts = lexicon_entry.split()
-    word = parts[0].strip()
-    f_labels = {}
-    c_structure_constraints = {}
-    for part in parts[1:]:
-        if part.startswith('c('):
-            constraint, value = part.strip('c()').split('=')
-            c_structure_constraints[constraint] = value
-        else:
-            label, value = part.strip('[]').split('=')
-            f_labels[label] = value
-    return word, f_labels, c_structure_constraints
+    functional_labels = {}
+    lexicon_entry = lexicon_entry.replace("[", "").replace("]", "").replace(";", "")
+    labels = lexicon_entry.split()
+    for label in labels:
+        parts = label.split('=')
+        if len(parts) == 2:
+            functional_labels[parts[0].strip()] = parts[1].strip()
+    return functional_labels
 
 def match_constraints(rule: str, lexicon_entry: dict) -> bool:
     # Extract the functional constraints from the rule
@@ -115,33 +112,48 @@ def match_constraints(rule: str, lexicon_entry: dict) -> bool:
         return True
 
 def match_c_constraints(rule, tokens, i):
-    # Regular expression for matching variable-binding notation
-    var_binding_re = re.compile(r"\[[A-Z]+\]")
-    
-    # Split the rule's RHS into a list of symbols
-    rhs_symbols = rule.rhs.split()
-    
-    # Iterate through the RHS symbols and check for c-structure constraints
-    for j, symbol in enumerate(rhs_symbols):
-        # Check if the symbol is a variable-binding notation
-        match = var_binding_re.match(symbol)
-        if match:
-            # Extract the variable name
-            var_name = match.group()[1:-1]
-            
-            # Check if the variable is already bound to a symbol
-            if var_name in rule.var_bindings:
-                # Check if the variable is bound to the current token
-                if rule.var_bindings[var_name] != tokens[i+j]:
-                    return False
-            else:
-                # Bind the variable to the current token
-                rule.var_bindings[var_name] = tokens[i+j]
-        else:
-            # Check if the symbol is the same as the current token
-            if symbol != tokens[i+j]:
-                return False
+    c_structure_constraints = rule.c_structure_constraints
+    for constraint in c_structure_constraints:
+        match = re.search(constraint, tokens[i])
+        if not match:
+            return False
     return True
+
+def match_f_constraints(rule, lexicon_entry):
+    f_structure_constraints = rule[2]
+    for constraint in f_structure_constraints:
+        if not constraint.is_valid(lexicon_entry):
+            return False
+    return True
+
+def impose_constraints_in_tree(tree: LFGParseTreeNodeF, constraints: dict):
+    """
+    Impose the constraints on the parse tree.
+    :param tree: the root node of the parse tree
+    :param constraints: the constraints, in the form of a dictionary where the keys are the functional labels and the values are the corresponding label values
+    """
+    for label, value in constraints.items():
+        tree.add_functional_label(label, value)
+    for child in tree.children:
+        if isinstance(child, LFGParseTreeNodeF):
+            impose_constraints_in_tree(child, constraints)
+
+def remove_unused_constraints(node: LFGParseTreeNodeF):
+    """
+    remove unused constraint labels from a parse tree node and its children
+    """
+    # first remove constraints from the current node
+    labels_to_remove = set(node.get_all_functional_labels().keys())
+    for child in node.children:
+        if isinstance(child, LFGParseTreeNodeF):
+            labels_to_remove -= set(child.get_all_functional_labels().keys())
+    for label in labels_to_remove:
+        node.remove_functional_label(label)
+    
+    # then recursively remove constraints from children nodes
+    for child in node.children:
+        if isinstance(child, LFGParseTreeNodeF):
+            remove_unused_constraints(child)
 
 def parse_lexicon(file):
     entries = {}
