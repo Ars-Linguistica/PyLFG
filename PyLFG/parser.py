@@ -103,15 +103,18 @@ def parse_grammar(filename):
             # Ignore empty lines and lines starting with '#'
             if not line.strip() or line.startswith('#'):
                 continue
-
-            lhs, rhs = line.split('->')
+                
+            lhs, rhs_annotations = line.split('{')
             lhs = lhs.strip()
+            rhs, annotations = rhs_annotations.split('}')
             rhs = rhs.strip()
-
+            annotations = annotations.strip()
+            
+            rule = (rhs, annotations)
             if lhs in grammar:
-                grammar[lhs].append(rhs)
+                grammar[lhs].append(rule)
             else:
-                grammar[lhs] = [rhs]
+                grammar[lhs] = [rule]
     return grammar
 
 if __name__ == '__main__':
