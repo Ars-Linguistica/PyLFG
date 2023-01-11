@@ -115,6 +115,12 @@ class LFGParseTreeNodeF(LFGParseTreeNode):
 
     def display_f_structure(self):
         return self.f_structure.display()
+    
+    def set_path_stm(self, path_stm):
+        self.path_stm = path_stm
+
+    def get_path_stm(self):
+        return self.path_stm
 
 
 class LFGParseTree:
