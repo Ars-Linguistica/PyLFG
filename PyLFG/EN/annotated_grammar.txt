@@ -1,44 +1,32 @@
-# Types
+// Types
 D = "Determiner"
-N = "Noun"
-V = "Verb"
-P = "Preposition"
+NP = "Noun Phrase"
+VP = "Verb Phrase"
+PP = "Prepositional Phrase"
 Adv = "Adverb"
 Adj = "Adjective"
 Pro = "Pronoun"
 Conj = "Conjunction"
 Mod = "Modal"
 
-# Production rules
+// Production rules
 
-# Simple sentences
-S → NP VP {
+// Simple sentences
+S → NP VP [Adv] {
     ↑ = ↓1;
     (↑ SUBJ) = ↓1;
     (↑ PRED) = ↓2;
+    (↑ MOD) = [MOD:↓3];
 }
 
-S → NP VP Adv {
-    ↑ = ↓1;
-    (↑ SUBJ) = ↓1;
-    (↑ PRED) = ↓2;
-    (↑ MOD) = [MOD:'Adv'];
-}
-
-S → NP VP PP {
+S → NP VP PP [Adv] {
     ↑ = ↓1;
     (↑ SUBJ) = ↓1;
     (↑ PRED) = [PRED:'VP PP'];
+    (↑ MOD) = [MOD:↓4];
 }
 
-S → NP VP PP Adv {
-    ↑ = ↓1;
-    (↑ SUBJ) = ↓1;
-    (↑ PRED) = [PRED:'VP PP'];
-    (↑ MOD) = [MOD:'Adv'];
-}
-
-# Noun phrases
-NP → D N {
+// Noun Phrases
+NP → D [NP|Pro] {
     ↑ = [NOUN:↓2];
 }
