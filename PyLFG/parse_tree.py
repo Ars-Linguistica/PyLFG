@@ -135,6 +135,20 @@ class LFGParseTree:
         # Return the matrix
         return matrix
     
+    def to_latex(self):
+        f_structure_latex = self._to_latex_helper(self.root)
+        return f"\\begin{{equation}}\n{f_structure_latex}\n\\end{{equation}}"
+
+    def _to_latex_helper(self, node):
+        children = "\n".join([self._to_latex_helper(child) for child in node.children])
+        label = node.label
+        if node.token:
+            label = f"`{node.token}'"
+        if not children:
+            children = "\\textrm{None}"
+        functional_labels = "\n".join([f"{key} & {value}" for key, value in node.functional_labels.items()])
+        return f"\\textrm{{{label}}} & {{\n{functional_labels}\n{children}\n}}"
+    
     def to_networkx(self):
         graph = nx.DiGraph()
         stack = [(self.root, None)]
