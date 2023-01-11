@@ -9,15 +9,15 @@ import matplotlib.pyplot as plt
 
 
 class LFGParseTreeNode:
-    def __init__(self, label: str, token: str, functional_labels=None, children=None):
+    def __init__(self, label: str, token: str, functional_labels: dict = None, children=None):
         """
         Construct a new LFG parse tree node.
         Parameters:
         - label (str): The label of the node, typically a non-terminal symbol or a terminal symbol.
         - token (str): The token the node represents, if any.
-        - functional_labels (Dict[str, str]): functional labels of the lexical item
+        - functional_labels (Dict[str, str]): functional labels of the lexical item in the XLFG standard format, where keys are the functional labels and values are the corresponding label values
         - children (List[LFGParseTreeNode]): The children of the node.
-    """
+        """
         self.label = label
         self.token = token
         self.functional_labels = functional_labels if functional_labels is not None else {}
@@ -27,26 +27,41 @@ class LFGParseTreeNode:
         self.children.append(child)
 
     def add_functional_label(self, label: str, value: str):
+        """
+        Add a new functional label
+        :param label: (str) functional label
+        :param value: (str) corresponding label value
+        """
         self.functional_labels[label] = value
 
     def get_functional_label(self, label: str):
+        """
+        get the value of the functional label specified
+        :param label: (str) functional label
+        :return: (str) corresponding label value
+        """
         return self.functional_labels.get(label)
 
     def remove_functional_label(self, label: str):
+        """
+        remove the specified functional label from the functional_labels
+        :param label: (str) functional label
+        """
         self.functional_labels.pop(label, None)
 
     def get_all_functional_labels(self):
+        """
+        get all functional labels
+        :return: dict of functional labels in the XLFG standard format
+        """
         return self.functional_labels
-
-    def has_functional_label(self, label: str):
-        return label in self.functional_labels
     
     def is_leaf(self):
         """
         Determine if the node is a leaf node (i.e., has no children).
         Returns:
         - bool: True if the node is a leaf node, False otherwise.
-    """
+        """
         return not self.children
 
     def __repr__(self):
@@ -54,15 +69,14 @@ class LFGParseTreeNode:
         Return a string representation of the node.
         Returns:
         - str: A string representation of the node.
-    """
+        """
         return f"LFGParseTreeNode(label={self.label}, token={self.token}, functional_labels={self.functional_labels}, children={self.children})"
 
 
 class LFGParseTreeNodeF(LFGParseTreeNode):
-    def __init__(self, label: str, token: str, functional_labels=None, children=None, f_structure=None):
+    def __init__(self, label: str, token: str, functional_labels=None, children=None):
         super().__init__(label, token, functional_labels, children)
-        self.f_structure = f_structure or FStructure()
-
+        self.f_structure = FStructure()
     def add_to_f_structure(self, attribute: str, value: str):
         self.f_structure.add(attribute, value)
         
@@ -83,8 +97,6 @@ class LFGParseTreeNodeF(LFGParseTreeNode):
 
     def display_f_structure(self):
         return self.f_structure.display()
-
-
 
 
 class LFGParseTree:
