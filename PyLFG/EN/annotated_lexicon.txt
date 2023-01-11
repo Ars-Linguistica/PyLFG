@@ -9,12 +9,12 @@ book N[PRED:'book'];
 house N[PRED:'house'];
 tree N[PRED:'tree'];
 
-sit V[PRED:'sit<SUBJ.sit_1stArg>', TENSED:-, ASPECT:IMPERFECTIVE];
-sleep V[PRED:'sleep<SUBJ.sleep_1stArg>', TENSED:-, ASPECT:IMPERFECTIVE];
-run V[PRED:'run<SUBJ.run_1stArg>', TENSED:-, ASPECT:IMPERFECTIVE];
-read V[PRED:'read<SUBJ.read_1stArg, OBJ.read_2ndArg>', TENSED:-, ASPECT:IMPERFECTIVE];
-live V[PRED:'live<SUBJ.live_1stArg>', TENSED:-, ASPECT:IMPERFECTIVE];
-climb V[PRED:'climb<SUBJ.climb_1stArg>', TENSED:-, ASPECT:IMPERFECTIVE];
+sit V[PRED:'sit<SUBJ.sit_1stArg>', TENSE:-, ASPECT:IMPERFECTIVE];
+sleep V[PRED:'sleep<SUBJ.sleep_1stArg>', TENSE:-, ASPECT:IMPERFECTIVE];
+run V[PRED:'run<SUBJ.run_1stArg>', TENSE:-, ASPECT:IMPERFECTIVE];
+read V[PRED:'read<SUBJ.read_1stArg, OBJ.read_2ndArg>', TENSE:-, ASPECT:IMPERFECTIVE];
+live V[PRED:'live<SUBJ.live_1stArg>', TENSE:-, ASPECT:IMPERFECTIVE];
+climb V[PRED:'climb<SUBJ.climb_1stArg>', TENSE:-, ASPECT:IMPERFECTIVE];
 
 on P[PRED:'on'];
 in P[PRED:'in'];
