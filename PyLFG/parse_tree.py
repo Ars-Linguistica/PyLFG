@@ -200,25 +200,21 @@ class LFGParseTree:
 class FStructure:
     def __init__(self):
         self.attributes = {}
-
+    
     def add(self, attribute: str, value: str):
         self.attributes[attribute] = value
 
-    def get(self, attribute: str):
-        return self.attributes.get(attribute)
-
     def set(self, attribute: str, value: str):
         self.attributes[attribute] = value
-
+        
     def remove(self, attribute: str):
         self.attributes.pop(attribute, None)
 
-    def get_all(self):
+    def get(self, attribute: str) -> str:
+        return self.attributes.get(attribute)
+    
+    def get_all(self) -> Dict[str,str]:
         return self.attributes
-
-    def has(self, attribute: str):
+    
+    def has(self, attribute: str) -> bool:
         return attribute in self.attributes
-        
-    def display(self):
-        for attribute, value in self.attributes.items():
-            print(f"{attribute} : {value}")
