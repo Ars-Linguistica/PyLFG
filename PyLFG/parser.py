@@ -77,70 +77,66 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
                     parent.add_child(node)
     return all_trees
 
-
-
-def parse_lexicon(filename: str) -> Dict[str, List[str]]:
-    """
-    Load the lexicon from the given file and return it as a dictionary.
-
-    The file is expected to contain one word and its part of speech tag per line, separated by a colon.
-    Lines starting with '#' and empty lines are ignored.
-
-    If a word appears multiple times in the file, all its tags are stored in a list in the dictionary.
-
-    Args:
-        filename (str): The name of the file to load the lexicon from.
-
-    Returns:
-        Dict[str, List[str]]: The lexicon as a dictionary.
-    """
-    lexicon = {}
-    with open(filename, 'r') as f:
+def parse_lexicon(file):
+    entries = {}
+    with open(file) as f:
         for line in f:
-            # Ignore empty lines and lines starting with '#'
-            if not line.strip() or line.startswith('#'):
+            if line.startswith("//"):
                 continue
-
-            word, pos_annotations = re.split("\s", line, 1)
-            word = word.strip()
-            pos_annotations = pos_annotations.strip()
-            if word in lexicon:
-                lexicon[word].append(pos_annotations)
-            else:
-                lexicon[word] = [pos_annotations]
-    return lexicon
-
-def parse_grammar(filename):
-    grammar = {}
-    with open(filename, 'r') as f:
-        for line in f:
-            # Ignore empty lines and lines starting with '#'
-            if not line.strip() or line.startswith('#'):
+            if line.startswith("_"):
+                entry_type, fields = line.strip().split(" ")
+                entries[entry_type] = fields
                 continue
-                
-            lhs, rhs_annotations = line.split('{')
-            lhs = lhs.strip()
-            rhs, annotations = rhs_annotations.split('}')
-            rhs = rhs.strip()
-            annotations = annotations.strip()
-            
-            rule = (rhs, annotations)
-            if lhs in grammar:
-                grammar[lhs].append(rule)
+            if "|" in line:
+                entries_raw = line.strip().split("|")
+                for e in entries_raw:
+                    word, category_raw, f_struct = e.strip().split(" ")
+                    word = word.replace("\"", "")
+                    category = category_raw.strip("[").strip("]")
+                    f_struct = f_struct.strip("[").strip("]")
+                    f_struct = f_struct.split(",")
+                    f_struct = {f.split(":")[0].strip(): f.split(":")[1].strip() for f in f_struct}
+                    if word in entries:
+                        entries[word].append({"category": category, "f_struct": f_struct})
+                    else:
+                        entries[word] = [{"category": category, "f_struct": f_struct}]
             else:
-                grammar[lhs] = [rule]
-    return grammar
+                word, category_raw, f_struct = line.strip().split(" ")
+                word = word.replace("\"", "")
+                category = category_raw.strip("[").strip("]")
+                f_struct = f_struct.strip("[").strip("]")
+                f_struct = f_struct.split(",")
+                f_struct = {f.split(":")[0].strip(): f.split(":")[1].strip() for f in f_struct}
+                entries[word] = [{"category": category, "f_struct": f_struct}]
+    return entries
 
-if __name__ == '__main__':
-    sentence = "the cat slept on the mat"
-    # Set the current language to English
-    language = "EN"
-    
-    # Load the default grammar
-    grammar = parse_grammar("{language}/grammar.txt")
-    
-    # Load the default lexicon
-    lexicon = parse_lexicon("{language}/lexicon.txt")
-    parse_tree = build_parse_trees(sentence, grammar, lexicon)[0]
-    print(parse_tree)
+def parse_grammar(file_name):
+    """
+    Parse a file that contains a context-free grammar in the XLFG format and
+    return a dictionary that maps each non-terminal to a list of its possible
+    expansions.
 
+    :param file_name: The name of the file that contains the grammar.
+    :return: A dictionary that maps each non-terminal to a list of its possible
+    expansions.
+    """
+    with open(file_name) as f:
+        lines = f.readlines()
+
+    # remove comments and blank lines
+    lines = [line.strip() for line in lines if not line.strip().startswith("//") and line.strip()]
+    # join all the lines of the file in a single string
+    grammar_string = " ".join(lines)
+
+    grammar_dict = {}
+    for rule in grammar_string.split(";"):
+        # Split the rule into its components
+        lhs, rhs, constraints = re.split(r"\s*->\s*|{", rule)
+        rhs = rhs.strip()
+        constraints = constraints.strip("}")
+        # Add the rule to the dictionary
+        if lhs not in grammar_dict:
+            grammar_dict[lhs] = []
+        grammar_dict[lhs].append((rhs, constraints))
+
+    return grammar_dict
