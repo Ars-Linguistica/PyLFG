@@ -95,6 +95,8 @@ class LFGParseTreeNodeF(LFGParseTreeNode):
     def __init__(self, label: str, token: str, functional_labels=None, children=None):
         super().__init__(label, token, functional_labels, children)
         self.f_structure = FStructure()
+        self.path_stm = path_stm
+        
     def add_to_f_structure(self, attribute: str, value: str):
         self.f_structure.add(attribute, value)
         
