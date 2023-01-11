@@ -12,7 +12,7 @@ as well as a FStructure class to represent the f-structure of the analyzed sente
 """
 
 import re
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
 
 
@@ -30,25 +30,22 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
             else:
                 found = False
                 for rule in grammar[top]:
+                    rule = parse_rule(rule)  # parse the rule using XLFG standard syntax
                     if i < len(tokens) and tokens[i] in lexicon:
-                        match = re.search(f"{lexicon[tokens[i]]}\\[(.*?)\\]", rule)
-                        if match:
-                            annotation = match.group(1)
-                            annotation_dict = dict(item.split(':') for item in annotation.split(','))
+                        lexicon_entry = lexicon[tokens[i]]
+                        lexicon_entry = parse_lexicon_entry(lexicon_entry) # parse the lexicon entry using XLFG standard syntax
+                        if match_constraints(rule, lexicon_entry):
                             children = []
-                            for child in rule.split():
+                            for child in rule.rhs:
+                                child_node = None
                                 if child in lexicon:
-                                    children.append(LFGParseTreeNodeF(child, None, annotation_dict))
+                                    child_node = LFGParseTreeNodeF(child, None)
                                 else:
-                                    children.append(LFGParseTreeNodeF(child, None))
+                                    child_node = LFGParseTreeNodeF(child, None)
+                                children.append(child_node)
                             non_term_node = LFGParseTreeNodeF(top, None, children=children)
                             stack.pop()
                             for child in reversed(children):
-                                if '<' in child.label:
-                                    func_label = child.label.split('<')[1][:-1]
-                                    for func in func_label.split('.'):
-                                        func_items = func.split('_')
-                                        child.add_functional_label(func_items[0], func_items[1])
                                 stack.append(child)
                             stack.append(non_term_node)
                             found = True
@@ -57,25 +54,71 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
                     stack.pop()
         else:
             if top in lexicon:
-                annotation_dict = {}
-                for tag in lexicon[top]:
-                    match = re.search("\\[(.*?)\\]", tag)
-                    if match:
-                        annotation = match.group(1)
-                        annotation_dict = dict(item.split(':') for item in annotation.split(','))
-                leaf_node = LFGParseTreeNodeF(lexicon[top], top, annotation_dict)
+                leaf_node = LFGParseTreeNodeF(lexicon[top], top)
                 stack.pop()
                 stack.append(leaf_node)
             elif isinstance(top, LFGParseTreeNodeF):
-                node = stack.pop()
-                if not stack:
-                    tree = LFGParseTree(node)
-                    tree.set_sentence(sentence)
-                    all_trees.append(tree)
-                else:
-                    parent = stack[-1]
-                    parent.add_child(node)
+                non_term_node = top
+                children = top.children
+                stack.pop()
+                if stack and stack[-1] == non_term_node.label:
+                    stack.pop()
+                    stack.extend(reversed(children))
+                    if stack[-1].label == "S":
+                        all_trees.append(LFGParseTree(stack[-1]))
     return all_trees
+
+def parse_rule(rule: str) -> str:
+    """
+    Given a string representation of a XLFG phrase structure rule, returns a string in the format
+    "LHS → RHS" where LHS is the left-hand side of the rule and RHS is the right-hand side of the rule.
+
+    :param rule: the string representation of a XLFG phrase structure rule
+    :return: the rule in the format "LHS → RHS"
+    """
+    parts = rule.split('→')
+    lhs = parts[0].strip()
+    rhs = parts[1].strip()
+    rhs = rhs.replace("[", "").replace("]", "").replace(";", "")
+
+    return f"{lhs} → {rhs}"
+
+def parse_lexicon_entry(lexicon_entry: str) -> Tuple:
+    parts = lexicon_entry.split()
+    category = parts[0]
+    f_structure = None
+    constraints = None
+    for part in parts[1:]:
+        if part.startswith("["):
+            f_structure = part
+        elif part.startswith("{"):
+            constraints = part
+    if f_structure:
+        f_structure = f_structure[1:-1].split(",")
+    if constraints:
+        constraints = constraints[1:-1].split(";")
+    return category, f_structure, constraints
+
+def match_constraints(rule: str, lexicon_entry: dict) -> bool:
+    # Extract the functional constraints from the rule
+    match = re.search(f"\\{{(.*?)\\}}", rule)
+    if match:
+        constraints = match.group(1)
+    else:
+        # If there are no constraints specified in the rule, return True
+        return True
+
+    # Check if each constraint in the rule is satisfied by the lexicon entry
+    for constraint in constraints.split(';'):
+        c = constraint.strip()
+        c_parts = c.split("=")
+        c_parts[0] = c_parts[0].strip()
+        c_parts[1] = c_parts[1].strip()
+        if c_parts[0] not in lexicon_entry or lexicon_entry[c_parts[0].strip()] != c_parts[1]:
+            return False
+    # If all constraints are satisfied return True
+    return True
+
 
 def parse_lexicon(file):
     entries = {}
