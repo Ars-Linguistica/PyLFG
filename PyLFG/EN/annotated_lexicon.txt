@@ -1,4 +1,4 @@
-# Lexicon
+// Lexicon
 
 "." DOT;
 
