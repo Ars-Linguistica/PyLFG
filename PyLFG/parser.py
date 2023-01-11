@@ -143,19 +143,6 @@ def match_c_constraints(rule, tokens, i):
                 return False
     return True
 
-
-    # Check if each constraint in the rule is satisfied by the lexicon entry
-    for constraint in constraints.split(';'):
-        c = constraint.strip()
-        c_parts = c.split("=")
-        c_parts[0] = c_parts[0].strip()
-        c_parts[1] = c_parts[1].strip()
-        if c_parts[0] not in lexicon_entry or lexicon_entry[c_parts[0].strip()] != c_parts[1]:
-            return False
-    # If all constraints are satisfied return True
-    return True
-
-
 def parse_lexicon(file):
     entries = {}
     with open(file) as f:
