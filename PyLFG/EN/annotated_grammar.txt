@@ -1,4 +1,4 @@
-// Types
+/* Types
 D = "Determiner"
 NP = "Noun Phrase"
 VP = "Verb Phrase"
@@ -8,6 +8,7 @@ Adj = "Adjective"
 Pro = "Pronoun"
 Conj = "Conjunction"
 Mod = "Modal"
+*/
 
 // Production rules
 
