@@ -147,20 +147,36 @@ class LFGParseTree:
         # Return the matrix
         return matrix
     
-    def to_latex(self):
+    def to_latex(self, filepath: str):
         f_structure_latex = self._to_latex_helper(self.root)
-        return f"\\begin{{equation}}\n{f_structure_latex}\n\\end{{equation}}"
+        c_structure_latex = self._to_c_structure_latex_helper(self.root)
+        caption = "C-structure tree and F-structure representation of the parse tree"
+        label = "parse_tree"
 
-    def _to_latex_helper(self, node):
-        children = "\n".join([self._to_latex_helper(child) for child in node.children])
-        label = node.label
-        if node.token:
-            label = f"`{node.token}'"
-        if not children:
-            children = "\\textrm{None}"
-        functional_labels = "\n".join([f"{key} & {value}" for key, value in node.functional_labels.items()])
-        return f"\\textrm{{{label}}} & {{\n{functional_labels}\n{children}\n}}"
-    
+        latex_code = f"""
+        \\documentclass{{article}}
+        \\usepackage{{tikz-qtree}}
+        \\usepackage{{tabularx}}
+        \\usepackage[active,tightpage]{{preview}}
+        \\usepackage{{graphicx}}
+        \\PreviewEnvironment{{center}}
+        \\begin{{document}}
+        \\begin{{figure}}[h]
+        \\centering
+        \\begin{{tabularx}}{{1.5\\textwidth}}{{X l}}
+        {c_structure_latex} & {f_structure_latex}\\\\
+        \\end{{tabularx}}
+        \\caption{{{caption}}}
+        \\label{{{label}}}
+        \\end{{figure}}
+        \\end{{document}}
+        """
+        with open(filepath, "w") as f:
+            f.write(latex_code)
+
+    def _to_c_structure_latex_helper(self, node):
+        children = " ".join([self._to_c_structure_latex
+        
     def to_networkx(self):
         graph = nx.DiGraph()
         stack = [(self.root, None)]
