@@ -1,6 +1,7 @@
 """
 This module provides classes to represent and visualize LFG parse trees.
-The LFGParseTree class provides a visualization of the tree structure of the sentence, as well as functional annotations in the lexical items.
+The LFGParseTree class provides a visualization of the tree structure of the sentence,
+as well as functional annotations in the lexical items.
 """
 
 import networkx as nx
@@ -57,10 +58,26 @@ class LFGParseTreeNode:
         return f"LFGParseTreeNode(label={self.label}, token={self.token}, functional_labels={self.functional_labels}, children={self.children})"
 
 
-class LFGParseTreeNodeF:
-    def __init__(self, label, terminals, children=None, f_structure = None):
-        super().__init__(label, terminals, children)
-        self.f_structure = f_structure or FStructure(label)
+class LFGParseTreeNodeF(LFGParseTreeNode):
+    def __init__(self, label: str, token: str, functional_labels=None, children=None, f_structure=None):
+        super().__init__(label, token, functional_labels, children)
+        self.f_structure = f_structure or FStructure()
+        
+    def add_to_f_structure(self, attribute: str, value: str):
+        self.f_structure.add(attribute, value)
+        
+    def get_from_f_structure(self, attribute: str):
+        return self.f_structure.get(attribute)
+        
+    def remove_from_f_structure(self, attribute: str):
+        self.f_structure.remove(attribute)
+        
+    def get_all_f_structure(self):
+        return self.f_structure.get_all()
+        
+    def has_in_f_structure(self, attribute: str):
+        return self.f_structure.has(attribute)
+
 
 
 class LFGParseTree:
@@ -148,23 +165,21 @@ class LFGParseTree:
 
 
 class FStructure:
-    def __init__(self, sentence: str):
-        self.labels = {}
-        self.children = []
-        self.sentence = sentence
+    def __init__(self, label):
+        self.label = label
+        self.attributes = {}
 
-    def add_label(self, label: str, value: str):
-        self.labels[label] = value
+    def add_attribute(self, attribute, value):
+        self.attributes[attribute] = value
 
-    def get_label(self, label: str):
-        return self.labels.get(label, None)
+    def get_attribute(self, attribute):
+        return self.attributes.get(attribute)
 
-    def add_child(self, child: 'FStructure'):
-        self.children.append(child)
+    def remove_attribute(self, attribute):
+        self.attributes.pop(attribute, None)
 
-    def get_children(self) -> List['FStructure']:
-        return self.children
+    def get_all_attributes(self):
+        return self.attributes
 
-    def to_string(self):
-        label_str = ', '.join([f'{label}:{value}' for label, value in self.labels.items()])
-        return f'({self.sentence}, {label_str}, [{", ".join([child.to_string() for child in self.children])}])'
+    def has_attribute(self, attribute):
+        return attribute in self.attributes
