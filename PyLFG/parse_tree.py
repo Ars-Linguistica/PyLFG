@@ -22,6 +22,7 @@ class LFGParseTreeNode:
         self.token = token
         self.functional_labels = functional_labels if functional_labels is not None else {}
         self.children = children or []
+        self.e_structure = None
 
     def add_child(self, child):
         self.children.append(child)
@@ -55,6 +56,15 @@ class LFGParseTreeNode:
         :return: dict of functional labels in the XLFG standard format
         """
         return self.functional_labels
+    
+   def calculate_e_structure(self):
+        e_structure = {}
+        if self.label in e_structure:
+            e_structure[self.label] = (self.f_structure, [])
+        for child in self.children:
+            child.calculate_e_structure()
+            e_structure[self.label][1].append(child.e_structure)
+        self.e_structure = e_structure 
     
     def is_leaf(self):
         """
