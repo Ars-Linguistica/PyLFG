@@ -16,3 +16,19 @@ def load_templates(template_file):
         else:
             current_template = None
     return templates
+
+def load_features(features_file):
+    with open(features_file, 'r') as f:
+        feature_data = f.read()
+    # Do some processing of the feature data, such as splitting it into lines and parsing it
+    features = {}
+    for line in feature_data.split('\n'):
+        # Split the line by ':' and remove leading/trailing whitespace
+        feature, values = [x.strip() for x in line.split(':')]
+        # Remove the arrow and leading/trailing whitespace from the values string
+        values = values.replace('->', '').strip()
+        # Split the values string by '$' and remove leading/trailing curly braces
+        values = [x.strip() for x in values.split('$') if x.strip()]
+        # Add the feature and its values to the features dictionary
+        features[feature] = values
+    return features
