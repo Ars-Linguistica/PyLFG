@@ -246,7 +246,7 @@ class LFGParseTree:
             f.write(latex_code)
 
     def _to_c_structure_latex_helper(self, node):
-        children = " ".join([self._to_c_structure_latex
+        # children = " ".join([self._to_c_structure_latex
         
     def to_networkx(self):
         graph = nx.DiGraph()
@@ -259,6 +259,11 @@ class LFGParseTree:
         return graph
 
     def draw(self, layout: str = 'spring', color_map: Dict[str, str] = None):
+        """
+        tree = LFGParseTree(root_node)
+        color_map = {'NP': 'red', 'VP': 'green', 'PP': 'blue'}
+        tree.draw(layout='spring', color_map=color_map)
+        """
         G = nx.Graph()
         queue = [(self.root, None)]
         while queue:
