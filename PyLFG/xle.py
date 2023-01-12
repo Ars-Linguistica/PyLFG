@@ -1,3 +1,5 @@
+import openfst_python as fst
+
 
 def load_templates(template_file):
     templates = {}
@@ -90,3 +92,8 @@ def parse_grammar(grammar_file: str) -> Dict[str, List[Tuple[str, List[str], Dic
                     features[key] = value
             lexicon[word] = (morph, features)
     return lexicon
+
+def load_fst(fst_path: str):
+    fst = fst.Fst.read(fst_path)
+    return
+
