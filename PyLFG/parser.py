@@ -227,3 +227,34 @@ def fst_tokenize(sentence, fst_path):
     tokens = [tokenized_sentence[i].split("\t")[1] for i in range(len(tokenized_sentence))]
     return tokens
 
+def build_trees(disambiguated_entries, grammar, templates):
+    """
+    Build parse trees from the disambiguated entries using the provided grammar and templates.
+    """
+    # Initialize an empty list to store the parse trees
+    parse_trees = []
+    # Iterate through the disambiguated entries
+    for entry in disambiguated_entries:
+        # Get the non-terminal symbol for the entry
+        non_terminal = entry[0]
+        # Get the corresponding grammar rule for the non-terminal symbol
+        rule = grammar[non_terminal]
+        # Get the c-structure and f-structure constraints for the rule
+        c_constraints = rule[2]
+        f_constraints = rule[3]
+        # Initialize an empty string to store the template
+        template = ""
+        # Iterate through the c-structure constraints
+        for constraint in c_constraints:
+            # Replace the constraint in the template with the corresponding value from the entry
+            template = template.replace("{" + constraint + "}", entry[c_constraints[constraint]])
+        # Iterate through the f-structure constraints
+        for constraint in f_constraints:
+            # Replace the constraint in the template with the corresponding value from the entry
+            template = template.replace("{" + constraint + "}", entry[f_constraints[constraint]])
+        # Use the template to build the parse tree for the entry
+        parse_tree = templates[template]
+        # Add the parse tree to the list of parse trees
+        parse_trees.append(parse_tree)
+    # Return the list of parse trees
+    return parse_trees
