@@ -3,7 +3,7 @@ PyLFG is a package for parsing sentences using Lexical Functional Grammar (LFG).
 This module provides an implementation of the Earley parsing algorithm for building parse trees
 from sentences and grammar rules specified in LFG.
 
-The primary entry point for the module is the `build_parse_trees` function, which takes a sentence string
+The primary entry point for the module is the `LfgParser` class and it's main methode parse(sentence), which takes a sentence string
 and a set of grammar rules and lexicon and returns a list of parse trees for the sentence.
 
 The package also provides helper functions for loading grammar rules and lexicon from files,
@@ -18,9 +18,23 @@ import xlfg.parse_grammar
 import xlfg.parse_lexicon
 
 
-def build_parse_trees(sentence: str, grammar: Grammar, lexicon: Lexicon) -> list:
-    grammar = grammar.parse()
-    lexicon = lexicon.parse()
+class LfgParser:
+    def __init__(self, grammar_format):
+        self.grammar_format = grammar_format
+    
+    def parse(sentence: str) -> list:
+        # Calls the required buid_parse_trees method corresponding to grammar_format
+        pass
+
+class XlfgParser(LfgParser):
+    def __init__(self, grammar: dict, lexicon: Lexicon):
+        self.grammar = grammar
+        self.lexicon = lexicon
+
+    
+    def build_parse_trees(sentence: str) -> list:
+    grammar = self.grammar.parse()
+    lexicon = self.lexicon.parse()
     all_trees = []
     stack = ["0", "S"]
     tokens = sentence.split()
@@ -73,6 +87,16 @@ def build_parse_trees(sentence: str, grammar: Grammar, lexicon: Lexicon) -> list
     impose_constraints_in_tree(all_trees)
     remove_unused_constraints(all_trees)
     return all_trees
+    
+
+class XleParser(LfgParser):
+    def __init__(self, grammar: dict, lexicon: Lexicon):
+        self.grammar = grammar
+        self.lexicon = lexicon
+
+    
+    def build_parse_trees(sentence: str) -> list:
+        pass
 
 class Grammar:
     def __init__(self, grammar_format: str, grammar: dict):
