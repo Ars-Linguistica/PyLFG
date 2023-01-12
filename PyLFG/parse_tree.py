@@ -290,6 +290,8 @@ class FStructure:
         Construct a new FStructure object.
         """
         self.attributes = {}
+        self.constraints = []
+        self.f_structures = []
 
     def add(self, attribute: str, value: str):
         """
@@ -366,3 +368,22 @@ class FStructure:
         :return: dict of functional labels in the XLFG standard format
         """
         return self.attributes
+    
+    def add_constraint(self, constraint: str):
+        self.constraints.append(constraint)
+    
+    def remove_constraint(self, constraint: str):
+        self.constraints.remove(constraint)
+    
+    def check_constraints(self):
+        for constraint in self.constraints:
+            if not constraint(self.attributes):
+                return False
+        return True
+        
+    def add_f_structure(self, f_structure: dict):
+        self.f_structures.append(f_structure)
+        
+    def get_f_structures(self):
+        return self.f_structures
+
