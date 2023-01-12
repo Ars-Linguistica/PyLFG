@@ -258,18 +258,21 @@ class LFGParseTree:
                 stack.append((child, node.label))
         return graph
 
-    def draw(self, show_labels=True, show_annotations=False, labels=None, font_size=12, font_color='black'):
-        graph = self.to_networkx()
-        pos = nx.spring_layout(graph)
-        nx.draw_networkx_nodes(graph, pos, node_size=1000, node_color='lightblue', alpha=0.8)
-        nx.draw_networkx_edges(graph, pos, edge_color='gray')
-        if show_labels:
-            if labels:
-                nx.draw_networkx_labels(graph, pos, labels, font_size=font_size, font_color=font_color)
-            else:
-                nx.draw_networkx_labels(graph, pos, font_size=font_size, font_color=font_color)
-        if show_annotations:
-            nx.draw_networkx_edge_labels(graph, pos, edge_labels=self.get_annotations())
+    def draw(self, layout: str = 'spring', color_map: Dict[str, str] = None):
+        G = nx.Graph()
+        queue = [(self.root, None)]
+        while queue:
+            node, parent = queue.pop(0)
+            G.add_node(node.label)
+            if parent:
+                G.add_edge(parent.label, node.label)
+            for child in node.children:
+                queue.append((child, node))
+        if color_map:
+            color_values = [color_map.get(node.label, 'white') for node in G.nodes()]
+            nx.draw(G, pos=nx.drawing.nx_agraph.graphviz_layout(G, prog=layout), node_color=color_values)
+        else:
+            nx.draw(G, pos=nx.drawing.nx_agraph.graphviz_layout(G, prog=layout))
         plt.show()
 
     def get_annotations(self):
