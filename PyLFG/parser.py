@@ -199,3 +199,31 @@ class XleLexicon(Lexicon):
         # Code for parsing XLE lexicon format and returning the dictionary 
         # in the required format goes here
         return xle.parse_lexicon(lexicon_file)
+
+import os
+
+def tokenize(sentence, fst_tokenizer_path):
+    """
+    Tokenize the given sentence using an FST tokenizer if present in the given directory,
+    otherwise use a default string split method.
+    """
+    
+    if os.path.exists(fst_tokenizer_path):
+        # Use the FST tokenizer to tokenize the sentence
+        tokens = fst_tokenize(sentence, fst_tokenizer_path)
+    else:
+        # Use a default string split method to tokenize the sentence
+        tokens = sentence.split()
+    return tokens
+
+def fst_tokenize(sentence, fst_path):
+    """
+    Tokenize the given sentence using the FST at the given path.
+    """
+    # Load the FST and tokenize the sentence
+    tokenizer = fst.Fst.read(fst_path)
+    tokenized_sentence = tokenizer.transduce(sentence)
+    # Extract the tokens from the tokenized sentence
+    tokens = [tokenized_sentence[i].split("\t")[1] for i in range(len(tokenized_sentence))]
+    return tokens
+
