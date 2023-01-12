@@ -33,20 +33,42 @@ def load_features(features_file):
         features[feature] = values
     return features
 
-def parse_grammar(grammar_file: str) -> dict:
+def parse_grammar(grammar_file: str) -> Dict[str, List[Tuple[str, List[str], Dict[str, str], Dict[str, str]]]]:
+    """
+    Parse an XLE grammar file and return a dictionary of grammar rules, where the keys are
+    non-terminal symbols and the values are lists of tuples representing the corresponding
+    grammar rules in the form (lhs, rhs, c_constraints, f_constraints).
+    """
     grammar = {}
-    with open(grammar_file, "r") as file:
-        lines = file.readlines()
-        for line in lines:
-            # Skip empty lines or lines starting with a comment symbol
-            if not line.strip() or line.startswith("#"):
+    with open(grammar_file, 'r') as f:
+        for line in f:
+            # skip comments and empty lines
+            if line.startswith("#") or line.strip() == "":
                 continue
-            # Split the line by the "=" symbol to separate the left-hand side and right-hand side of the rule
-            lhs, rhs = line.split("=")
-            # Strip any leading or trailing whitespace from the left-hand side
+            # split the line on the "=" character
+            lhs, rhs = line.strip().split("=")
+            # remove any leading/trailing whitespace and split the lhs into the non-terminal symbol and the c-structure constraints
             lhs = lhs.strip()
-            # Strip any leading or trailing whitespace from the right-hand side and split it by whitespace to get the list of symbols in the rule
-            rhs = [symbol.strip() for symbol in rhs.strip().split()]
-            # Add the rule to the grammar dictionary, using the left-hand side as the key and the right-hand side as the value
-            grammar[lhs] = rhs
+            if " " in lhs:
+                non_terminal, c_constraints_str = lhs.split(" ", 1)
+                c_constraints = {c.split(" ")[0]: c.split(" ")[1] for c in c_constraints_str.split(" ")}
+            else:
+                non_terminal = lhs
+                c_constraints = {}
+            # split the rhs into the f-structure constraints and the list of symbols
+            if "{" in rhs:
+                rhs, f_constraints_str = rhs.split("{")
+                f_constraints_str = f_constraints_str.strip()[:-1]
+                f_constraints = {f.split(" ")[0]: f.split(" ")[1] for f in f_constraints_str.split(" ")}
+                rhs = rhs.strip()
+            else:
+                f_constraints = {}
+                rhs = rhs.strip()
+            # split the rhs symbols on whitespace
+            rhs_symbols = rhs.split(" ")
+            # add the rule to the grammar dictionary
+            if non_terminal in grammar:
+                grammar[non_terminal].append((non_terminal, rhs_symbols, c_constraints, f_constraints))
+            else:
+                grammar[non_terminal] = [(non_terminal, rhs_symbols, c_constraints, f_constraints)]
     return grammar
