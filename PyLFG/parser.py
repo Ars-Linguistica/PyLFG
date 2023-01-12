@@ -146,7 +146,7 @@ class XleGrammar(Grammar):
         """
         # Code for parsing XLE grammar format and returning the dictionary 
         # in the required format goes here
-        pass
+        return xle.parse_grammar(grammar_file)
 
 class XleLexicon(Lexicon):
     def __init__(self, lexicon_file: str):
@@ -159,4 +159,4 @@ class XleLexicon(Lexicon):
         """
         # Code for parsing XLE lexicon format and returning the dictionary 
         # in the required format goes here
-        pass
+        return xle.parse_lexicon(lexicon_file)
