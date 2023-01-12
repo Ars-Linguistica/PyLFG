@@ -14,6 +14,8 @@ as well as a FStructure class to represent the f-structure of the analyzed sente
 import re
 from typing import List, Dict, Tuple
 from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
+import xlfg.parse_grammar
+import xlfg.parse_lexicon
 
 
 def build_parse_trees(sentence: str, grammar: Grammar, lexicon: Lexicon) -> list:
@@ -113,7 +115,7 @@ class XlfgGrammar:
         :return: a dictionary with the nonterminals as keys and lists of rules as values
         """
         
-        return parse_grammar(grammar_file)
+        return xlfg.parse_grammar(grammar_file)
 
 
 class XlfgLexicon:
@@ -130,4 +132,4 @@ class XlfgLexicon:
         :return: a dictionary with the words as keys and lexicon entries as values
         """
         
-        return parse_lexicon(lexicon_file)
+        return xlfg.parse_lexicon(lexicon_file)
