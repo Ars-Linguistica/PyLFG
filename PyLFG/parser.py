@@ -133,3 +133,30 @@ class XlfgLexicon:
         """
         
         return xlfg.parse_lexicon(lexicon_file)
+
+
+class XleGrammar(Grammar):
+    def __init__(self, grammar_file: str):
+        super().__init__(grammar_file)
+
+    def parse(self):
+        """
+        Parse the grammar in XLE format and return a dictionary in the format 
+        {non_terminal: List[Tuple[str, List[str], Dict[str, str], Dict[str, str]]]}
+        """
+        # Code for parsing XLE grammar format and returning the dictionary 
+        # in the required format goes here
+        pass
+
+class XleLexicon(Lexicon):
+    def __init__(self, lexicon_file: str):
+        super().__init__(lexicon_file)
+
+    def parse(self):
+        """
+        Parse the lexicon in XLE format and return a dictionary in the format 
+        {token: Tuple[List[Tuple[str, str]], Dict[str, str]]}
+        """
+        # Code for parsing XLE lexicon format and returning the dictionary 
+        # in the required format goes here
+        pass
