@@ -16,7 +16,8 @@ from typing import List, Dict, Tuple
 from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
 import xlfg.parse_grammar
 import xlfg.parse_lexicon
-
+import xle.parse_grammar
+import xle.parse_lexicon
 
 class LfgParser:
     def __init__(self, grammar_format):
