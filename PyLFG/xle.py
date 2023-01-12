@@ -1,6 +1,34 @@
 import openfst_python as fst
 
 
+# test implementation.
+def integrate_lfg(grammar_path, lexicon_path, morph_fst_path, tokenizer_fst_path):
+    # Initialize LFG object
+    lfg = LFG()
+
+    # Load grammar and lexicon
+    lfg.load_grammar(grammar_path)
+    lfg.load_lexicon(lexicon_path)
+
+    # Load morphological analyzer FST
+    lfg.load_fst(morph_fst_path, "morph")
+
+    # Load tokenizer FST
+    lfg.load_fst(tokenizer_fst_path, "tokenizer")
+
+    # Use FSTs to analyze input sentence
+    sentence = "The cat is baking a cake."
+    tokenized = lfg.tokenize(sentence)
+    morph_analysis = lfg.analyze_morphology(tokenized)
+
+    # Use templates to integrate FST output with parsed lexicon and grammar
+    for word in morph_analysis:
+        stem = word[0]
+        tags = word[1]
+        lfg.apply_template("V", stem, tags)
+
+    return parse_tree
+
 def load_templates(template_file):
     templates = {}
     with open(template_file, 'r') as f:
