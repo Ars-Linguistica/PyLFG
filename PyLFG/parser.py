@@ -91,13 +91,27 @@ class XlfgParser(LfgParser):
     
 
 class XleParser(LfgParser):
-    def __init__(self, grammar: dict, lexicon: Lexicon):
-        self.grammar = grammar
-        self.lexicon = lexicon
+    def __init__(self, template_file, features_file, grammar_file, lexicon_file, fst_dir):
+        self.templates = load_templates(template_file)
+        self.features = load_features(features_file)
+        self.grammar = parse_grammar(grammar_file)
+        self.lexicon = load_lexicon(lexicon_file)
+        self.fst_dir = fst_dir
 
-    
-    def build_parse_trees(sentence: str) -> list:
-        pass
+    def build_parse_trees(self, sentence):
+        """
+        Use the resources from the lexicon, grammar, and FSTs to build parse trees for the given sentence.
+        """
+        # Tokenize the sentence
+        tokens = tokenize(sentence)
+        # Look up the lexical entries for each token in the lexicon
+        lexical_entries = [self.lexicon[token] for token in tokens]
+        # Use the FSTs in the fst_dir directory to disambiguate the lexical entries
+        disambiguated_entries = disambiguate_entries(lexical_entries, self.fst_dir)
+        # Use the grammar and templates to build the parse trees
+        parse_trees = build_trees(disambiguated_entries, self.grammar, self.templates)
+        return parse_trees
+
 
 class Grammar:
     def __init__(self, grammar_format: str, grammar: dict):
