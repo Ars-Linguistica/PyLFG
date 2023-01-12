@@ -70,6 +70,7 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
     remove_unused_constraints(all_trees)
     return all_trees
 
+
 def parse_rule(rule: str) -> Tuple[str, List[str]]:
     """
     Given a string representation of a XLFG phrase structure rule, returns a tuple of 
