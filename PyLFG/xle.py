@@ -96,4 +96,28 @@ def parse_grammar(grammar_file: str) -> Dict[str, List[Tuple[str, List[str], Dic
 def load_fst(fst_path: str):
     fst = fst.Fst.read(fst_path)
     return
+    
+def integrate_lfg(lexicon, grammar):
+    # Load the templates from common.templates.lfg
+    with open('common.templates.lfg', 'r') as f:
+        templates = f.read()
+    
+    # Load the feature declaration from common.features.lfg
+    with open('common.features.lfg', 'r') as f:
+        features = f.read()
+    
+    # Load the morphconfig and rules from eng-pargram.lfg
+    with open('eng-pargram.lfg', 'r') as f:
+        config_and_rules = f.read()
+    
+    # Insert the parsed lexicon and parsed grammar into the appropriate place in the templates
+    templates = templates.replace('LEXICON_GOES_HERE', lexicon)
+    templates = templates.replace('GRAMMAR_GOES_HERE', grammar)
+    
+    # Insert the templates, feature declaration, and config/rules into eng-pargram.lfg
+    config_and_rules = config_and_rules.replace('TEMPLATES_GO_HERE', templates)
+    config_and_rules = config_and_rules.replace('FEATURE_DECLARATION_GOES_HERE', features)
+    
+    return config_and_rules
+
 
