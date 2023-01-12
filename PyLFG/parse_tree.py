@@ -295,39 +295,45 @@ class FStructure:
 
     def add(self, attribute: str, value: str):
         """
-        Add an attribute-value pair to the FStructure.
-        :param attribute: (str) attribute name
-        :param value: (str) attribute value
+        Add a new attribute-value pair to the f-structure
+        :param attribute: (str) the attribute name
+        :param value: (str) the value of the attribute
         """
-        self.attributes[attribute] = value
-
+        if attribute not in self.attributes:
+            self.attributes[attribute] = set()
+        self.attributes[attribute].add(value)
+    
     def set(self, attribute: str, value: str):
         """
-        set an attribute-value pair to the FStructure, replacing any existing value with the new value
-        :param attribute: (str) attribute name
-        :param value: (str) attribute value
+        Set the value of the specified attribute
+        :param attribute: (str) the attribute name
+        :param value: (str) the value of the attribute
         """
-        self.attributes[attribute] = value
-
+        self.attributes[attribute] = {value}
+    
     def get(self, attribute: str):
         """
-        get the value of the attribute
-        :param attribute: (str) attribute name
-        :return: (str) value of the attribute
+        Get the value of the specified attribute
+        :param attribute: (str) the attribute name
+        :return: (str) the value of the attribute
         """
-        return self.attributes.get(attribute)
-
+        if attribute in self.attributes:
+            return self.attributes[attribute]
+        else:
+            return None
+    
     def remove(self, attribute: str):
         """
-        remove the specified attribute from the f-structure
-        :param attribute: (str) attribute name
+        Remove the specified attribute from the f-structure
+        :param attribute: (str) the attribute name
         """
-        self.attributes.pop(attribute, None)
-
-    def get_all(self):
+        if attribute in self.attributes:
+            self.attributes.pop(attribute)
+    
+    def get_all_attributes(self):
         """
-        get all the attributes
-        :return: dict of attributes in the XLFG standard format
+        get all attributes and their values
+        :return: dict of attributes and their values
         """
         return self.attributes
 
