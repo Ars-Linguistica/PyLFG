@@ -32,3 +32,21 @@ def load_features(features_file):
         # Add the feature and its values to the features dictionary
         features[feature] = values
     return features
+
+def parse_grammar(grammar_file: str) -> dict:
+    grammar = {}
+    with open(grammar_file, "r") as file:
+        lines = file.readlines()
+        for line in lines:
+            # Skip empty lines or lines starting with a comment symbol
+            if not line.strip() or line.startswith("#"):
+                continue
+            # Split the line by the "=" symbol to separate the left-hand side and right-hand side of the rule
+            lhs, rhs = line.split("=")
+            # Strip any leading or trailing whitespace from the left-hand side
+            lhs = lhs.strip()
+            # Strip any leading or trailing whitespace from the right-hand side and split it by whitespace to get the list of symbols in the rule
+            rhs = [symbol.strip() for symbol in rhs.strip().split()]
+            # Add the rule to the grammar dictionary, using the left-hand side as the key and the right-hand side as the value
+            grammar[lhs] = rhs
+    return grammar
