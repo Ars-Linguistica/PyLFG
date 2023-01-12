@@ -70,6 +70,66 @@ def build_parse_trees(sentence: str, grammar: dict, lexicon: dict) -> list:
     remove_unused_constraints(all_trees)
     return all_trees
 
+class Grammar:
+    def __init__(self, grammar_format: str, grammar: dict):
+        self.grammar_format = grammar_format
+        self.grammar = grammar
+
+    def parse(self):
+        if self.grammar_format == "XLFG":
+            return XlfgGrammar(self.grammar).parse()
+        elif self.grammar_format == "XLE":
+            return XleGrammar(self.grammar).parse()
+        else:
+            raise ValueError(f"Unsupported grammar format: {self.grammar_format}")
+
+
+class Lexicon:
+    def __init__(self, lexicon_format: str, lexicon: dict):
+        self.lexicon_format = lexicon_format
+        self.lexicon = lexicon
+
+    def parse(self):
+        if self.lexicon_format == "XLFG":
+            return XlfgLexicon(self.lexicon).parse()
+        elif self.lexicon_format == "XLE":
+            return XleLexicon(self.lexicon).parse()
+        else:
+            raise ValueError(f"Unsupported lexicon format: {self.lexicon_format}")
+
+class XlfgGrammar:
+    def __init__(self, grammar_file: str):
+        self.grammar = self.parse_grammar(grammar_file)
+    
+    @staticmethod
+    def parse_grammar(grammar_file: str) -> dict:
+        """
+        Given a file containing XLFG grammar rules, returns a dictionary
+        with the nonterminals as keys and lists of rules as values.
+
+        :param grammar_file: the file containing XLFG grammar rules
+        :return: a dictionary with the nonterminals as keys and lists of rules as values
+        """
+        
+        return parse_grammar(grammar_file)
+
+
+class XlfgLexicon:
+    def __init__(self, lexicon_file: str):
+        self.lexicon = self.parse_lexicon(lexicon_file)
+    
+    @staticmethod
+    def parse_lexicon(lexicon_file: str) -> dict:
+        """
+        Given a file containing XLFG lexicon entries, returns a dictionary
+        with the words as keys and lexicon entries as values.
+
+        :param lexicon_file: the file containing XLFG lexicon entries
+        :return: a dictionary with the words as keys and lexicon entries as values
+        """
+        
+        return parse_lexicon(lexicon_file)
+
 
 def parse_rule(rule: str) -> Tuple[str, List[str]]:
     """
