@@ -145,8 +145,8 @@ class LFGParseTreeNodeE(LFGParseTreeNode):
     def get_aspect(self):
         return self.aspect
     
-    def set_mood(self, aspect: str):
-        self.mood = aspect
+    def set_mood(self, mood: str):
+        self.mood = mood
 
     def get_mood(self):
         return self.mood
@@ -162,6 +162,12 @@ class LFGParseTreeNodeE(LFGParseTreeNode):
 
     def get_lexical_head
         return self.lexical_head
+    
+    def set_logical_form(self, form: str):
+        self.logical_form = form
+
+    def get_logical_form
+        return self.logical_form
 
 
 class LFGParseTree:
