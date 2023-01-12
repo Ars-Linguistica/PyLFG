@@ -1,0 +1,78 @@
+STANDARD COMMON FEATURES (1.0)
+
+"These features can be used by all the grammars.  If a language has a
+given feature, it must use one of these values.  New values can be
+added after approval by the feature committee.  New features can be
+added as they become more universal."
+
+"This feature declaration should be called in the grammars as:
+
+FEATURES (STANDARD COMMON) (STANDARD YOUR-LANGUAGE).
+
+To modify these features and their values use the edit
+operators provided in xle.  In your feature declaration you can:"
+
+"0. Add a feature not declared here:
+     CHECK: -> << [ _NCHECK _VCHECK ]. 
+
+1. Use just a subset of the values:
+     &CASE: -> $ { nom acc }.
+
+2. Add in a new value for a feature here; these will be discussed at
+the next meeting:
+     +CASE: -> $ { finnish12 finnish13 finnish 14 }.
+
+3. Completely replace a feature with new values; these will be discussed at
+the next meeting:
+     !CASE: -> $ { sg pl }.
+
+4. Delete a feature that is not used in your grammar (e.g., remove
+GEND in a language with no grammatical gender):
+     !GEND: -> $ {}."
+
+"Note that instantiated feature values are compatible with
+noninstantiated feature value declarations."
+
+ANIM: -> $ {+ -}.
+AQUANT: -> << [ ADJUNCT PRED QUANT-TYPE DEGREE DEG-DIM ].
+ATYPE: -> $  {adverbial attributive predicative}. 
+CASE: -> $ {acc dat erg gen inst loc nom obl}.
+CLAUSE-TYPE: -> $ { adv cond decl imp int nom pol-int rel wh-int
+}. 
+COMMON: -> $ { count gerund mass measure partitive }.
+DEG-DIM: -> $  {equative neg pos}.
+DEGREE: -> $  {comparative positive superlative}.
+DET: -> << [ DEIXIS DET-TYPE PRED ].
+DET-TYPE: -> $ {article def demon indef int rel}. 
+GEND: { ->  $ {fem masc neut} | ->  << [ FEM MASC NEUT ] }.
+HUMAN: -> $ {+ -}.
+GEND-SEM: -> $  {female male nonhuman}.
+LOCATION-TYPE: -> $ { city country }.
+MOOD: -> $  {imperative indicative subjunctive successive}.
+NAME-TYPE: -> $ {first_name last_name }.
+NSEM: -> << [ COMMON NUMBER-TYPE PROPER TIME ].
+NSYN: -> $ { common pronoun proper }.
+NTYPE: -> << [ NSEM NSYN ].
+NUM: -> $  {pl sg}. 
+NUMBER:  -> << [NUMBER-TYPE PRED ADJUNCT CLASSIFIER-FORM MOD].
+NUMBER-TYPE: -> $  {card fract ord percent}.
+PASSIVE: -> $  {+ -}.
+PERF: -> $  {+ - +_ -_}.
+PERS: -> $  {1 2 3}.
+PROG: -> $  {+ - +_ -_}.
+PRON-TYPE: -> $  {demon expl_ free inh-refl_ int locative null pers
+quant poss recip refl rel}.
+PROPER: -> << [ PROPER-TYPE LOCATION-TYPE NAME-TYPE ].
+PROPER-TYPE: -> $ { addr_form location name organization title }.
+PSEM: -> $  {ag ben comit compar dir inst loc manner num part poss purp temp }.
+PTYPE: -> $  {nosem sem}.
+QUANT: -> << [ADJUNCT QUANT-TYPE POL PRED DEGREE DEG-DIM ].
+QUANT-TYPE: -> $ {comparative equative existential gen negative superlative universal}.
+SPEC: -> << [ADJUNCT AQUANT DET  NUMBER POSS QUANT  SPEC-TYPE]. 
+STMT-TYPE: -> $  { decl header imp int }.
+TENSE: -> $  {fut null past pres}.
+TIME: -> $ { date day hour minute month season second week year}.
+TNS-ASP: -> <<  [MOOD PERF PROG TENSE].
+VTYPE: -> $  {aux copular main modal noncopular predicative raising}.
+
+----
