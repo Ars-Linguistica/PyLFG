@@ -72,3 +72,21 @@ def parse_grammar(grammar_file: str) -> Dict[str, List[Tuple[str, List[str], Dic
             else:
                 grammar[non_terminal] = [(non_terminal, rhs_symbols, c_constraints, f_constraints)]
     return grammar
+    
+    def parse_lexicon(file: str) -> Dict[str, Tuple[str, Dict[str, str]]]:
+    lexicon = {}
+    with open(file) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            tokens = line.split()
+            word = tokens[0]
+            morph = tokens[1]
+            features = {}
+            for feature in tokens[2:]:
+                if "=" in feature:
+                    key, value = feature.split("=")
+                    features[key] = value
+            lexicon[word] = (morph, features)
+    return lexicon
