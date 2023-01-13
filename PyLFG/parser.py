@@ -14,10 +14,19 @@ as well as a FStructure class to represent the f-structure of the analyzed sente
 import re
 from typing import List, Dict, Tuple
 from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
+from .parser_gen import CompiledLfgParser
 import xlfg.parse_grammar
 import xlfg.parse_lexicon
 import xle.parse_grammar
 import xle.parse_lexicon
+
+
+
+class CompiledXlfgParser(CompiledLfgParser):
+    def __init__(self):
+        super().__init__("xlfg", xlfg.parse_grammar.parse(), xlfg.parse_lexicon.parse())
+
+
 
 class LfgParser:
     def __init__(self, grammar_format):
