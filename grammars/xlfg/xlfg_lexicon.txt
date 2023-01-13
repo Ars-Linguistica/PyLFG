@@ -1,0 +1,81 @@
+9 XLFG lexicon
+Although XLFG has been developed to extract syntactic properties from sen- tences, but not for phonological or morpho-syntactical treatment, it allows us to carry out a basic analysis of compounds or portmanteau forms.
+Words are written in UTF-8 encoding. The system will accept some accented characters directly, but when using non latin alphabets or less used symbols or keywords, double quotes should be added.
+In order to parse words witch correspond to a local grammar (i.e. rec- ognizable with a regular expression) without using the power of the XLFG context-free parser and with a finite lexica, we added special forms: _EMAIL_,
+_URL_, _INTEGER_, and _REAL_. The first matches a regular email adresse as lionel.clement@u-bordeaux.fr, the second matches an url as https://www.xlfg.org, etc.
+Here some exemples of accepted forms:
+   John
+"emergency exit” Schreibmaschinenpapier _INTEGER_
+";"
+ An XLFG lexical entry consists of a triplet (category label, functional struc- ture, set of local functional constraints). Functional structures and functional constraints are optional.
+A simple form is associated with one triplet, while an homonym form is associated with several ones separated with a | symbol.
+Here an example of homonym entries for the form left: past tense of leave or opposite of right.
+A poly-categorial word (compound or portmanteau word that must be ana- lyzed according to a morphological theory, or agglutinate word) is represented by a list of triplets separated with the ampersand character &. For example, the French word auquel is the agglutination of the preposition à and the relative pronoun lequel
+48
+   left commonNoun [PRED: ’LEFT’] | verb [PRED:’LEAVE’];
+ 
+   auquel (prep [PRED: ’à’]
+& relPro [PRED: ’lequel’, GENDER: ms, NUMBER: sg]);
+ Obviously, one may combine these two possibilities. For example, the little French word du is either a partitive determiner, or a definite article le following the preposition de.
+The F-structure in an lexicon entry may be followed by local functional constraints. It allows us to give the syntactic property of the word depending on its context.
+Let us take the example of a subject control verb such as want. An optimal lexical entry will look like this:
+Information on the nature of the predicate and subject agreement are con- stant in uses of this entry, so they should be specified in the F-structure. Yet the constraint linking the subject of the infinitive to the local subject depends on the context and should thus be stated separately. Thus the only context anchor for the functional constraints in reference to a lexical entry is ↑, not ↓ i.
+9.1 Unknown words
+When a unknown word is encountered, XLFG assigns it with the special value _UNKNOWN_. One can associate open categories (nouns, verbs, adjectives,) with the unknown words, but not grammatical lexemes such as preposition, particules or determiners.
+In this case, and also in the case of regular expressions which we have already discussed, the keyword _THIS_ corresponds to the form encountered in the input. This enables us to rewrite this form in the calculated F-structure.
+49
+   du det [NUMBER: sg, PARTITIVE: true, DEFINED: false] | (prep [PRED: ’DE’, PCASE: DE]
+& det [GENDER: ms, NUMBER: sg, DEFINED: true]);
+    wants v [PRED:’WANT<SUBJ.agent, VCOMP.theme>’, TENSE: present, SUBJ: [NUMBER: sg, PERSON: 3]] {
+(↑ VCOMP SUBJ) = (↑ SUBJ); };
+ 
+   _UNKNOWN_ verb[PRED: ’_THIS_’]
+| noun[PRED: ’_THIS_’]
+| adjective[PRED: ’_THIS_’] | adverb[PRED: ’_THIS_’];
+ 9.2 Macros
+As a lot of similar attributes with the same values are used, we added a con- venient way of writing this only once using an assigned variable marked with "@”:
+It is possible to use this variable in the definition section
+   @ms: GENDER: masc, NUMBER: sing;
+    @m: GENDER: masc; @s: NUMBER: sing; @p: NUMBER: plural; @ms: @m, @s;
+@K: VFORM:participle;
+@Kms: @K, @ms; @_12: PERSON: 1|2; @P: tense: present, mood: indicative; @V12s_p: SUBJ: [ ( [@_12, @s], [@p] ) ]; @P12s_p: @P, @V12s_p;
+ Then every macros may be used in the grammar or in the lexicon:
+9.3 The lex function
+In [Clément, 2019], we added a new operator in XLFG witch does’n exist in LFG theory: the lexical capture. The lexical path (↓1 lex) allows us to re-
+50
+   give V [PRED: ’TO_GIVE’, @P12sp];
+ 
+trieve all lexical entries based on the local lexeme (i.e. the PRED feature) of ↓1. These lexical entries are not only the same word, but also different forms according to its morphology like is the sentence 13a. In more difficult cases, it can be a combination between several lexemes (light verbs, phrasemes, serial verbs, etc). This explains for exemple the zeugma constructions that we have formalized with XLFG. See this example where the light verb to execute (a law) is coordinated with the plain verb to execute sb in the second example (13b): Furthermore, there is no reason to think that the lexical entry retrieved must have the same sub-categorisation as the original one.
+(13) a. Lucy has to finish high school and her brothers their Master Degrees. b. You are free to execute your laws, and your citizens, as you see fit
+(Star Trek: The Next Generation)
+In order to add such new lexical entries with a given lexeme and a new sub- categorization, one has to add the following line in the lexicon wich will contains at least the sub-categorization:
+In 13a, the sequence her brother its Master Degree isn’t a sentence according to the fact that it doesn’t contain any verb. In fact, the verb is in the first part of the coordination.
+But we see that a) The verb form must be have to, not has to, according to the morphological agreement with a plural noun. b) the verb is composed with the auxiliary have to finish, it is not the simple form finish.
+If in our grammar, the local predicate of the sentence Lucy has to finish high school is
+We then add the following lexical entry in the lexicon:
+The F-structure resulting to the parsing is the following:
+51
+   #<lexeme> <features> [<local functional descriptions>];
+    PRED: ’HAVE_TO_FINISH<SUBJECT.agent, OBJECT.patient>’
+    #HAVE_TO_FINISH [SUBCAT:’<SUBJECT.agent, OBJECT.patient>’
+ 
+   [PRED: ’AND’, {
+[PRED:’HAVE_TO_FINISH<SUBJECT.agent, OBJECT.patient>’, SUBJECT:[PRED:’LUCY’, . . . ], OBJECT:[PRED:’HIGH_SCHOOL’, . . . ]
+],
+[PRED:HAVE_TO_FINISH<SUBJECT.agent, OBJECT.patient>’,
+SUBJECT:[PRED:’BROTHER’, . . . ],
+OBJECT:[PRED:’MASTER DEGREE’, . . . ] ]}
+ In the second example, the lexeme is not the same; the first part of the coordination, it is a light verb construction execute a law, when it is the plain verb to execute in the second part.
+The lexical entries are the following:
+The F-structure resulting to the parsing is the following:
+   executeVERB[PRED: ’TO_EXECUTE<SUBJECT.Agent, OBJECT.Patient>’] | VERB[LEXEME: ’EXECUTE_-’];
+laws NOUN[LEXEME: ’LAW’];
+# TO_EXECUTE_LAW [SUBCAT: ’<SUBJECT.Agent , OBJECT.Theme>’];
+    [PRED: ’AND’, {
+[PRED:’EXECUTE_LAW<SUBJECT.Agent, OBJECT.Theme>’, SUBJECT: 1 [PRED:’YOU’, . . . ],
+OBJECT:[PRED:’LAW’, . . . ]
+],
+[PRED:EXECUTE<SUBJECT.Agent, OBJECT.Patient>’,
+SUBJECT: 1 ,
+OBJECT:[PRED:’CITIZEN’, . . . ] ]}
+ The thematic relation of to execute a law is not exactly the same as to execute sb. Indeed, a law is not a patient, but a theme, because it does not change its state when it is executed. A person who is executed unfortunately does.
