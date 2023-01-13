@@ -1,0 +1,29 @@
+# English to French transfer rules
+
+# Transfer rule for verb tense
+{verb.tense=past} → {verb.tense=passé}
+{verb.tense=present} → {verb.tense=présent}
+{verb.tense=future} → {verb.tense=futur}
+
+# Transfer rule for subject pronoun
+{subject.pronoun=I} → {subject.pronoun=je}
+{subject.pronoun=you} → {subject.pronoun=tu}
+{subject.pronoun=he} → {subject.pronoun=il}
+{subject.pronoun=she} → {subject.pronoun=elle}
+{subject.pronoun=it} → {subject.pronoun=il/elle}
+{subject.pronoun=we} → {subject.pronoun=nous}
+{subject.pronoun=they} → {subject.pronoun=ils/elles}
+
+# Transfer rule for object pronoun
+{object.pronoun=me} → {object.pronoun=moi}
+{object.pronoun=you} → {object.pronoun=toi}
+{object.pronoun=him} → {object.pronoun=lui}
+{object.pronoun=her} → {object.pronoun=elle}
+{object.pronoun=it} → {object.pronoun=lui/elle}
+{object.pronoun=us} → {object.pronoun=nous}
+{object.pronoun=them} → {object.pronoun=eux/elles}
+
+# Transfer rule for verb conjugation
+{verb.infinitive=manger} → {verb.conjugation=mange}
+{verb.infinitive=parler} → {verb.conjugation=parle}
+{verb.infinitive=vivre} → {verb.conjugation=vis}
