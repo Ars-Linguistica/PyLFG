@@ -1,5 +1,7 @@
 import textual
+import json
 from xlfg import parse_rule, parse_lexicon_entry, match_constraints, impose_constraints_in_tree, remove_unused_constraints
+import d3
 
 # Create a Textual App and a MainView
 app = textual.Application("PyLFG")
@@ -30,7 +32,6 @@ lexicon_list = textual.ListBox()
 
 # Add event handlers for adding and editing lexicon entries
 @lexicon_input.on("submit")
-def add_lexicon_entry():
     lexicon_entry = lexicon_input.value
     functional_labels = parse_lexicon_entry(lexicon_entry)
     # Add the entry to the list
@@ -56,7 +57,7 @@ def impose_constraints(node):
             functional_labels[label] = value
         impose_constraints_in_tree(node, functional_labels)
 
-@tree_view.on("right_click)
+@tree_view.on("right_click")
 def remove_constraints(node):
     if isinstance(node, LFGParseTreeNodeF):
         remove_unused_constraints(node)
@@ -69,18 +70,98 @@ sentence_output = textual.TextField()
 # Add event handler for generating sentences
 @generate_button.on("click")
 def generate_sentence():
-    selected_node = tree_view.selected_node
-    if isinstance(selected_node, LFGParseTreeNodeF):
-        sentence = generate_sentence_from_f_structure(selected_node)
-        sentence_output.value = sentence
+    sentence = generate_sentence_from_f_structure(tree_view.root)
+    sentence_output.value = sentence
+
+# Add visual representation of parse tree
+d3.create_tree_vis(tree_view)
+
+# Add toggle button for switching between c-structure and f-structure views
+structure_toggle = textual.ToggleButton("C-structure", "F-structure")
+
+# Add event handler for switching between views
+@structure_toggle.on("change")
+def switch_view(state):
+    if state == "C-structure":
+        d3.switch_to_c_structure(tree_view)
     else:
-        sentence_output.value = "Please select an F-structure node to generate a sentence."
+        d3.switch_to_f_structure(tree_view)
 
-# Add the sections to the MainView
-main_view.add_section("Production Rules", [rule_input, rule_list])
-main_view.add_section("Lexicon", [lexicon_input, lexicon_list])
-main_view.add_section("C-structure and F-structure", [tree_view])
-main_view.add_section("Sentence Generation", [generate_button, sentence_output])
+# Add undo and redo buttons
+undo_button = textual.Button("Undo")
+redo_button = textual.Button("Redo")
 
-# Start the App
-app.run(main_view)
+# Add event handlers for undo and redo
+@undo_button.on("click")
+def undo():
+    app.undo()
+
+@redo_button.on("click")
+def redo():
+    app.redo()
+
+# Add save and load buttons
+save_button = textual.Button("Save")
+load_button = textual.Button("Load")
+
+# Add event handlers for saving and loading
+@save_button.on("click")
+def save():
+    grammar = {
+        "rules": rule_list.items,
+        "lexicon": lexicon_list.items,
+        "parse_tree": tree_view.root
+    }
+    with     open("grammar.json", "w") as f:
+        json.dump(grammar, f)
+
+@load_button.on("click")
+def load():
+    with open("grammar.json", "r") as f:
+        grammar = json.load(f)
+    rule_list.items = grammar["rules"]
+    lexicon_list.items = grammar["lexicon"]
+    tree_view.root = grammar["parse_tree"]
+
+# Add share button
+share_button = textual.Button("Share")
+
+# Add event handler for sharing
+@share_button.on("click")
+def share():
+    grammar = {
+        "rules": rule_list.items,
+        "lexicon": lexicon_list.items,
+        "parse_tree": tree_view.root
+    }
+    json_grammar = json.dumps(grammar)
+    email = input("Enter email address to share with: ")
+    # Use email library to send json_grammar to email address
+
+# Add consistency check button
+consistency_check_button = textual.Button("Check Consistency")
+
+# Add event handler for consistency check
+@consistency_check_button.on("click")
+def check_consistency():
+    if check_consistency_of_grammar(tree_view.root):
+        print("Grammar is consistent.")
+    else:
+        print("Grammar is inconsistent.")
+
+# Add debug button
+debug_button = textual.Button("Debug")
+
+# Add event handler for debugging
+@debug_button.on("click")
+def debug():
+    debug_parse_tree(tree_view.root)
+
+# Add all the widgets to the main view
+main_view.add(rule_input, rule_list, lexicon_input, lexicon_list, tree_view, structure_toggle, generate_button, sentence_output, undo_button, redo_button, save_button, load_button, share_button, consistency_check_button, debug_button)
+
+# Run the app
+app.run()
+
+    
+
