@@ -7,26 +7,34 @@ class ParserGenerator:
         self.grammar_format = grammar_format
 
     def convert_grammar(self, grammar: dict) -> str:
-        """Convert the current grammar format to the format required by the parser generator"""
+    """Convert the XLFG grammar format to the format required by the parser generator"""
+    if self.grammar_format != "xlfg":
+        raise ValueError(f"Unsupported grammar format for this method: {self.grammar_format}")
+    converted_grammar = ""
+    for lhs, rhs_list in grammar.items():
+        for rhs in rhs_list:
+            c_constraints, f_constraints = rhs[2], rhs[3]
+            c_constraints_str = " ".join(c_constraints)
+            f_constraints_str = " ".join(f_constraints)
+            rule = f"{lhs} -> {rhs[0]} {rhs[1]} [c: {c_constraints_str}] [f: {f_constraints_str}]"
+            converted_grammar += rule + "\n"
+    return converted_grammar
+
+
+        def convert_lexicon(self, lexicon: dict) -> str:
+        """Convert the current lexicon format to the format required by the parser generator"""
         if self.grammar_format == "xlfg":
-            # convert grammar to format required by the parser generator
-            return converted_grammar
+            lexicon_str = ""
+            for word, entries in lexicon.items():
+                for entry in entries:
+                    lexicon_str += f"{word}:{entry}\n"
+            return lexicon_str
         elif self.grammar_format == "xle":
-            # convert grammar to format required by the parser generator
-            return converted_grammar
+            # adapt the conversion for the xle format
+            return converted_lexicon
         else:
             raise ValueError(f"Unsupported grammar format: {self.grammar_format}")
 
-    def convert_lexicon(self, lexicon: dict) -> str:
-        """Convert the current lexicon format to the format required by the parser generator"""
-        if self.grammar_format == "xlfg":
-            # convert lexicon to format required by the parser generator
-            return converted_lexicon
-        elif self.grammar_format == "xle":
-            # convert lexicon to format required by the parser generator
-            return converted_lexicon
-        else:
-            raise ValueError(f"Unsupported grammar format: {self.grammar_format}")
     
     def generate_parser(self, grammar: str, lexicon: str):
         """Use the parser generator to generate a parser"""
