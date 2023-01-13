@@ -1,0 +1,48 @@
+/* Global Styles */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Section Styles */
+section {
+    margin: 2rem;
+    padding: 1rem;
+}
+
+/* Input Styles */
+input, textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+/* Button Styles */
+button {
+    background-color: #333;
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* List Styles */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
