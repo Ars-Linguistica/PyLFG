@@ -1,0 +1,1023 @@
+<!DOCTYPE html  PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+"http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
+<html lang="en">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <title>XLFG</title>
+  <link rel="icon" type="image/png" href="images/icon.png" >
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="css/output.css" >
+  <link rel="stylesheet" type="text/css" href="css/index.css" >
+  <link rel="stylesheet" type="text/css" href="css/navbar.css" >
+  <link rel="stylesheet" type="text/css" href="css/typeahead.css">
+  <link rel="stylesheet" type="text/css" media="print" href="css/print.css" >
+  <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/RubaXa/Sortable/Sortable.min.js">
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/navbar.js"></script>
+  <script type="text/javascript" src="js/update_view.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="js/typehead.js"></script>
+  <script type="text/javascript" src="MathJax-master/MathJax.js" async></script>
+  <script type="text/javascript" src="js/countdown.js" defer></script>
+  </head>
+
+  <body id="body" class="fullscreen">  <script type="text/x-mathjax-config">
+//<![CDATA[
+  MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      TeX:{
+	  MAXBUFFER: 102400
+	  },
+      tex2jax: {
+	  inlineMath: [ ['$','$'] ],
+	  displayMath: [ ['$$','$$'] ],
+	  processEscapes: false
+	  },
+      "HTML-CSS": {
+	  fonts: ["TeX"],
+	  scale: 100
+	  }
+  });
+//]]>
+  </script><form accept-charset="utf-8" id="main-form" action="/index.php" method="POST" ></form><div class="modal fade" id="about">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					<img alt="logo xlfg"
+						style="max-width: 240px; margin-top: 32px; margin-bottom: 32px; margin-left: 32px; margin-right: 32px;"
+						src="images/simpleLogo.png" />
+				</h4>
+			</div>
+			<div class="modal-body">
+                	<h4 class="modal-title">XLFG version 9.16.1</h4>
+                <p>Author: Lionel Cl&eacute;ment -- University Bordeaux -- LaBRI</p>
+
+				<p>XLFG is a fast, accurate deep parser for LFG grammar. These outputs are phrase structures, predicate-argument structures and predicate-thematic relationships.</p>
+
+				<p>The typical XLFG applications are
+
+				<ul>
+					<li>Syntax courses</li>
+					<li>Research and education in Linguistics</li>
+					<li>Research and education in Computational Linguistics</li>
+					<li>Computational Linguistics projects</li>
+				</ul>
+
+			</div>
+			<div class="modal-footer"><center>
+  <small>
+    <em class="hidden-print">Lionel Clément - </em><em>XLFG Copyright 2014-2022 </em><em class="hidden-print"><a href="http://www.labri.fr">LaBRI</a>, CNRS (UMR 5800), the University of Bordeaux, and the Bordeaux INP</em>
+  </small>
+</center>                <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+			</div>
+		</div>
+	</div>
+</div><div class="modal fade" id="terms">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					<img alt="logo xlfg"
+						style="max-width: 240px; margin-top: 32px; margin-bottom: 32px; margin-left: 32px; margin-right: 32px;"
+						src="images/simpleLogo.png" />
+				</h4>
+				<h4 class="modal-title" id="myModalLabel">Terms and conditions of
+				use of the site XLFG</h4>
+			</div>
+			<div class="modal-body">
+				<div style="height: 600px; font: 16px/26px Georgia, Garamond, Serif; overflow: auto;">
+
+<p>XLFG has been designed to allow the sharing of grammars between multiple users (students, teachers, lecturers, researchers, etc.). Nevertheless, it is not designed to backup data. We are not responsible for any loss of work. To make sure work and data is properly saved, a variety of alternative methods are readily available.</p> 
+
+<p>XLFG is often used for exams and tutorials. While we endeavor to do the utmost to prevent server interruptions, we disavow any liability for problems resulting from the use of this web site during exams or tutorial sessions.</p> 
+
+<p>XLFG has been designed with the field of linguistics in mind. The comments and opinions on the sentences are those of the author alone and do not necessarily reflect those of the XLFG operator.</p> 
+
+<p>We reserve the right to terminate any account and remove all contents associated with it at any moment.</p> 
+
+				</div>
+			</div>
+
+			<div class="modal-footer"><center>
+  <small>
+    <em class="hidden-print">Lionel Clément - </em><em>XLFG Copyright 2014-2022 </em><em class="hidden-print"><a href="http://www.labri.fr">LaBRI</a>, CNRS (UMR 5800), the University of Bordeaux, and the Bordeaux INP</em>
+  </small>
+</center>				<button id="terms-btn-ok" type="button" class="btn btn-success" data-toggle="modal" data-dismiss="modal" data-target="#signup">OK</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script class="script" type="text/javascript">
+//<![CDATA[
+$.getScript('js/terms.js');
+//]]>
+</script><div class="modal fade" id="news">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					<img alt="logo xlfg"
+						style="max-width: 240px; margin-top: 32px; margin-bottom: 32px; margin-left: 32px; margin-right: 32px;"
+						src="images/simpleLogo.png" />
+				</h4>
+			</div>
+			<div class="modal-body">
+                	<h4 class="modal-title">Last Updates</h4>
+                	            		    <ul>
+                                                <li>User interface modifications (in <span class="text-success">green</span>)</li>
+                                                <li>Software modifications (in <span class="text-info">blue</span>)</li>
+                                                <li>Internal modifications (for developer) (in <span class="text-danger">red</span>)</li>
+                                            </ul>
+
+                    <ul>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9161" onclick="$('.collapse').removeClass('in')">9.16.1 (minor - december 2022 - revision 38559)</a>
+                    <div id="version9161" class="collapse in">
+            		    <ul>
+                            <li class="text-danger">Security Update and new IP server.</li>
+                        </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9160" onclick="$('.collapse').removeClass('in')">9.16.0 (minor - december 2021 - revision 37829)</a>
+                    <div id="version9160" class="collapse">
+            		    <ul>
+                            <li class="text-success">A new tab named "Error" will be added to output from where you will be able to see warning and error messages.</li>
+                            <li class="text-success">New print button on each parse result.</li>
+                            <li class="text-success">New links on functional-structure results.</li>
+                            <li class="text-success">SUBCAT keyword on F-structures deprecated. Replaced with PRED feature.</li>
+                            <li class="text-success">LEXEME keyword on F-structures deprecated for prefixes and suffixes lexemes. Replaced with PRED feature.</li>
+                            <li class="text-success">The obsolete notation for optional grammatical is deprecated. [X.x] replaced with [X].x</li>
+                            <li class="text-success">&quot;_unknown_word_&quot; and &quot;_this_&quot; replace the deprecated notations _UNKNOWN_ and _THIS_.</li>
+                            <li class="text-success">Bug fixed on Extended Coherence test.</li>
+                            <li class="text-info">Renaming C++ classes and attributes.</li>
+                            <li class="text-info">Modifications on internal Feature-structure C++ representation.</li>
+                            <li class="text-danger">&quot;_unknown_word_&quot; and &quot;_this_&quot; are new keywords; no longer lexical entries.</li>
+                            <li class="text-danger">New unification algorithm.</li>
+                            <li class="text-danger">New extended coherence algorithm.</li>
+                            <li class="text-danger">More robust serialization routines for bitset comparison.</li>
+                        </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9155" onclick="$('.collapse').removeClass('in')">9.15.5 (patch - november 2021)</a>
+                    <div id="version9155" class="collapse">
+            		    <ul>
+                            <li class="text-success">Uniq operator modified.</li>
+                            <li class="text-success">Uniq operator calculated .</li>
+                            <li class="text-info">Optimization: flags type limited to 20 bis.</li>
+                        </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9154" onclick="$('.collapse').removeClass('in')">9.15.4 (patch - november 2021)</a>
+                    <div id="version9154" class="collapse">
+            		    <ul>
+                            <li class="text-success">Improvement of presentation of partial phrases as trees.</li>
+                            <li class="text-success">Improvement of graphic presentation of Constituent-Structures as CFG.</li>
+                            <li class="text-success">Improvement of graphic presentation of of Phrase lattice.</li>
+                            <li class="text-danger">Bug fixed on compact presentation of Functional-Structures.</li>
+                        </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9153" onclick="$('.collapse').removeClass('in')">9.15.3 (patch - november 2021)</a>
+                    <div id="version9153" class="collapse">
+            		    <ul>
+                            <li class="text-success">The obsolete version of XLFG is no longer available.</li>
+                            <li class="text-danger">The evaluation of lexical equations are made on the local f-structures before the evaluation of the embedded f-structures.</li>
+                        </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9152" onclick="$('.collapse').removeClass('in')">9.15.2 (patch - october 2021)</a>
+                    <div id="version9152" class="collapse">
+            		    <ul>
+                            <li class="text-success">Rewriting some exception messages.</li>
+       				        <li class="text-success">Focus only the local functional equations into the selected node.</li>
+                            <li class="text-success"><i>Draw all Functional Equations</i> -> <i>Draw syntactical and lexical Functional Equations</i></li>
+                            <li class="text-success">The exportation of a version no longer erases the output panel.</li>
+                            <li class="text-danger">Test more unification failure.</li>
+                        </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9151" onclick="$('.collapse').removeClass('in')">9.15.1 (patch - october 2021)</a>
+                    <div id="version9151" class="collapse">
+            		    <ul>
+                            <li class="text-success">Renumber the co-indexes f-structures.</li>
+                            <li class="text-danger">Increase from 64 to 128 the number of available atoms.</li>
+                        </ul>
+                    </div>
+                    </li>
+
+                    <li class="text-success">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9150" onclick="$('.collapse').removeClass('in')">9.15.0 (minor - october 2021)</a>
+                    <div id="version9150" class="collapse">
+            		    <ul>
+                            <li class="text-success">Additing a new equation: <b>let</b> &lt;id&gt; <b>in</b> ↓i &lt;stm&gt;<br>
+                            The <b>let</b> operator will quantify on each ↓i before the evaluation of the statement &lt;stm&gt;<br>
+                            It is necessary when ↓i is ambiguous and is present in several instances into &lt;stm&gt;, to prevent all the combination.<br>
+                            Exemple:<br>
+                            <b>let</b> prep_phrase <b>in</b> ↓2<br>
+                            &#160;&#160;(↑ (prep_phrase PCASE)) = prep_phrase;
+                        </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9142" onclick="$('.collapse').removeClass('in')">9.14.2 (patch - october 2021)</a>
+                    <div id="version9142" class="collapse">
+            		    <ul>
+                            <li class="text-success">Show the wrong functional equations.</li>
+                            <li class="text-success">Show SUBCAT focus in equations.</li>
+                            <li class="text-danger">Bug in unification process fixed between PRED and SUBCAT.</li>
+                            <li class="text-danger">Remove non relevant Functional equations with literals.</li>
+                            <li class="text-danger">A self f-structure is ill-formed on a local node while a local statement fails.</li>
+                            <li class="text-danger">A syntactic error throws a FatalErrorException.</li>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9141" onclick="$('.collapse').removeClass('in')">9.14.1 (patch - october 2021)</a>
+                    <div id="version9141" class="collapse">
+            		    <ul>
+                            <li class="text-danger">Internal bug fixed (bitset to ullong)</li>
+       				    </ul>
+                    </div>
+                    </li>
+
+                    <li class="text-success">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9140" onclick="$('.collapse').removeClass('in')">9.14.0 (minor - october 2021)</a>
+                    <div id="version9140" class="collapse">
+            		    <ul>
+            		        <li class="text-success">The forest link is now available on root note.</li>
+            		        <li class="text-success">The details on local FS are now shown.</li>
+                            <li class="text-danger">Bugs fixed on unfold/fold shared FS.</li>
+       				    </ul>
+                    </div>
+                    </li>
+
+                    <li class="text-success">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9130" onclick="$('.collapse').removeClass('in')">9.13.0 (minor - june 2021)</a>
+                    <div id="version9130" class="collapse">
+            		    <ul>
+       				        <li class="text-success">In test-suite, selected <i>do not parse this sentence</i> do no  loger ovoid the actual grammatical selection.</li>
+                            <li class="text-success">It is possible to see or not the local functional equations locally embedded in FS.</li>
+                            <li class="text-danger">Bugs fixed on unfold/fold shared FS.</li>
+                            <li class="text-danger">New enumeration on Local linked FS.</li>
+       				    </ul>
+                    </div>
+                    </li>
+
+                    <li class="text-success">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9120" onclick="$('.collapse').removeClass('in')">9.12.0 (minor - february 2021)</a>
+                    <div id="version9120" class="collapse">
+            		    <ul>
+       				        <li class="text-success">change <i>Syntactic functions</i> to <i>grammatical functions</i>.</li>
+       				        <li class="text-success">Adding a tab button to insert indentation in the inputs.
+       				        <li class="text-danger">Bug fixed on <i>let</i> expressions.</li>
+                            <li class="text-danger">Bug fixed on evaluation process.</li>
+       				    </ul>
+                    </div>
+                    </li>
+
+                    <li class="text-success">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9110" onclick="$('.collapse').removeClass('in')">9.11.0 (minor - february 2021)</a>
+                    <div id="version9110" class="collapse">
+            		    <ul>
+       				        <li class="text-success">The expression <br>
+       				        <b><i>with <mtext>$</mtext>x in (&uarr; regexp) [... <mtext>$</mtext>dollar x ...]</i></b><br>
+       				        is replaced by<br>
+       				        <b><i>let x in (&uarr; regexp) [... x ...]</i></b>.
+       				        <li class="text-danger">Bug fixed on <i>let</i> expressions.
+       				    </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9101" onclick="$('.collapse').removeClass('in')">9.10.1 (patch - january 2021)</a>
+                    <div id="version9101" class="collapse">
+            		    <ul>
+       				        <li class="text-success">Drawing local functional equations into the F-structures.</li>
+       				        <li class="text-danger">Bug fixed on path expressions.</li>
+       				        <li class="text-danger">Bug fixed on difference constraint.</li>
+       				    </ul>
+                    </div>
+                    </li>
+
+                    <li class="text-success">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9100" onclick="$('.collapse').removeClass('in')">9.10.0 (minor - january 2021)</a>
+                    <div id="version9100" class="collapse">
+            		    <ul>
+       				        <li class="text-success">The extended coherence condition stands only for semantic arguments.</li>
+       				    </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version993" onclick="$('.collapse').removeClass('in')">9.9.3 (patch - january 2021)</a>
+                    <div id="version993" class="collapse">
+            		    <ul>
+       				        <li class="text-danger">Bug fixed on local equations.
+       				    </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version992" onclick="$('.collapse').removeClass('in')">9.9.2 (patch - january 2021)</a>
+                    <div id="version992" class="collapse">
+            		    <ul>
+       				        <li class="text-success">Remove a user member or remove a project assignment from a workshop do not longer remove the associated project versions.
+                            <li class="text-success">It is no longer allowed to remove a project when there are still versions of this project.
+       				    </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version991" onclick="$('.collapse').removeClass('in')">9.9.1 (patch - january 2021)</a>
+                    <div id="version991" class="collapse">
+            		    <ul>
+       				        <li class="text-danger">Allow multiple pointers to the same FS (to be improved)
+                            <li class="text-danger">Strip whitespace from the beginning and end of a sentence.
+                            <li class="text-danger">Unification before pointing an FS (bug fixed).
+       				    </ul>
+                    </div>
+                    </li>
+
+                    <li class="text-success">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version990" onclick="$('.collapse').removeClass('in')">9.9.0 (minor - january 2021)</a>
+                    <div id="version990" class="collapse">
+            		    <ul>
+       				        <li class="text-success">Sentences -> Test suite.
+                            <li class="text-success">Parse just one sentence available.
+                            <li class="text-success">Check a word available.
+       				    </ul>
+                    </div>
+                    </li>
+
+                    <li>
+                    <a class="accordion-toggle" data-toggle="collapse" href="#version9811" onclick="$('.collapse').removeClass('in')">9.8.11 (patch - december 2020)</a>
+                    <div id="version9811" class="collapse">
+            		    <ul>
+       				        <li class="text-success">The deprecated <i>Projects>Save version</i> submenu non longer exists.
+       				        <li class="text-success">Changing <i>Compact Feature-Structures: No</i> to <i>Uncompact Feature-Structures Yes</i>.
+       				        <li class="text-success">Error message telling the user that a sentence cannot be parsed because it contains a word that is not in the lexicon.
+       				        <li class="text-danger">Bugs fixed in Compact/Uncompact F-Structures data.
+       				    </ul>
+                    </div>
+                    </li>
+
+    				<li><a class="accordion-toggle" data-toggle="collapse" href="#version9810" onclick="$('.collapse').removeClass('in')">9.8.10 (patch)</a>
+                    <div id="version9810" class="collapse">
+       				    <ul>
+       				        <li>Bugs fixed
+       				            <ul>
+       				                <li>In $i terms (back-end)</li>
+       				                <li>In coloration of sentences (front-end)</li>
+       				            </ul>
+       				        <li>(↑ X) = (↑ Y) equation:
+           				        <ul>
+                                    <li>If left-hand side (lhs) refers to anonymous variable, creates a pointer lhs => rhs
+                                    </li>
+       	        			        <li>If both lhs and rhs refer to an FS
+       		        		            <ol>
+                                            <li>Unifies</li>
+                                           	<li>Creates a pointer lhs => rhs</li>
+                                        </ol>
+                                    </li>
+       				            </ul>
+       				        </li>
+       				    </ul>
+       				</div>
+                    </li>
+
+       				<li><a class="accordion-toggle" data-toggle="collapse" href="#version989" onclick="$('.collapse').removeClass('in')">9.8.9 (patch)</a>
+                    <div id="version989" class="collapse">
+       				    <ul>
+       				        <li>A bug fixed on constraining equations</li>
+       				        <li>More explicit Internal error messages</li>
+       				    </ul>
+       				</div>
+       				</li>
+
+       				<li><a class="accordion-toggle" data-toggle="collapse" href="#version988" onclick="$('.collapse').removeClass('in')">9.8.8 (patch)</a>
+                    <div id="version988" class="collapse">
+                        <ul>
+                            <li>Various IHM improvements
+
+                                <ul>
+                                    <li>Spelling mistakes and typos</li>
+                                    <li>Web browsing: you can refresh the page and come back to some of the browsing history</li>
+                                    <li>Input sentences
+                                        <ul>
+                                            <li>Coloration</li>
+                                            <li>Drap and drop to sort sentences</li>
+                                        </ul>
+                                    </li>
+                                    <li>Modifications on permissions on the project header
+                                        <ul>
+                                                        <li>Using the original version on hidden mode</li>
+                                                        <li>Using either the original or the copied version on read-only mode</li>
+                                                        <li>A button <i>"Set default grants"</i> was added int the project header</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Zoom on Argument structure
+                                    </li>
+                                    <li>Macro descriptions with '@' sign usable as features values, not only as a feature.
+
+                                        <small>
+                                        <p>Example of usage:</p>
+                                        <p>@P:		TENSE:present;<br>
+                                        @p:		NUMBER:pl;<br>
+                                        @s:		NUMBER:sg;<br>
+                                        @_3:	PERS:3;<br>
+                                        @_12:	PERS:1|2;<br>
+                                        @_3s:	@_3, @s;<br>
+                                        @_3p:	@_3, @p;<br>
+                                        @_no3s:	[@_12] | [@_3p];<br>
+                                        bark verb [PRED:'to_bark<SUBJ>', @P, SUBJ:@_no3s];<br>
+                                        barks verb [PRED:'to_bark<SUBJ>', @P, SUBJ:@_3s];<br>
+                                        </p>
+                                        </small>
+
+                				    </li>
+                                </ul>
+                            </li>
+                        </ul>
+       				</div>
+       				</li>
+       			</ul>
+
+			</div>
+			<div class="modal-footer"><center>
+  <small>
+    <em class="hidden-print">Lionel Clément - </em><em>XLFG Copyright 2014-2022 </em><em class="hidden-print"><a href="http://www.labri.fr">LaBRI</a>, CNRS (UMR 5800), the University of Bordeaux, and the Bordeaux INP</em>
+  </small>
+</center>                <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+			</div>
+		</div>
+	</div>
+</div><nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+			</button>
+			<a class="navbar-brand disabled" style="pointer-events: none;"
+				href="index.php" title="XLFG"> <img alt="logo xlfg"
+				style="max-width: 140px; margin-top: -12px;"
+				src="images/simpleLogo.png" />
+            </a>
+		</div>
+
+		<div class="collapse navbar-collapse">
+
+			<ul class="nav navbar-nav">
+
+				<li class="dropdown"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false">Projects&#160;<b
+						class="caret"></b></a>
+					<ul class="dropdown-menu">
+
+						<li class="navbar-user"><a
+							href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+    addInput('main-form', 'id_project', '');
+    addInput('main-form', 'id_version', '');
+}).then(function() {
+    form_task('main-form', 'manage-project', 'form-content', true);
+});
+">New project</a></li>
+						<li class="divider"></li>
+						<li class="navbar-user navbar-import"><a
+							href="javascript:;"
+							onclick="
+$('#upload-input').click();
+							"><span class="glyphicon glyphicon-import"></span>&#160;Import a version</a></li>
+						<li class="navbar-user navbar-export"><a
+							href="javascript:;"
+							onclick="
+    form_task('project-form', 'export-version', 'project-error', false);
+"><span class="glyphicon glyphicon-export"></span>&#160;Export this version</a></li>
+						<li class="divider"></li>
+						<li class="navbar-user"><a
+							href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+    addInput('main-form', 'projects_selection', 'my_projects');
+}).then(function() {
+    form_task('main-form', 'list-projects', 'form-content', true);
+});
+">Your projects</a></li>
+						<li class="navbar-user"><a
+							href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+    addInput('main-form', 'projects_selection', 'my_versions');
+}).then(function() {
+    form_task('main-form', 'list-projects', 'form-content', true);
+});
+">Your versions of existing projects</a></li>
+						<li class="navbar-user"><a
+							href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+    addInput('main-form', 'projects_selection', 'all');
+}).then(function() {
+    form_task('main-form', 'list-projects', 'form-content', true);
+});
+">All projects</a></li>
+						<li class="divider"></li>
+                         <li id="menu"></li>
+
+	               </ul>
+				</li>
+
+				<li class="dropdown navbar-user"><a href="javascript:;"
+					class="dropdown-toggle" data-toggle="dropdown">Users&#160;<b
+						class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li class="navbar-user"><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+    addInput('main-form', 'users_selection', 'my_workshops');
+}).then(function() {
+	form_task('main-form','list-users','form-content', true);
+});
+">Members of your workshops</a></li>
+						<li class="navbar-user"><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+    addInput('main-form', 'users_selection', 'all');
+}).then(function() {
+	form_task('main-form','list-users','form-content', true);
+});
+">All users</a></li>
+					</ul>
+				</li>
+
+				<li class="dropdown navbar-user"><a href="javascript:;"
+					class="dropdown-toggle" data-toggle="dropdown">Workshops&#160;<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li class="navbar-user"><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+    addInput('main-form', 'id_workshop', '');
+}).then(function() {
+    form_task('main-form', 'manage-workshop', 'form-content', true);
+});
+">New workshop</a></li>
+						<li class="divider"></li>
+						<li class="navbar-user"><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+    addInput('main-form', 'workshops_selection', 'my_workshops');
+}).then(function() {
+	form_task('main-form', 'list-workshops', 'form-content', true);
+});
+">Your workshops</a></li>
+						<li class="navbar-user"><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+    addInput('main-form', 'workshops_selection', 'my_contributions');
+}).then(function() {
+	form_task('main-form', 'list-workshops', 'form-content', true);
+});
+">Your contribution to workshops</a></li>
+						<li class="navbar-user"><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+    addInput('main-form', 'workshops_selection', 'all_workshops');
+}).then(function() {
+	form_task('main-form', 'list-workshops', 'form-content', true);
+});
+">All workshops</a></li>
+					</ul>
+				</li>
+
+				<li class="dropdown navbar-parsing"><a href="javascript:;"
+					class="dropdown-toggle navbar-tools" data-toggle="dropdown">Tools&#160;<b
+						class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li id="menu-fullscreen" class="navbar-parsing menu-parse"><a
+							href="javascript:;" onclick="fullscreen();">Fullscreen</a></li>
+						<li class="navbar-admin-show"><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+}).then(function() {
+    form_task('main-form', 'list-logs', 'form-content', true);
+});
+">Command Logs</a></li>
+<!-- -->
+						<li class="divider navbar-admin-show"></li>
+                        <li class="navbar-admin-show"><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+}).then(function() {
+    form_task('main-form', 'svn-update', 'form-content', true);
+});
+">SVN Update</a></li>
+						<li class="navbar-admin-show"><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+}).then(function() {
+    form_task('main-form', 'svn-log', 'form-content', true);
+});
+">SVN Logs</a></li>
+						<li class="navbar-admin-show"><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+}).then(function() {
+    form_task('main-form', 'file-logs', 'form-content', true);
+});
+">PHP logs</a></li>
+<!-- -->
+					</ul>
+				</li>
+                <li class="dropdown"><a href="javascript:;" class="dropdown-toggle"
+					data-toggle="dropdown">Help&#160;<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;" data-toggle="modal"
+							data-target="#about">About XLFG</a></li>
+						<li><a href="javascript:;" data-toggle="modal"
+							data-target="#terms" onclick="$('#terms-btn-ok').removeAttr('data-target')">Terms and conditions of use of the site XLFG</a></li>
+						<li><a href="javascript:;" data-toggle="modal"
+							data-target="#news">Last updates</a></li>
+						<li><a href="doc/xlfg-9.11.0.pdf" target="DOC">XLFG Documentation</a></li>
+						<li><a href="javascript:;" onclick="
+promise.then(function() {
+    removeInputs('main-form');
+}).then(function() {
+    form_task('main-form', 'list-howto', 'form-content', true);
+});
+">How to list</a></li>
+						<li class="divider"></li>
+						<li><a href="mailto:lionel.clement@u-bordeaux.fr?subject=XLFG">Send an email to
+								XLFG Administrators</a></li>
+					</ul>
+				</li>
+
+                <!--December 13th 14h00 GMT for 24h-->
+				<!--
+				<li class="dropdown" ><a href="javascript:;" class="dropdown-toggle"
+					data-toggle="dropdown" style="color: red">24h maintenance: shutdown
+					<span id="countdown" data-time="2022-12-13T12:54:00.000Z">
+					days:<span id="days"></span>&nbsp;
+					<span id="hours"></span>:<span id="minutes"></span>:<span id="seconds"></span>
+					</span>
+					</a>
+				</li>
+				-->
+				
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+
+				<li class="navbar-user-hide"><a href="javascript:;"
+					onclick="
+promise.then(function() {
+    removeInputs('main-form');
+}).then(function() {
+    form_task('main-form', 'signup-form', 'form-content', true);
+});
+"
+					style="color: darkorange"><span class="glyphicon glyphicon-user"></span>&#160;Sign-up</a>
+				</li>
+				<li class="navbar-user-hide"><a href="javascript:;"
+					onclick="
+promise.then(function() {
+    removeInputs('main-form');
+}).then(function() {
+    form_task('main-form', 'signin-form', 'form-content', true);
+});
+"><span
+						class="glyphicon glyphicon-lock"></span>&#160;Sign-in&#160;&#160;&#160;</a>
+				</li>
+				<li class="navbar-user-show" id="li-notificationsCount"><a href="javascript:;"
+					onclick="
+promise.then(function() {
+    removeInputs('main-form');
+}).then(function() {
+    form_task('main-form', 'list-notifications', 'form-content', true);
+});
+"><span
+						class="glyphicon glyphicon-envelope" ></span>&#160;<sup><sup><span
+								class="badge" id="notificationsCount" style="font-size:1.2em;"></span></sup></sup></a>
+				</li>
+				<li class="navbar-user-show dropdown"><a href="javascript:;"
+					class="dropdown-toggle" data-toggle="dropdown"
+					style="color: darkorange"><span id="firstName"></span>&#160;<span
+						id="lastName"></span><b class="caret"></b>&#160;&#160;&#160;</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+}).then(function() {
+    form_task('main-form', 'settings-form', 'form-content', true);
+});
+"><span
+								class="glyphicon glyphicon-wrench"> </span> <b>Settings</b></a></li>
+						<li><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+}).then(function() {
+    form_task('main-form', 'reset-password-form', 'form-content', true);
+});
+"><span
+								class="glyphicon glyphicon-lock"> </span> <b>Reset password</b></a></li>
+						<li><a href="javascript:;"
+							onclick="
+promise.then(function() {
+    removeInputs('main-form');
+}).then(function() {
+    form_task('main-form', 'signout', 'form-content', true);
+});
+"><span
+								class="glyphicon glyphicon-off"> </span> <b>Sign-out</b></a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav><script type="text/javascript">
+//<![CDATA[
+update_view(null, null, null, null, null, false, false, false, false, false);
+$('#menu').replaceWith('<li class="dropdown dropdown-submenu"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">English grammar</a>\
+<ul class="dropdown-menu">        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 23);\
+    addInput(\'main-form\', \'id_version\', 23);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">A first LFG grammar</a>\
+        </li>        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 172);\
+    addInput(\'main-form\', \'id_version\', 326);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">Context-Free Grammar</a>\
+        </li>        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 1442);\
+    addInput(\'main-form\', \'id_version\', 2028);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">Control vs Raising</a>\
+        </li>        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 25);\
+    addInput(\'main-form\', \'id_version\', 25);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">To switch on vs. to jump on</a>\
+        </li>        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 24);\
+    addInput(\'main-form\', \'id_version\', 24);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">Phraseology &amp; light verbs</a>\
+        </li>        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 27);\
+    addInput(\'main-form\', \'id_version\', 27);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">Unknown words</a>\
+        </li></ul>\
+</li><li class="dropdown dropdown-submenu"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">French grammar</a>\
+<ul class="dropdown-menu">        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 17);\
+    addInput(\'main-form\', \'id_version\', 17);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">Simple without FS</a>\
+        </li>        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 18);\
+    addInput(\'main-form\', \'id_version\', 18);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">Simple with FS</a>\
+        </li>        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 21);\
+    addInput(\'main-form\', \'id_version\', 21);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">Coordination</a>\
+        </li>        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 19);\
+    addInput(\'main-form\', \'id_version\', 19);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">Raising and Control</a>\
+        </li>        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 20);\
+    addInput(\'main-form\', \'id_version\', 20);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">Roule galette</a>\
+        </li></ul>\
+</li><li class="dropdown dropdown-submenu"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">German grammars</a>\
+<ul class="dropdown-menu">        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 38);\
+    addInput(\'main-form\', \'id_version\', 38);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">LFG&apos;02</a>\
+        </li></ul>\
+</li><li class="dropdown dropdown-submenu"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Antillean French Creole</a>\
+<ul class="dropdown-menu">        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 1441);\
+    addInput(\'main-form\', \'id_version\', 2027);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">kréyòl gwadloupéyen (thanks to Emmanuel Schang @Univ Orleans France)</a>\
+        </li></ul>\
+</li><li class="dropdown dropdown-submenu"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Arabic grammars</a>\
+<ul class="dropdown-menu">        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 14);\
+    addInput(\'main-form\', \'id_version\', 14);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">A little Arabic grammar</a>\
+        </li></ul>\
+</li><li class="dropdown dropdown-submenu"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Unit Test</a>\
+<ul class="dropdown-menu">        <li><a href="javascript:;" onclick="\
+promise.then(function() {\
+    removeInputs(\'main-form\');\
+    addInput(\'main-form\', \'id_project\', 1439);\
+    addInput(\'main-form\', \'id_version\', 2025);\
+ }).then(function() {\
+    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
+ });\
+ ">Unit test</a>\
+        </li></ul>\
+</li>');
+//]]>
+</script>  <div class="container-fluid" style="background-color:#fcfcfc;">
+    <div id="form-content" class="row">    </div>
+  </div>
+  <div class="footer navbar-fixed-bottom"><center>
+  <small>
+    <em class="hidden-print">Lionel Clément - </em><em>XLFG Copyright 2014-2022 </em><em class="hidden-print"><a href="http://www.labri.fr">LaBRI</a>, CNRS (UMR 5800), the University of Bordeaux, and the Bordeaux INP</em>
+  </small>
+</center>  </div>
+<div class="modal fade" id="please-wait">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<H2>
+					<span id="please-wait-content" class="text-info"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;Please wait...</span>
+				</H2>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+$('#please-wait').modal('hide');
+//]]>
+</script>
+<div class="modal fade modal-md" id="message">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div id="message-body"></div>
+			</div>
+			<div class="modal-footer">
+				<button id="btn-close" class="btn btn-primary btn-close"
+					type="button" data-dismiss="modal" onclick="$('#message').hide();">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+$.getScript('js/message.js');
+//]]>
+</script><div class="modal fade" id="privacy">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel"></h4>
+			</div>
+			<div class="modal-body">
+				<div>
+
+  <H1>Privacy</H1>
+  <p>Here at XLFG, we value your privacy.</p>
+
+  <p>In order to run optimally, the site records and saves the cookies from each log-in session.</p>
+
+  <p>Your personal information, including your name and e-mail, are not shared with other members of the community without your approbation, but are saved on the server.</p>
+
+  <p>The XLFG grammar and lexicon are shared at your discretion.</p> 
+
+  <p>To best update and manage the software, we record and save the XLFG grammar, lexicon,
+and sample sentences.<p>
+
+
+  <HR>
+
+  <H1>Warning</H1>
+
+  <p>The XLFG administrator does not provide data safety.</p>
+
+  <p>It's wise to save your projects and versions by exporting it on your personal device.</p>
+
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+			</div>
+
+		</div>
+	</div>
+</div><script type="text/javascript">
+//<![CDATA[
+  $('#privacy').modal('show');
+//]]>
+</script>  </body>
+</html>
