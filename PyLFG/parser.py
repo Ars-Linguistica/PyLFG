@@ -263,3 +263,40 @@ def build_trees(disambiguated_entries, grammar, templates):
         parse_trees.append(parse_tree)
     # Return the list of parse trees
     return parse_trees
+
+
+class LCFRSGrammar:
+    def __init__(self):
+        self.rules = []
+        self.nonterminals = set()
+        self.terminals = set()
+
+    def add_rule(self, lhs, rhs, weight=1.0):
+        self.rules.append((lhs, rhs, weight))
+        self.nonterminals.add(lhs)
+        for symbol in rhs:
+            if symbol in self.nonterminals:
+                self.terminals.add(symbol)
+
+    def parse(self, sentence):
+        chart = [[[] for _ in range(len(sentence) + 1)] for _ in range(len(sentence) + 1)]
+        for i in range(len(sentence)):
+            for lhs, rhs, weight in self.rules:
+                if rhs[0] == sentence[i]:
+                    chart[i][i+1].append((lhs, weight, []))
+
+        for span in range(2, len(sentence) + 1):
+            for start in range(len(sentence) - span + 1):
+                end = start + span
+                for mid in range(start + 1, end):
+                    for lhs1, weight1, children1 in chart[start][mid]:
+                        for lhs2, weight2, children2 in chart[mid][end]:
+                            for lhs, rhs, weight in self.rules:
+                                if rhs == [lhs1, lhs2]:
+                                    chart[start][end].append((lhs, weight * weight1 * weight2, [children1, children2]))
+        parses = []
+        for lhs, weight, children in chart[0][len(sentence)]:
+            if lhs == "S":
+                parses.append((weight, children))
+        return parses
+
