@@ -19,137 +19,136 @@ document.addEventListener("DOMContentLoaded", function() {
             // Add event listeners to the buttons
             addRuleButton.addEventListener("click", function() {
                 // Check if the app is running locally or online
-                if(window.location.hostname === "localhost"){
+                if (window.location.hostname === "localhost") {
                     // Send an HTTP request to the local server to add the rule
                     fetch("http://localhost:5000/add-rule", {
-                        method: "POST",
-                        body: JSON.stringify({
-                            rule: ruleInput.value
-                        }),
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Update the rule list
-                            updateRuleList();
-                        } else {
-                            alert("Error adding rule: " + data.error);
-                        }
-                    });
+                            method: "POST",
+                            body: JSON.stringify({
+                                rule: ruleInput.value
+                            }),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Update the rule list
+                                updateRuleList();
+                            } else {
+                                alert("Error adding rule: " + data.error);
+                            }
+                        });
                 } else {
                     // Send an HTTP request to the online server to add the rule
                     fetch("/add-rule", {
-                        method: "POST",
-                        body: JSON.stringify({
-                            rule: ruleInput.value
-                        }),
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Update the rule list
-                            updateRuleList();
-                        } else {
-                            alert("Error adding rule: " + data.error);
-                        }
-                    });
+                            method: "POST",
+                            body: JSON.stringify({
+                                rule: ruleInput.value
+                            }),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Update the rule list
+                                updateRuleList();
+                            } else {
+                                alert("Error adding rule: " + data.error);
+                            }
+                        });
                 }
             });
 
             editRuleButton.addEventListener("click", function() {
                 // Check if the app is running locally or online
-                if(window.location.hostname === "localhost"){
+                if (window.location.hostname === "localhost") {
                     // Send an HTTP request to the local server to edit the selected rule
                     fetch("http://localhost:5000/edit-rule", {
-                        method: "POST",
-                        body: JSON.stringify({
-                            rule: ruleInput.value
-                        }),
-                        headers:{
-"Content-Type": "application/json"
-}
-})
-.then(response => response.json())
-.then(data => {
-if (data.success) {
-// Update the rule list
-updateRuleList();
-} else {
-alert("Error editing rule: " + data.error);
-}
-});
-} else {
-// Send an HTTP request to the online server to edit the selected rule
-fetch("/edit-rule", {
-method: "POST",
-body: JSON.stringify({
-rule: ruleInput.value
-}),
-headers: {
-"Content-Type": "application/json"
-}
-})
-.then(response => response.json())
-.then(data => {
-if (data.success) {
-// Update the rule list
-updateRuleList();
-} else {
-alert("Error editing rule: " + data.error);
-}
-});
-}
-});
+                            method: "POST",
+                            body: JSON.stringify({
+                                rule: ruleInput.value
+                            }),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Update the rule list
+                                updateRuleList();
+                            } else {
+                                alert("Error editing rule: " + data.error);
+                            }
+                        });
+                } else {
+                    // Send an HTTP request to the online server to edit the selected rule
+                    fetch("/edit-rule", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                rule: ruleInput.value
+                            }),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Update the rule list
+                                updateRuleList();
+                            } else {
+                                alert("Error editing rule: " + data.error);
+                            }
+                        });
+                }
+            });
 
-        deleteRuleButton.addEventListener("click", function() {
-            // Check if the app is running locally or online
-            if(window.location.hostname === "localhost"){
-                // Send an HTTP request to the local server to delete the selected rule
-                fetch("http://localhost:5000/delete-rule", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        rule: ruleInput.value
-                    }),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Update the rule list
-                        updateRuleList();
-                    } else {
-                        alert("Error deleting rule: " + data.error);
-}
-});
-} else {
-// Send an HTTP request to the online server to delete the selected rule
-fetch("/delete-rule", {
-method: "POST",
-body: JSON.stringify({
-rule: ruleInput.value
-}),
-headers: {
-"Content-Type": "application/json"
-}
-})
-.then(response => response.json())
-.then(data => {
-if (data.success) {
-// Update the rule list
-updateRuleList();
-} else {
-alert("Error deleting rule: "
-data.error);
-}
-});
-}
-});
-
+            deleteRuleButton.addEventListener("click", function() {
+                // Check if the app is running locally or online
+                if (window.location.hostname === "localhost") {
+                    // Send an HTTP request to the local server to delete the selected rule
+                    fetch("http://localhost:5000/delete-rule", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                rule: ruleInput.value
+                            }),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Update the rule list
+                                updateRuleList();
+                            } else {
+                                alert("Error deleting rule: " + data.error);
+                            }
+                        });
+                } else {
+                    // Send an HTTP request to the online server to delete the selected rule
+                    fetch("/delete-rule", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                rule: ruleInput.value
+                            }),
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Update the rule list
+                                updateRuleList();
+                            } else {
+                                alert("Error deleting rule: "
+                                    data.error);
+                            }
+                        });
+                }
+            });
