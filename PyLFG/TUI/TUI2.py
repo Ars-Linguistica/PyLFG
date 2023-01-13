@@ -2,7 +2,7 @@ import textual
 import json
 from xlfg import parse_rule, parse_lexicon_entry, match_constraints, impose_constraints_in_tree, remove_unused_constraints
 import d3
-from command import process
+from command import CommandHandler
 # Create a Textual App and a MainView
 app = textual.Application("PyLFG")
 main_view = textual.MainView()
@@ -15,6 +15,15 @@ interactive_prompt = textual.TextField(placeholder="Enter sentence to be analyze
 def process_input():
     input_string = interactive_prompt.value
     process(input_string)
+
+# Instantiate the CommandHandler
+command_handler = CommandHandler(rule_list, lexicon_list, parse_tree)
+
+# Add the event handler for the interactive prompt
+@interactive_prompt.on("submit")
+def process_input():
+    input_string = interactive_prompt.value
+    command_handler.process(input_string)
 
 # Production Rule Section
 # Create a TextField for entering new production rules and a ListBox to display existing rules
