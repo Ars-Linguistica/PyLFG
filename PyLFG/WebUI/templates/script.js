@@ -69,4 +69,83 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   });
 
-  addLexiconButton.addEventListener("click", function()
+addLexiconButton.addEventListener("click", function() {
+// Send an HTTP request to the server to add the lexicon entry
+fetch("/add-lexicon", {
+method: "POST",
+body: JSON.stringify({ entry: lexiconInput.value }),
+headers: { "Content-Type": "application/json" }
+})
+.then(response => response.json())
+.then(data => {
+if (data.success) {
+// Update the lexicon list
+updateLexiconList();
+} else {
+alert("Error adding lexicon entry: " + data.error);
+}
+});
+});
+
+editLexiconButton.addEventListener("click", function() {
+// Send an HTTP request to the server to edit the selected lexicon entry
+fetch("/edit-lexicon", {
+method: "POST",
+body: JSON.stringify({ entry: lexiconInput.value }),
+headers: { "Content-Type": "application/json" }
+})
+.then(response => response.json())
+.then(data => {
+if (data.success) {
+// Update the lexicon list
+updateLexiconList();
+} else {
+alert("Error editing lexicon entry: " + data.error);
+}
+});
+});
+
+deleteLexiconButton.addEventListener("click", function() {
+// Send an HTTP request to the server to delete the selected lexicon entry
+fetch("/delete-lexicon", {
+method: "POST",
+body: JSON.stringify({ entry: lexiconInput.value }),
+headers: { "Content-Type": "application/json" }
+})
+.then(response => response.json())
+.then(data => {
+if (data.success) {
+// Update the lexicon list
+updateLexiconList();
+} else {
+alert("Error deleting lexicon entry: " + data.error);
+}
+});
+});
+
+// Add event listener to the interactive prompt
+interactivePrompt.addEventListener("keydown", function(event) {
+if (event.key === "Enter") {
+// Send an HTTP request to the server to analyze the sentence
+fetch("/analyze-sentence", {
+method: "POST",
+body: JSON.stringify({ sentence: interactivePrompt.value }),
+headers: { "Content-Type": "application/json" }
+})
+.then(response => response.json())
+.then(data => {
+if (data.success) {
+// Update the parse tree and f/e-structure views
+updateParseTreeView(data.parse_tree);
+updateFStructureView(data.f_structure);
+updateEStructureView(data.e_structure);
+} else {
+alert("Error analyzing sentence: " + data.error);
+}
+});
+}
+});
+
+// Add event listeners to the constraint input and buttons
+addConstraintButton.addEventListener("click", function() {
+// Send an HTTP request to the server to add the constraint
