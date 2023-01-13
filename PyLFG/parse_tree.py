@@ -413,4 +413,17 @@ class FStructure:
             elif attribute.startswith("arg"):
                 sentence += value + " "
         return sentence.strip()
+        
+        def transfer_language(self, transfer_rules: dict):
+        """
+        Transfer the f-structure to a different language using the provided transfer rules.
+        :param transfer_rules: (Dict[str, str]) A dictionary where keys are the attributes in the original language,
+            and values are the corresponding attributes in the target language.
+        """
+        new_attributes = {}
+        for attribute, value in self.attributes.items():
+            if attribute in transfer_rules:
+                new_attribute = transfer_rules[attribute]
+                new_attributes[new_attribute] = value
+        self.attributes = new_attributes
 
