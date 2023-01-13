@@ -400,4 +400,17 @@ class FStructure:
         
     def get_f_structures(self):
         return self.f_structures
+    
+    def generate_sentence(self) -> str:
+        """
+        Generate a sentence from the f-structure
+        :return: (str) the sentence
+        """
+        sentence = ""
+        for attribute, value in self.attributes.items():
+            if attribute == "pred":
+                sentence += value + " "
+            elif attribute.startswith("arg"):
+                sentence += value + " "
+        return sentence.strip()
 
