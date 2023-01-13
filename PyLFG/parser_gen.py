@@ -35,7 +35,7 @@ class ParserGenerator:
         parser = plyplus.Grammar(grammar, lexicon)
         return parser
 
-class LfgParser:
+class CompiledLfgParser:
     def __init__(self, grammar_format, grammar: dict, lexicon: dict):
         self.grammar_format = grammar_format
         self.grammar = grammar
