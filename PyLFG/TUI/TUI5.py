@@ -5,13 +5,13 @@ import d3
 from command import CommandHandler
 
 # Create a Textual App and a MainView
-app = textual.Application("PyLFG")
+app = textual.Application("PyLFG", theme=textual.Themes.DARK)
 main_view = textual.MainView()
 
 # Group UI elements
-interactive_prompt_section = textual.Section("Interactive Prompt")
-production_rule_section = textual.Section("Production Rules")
-lexicon_entry_section = textual.Section("Lexicon Entries")
+interactive_prompt_section = textual.Section("Interactive Prompt", layout=textual.layouts.GRID)
+production_rule_section = textual.Section("Production Rules", layout=textual.layouts.GRID)
+lexicon_entry_section = textual.Section("Lexicon Entries", layout=textual.layouts.GRID)
 
 # Add clear labels and instructions
 interactive_prompt_section.add(textual.Label("Enter sentence to be analyzed or command preceded by $ symbol"))
@@ -50,47 +50,31 @@ tree_view = d3.ParseTreeView()
 # Add all sections to the main view
 main_view.add(interactive_prompt_section, production_rule_section, lexicon_entry_section, tree_view)
 
-# Default Styling
+# Set global styling
 textual.set_global_style(textual.Style(
     background_color="#F5F5F5",
-    text_color="#333333",
-    accent_color="#0078D7",
-    font="Open Sans",
-    font_size=14,
+    text_color="#1A1A1A",
+    font_family="Arial",
+    font_size=16,
     padding=10,
-    spacing=10,
-    border_radius=5
+    button_height=30,
+    button_width=150,
+    button_radius=5,
+    button_background_color="#4CAF50",
+    button_text_color="#F5F5F5",
+    button_hover_background_color="#3E8E41",
+    button_active_background_color="#3E8E41",
+    textfield_height=30,
+    textfield_width=500,
+    textfield_radius=5,
+    textfield_background_color="#F5F5F5",
+    textfield_text_color="#1A1A1A",
+    textfield_placeholder_color="#C0C0C0",
+    listbox_height=200,
+    listbox_width=500,
+    listbox_background_color="#F5F5F5",
+    listbox_text_color="#1A1A1A",
+    listbox_selected_background_color="#4CAF50",
+    listbox_selected_text_color="#F5F5F5",
 ))
-
-# Interactive prompt section styling
-interactive_prompt_section.style.background_color = "#FFFFFF"
-interactive_prompt_section.style.text_color = "#333333"
-interactive_prompt_section.style.border_radius = 10
-interactive_prompt_section.style.padding = 20
-
-# Production Rule Input styling
-rule_input.style.width = "70%"
-rule_input.style.margin_right = "5%"
-add_rule_button.style.width = "15%"
-edit_rule_button.style.width = "15%"
-delete_rule_button.style.width = "15%"
-
-# Production Rule List styling
-rule_list.style.height = "200px"
-rule_list.style.overflow_y = "scroll"
-
-# Lexicon Entry Input styling
-lexicon_input.style.width = "70%"
-lexicon_input.style.margin_right = "5%"
-add_lexicon_button.style.width = "15%"
-edit_lexicon_button.style.width = "15%"
-delete_lexicon_button.style.width = "15%"
-
-# Lexicon Entry List styling
-lexicon_list.style.height = "200px"
-lexicon_list.style.overflow_y = "scroll"
-
-# Parse Tree View styling
-tree_view.style.height = "500px"
-tree_view.style.width = "100%"
 
