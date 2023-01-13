@@ -7,6 +7,31 @@ import d3
 app = textual.Application("PyLFG")
 main_view = textual.MainView()
 
+# Interactive prompt section
+interactive_prompt = textual.TextField(placeholder="Enter sentence to be analyzed or command preceded by $ symbol")
+
+# Add event handler for interactive prompt
+@interactive_prompt.on("submit")
+def process_input():
+    input_string = interactive_prompt.value
+    if input_string[0] == "$":
+        # Process command
+        command = input_string[1:]
+        if command == "display_rules":
+            print("Current production rules:")
+            for rule in rule_list.items:
+                print(rule.text)
+        elif command == "display_lexicon":
+            print("Current lexicon entries:")
+            for entry in lexicon_list.items:
+                print(entry.text)
+        else:
+            print("Invalid command")
+    else:
+        # Analyze sentence
+        parse_tree = parse_sentence(input_string, rule_list.items, lexicon_list.items)
+        tree_view.set_tree(parse_tree)
+
 # Production Rule Section
 # Create a TextField for entering new production rules and a ListBox to display existing rules
 rule_input = textual.TextField(placeholder="Enter production rule (e.g. NP → Det N {c-structure constraints})")
@@ -158,7 +183,9 @@ def debug():
     debug_parse_tree(tree_view.root)
 
 # Add all the widgets to the main view
-main_view.add(rule_input, rule_list, lexicon_input, lexicon_list, tree_view, structure_toggle, generate_button, sentence_output, undo_button, redo_button, save_button, load_button, share_button, consistency_check_button, debug_button)
+main_view.add(interactive_prompt, rule_input, rule_list, lexicon_input, lexicon_list, tree_view, structure_toggle, generate_button, sentence_output, undo_button, redo_button, save_button, load_button, share_button, consistency_check_button, debug_button)
+# Add interactive_prompt handler to the main view
+main_view.add_event_handler(process_input)
 
 # Run the app
 app.run()
