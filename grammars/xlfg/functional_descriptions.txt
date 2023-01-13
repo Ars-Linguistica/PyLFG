@@ -1,0 +1,271 @@
+6 Functional descriptions
+The Functional description is a crucial part of the LFG theory. It defines the Φ projection allowing one to construct a F-structure from a C-structure. They also provide explicit constraints on the resulting F-structures.
+Syntactic relations, local and nonlocal agreement, subject control, sub-cate- gorization, and many other syntactic phenomena can be modeled using func- tional descriptions. The following examples are only illustrative, and the inter- ested reader is directed to the LFG literature for further reading and analyses.
+6.1 Functional equations
+Functional equations are needed to construct F-structures associated with C- structures. One may for instance assume a rule such as the following to associate a preverbal NP with the subject function:
+   S → NP VP {
+(↑ SUBJ) = ↓1 ;
+↑ = ↓2 ; };
+ ↓1 and ↓2 denote the F-structure of the dominated constituent, in the present instance respectively the NP and the VP, whereas ↑ denotes the functional struc- ture of the dominating category, here S, the full sentence. When a rule intro- duces a single constituent, ↓ can be used equivalently to ↓1. The equation (↑ SUJ) = ↓1 instantiates a new attribute SUBJ in the F-structure ↑ and assigns the structure denoted by ↓1 as its value. If the attribute already existed in ↑, its value would become the unification of (↑ SUJ) and ↓1.
+Let us take an example: the sentence My father came. The functional structure initially assigned to the VP is:
+ PRED ’come < SUBJ>’  TENSE past   􏰂 NUMBER singular 􏰃 
+SUBJ PERSON 3
+The functional structure initially assigned to the NP is:
+ PRED ’father’   NUMBER singular  GENDER masculine
+Applying the equation (↑ SUJ) = ↓1 updates ↑ to: 26
+
+and
+ PRED ’father’   NUMBER singular  GENDER masculine
+􏰂 NUMBER singular 􏰃 PERSON 3
+ PRED ’come < SUBJ>’
+TENSE past
+  PRED ’father’
+ SUBJ  NUMBER singular    PERSON 3 
+GENDER masculine We see here that the value of SUBJ is the unification of
+6.2 Set-valued attributes
+Attributes corresponding to modifiers have a set of F-structures as their value. The value of such attributes is constructed using declarations of the form
+where (↓i <path>) (or just ↓i) is the description of an F-structure X and (↑ <path>) an attribute. If the attribute is already present in the structure as a set, X is added to it. If the attribute is present with another type, an error is reported.
+As an example, let us consider a noun modified by an adjective and a relative clause: the technical issues that plague the project.
+The following rules allow for an adequate analysis:
+  
+
+   ↓i ∈ (↑ <path>)
+(↓i <path>) ∈ (↑ <path>)
+    NP → DET N { ↑ = ↓1 ;
+↑ = ↓2 ; };
+N → ADJ N {
+↓1 ∈ (↑ ADJ);
+ 27
+
+   ↑ = ↓2 ; };
+N → N REL {
+↑ = ↓1 ;
+↓2 ∈ (↑ ADJ); };
+ Here is the resulting F-structure, assuming a simplified lexicon:
+ PRED ’issue’ 
+􏰂􏰃
+  PRED’technical’  
+   ... 
+ 
+ 
+  
+    
+ PRED
+ADJ 􏰂PRED’pro’􏰃
+’plague<SUBJ, OBJ>’
+   SUJ   
+   ...    􏰂􏰃
+   
+PRED ’project’
+...
+   
+     
+
+   OBJ   
+ ... ...
+6.3 Links between F-structures
+The use of equality in LFG functional equations allows for a single F-structure to be the common value of two attributes modeling distinct grammatical functions. This is how subject control is modelled in LFG: the subject of an XCOMP or XADJ is shared with a function of the main sentence. For instance the sentence Mary wants to stay is analyzed as:
+ PRED 
+’want<SUBJ, XCOMP>’  􏰂PRED 1’Mary’􏰃 
+... 
+ SUBJ 
+  PRED ’stay<SUBJ>’  
+  XCOMP SUBJ 1 
+...
+In this example, the subject of the infinitive is controlled by the matrix verb want, whose lexical entry states that it is shared with the subject of want — but the name Mary is realized just once in the constituent structure. In LFG, this effect is modeled by putting the following equation in the lexical entry of want :
+28
+ 
+
+(↑ XCOMP SUBJ) = (↑ SUBJ)
+Remember however that there is no equality in XLFG: equality is replaced by assignment after unification. But copy is not appropriate in the present instance: we do not want to construct a new subject.
+XLFG will automatically detects such a situation and will create a link to the subject (↑ SUBJ).
+If the attribute corresponding to the left-hand side is already present with a feature-structure value, it must subsume the second one to produce a well- formed F-structure. If it is present, but with another type, an error is reported.
+6.4 Constraining equations
+This is the analogue of LFG constraining equations, noted with the operator “=c”. Such constraints do not build structure, but check that some attribute in a given F-structure has the required value.
+As a possible application, notice that in English, finite clauses with the function of complement only optionally begin with a complementizer, whereas finite clauses with the function of a subject need a complementizer. To account for this, we may assume that the complementizer that introduces a feature 􏰀 CPLZER THAT 􏰁, and that the C-structure rule for clausal subjects checks for the presence of that feature through an equality constraint:
+   S → S VP {
+(↑ SUBJ) = ↓1 ;
+↑ = ↓2;
+(↓1 CPLZER) == THAT;
+}
+ As only an existing constant may be checked without building a structure, all the functional descriptions are accepted as equality operands:
+<constant> == <constant> Where <constant> is:
+(↑ <path>) (↓ <path>) <atom> <literal>
+Obviously, a constraint equation that makes reference to a constant which does not exist fails.
+29
+
+6.5 Negative constraints
+The operator ̸= is the opposite of ==. A constraint such as the following is verified if either there is no CPLZER attribute in the structure, or its value is not THAT.
+<constant> ̸= <constant>
+This constraint fails if and only if the constants doesn’t exist, or exists with
+a value that doesn’t match.
+6.6 Existential constraint
+It is possible for a syntactic rule or a lexical entry to require a feature to be present without a particular value. For exemple, a finite verb is required when the complementizer that is the head of a clause whatever is the tense of such a verb.
+(9) a. The Commission is also still debating whether to apply the law. b. *The Commission is also still debating if to apply the law.
+c. The Commission is also still debating if one should apply the law. We use only the functional description to describe such a constraint.
+Conversely, a syntactic rule or a lexical entry may require a feature to be not present. For exemple, a verb introduced by the to particule is no finite. We use the ¬ symbol to represent describe constraint.
+(10) a. *The Commission is also still debating whether to should apply the law.
+30
+   (↑ CPLZER) ̸= that;
+    that CPLTZ [] {(↑ TENSE);};
+    to PART [] {¬(↑ TENSE);};
+ 
+6.7 Conditionals
+Conditionals on C-structure
+Since functional descriptions are assigned to phrase structure rules rather than constituents, we added the operators if that allows one to turn on or off the functional descriptions associated with optional constituents. Here is an exam- ple:
+   VP → AUX [advneg] VP {
+if ($2)
+(↑ neg) = true;
+else
+(↑ neg) = false;
+}
+ In this example, the F-structure of the VP will always carry a feature neg, with value true if a negative adverb is present, false otherwise.
+Using the operator if is not needed if the functional description includes a reference to the functional structure of the optional term. The rule
+   NP → [DET] N {
+↑ = ↓1;
+↑ = ↓2; }
+ is equivalent to (and slightly awkward)
+   NP → [DET] N {
+if ($1)
+↑ = ↓1;
+↑ = ↓2; }
+ The general form for a conditional functional description is the following: 31
+
+   if ($i) <statement>
+if ($i) <statement> else <statement> if (¬$i) <statement>
+if (¬$i) <statement> else <statement>
+ where $i is true if and only if the ith term of the rule is present. Conditionals on F-structure
+If a constraining equation, a negative constraint or an existential constraint is the condition to evaluate some other constraints or functional descriptions, the operator if is also available to do so:
+For exemple, in French, the gender of coordinated nouns depends on the gender of its parts: to be marked as feminine, all the parts have to be in feminine gender. While the person is marked as 1st (resp. 2nd) when just one part is at the 1st (resp. 2nd) person.
+   if (<expression>) <statement>
+if (<expression>) <statement> else <statement>
+ (11) a.
+Jean et moi sommes partis
+Jean (masc) and me (fem/masc) went (1st - plural - masc)
+b. Jeanne et moi sommes parties/partis
+Jean (fem) and me (fem/masc) went (1st - plural - fem/masc)
+c. Jeanne et toi êtes parties/partis
+Jean (fem) and me (fem/masc) went (2nd - plural - fem/masc)
+d. Jeanne et Michel sont partis
+Jeanne (fem) and Michel (masc) went (3rd - plural - masc)
+e. Jeanne et Michèle sont parties
+Jeanne (fem) and Michèle (fem) went (3rd - plural - fem)
+Following these guidelines, the XLFG rule for NP coordination in French is as simple as this:
+32
+
+   NP → NP coo NP {
+(↑ number) = pl;
+if (((↓1 person) == 1) ∨ ((↓3 person) == 1)) (↑ person) = 1;
+else if (((↓1 person) == 2) ∨ ((↓3 person) == 2)) (↑ person) = 2;
+else
+(↑ person) = 3;
+if (((↓1 gender) == fem) ∧ ((↓3 gender) == fem)) (↑ gender) = fem;
+else
+(↑ gender) = masc;
+↓1 ∈ ↑; ↑ = ↓2; ↓3 ∈ ↑;
+}
+ 6.8 Selection
+A fold and economical way to write LFG rules is to use the selection like this example from [Falk, 2001] p.76
+   VP → V
+↑ = ↓
+PP∗  IP  NP S
+  􏰄 DP 􏰅∗  CP 
+􏰄
+(↑ OBJ) =↓; 􏰅 (↑ OBJ2) =↓;
+(↑ (↓ PCASE)) = ↓ (↑ COMP) = ↓
+ The equivalent XLFG notation for term selection, is written by using the “|” symbol.
+33
+   VP → V [NPs] [PPs] [CP | IP | S];
+ 
+In order to associate a function description with each selection, the keyword switch is used.
+Here is the complete exemple:
+   VP → V [NPs] [PPs] [CP | IP | S] {
+↑ = ↓1;
+↑ = ↓2;
+↑ = ↓3;
+(↑ COMP) = ↓4;
+};
+NPs → [NPs] DP | NP; {
+↑ = ↓1; switch ($2) {
+case DP: (↑ OBJ) = ↓2;
+case NP: (↑ OBJ2) = ↓2; }
+};
+PPs → [PPs] PP; {
+↑ = ↓1;
+(↑ (↓ PCASE)) = ↓2; };
+ The operator switch concerns DP|NP designated by $2: depending on whether this term is DP or NP, the different statements identified by the keyword case is applied.
+The general form for a selection is the following:
+   switch ($i) {
+case <identifier>: <statement> case <identifier>: <statement> ...
+}
+ 34
+
+6.9 Variable attributes
+A single verb may combine with two oblique complements. In such cases, the LFG practice is to index the grammatical function of the complement with the name of the adposition introducing it. This allows for a unique function to be assigned to each complement, in accordance with the unicity requirement on grammatical functions. Thus the PRED value for a verb such as talk is:
+To make sure that the right preposition is used within each complement, it is necessary to constrain the PCASE value associated with the preposition to match the indexed function, as in the following example.
+ PRED ’TALK<SUBJ, OBLto, OBLabout >’  
+ SUBJ 􏰀 ... 􏰁  
+   PRED: ’TALK<SUBJ, OBLto, OBLabout >’
+   􏰂 PCASE to 􏰃 
+ OBLto ...  
+ 
+ 􏰂PCASE about􏰃  OBLabout . . .
+In XLFG, such variable attribute names can be denoted by concatenating a description to the left of an attribute name: OBL - (f PCASE) names an attribute constructed by concatenating OBL with the value of the PCASE at- tribute of f using the operator "-”. The following rule allows one to construct the preceding schematic F-structure from appropriate lexical entries.
+   VP → V [PP] {
+↑ = ↓1;
+(↑ OBL - (↓2 PCASE)) = ↓2; }
+ 6.10 Long distance dependencies
+Long distance dependencies are standardly modeled in LFG through functional uncertainty, that is, the use of regular expressions in attribute path descriptions. This is readily implemented in XLFG. For instance, the following is a standard
+35
+
+rule for describing wh- questions in English such as Who do you think John saw?
+   S1 → NP S {
+↑ = ↓2;
+(↑ FOCUS) = ↓1;
+(↓ WH) == true;
+let x in (↑ (COMP | VCOMP)+)
+(x OBJ) = (↑ FOCUS); }
+ In this description (↑ (COMP | VCOMP) +) denotes a sequence of COMPs and VCOMPs embedded in each other ↑. All values that correspond to this existing sequence are assigned to the variable x. (x OBJ) denotes the OBJs embedded in them.
+The general structure of such statements is
+where X names the function of the fronted constituent in the embedded clause, and <regexp> is a regular expression over the set of attribute names.
+A regular expression denotes a path in a functional structure. The simplest kind of regular expression is just an attribute name. From two regular expres- sions A and B, one can derive the complex expressions (A B) (A|B), A*, A+, corresponding respectively to concatenation, disjunction, iterative closure, and iterative closure with at least one element.
+Let us take a few examples from the F-structure of John asks which file Luke should open.
+   let <identifier> in (↑ <regexp>) <statement>
+ 36
+
+ PRED ’ask<SUBJ, (COMP)>’  
+􏰀􏰁
+SUBJ x PRED ’John’   ′
+  PRED ’should < SUBJ, VCOMP >    
+ FOCUS k􏰀PRED ’file’􏰁  
+
+COMP ySUBJ z􏰀PRED ’Luke’􏰁  
+
+   PRED ’open<SUBJ,OBJ>′    
+  VCOMP w SUBJ z   OBJ k
+6.11
+(↑ (COMP SUBJ)) denotes structure [PRED ’Luke’] – that is, z.
+(↑ (COMP | SUBJ)) denotes the structures [PRED ’should’] or [PRED ’John’]
+– that is, neither exclusive to x or y.
+(↑ (COMP | VCOMP)+) denotes the structures y, w.
+The cut operator “!”
+Without any pragmatic context, some sentences are ambiguous between an id- iomatic expression and a literal expression.
+(12) a. The boat began to sway, broke the ice which was surrounding it, and began to move forward slowly.
+b. This simple gesture broke the ice.
+As you have probably noticed by now, XLFG was designed to preserve all the ambiguities between each level of the analysis. It keeps shared structures during the process as a whole.
+The meaning of an ambiguous sentence like 12a, 12b is based on a pragmatic analysis that is not involved in the XLFG syntactic process.
+In fact, in most cases it’s unlikely that a pragmatic analysis will be necessary. The idiomatic expressions and the compounds are almost always the right lexical entry, and you can drop the rest that it is statistically less probable.
+There are two ways in XLFG to simulate such a probability. The first one is to add a new feature with a weight level on each word. This rank may be given by a statistical study on texts and retrieved at the end of the parsing to rank the output results. The second way is to select only the idiomatic expression and never select the others. An XLFG operator “!” is provided for that purpose: in a lexical rule or in a syntactic rule, one may add this equation to present the other analysis:
+37
+
+↑ = !;
+A possible XLFG lexical entry for the form broke which allows us to have a correct analysis of the sentences 12a, 12b is the following:
+   broke [PRED: ’TO_BRAKE_THE_ICE<SUBJ.Agent>OBJ’, TENSE: past,
+MOOD: indicative, OBJ: [LEXEME:’ICE’,
+number: sg,
+def: true, modified: false]]{
+↑ = !; }
+|[PRED: ’TO_BRAKE<SUBJ.Agent, OBJ.Patient>’, TENSE: past,
+MOOD: indicative]
+ In 12a, all the constraints of the first entry are applied, and the “!” operator rejects the second entry.
+In 12b, the noun ice is modified with the relative which was surrounding it that is incompatible with the feature modified:false. The only entry which is compatible is the second one.
