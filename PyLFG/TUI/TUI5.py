@@ -66,38 +66,28 @@ parse_tree_section.add(constraint_input, add_constraint_button, edit_constraint_
 constraint_list = textual.ListBox()
 parse_tree_section.add(constraint_list)
 
-# Export Grammar and Lexicon
-export_button = textual.Button("Export Grammar and Lexicon")
-parse_tree_section.add(export_button)
-
 # Add all sections to the main view
 main_view.add(interactive_prompt_section, production_rule_section, lexicon_entry_section, parse_tree_section)
 
 # Set global styling
 textual.set_global_style(textual.Style(
     background_color=textual.colors.WHITE,
-    text_color=textual.colors.BLACK,
-    selected_background_color=textual.colors.LIGHT_GREY,
-    selected_text_color=textual.colors.BLACK
+    text_color=textual.colors.BLACK
 ))
 
-# Add event handlers for buttons and input fields
-add_rule_button.on_click(lambda: parse_rule(rule_input.value) and rule_list.add_item(rule_input.value))
-edit_rule_button.on_click(lambda: parse_rule(rule_input.value) and rule_list.update_selected_item(rule_input.value))
-delete_rule_button.on_click(lambda: rule_list.remove_selected_item())
-add_lexicon_button.on_click(lambda: parse_lexicon_entry(lexicon_input.value
-add_lexicon_button.on_click(lambda: parse_lexicon_entry(lexicon_input.value) and lexicon_list.add_item(lexicon_input.value))
-edit_lexicon_button.on_click(lambda: parse_lexicon_entry(lexicon_input.value) and lexicon_list.update_selected_item(lexicon_input.value))
-delete_lexicon_button.on_click(lambda: lexicon_list.remove_selected_item())
+# Define command handler
+cmd_handler = CommandHandler(interactive_prompt, rule_input, rule_list, lexicon_input, lexicon_list, tree_view, f_structure_view, e_structure_view, constraint_input, constraint_list)
 
-add_constraint_button.on_click(lambda: match_constraints(constraint_input.value) and constraint_list.add_item(constraint_input.value))
-edit_constraint_button.on_click(lambda: match_constraints(constraint_input.value) and constraint_list.update_selected_item(constraint_input.value))
-delete_constraint_button.on_click(lambda: constraint_list.remove_selected_item())
-
-export_button.on_click(lambda: export_grammar_and_lexicon())
-
-interactive_prompt.on_submit(lambda: handle_interactive_prompt(interactive_prompt.value))
+# Bind buttons to command handler functions
+add_rule_button.bind(cmd_handler.add_rule)
+edit_rule_button.bind(cmd_handler.edit_rule)
+delete_rule_button.bind(cmd_handler.delete_rule)
+add_lexicon_button.bind(cmd_handler.add_lexicon_entry)
+edit_lexicon_button.bind(cmd_handler.edit_lexicon_entry)
+delete_lexicon_button.bind(cmd_handler.delete_lexicon_entry)
+add_constraint_button.bind(cmd_handler.add_constraint)
+edit_constraint_button.bind(cmd_handler.edit_constraint)
+delete_constraint_button.bind(cmd_handler.delete_constraint)
 
 # Run the app
-app.run()
-
+app.run(main_view)
