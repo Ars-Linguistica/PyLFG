@@ -149,3 +149,52 @@ alert("Error analyzing sentence: " + data.error);
 // Add event listeners to the constraint input and buttons
 addConstraintButton.addEventListener("click", function() {
 // Send an HTTP request to the server to add the constraint
+fetch("/add-constraint", {
+method: "POST",
+body: JSON.stringify({ constraint: constraintInput.value }),
+headers: { "Content-Type": "application/json" }
+})
+.then(response => response.json())
+.then(data => {
+if (data.success) {
+// Update the constraint list
+updateConstraintList();
+} else {
+alert("Error adding constraint: " + data.error);
+}
+});
+});
+
+editConstraintButton.addEventListener("click", function() {
+// Send an HTTP request to the server to edit the selected constraint
+fetch("/edit-constraint", {
+method: "POST",
+body: JSON.stringify({ constraint: constraintInput.value }),
+headers: { "Content-Type": "application/json" }
+})
+.then(response => response.json())
+.then(data => {
+if (data.success) {
+// Update the constraint list
+updateConstraintList();
+} else {
+alert("Error editing constraint: " + data.error);
+}
+});
+});
+
+deleteConstraintButton.addEventListener("click", function() {
+// Send an HTTP request to the server to delete the selected constraint
+fetch("/delete-constraint", {
+method: "POST",
+body: JSON.stringify({ constraint: constraintInput.value }),
+headers: { "Content-Type": "application/json" }
+})
+.then(response => response.json())
+.then(data => {
+if (data.success) {
+// Update the constraint list
+updateConstraintList();
+} else {
+alert("Error deleting constraint: " + data.error);
+}
