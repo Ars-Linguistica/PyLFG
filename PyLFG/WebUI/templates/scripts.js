@@ -126,5 +126,30 @@ alert("Error editing rule: " + data.error);
                         // Update the rule list
                         updateRuleList();
                     } else {
-                        alert("Error deleting rule: "
+                        alert("Error deleting rule: " + data.error);
+}
+});
+} else {
+// Send an HTTP request to the online server to delete the selected rule
+fetch("/delete-rule", {
+method: "POST",
+body: JSON.stringify({
+rule: ruleInput.value
+}),
+headers: {
+"Content-Type": "application/json"
+}
+})
+.then(response => response.json())
+.then(data => {
+if (data.success) {
+// Update the rule list
+updateRuleList();
+} else {
+alert("Error deleting rule: "
+data.error);
+}
+});
+}
+});
 
