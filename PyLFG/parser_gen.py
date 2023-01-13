@@ -36,12 +36,14 @@ class ParserGenerator:
         return parser
 
 class LfgParser:
-    def __init__(self, grammar_format):
+    def __init__(self, grammar_format, grammar: dict, lexicon: dict):
         self.grammar_format = grammar_format
+        self.grammar = grammar
+        self.lexicon = lexicon
         self.parser_generator = ParserGenerator(grammar_format)
     
-    def parse(sentence: str, grammar: dict, lexicon: dict) -> list:
-        parser = self.parser_generator.generate_parser(grammar, lexicon)
+    def parse(self, sentence: str) -> list:
+        parser = self.parser_generator.generate_parser(self.grammar, self.lexicon)
         # use the generated parser to parse the sentence and build parse trees
         parse_trees = []
         for tree in parser.parse(sentence):
