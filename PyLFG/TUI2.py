@@ -14,15 +14,7 @@ interactive_prompt = textual.TextField(placeholder="Enter sentence to be analyze
 @interactive_prompt.on("submit")
 def process_input():
     input_string = interactive_prompt.value
-    if input_string[0] == "$":
-        # Process command
-        command = input_string[1:]
-        process(command)        
-    else:
-        # Analyze sentence
-        parse_tree = parse_sentence(input_string, rule_list.items, lexicon_list.items)
-        tree_view.set_tree(parse_tree)
-
+    process(input_string)
 
 # Production Rule Section
 # Create a TextField for entering new production rules and a ListBox to display existing rules
