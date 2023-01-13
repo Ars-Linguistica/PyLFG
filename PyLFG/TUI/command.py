@@ -76,6 +76,54 @@ class CommandHandler:
             print(f_structure)
         else:
             print("No sentence has been analyzed yet.")
+            
+    def clear_rules(self):
+    self.rule_list.clear()
+
+def clear_lexicon(self):
+    self.lexicon_list.clear()
+
+def export_parse_tree(self, format):
+    with open("parse_tree." + format, "w") as f:
+        f.write(str(self.parse_tree))
+
+def add_constraint(self, rule_or_entry, constraint):
+    if rule_or_entry in self.rule_list.items:
+        rule_or_entry.add_constraint(constraint)
+    elif rule_or_entry in self.lexicon_list.items:
+        rule_or_entry.add_constraint(constraint)
+    else:
+        print("Invalid rule/entry")
+
+def remove_constraint(self, rule_or_entry, constraint):
+    if rule_or_entry in self.rule_list.items:
+        rule_or_entry.remove_constraint(constraint)
+    elif rule_or_entry in self.lexicon_list.items:
+        rule_or_entry.remove_constraint(constraint)
+    else:
+        print("Invalid rule/entry")
+
+def rename_label(self, old_label, new_label):
+    self.parse_tree.rename_label(old_label, new_label)
+
+def swap_rules(self, rule1, rule2):
+    index1 = self.rule_list.items.index(rule1)
+    index2 = self.rule_list.items.index(rule2)
+    self.rule_list.items[index1], self.rule_list.items[index2] = self.rule_list.items[index2], self.rule_list.items[index1]
+
+def swap_entries(self, entry1, entry2):
+    index1 = self.lexicon_list.items.index(entry1)
+    index2 = self.lexicon_list.items.index(entry2)
+    self.lexicon_list.items[index1], self.lexicon_list.items[index2] = self.lexicon_list.items[index2], self.lexicon_list.items[index1]
+
+def undo(self):
+    self.previous_action.undo()
+
+def help(self):
+    print("Available commands: clear_rules, clear_lexicon, export_parse_tree, add_constraint, remove_constraint, rename_label, swap_rules, swap_entries, undo, help, generate_fst, parse_tree, display_c_structure_constraints, display_f_structure_constraints, add_c_structure_constraint, add_f_structure_constraint, remove_c_structure_constraint, remove_f_structure_constraint")
+
+def generate_fst(self):
+    # code for generating finite state transducer
     
     def invalid_command(self):
         print("Invalid command")
