@@ -300,3 +300,60 @@ class LCFRSGrammar:
                 parses.append((weight, children))
         return parses
 
+
+class LexicalizedLFG:
+    def init(self, grammar: dict, lexicon: Lexicon):
+    self.grammar = grammar
+    self.lexicon = lexicon
+    def build_parse_trees(sentence: str) -> list:
+    all_trees = []
+    stack = ["0", "S"]
+    tokens = sentence.split()
+    i = 0
+    while stack:
+        top = stack[-1]
+        if top in self.grammar:
+            if i < len(tokens) and tokens[i] in self.lexicon:
+                stack.append(tokens[i])
+                i += 1
+            else:
+                found = False
+                for rule in self.grammar[top]:
+                    rule_lhs, rule_rhs, rule_c_constraints, rule_f_constraints = parse_rule(rule)
+                    if i < len(tokens) and tokens[i] in self.lexicon:
+                        lexicon_entry = self.lexicon[tokens[i]]
+                        lexicon_entry_c, lexicon_entry_f = parse_lexicon_entry(lexicon_entry)
+                        if match_c_constraints(rule_c_constraints, tokens, i) and match_f_constraints(rule_f_constraints, lexicon_entry_f):
+                            children = []
+                            for child in rule_rhs:
+                                child_node = None
+                                if child in self.lexicon:
+                                    child_node = LFGParseTreeNodeF(child, None)
+                                else:
+                                    child_node = LFGParseTreeNodeF(child, None)
+                                children.append(child_node)
+                            non_term_node = LFGParseTreeNodeF(top, None, children=children)
+                            stack.pop()
+                            for child in reversed(children):
+                                stack.append(child)
+                            stack.append(non_term_node)
+                            found = True
+                            break
+                if not found:
+                    stack.pop()
+        else:
+            if top in self.lexicon:
+                leaf_node = LFGParseTreeNodeF(self.lexicon[top], top)
+                stack.pop()
+                stack.append(leaf_node)
+            elif isinstance(top, LFGParseTreeNodeF):
+                non_term_node = top
+                stack.pop()
+                if non_term_node.label == "S":
+                    all_trees.append(non_term_node)
+                else:
+                    for parent in stack:
+                        if isinstance(parent, LFGParseTreeNodeF):
+                            parent.add_child(non_term_node)
+                            break
+    return all_trees
