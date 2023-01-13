@@ -1,0 +1,122 @@
+8 Technical XLFG specifications
+An XLFG grammar consists in a set of phrase structure rules.
+Phrase structure rules describe clause structure, or more precisely regular- ities in clause structure. Constituents of the clause differ in category (noun phrase, verb phrase, etc.), in position (pre-verbal, post-verbal, etc.) and in grammatical relations (or grammatical functions) they enter into (subject, ob-
+ject, etc.).
+Categories for phrases are defined by the projection of a lexical element (a
+noun, verb, etc.) and a constitution.
+Syntactic positions are determined by word order and the structural arrange-
+ment of words.
+Grammatical functions may be expressed by case morphology (case end-
+ings, typically in "free word order" languages), or by lexically-registered valence requirements.
+The aim of an XLFG grammar is to use theoretical constructs from LFG to describe the syntactic regularities of a language. XLFG will produce a parse for grammatical sentences. The analysis of ungrammatical sentences will display information allowing the user to determine which constraints were violated. These constraints are always typeset in red.
+The following examples are not meant to be part of a realistic grammar fragment, but to illustrate various theoretical concepts.
+8.1 XLFG Notations
+The content of a XLFG grammar and lexicon is made with UTF-8 encoding char- acters. Capitalizations are taken into account to distinguish notations. Blank characters and line feeds are not taken into account, with the exception of strings.
+Comments
+Comments are destined for the reader only and are skipped by XLFG. A one line comment start with the // symbol, the text is skipped up to the end of the line. A multi-line comment starts with /* and ends with */. The enclosed text is skipped.
+Identifiers
+Whitout any quotes, all the strings beginning with a latin character, or "_” fol- lowed by alpha-numeric characters are identifiers, when they are not a keyword.
+• Thelatincharactersarea...z,A...Z,à,á,â,ã,ä,å,æ,ç,è,é,ê,ë,ì, í, î, ï, ð, ñ, ò, ó, ô, õ, ö, ø, ù, ú, û, ü, ý, ÿ, θ, À, Á, Â, Ã, Ä, Å, Æ, Ç, È, É, Ë, Ì, Í, Î, Ï, Ð, Ñ, Ò, Ó, Ô, Õ, Ö, Ø, Ù, Ú, Û, Ü, Ý, Ÿ, Þ, ß
+• The keywords are the following:
+41
+
+– start_symbol or start symbol
+– grammatical_functions or grammatical functions – PRED
+– LEXEME
+– SUBCAT
+– switch
+– case
+– if
+– else
+– with
+– in
+– lex
+Identifiers are used on different occasions:
+• As a terminal symbol in the lexicon and grammatical rules (common_noun,
+verb, preposition, . . . ).
+• As a non-terminal symbol in grammatical rules (S, NP, PP, . . . ).
+• As an attribute or atomic value in feature structures (number, singular, ...).
+• As a grammatical function (SUBJECT, OBJECT, . . . ).
+• As argument (Agent, Patient, . . . ).
+In order to write identifiers without latin characters in the grammar or lex-
+icon, one can use ‘ quotes. For exemple the rule S → Subject Object Verb; may be written in Tibetan characters:
+The maximal number of different identifiers in the same project is limited to 255, witch is suffisant for building large coverage XLFG grammars for many languages.
+8.2 Phrase structure rules
+This is an exemple of XLFG phrase structure rule:
+42
+VP → [aux] V [NP|S];
+ Brackets indicate optional constituents, the vertical bar indicates an alter- native between NP and S .
+This rule describes the composition of a phrase of type VP: this phrase con- sists of a possible constituent aux followed by V and possibly NP or S. These three constituents must be contiguous and in the specified order.
+In order to reiterate a constituent in a rule, one has to write a recursive rule instead; because the usual LFG Kleene star notation is not allowed in XLFG. The following LFG rule:
+VP → V PP∗
+is an equivalent to the XLFG one:
+Rules may be recursive to the left or to the right, immediately or not. This is used to model recursive phrase embedding, as e.g. in NPs occurring inside relative clauses themselves occurring inside NPs.
+   VP → V PPs; PPs → PP PPs;
+    N → N AP;
+N → AP N;
+N → N RelVP; RelVP → RelPro S; S → NP VP;
+NP → Det N [PP]; ...
+ A given constituent type need not have a unique possible composition. Al- ternate compositions are described by multiple rules with the same left hand part.
+43
+   VP → [aux] V [NP | S]; VP → VP adv;
+ 
+A phrase structure rule may have an empty right hand side. This allows for an explicit modeling of empty categories, as are postulated in some syntactic frameworks. This is particularly relevant when such rules are associated with functional descriptions giving rise to constraints on grammatical functions.
+Start symbol
+The start symbol corresponds to the type of phrase XLFG will attempt to parse. It is most often of the type Sentence, but of course XLFG can be used to parse any type of phrase compatible with the grammar.
+By default XLFG assumes that the first symbol it encounters in the grammar is the start symbol. If this behavior is not appropriate a different symbol may be specified by writing the given statement using the keyword start_symbol in the declaration section of the project.
+8.3 Functional structures
+A functional structure (F-structure hereafter) is represented as a feature-structure, namely a set of attribute-value pairs. It is represented with brackets, the fea- tures are separated with commas and the attribute-values pairs with the colon character:
+   NPro →;
+    start symbol: NP;
+    [PRED: ’snore<SUBJ>’,
+TENSE: present, MOOD: indicative
+SUBJ: [PRED: ’John’, NUMBER: sg, person: 3]]
+ 8.3.1 Atomic or literal feature
+While an attribute is an identifier, the possible values for attributes are atoms, literals, embedded F-structure, or a set of embedded F-structures.
+44
+
+• An atomic value is a number, an identifier, the symbols + or -, or a list of atomic values separated by the symbol |.
+The number of atomic values is limited to 255.
+• A literal value is a symbol marked between simple quotes.
+The number of literals is not limited.
+8.3.2 Embedded feature-structures
+Feature values for grammatical functions are embedded feature-structures
+8.3.3 Sets of feature-structures
+A set of F-structures is written within braces:
+Such a set of F-structures is used to describe an unordered list of modifiers.
+8.4 Shared functional structures
+As XLFG has been designed to share the analysis of ambiguous sentences, mul- tiple F-structures are represented in a unique structure by using distributed features.
+45
+   TENSE: present,
+PERSON: 1 | 2,
+DEF: +,
+MOOD: indicative | subjunctive
+    PREPOSITIONAL_FORM: ’into’,
+    [PRED: ’TO_SNORE<SUBJ>’, tense: present,
+SUBJ: [PRED: ’BOY’] ]
+    MOD: {[PRED: ’little’], [PRED: ’big’]}
+ 
+Distributed features
+The ambiguous analysis for the sentence John sees the man with a telescope corresponds to these two F-structures:
+   [ PRED: ’SEE<SUBJ, (OBJ)>’, SUBJ: [PRED:’JOHN’],
+OBJ: [PRED:’MAN’],
+MOD: {[PRED: ’TELESCOPE’ ]}]
+[ PRED: ’SEE<SUBJ, (OBJ)>’,
+SUBJ: [PRED:’JOHN’],
+OBJ: [PRED:’MAN’, MOD: {[PRED: ’TELESCOPE’ ]}]
+ An economic way to represent this pair of F-structures is to share the equiv- alent attributes into a common factor and distribute the differences into a list written with vertical bar characters like this:
+ [
+]
+PRED: ’SEE<SUBJ, (OBJ)>’, SUBJ: [PRED:’JOHN’],
+OBJ: [PRED:’MAN’],
+[ MOD: {[PRED: ’TELESCOPE’ ]}]
+|
+[ OBJ: [MOD: {[PRED: ’TELESCOPE’ ]}] ]
+ The OBJ attribute in the second F-structure is the result of unification be- tween [OBJ: [PRED:’MAN’]] and [OBJ: [MOD: {[PRED: ’TELESCOPE’]}]].
+An other exemple is the unique lexical entry for a regular English verb without s ending. It’s encode both a plural subject and singular first or second person subject.
+A useful way to encode the two entries is the following:
+   eat verb [
+PRED: ’TO_EAT<SUBJ, [OBJ]>’,
+SUBJ: [ number:singular, person:1|2] | [ number:plural ] ];
+eats verb [
+PRED: ’TO_EAT<SUBJ, [OBJ]>’, SUBJ: [ number:singular, person:3] ];
