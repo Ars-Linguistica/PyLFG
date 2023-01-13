@@ -1,0 +1,265 @@
+ChatGpt Init Prompt
+
+Hello, in this conversation we are going to talk about lexical functional grammar and our python package PyLFG. We are going to improve . PyLFG to make it the most comprehensive and performant state-of-the-art LFG parser. PyLFG will be used by linguistics university professors to teach the theory of Lexical Functional Grammar to their graduate students by teaching them how to write grammars and lexicons in the LFG formalism.
+
+PyLFG will be also used by linguistics students to learn how to engineer LFG grammars by entering production rules and lexicons, and entering sentences to be analyzed. 
+
+PyLFG will be also used by Linguistics academic researcher researching novel and state of the art theories and applications of LFG, such as the interface between phonology/syntax, morphology/syntax, semantics/syntax, theoretical syntactic theory, etc…
+
+I am going to enter the code for PyLFG in multiple inputs. When you have understood the content of the document, just say “ok” and wait for my next input. When I am done inputting the data I will input “done”. Until then you must wait for my next input.
+Here is the content of the xlfg standard LFG specification:
+10 ANNEXE 1 – XLFG Language
+10.1 The statements (<stm>) The Functional equations
+   ↑ = ↓i
+↓i = ↑
+(↓i <path>) = <atom>
+(↓i <path>) = <literal>
+(↓j <path>) = ↓i
+(↓j <path>) = (↓i <path>)
+(↓i <path>) = <features>
+↓i = <features>
+(↑ <path>) = <atom>
+(↑ <path>) = <literal>
+(↑ <path> LEXEME) = <literal> (↑ <path> PRED) = <pred>
+(↑ <path> SUBCAT) = <subcat> $id = ↓i
+(↑ <path>) = ↓i
+↑ = (↓i <path>)
+$id = (↓i <path>)
+(↑ <path>) = (↓i <path>)
+(↓i <path>) = (↑ <path>)
+↑ = <features>
+↑=!
+$id = <features>
+(↑ <path>) = <features>
+$id = (↑ <path>)
+$id = ($id <path>)
+(↑ <path>) = (↑ <path>)
+ The in-set descriptions
+↓i ∈ ↑
+↓i ∈ $id
+↓i ∈ (↑ <path>) ↓i ∈ (↓ <path>) (↓i <path>) ∈ ↑
+ (↓i <path>) ∈ $id
+(↓i <path>) ∈ (↑ <path>) (↓i <path>) ∈ (↓ <path>) <features> ∈ ↑
+<features> ∈ $id <features> ∈ (↑|↓ <path>)
+ The conditional descriptions depending on C-structures
+   if ($i) <stm>
+if ($i) <stm> else <stm> if (¬$i) <stm>
+if (¬$i) <stm> else <stm>
+ The constraints (<expression>)
+   <path> ̸= <atom>
+<path> ̸= <literal>
+(↑ <path> LEXEME) ̸= <literal> <path> ̸= <path>
+<path> == <atom>
+<path> == <literal>
+(↑ <path> LEXEME) == <lexeme> <path> == <path>
+<path>
+(↑ <path> LEXEME)
+¬<path>
+¬(↑ <path> LEXEME)
+ The conditional descriptions depending on F-structures
+
+if (<boolean_expression>) <stm>
+if (<boolean_expression>) <stm> else <stm>
+<boolean_expression> ::=
+( <expression> )
+<boolean_expression> ∧ <boolean_expression> <boolean_expression> ∨ <boolean_expression> <boolean_expression> ⇒ <boolean_expression> <boolean_expression> ⇔ <boolean_expression>
+ The case descriptions
+   switch ($i) {<list_case>}
+<list_case> ::= case <id>:<stm> <list_case> |case <id>:<stm>
+ The long-distance dependencies
+10.2 Features description (<features>)
+   with $id in (↑ <regexp>) <stm>
+    [...] []
+( lex ↑ )
+( lex ↓i )
+( lex (↑ <path>) )
+( lex (↓i <path>) )
+######################
+11 ANNEXE 2 – The full XLFG grammar
+   axiom: script_lines
+script_lines: script_line
+| script_lines script_line
+script_line: _grammar_ "≪" rules "≫"
+| _lexicon_ "≪" dictionary "≫"
+| _declarations_ "≪" declarations "≫" | _entries_ entries ";"
+declarations: declarations declaration | /* empty */
+declaration: "@" IDENTIFIER ":" list_feature ";" | "start_symbol" ":" term_id ";"
+| "start" "symbol" ":" term_id ";"
+| "grammatical_functions" ":" defFunctions ";" | "grammatical" "functions" ":" defFunctions ";" | IDENTIFIER ":" type ";" (not documented)
+| error ";"
+type: "[" "]"
+| "{" "}"
+| atom
+defFunctions: defFunctions "," IDENTIFIER | IDENTIFIER
+| /* empty */
+rules: rule rules | rule
+rule: term_id "→" terms_vector statements_or_semi rule: term_id "→" statements_or_semi terms_vector: terms_vector terms
+| terms
+terms: terms_disj
+| "[" terms_disj "]"
+ 56
+
+   terms_disj: terms_disj "|" term_id | term_id
+term_id: IDENTIFIER dictionary: lexicon_line dictionary
+| lexicon_line
+lexicon_line: IDENTIFIER entries ";" | STRING entries ";"
+| "#" IDENTIFIER features_opt ";" | error ;
+entries: entry "|" entries | entry
+entry: "(" entry ")"
+| entry "&" arg
+| arg
+arg: IDENTIFIER features_opt features_opt: features
+| /* empty */
+features: "[" list_feature "]" statements_opt
+features: "[" "]" statements_opt
+list_feature: list_feature "," feature | feature
+| list_feature "," list_features_pipe_plus
+| list_features_pipe_plus
+| list_feature "," "{" list_features_comma "}" | "{" list_features_comma "}"
+| list_feature "," "@" IDENTIFIER
+| "@" IDENTIFIER
+feature: "PRED" ":" "’" IDENTIFIER subcat "’"
+| "PRED" ":" "’" IDENTIFIER "-" subcat "’" | "PRED" ":" "’" "-" IDENTIFIER subcat "’" | "LEXEME" ":" "’" "-" IDENTIFIER "’"
+| "LEXEME" ":" "’" IDENTIFIER "-" "’"
+ 57
+
+   | "LEXEME" ":" "’" IDENTIFIER "’" | "SUBCAT" ":" "’" subcat "’"
+| atomIdentif ":" features
+| atomIdentif ":" list_features_pipe_plus | atomIdentif ":" atom
+| atomIdentif ":" "’" IDENTIFIER "’"
+| atomIdentif ":" "{" list_features_comma "}"
+list_features_comma: list_features_comma , features | features
+list_features_pipe_plus: list_features_pipe "|" features
+list_features_pipe: list_features_pipe "|" features | features
+subcat: "<" functions_opt ">" functions_without_actors_opt | /* empty */
+functions_opt: functions
+| /* empty */
+functions: functions "," function | function
+functions_without_actors_opt: functions_without_actors | /* empty */
+functions_without_actors: functions_without_actors, function_without_actors
+| function_without_actors
+function: function_without_actors
+| atomIdentif "." atomUniqIdentif
+| "[" atomIdentif "." atomUniqIdentif "]"
+function_without_actors: atomIdentif
+| "[" atomIdentif "]"
+atom: atomUniq
+| atomUniq "|" atom
+atomIdentif: atomUniqIdentif
+| atomUniqIdentif "|" atomIdentif
+ 58
+
+   atomUniq: atomUniqSign
+| atomUniqIdentif
+atomUniqIdentif: IDENTIFIER
+atomUniqSign: INTEGER | "+"
+| "-"
+statements_base: "{" list_statement "}" | "{" "}"
+statements_opt: statements_base | /* empty */
+statements_or_semi: statements_base | ";"
+list_statement: statement
+| list_statement statement
+statement: expression ";"
+| "{" list_statement "}"
+| "{" "}"
+| "↑" "=" down_stm ";"
+| down_stm "=" "↑" ";"
+| down_path_stm "=" atom_stm ";"
+| down_path_stm "=" literal_stm ";"
+| down_path_stm "=" down_stm ";"
+| down_path_stm "=" down_path_stm ";" | down_path_stm "=" features_stm ";"
+| down_stm "=" features_stm ";"
+| up_path_stm "=" atom_stm ";"
+| up_path_stm "=" literal_stm ";"
+| up_path_lexeme_stm "=" lexeme_stm ";" | up_path_pred_stm "=" pred_stm ";"
+| up_path_subcat_stm "=" subcat_stm ";" | $ IDENTIFIER "=" down_stm ";"
+| up_path_stm "=" down_stm ";"
+| "↑" "=" down_path_stm ";"
+| $ IDENTIFIER "=" down_path_stm ";" | up_path_stm "=" down_path_stm ";"
+| down_path_stm "=" up_path_stm ";"
+ 59
+
+   | "↑" "=" features_stm ";"
+| "↑" "=" "!" ";"
+| "$" IDENTIFIER "=" features_stm ";"
+| up_path_stm "=" features_stm ";"
+| "$" IDENTIFIER "=" up_path_stm ";"
+| up_path_stm "=" up_path_stm ";"
+| down_stm "∈" "↑" ";"
+| down_stm "∈" "$" IDENTIFIER ";"
+| down_stm "∈" path_stm ";"
+| down_path_stm "∈" "↑" ";"
+| down_path_stm "∈" $ IDENTIFIER ";"
+| down_path_stm "∈" path_stm ";"
+| features_stm "∈" "↑" ";"
+| features_stm "∈" $ IDENTIFIER ";"
+| features_stm "∈" path_stm ";"
+| "if" ( dollar_stm ) statement
+| "if" ( dollar_stm ) statement "else" statement
+| "if" ( ¬dollar_stm ) statement
+| "if" ( ¬dollar_stm ) statement "else" statement
+| "switch" ( dollar_stm ) "{" list_case_statement "}"
+| "let" var_stm in "(" "↑" regExpE ")" statement
+| "if" "(" boolean_expression ")" statement
+| "if" "(" boolean_expression ")" statement "else" statement
+expression: path_stm "̸=" atom_stm
+| path_stm "̸=" literal_stm
+| up_path_lexeme_stm "̸=" lexeme_stm | path_stm "̸=" path_stm
+| path_stm "==" atom_stm
+| path_stm "==" literal_stm
+| up_path_lexeme_stm "==" lexeme_stm | path_stm "==" path_stm
+| path_stm
+| up_path_lexeme_stm ";"
+| "¬" path_stm
+| "¬" up_path_lexeme_stm
+boolean_expression: "(" boolean_expression ")"
+| boolean_expression "∧" boolean_expression
+| boolean_expression "∨" boolean_expression | boolean_expression "⇒" boolean_expression | boolean_expression "⇔" boolean_expression | expression
+ 60
+
+   list_case_statement: case_statement list_case_statement | case_statement
+case_statement: "case" IDENTIFIER ":" statement
+atom_stm: atom
+pred_stm: path_pred_stm
+| "’" IDENTIFIER subcat ’
+| "’" IDENTIFIER "-" subcat ’ | "’" "-" IDENTIFIER subcat ’
+lexeme_stm: "’" IDENTIFIER "’"
+| "’" IDENTIFIER "-" "’" | "’" "-" IDENTIFIER "’"
+literal_stm: "’" IDENTIFIER "’"
+subcat_stm: "’" subcat "’"
+features_stm: features
+| "(" lex up_stm ")"
+| "(" lex down_stm ")"
+| "(" lex up_path_stm ")"
+| "(" lex down_path_stm ")"
+path_stm: up_path_stm
+| down_path_stm
+up_path_stm: "(" up_stm apply_path_cdr_stm ")"
+down_path_pred_stm: "(" down_stm apply_path_cdr_pred_stm ")"
+up_path_pred_stm: "(" up_stm apply_path_cdr_pred_stm ")"
+path_pred_stm: up_path_pred_stm
+| down_path_pred_stm
+up_path_lexeme_stm: "(" up_stm apply_path_cdr_lexeme_stm ")" up_path_subcat_stm: "(" up_stm apply_path_cdr_subcat_stm ")" down_path_stm: "(" down_stm apply_path_cdr_stm ")"
+ 61
+
+   var_stm: IDENTIFIER up_stm: "↑"
+| IDENTIFIER
+down_stm: "↓"
+| "↓" INTEGER
+| "#" INTEGER (not documented) dollar_stm: "$" INTEGER
+apply_path_cdr_stm: apply_step_path_stm last_step_path_stm | last_step_path_stm
+apply_path_cdr_pred_stm: apply_step_path_stm PRED | PRED
+apply_path_cdr_lexeme_stm: apply_step_path_stm LEXEME | LEXEME
+apply_path_cdr_subcat_stm: apply_step_path_stm SUBCAT | SUBCAT
+apply_step_path_stm: apply_step_path_stm step_path_stm | step_path_stm
+step_path_stm: atomIdentif
+| down_path_stm
+last_step_path_stm: atomIdentif
+| down_path_stm
+| step_path_stm "-" step_path_stm
+regExpE: regExpE regExpT | regExpT
+regExpT: regExpT "|" regExpF | regExpF
+regExpF: "(" regExpE" )" | regExpF "*"
+| regExpF "+"
+| regExpF "?"
+| atomUniqIdentif
