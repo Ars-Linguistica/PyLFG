@@ -1,5 +1,8 @@
-def process(command):
-  if command == "display_rules":
+def process(input_string):
+    if input_string[0] == "$":
+        # Process command
+        command = input_string[1:]
+        if command == "display_rules":
             print("Current production rules:")
             for rule in rule_list.items:
                 print(rule.text)
@@ -56,4 +59,9 @@ def process(command):
                 print("No sentence has been analyzed yet.")
         else:
             print("Invalid command")
+    else:
+        # Analyze sentence
+        parse_tree = parse_sentence(input_string, rule_list.items, lexicon_list.items)
+        tree_view.set_tree(parse_tree)
+  
            
