@@ -50,50 +50,47 @@ tree_view = d3.ParseTreeView()
 # Add all sections to the main view
 main_view.add(interactive_prompt_section, production_rule_section, lexicon_entry_section, tree_view)
 
-# Instantiate the CommandHandler
-command_handler = CommandHandler(rule_list, lexicon_list, tree_view)
+# Default Styling
+textual.set_global_style(textual.Style(
+    background_color="#F5F5F5",
+    text_color="#333333",
+    accent_color="#0078D7",
+    font="Open Sans",
+    font_size=14,
+    padding=10,
+    spacing=10,
+    border_radius=5
+))
 
-# Add event handlers for UI elements
-@interactive_prompt.on("submit")
-def process_input():
-    input_string = interactive_prompt.value
-    command_handler.process(input_string)
+# Interactive prompt section styling
+interactive_prompt_section.style.background_color = "#FFFFFF"
+interactive_prompt_section.style.text_color = "#333333"
+interactive_prompt_section.style.border_radius = 10
+interactive_prompt_section.style.padding = 20
 
-@add_rule_button.on("click")
-    def add_rule():
-        rule = rule_input.value
-        lhs, rhs, c_structure_constraints = parse_rule(rule)
-        # Add the rule to the list
-        rule_list.append(f"{lhs} → {' '.join(rhs)} {c_structure_constraints}")
-        
-@edit_rule_button.on("click")
-def edit_rule():
-    selected_rule = rule_list.selected_item
-    rule_input.value = selected_rule.text
-    rule_list.remove(selected_rule)
-    
-@delete_rule_button.on("click")
-def delete_rule():
-    selected_rule = rule_list.selected_item
-    rule_list.remove(selected_rule)
+# Production Rule Input styling
+rule_input.style.width = "70%"
+rule_input.style.margin_right = "5%"
+add_rule_button.style.width = "15%"
+edit_rule_button.style.width = "15%"
+delete_rule_button.style.width = "15%"
 
-@add_lexicon_button.on("click")
-def add_lexicon():
-    entry = lexicon_input.value
-    functional_labels = parse_lexicon_entry(entry)
-    lexicon_list.append(f"{functional_labels}")
-    
-@edit_lexicon_button.on("click")
-def edit_lexicon():
-    selected_entry = lexicon_list.selected_item
-    lexicon_input.value = selected_entry.text
-    lexicon_list.remove(selected_entry)
+# Production Rule List styling
+rule_list.style.height = "200px"
+rule_list.style.overflow_y = "scroll"
 
-@delete_lexicon_button.on("click")
-def delete_lexicon():
-    selected_entry = lexicon_list.selected_item
-    lexicon_list.remove(selected_entry)
+# Lexicon Entry Input styling
+lexicon_input.style.width = "70%"
+lexicon_input.style.margin_right = "5%"
+add_lexicon_button.style.width = "15%"
+edit_lexicon_button.style.width = "15%"
+delete_lexicon_button.style.width = "15%"
 
-# Run the app
-app.run(main_view)
+# Lexicon Entry List styling
+lexicon_list.style.height = "200px"
+lexicon_list.style.overflow_y = "scroll"
+
+# Parse Tree View styling
+tree_view.style.height = "500px"
+tree_view.style.width = "100%"
 
