@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upload Grammar</title>
+        <script src="https://cdn.jsdelivr.net/npm/htmx.org@1.1.7/dist/htmx.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <form hx-post="/upload_grammar" hx-swap="outerHTML">
+                <div class="form-group">
+                    <label for="grammar-textarea">Upload your LFG grammar:</label>
+                    <textarea class="form-control" id="grammar-textarea" name="grammar"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+        </div>
+    </body>
+</html>
