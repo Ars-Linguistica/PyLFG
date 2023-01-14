@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PyLFG</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h1>PyLFG</h1>
+      <form method="post" id="parseForm">
+        <div class="form-group">
+          <label for="sentence-input">Sentence to parse</label>
+          <textarea class="form-control" id="sentence-input" name="sentence-input"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="grammar-select">Select a grammar</label>
+          <select class="form-control" id="grammar-select" name="grammar-select">
+            <option value="-">(select a grammar)</option>
+            <option value="English">English</option>
+            <option value="French">French</option>
+            <option value="German">German</option>
+          </select>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="show-c-structure-checkbox" name="show-c-structure-checkbox">
+          <label class="form-check-label" for="show-c-structure-checkbox">Show c-structure</label>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="show-f-structure-checkbox" name="show-f-structure-checkbox">
+          <label class="form-check-label" for="show-f-structure-checkbox">Show f-structure</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Parse</button>
+      </form>
+    </div>
+  </body>
+</html>
