@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PyLFG</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@htmx/htmx.min.js"></script>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <nav class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <h1 class="title">PyLFG</h1>
+                    </div>
+                </div>
+                <div class="level-right">
+                    <div class="level-item">
+                        <a class="button is-primary" hx-get="/new-grammar" hx-target="#grammar-form">New Grammar</a>
+                    </div>
+                    <div class="level-item">
+                        <a class="button is-primary" hx-get="/new-lexicon" hx-target="#lexicon-form">New Lexicon</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-one-third">
+                    <nav class="panel">
+                        <p class="panel-heading">
+                            Grammars
+                        </p>
+                        <div class="panel-block" id="grammar-list"></div>
+                    </nav>
+                </div>
+                <div class="column is-one-third">
+                    <nav class="panel">
+                        <p class="panel-heading">
+                            Lexicons
+                        </p>
+                        <div class="panel-block" id="lexicon-list"></div>
+                    </nav>
+                </div>
+                <div class="column">
+                    <div id="grammar-form"></div>
+                    <div id="lexicon-form"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <form id="parse-form" class="form">
+                        <div class="field">
+                            <label class="label">Sentence</label>
+                            <div class="control">
+                                <textarea class="textarea" name="sentence"></textarea>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                              <button class="button is-link" hx-post="/parse" hx-target="#parse-result">Parse</button>
+</div>
+</div>
+</form>
+</div>
+<div class="column">
+<div id="parse-result"></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="columns">
+<div class="column is-one-third">
+<nav class="panel">
+<p class="panel-heading">
+Test Suites
+</p>
+<div class="panel-block" id="test-suite-list"></div>
+<div class="panel-block">
+<a class="button is-link" hx-get="/new-test-suite" hx-target="#test-suite-form">New Test Suite</a>
+</div>
+</nav>
+</div>
+<div class="column is-two-thirds">
+<div id="test-suite-form"></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="columns">
+<div class="column">
+<nav class="panel">
+<p class="panel-heading">
+Groups
+</p>
+<div class="panel-block" id="group-list"></div>
+<div class="panel-block">
+<a class="button is-link" hx-get="/new-group" hx-target="#group-form">New Group</a>
+</div>
+</nav>
+</div>
+<div class="column">
+<div id="group-form"></div>
+</div>
+</div>
+</div>
+</section>
+<script>
+htmx.on('load', function() {
+// Code to run on page load
+});
+</script>
+
+</body>
+</html>
