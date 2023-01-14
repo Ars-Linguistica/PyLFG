@@ -12,22 +12,6 @@
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
 
-  <link rel="stylesheet" type="text/css" href="css/output.css" >
-  <link rel="stylesheet" type="text/css" href="css/index.css" >
-  <link rel="stylesheet" type="text/css" href="css/navbar.css" >
-  <link rel="stylesheet" type="text/css" href="css/typeahead.css">
-  <link rel="stylesheet" type="text/css" media="print" href="css/print.css" >
-  <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/RubaXa/Sortable/Sortable.min.js">
-  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="js/navbar.js"></script>
-  <script type="text/javascript" src="js/update_view.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
-  <script type="text/javascript" src="js/typehead.js"></script>
-  <script type="text/javascript" src="MathJax-master/MathJax.js" async></script>
-  <script type="text/javascript" src="js/countdown.js" defer></script>
   </head>
 
   <body id="body" class="fullscreen">  <script type="text/x-mathjax-config">
@@ -437,40 +421,7 @@ $.getScript('js/terms.js');
                                     </li>
                                     <li>Modifications on permissions on the project header
                                         <ul>
-                                                        <li>Using the original version on hidden mode</li>
-                                                        <li>Using either the original or the copied version on read-only mode</li>
-                                                        <li>A button <i>"Set default grants"</i> was added int the project header</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        Zoom on Argument structure
-                                    </li>
-                                    <li>Macro descriptions with '@' sign usable as features values, not only as a feature.
 
-                                        <small>
-                                        <p>Example of usage:</p>
-                                        <p>@P:		TENSE:present;<br>
-                                        @p:		NUMBER:pl;<br>
-                                        @s:		NUMBER:sg;<br>
-                                        @_3:	PERS:3;<br>
-                                        @_12:	PERS:1|2;<br>
-                                        @_3s:	@_3, @s;<br>
-                                        @_3p:	@_3, @p;<br>
-                                        @_no3s:	[@_12] | [@_3p];<br>
-                                        bark verb [PRED:'to_bark<SUBJ>', @P, SUBJ:@_no3s];<br>
-                                        barks verb [PRED:'to_bark<SUBJ>', @P, SUBJ:@_3s];<br>
-                                        </p>
-                                        </small>
-
-                				    </li>
-                                </ul>
-                            </li>
-                        </ul>
-       				</div>
-       				</li>
-       			</ul>
-
-			</div>
 			<div class="modal-footer"><center>
   <small>
     <em class="hidden-print">Lionel Clément - </em><em>XLFG Copyright 2014-2022 </em><em class="hidden-print"><a href="http://www.labri.fr">LaBRI</a>, CNRS (UMR 5800), the University of Bordeaux, and the Bordeaux INP</em>
@@ -783,36 +734,6 @@ promise.then(function() {
 	</div>
 </nav><script type="text/javascript">
 //<![CDATA[
-update_view(null, null, null, null, null, false, false, false, false, false);
-$('#menu').replaceWith('<li class="dropdown dropdown-submenu"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">English grammar</a>\
-<ul class="dropdown-menu">        <li><a href="javascript:;" onclick="\
-promise.then(function() {\
-    removeInputs(\'main-form\');\
-    addInput(\'main-form\', \'id_project\', 23);\
-    addInput(\'main-form\', \'id_version\', 23);\
- }).then(function() {\
-    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
- });\
- ">A first LFG grammar</a>\
-        </li>        <li><a href="javascript:;" onclick="\
-promise.then(function() {\
-    removeInputs(\'main-form\');\
-    addInput(\'main-form\', \'id_project\', 172);\
-    addInput(\'main-form\', \'id_version\', 326);\
- }).then(function() {\
-    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
- });\
- ">Context-Free Grammar</a>\
-        </li>        <li><a href="javascript:;" onclick="\
-promise.then(function() {\
-    removeInputs(\'main-form\');\
-    addInput(\'main-form\', \'id_project\', 1442);\
-    addInput(\'main-form\', \'id_version\', 2028);\
- }).then(function() {\
-    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
- });\
- ">Control vs Raising</a>\
-        </li>        <li><a href="javascript:;" onclick="\
 promise.then(function() {\
     removeInputs(\'main-form\');\
     addInput(\'main-form\', \'id_project\', 25);\
@@ -867,157 +788,3 @@ promise.then(function() {\
  }).then(function() {\
     form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
  });\
- ">Coordination</a>\
-        </li>        <li><a href="javascript:;" onclick="\
-promise.then(function() {\
-    removeInputs(\'main-form\');\
-    addInput(\'main-form\', \'id_project\', 19);\
-    addInput(\'main-form\', \'id_version\', 19);\
- }).then(function() {\
-    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
- });\
- ">Raising and Control</a>\
-        </li>        <li><a href="javascript:;" onclick="\
-promise.then(function() {\
-    removeInputs(\'main-form\');\
-    addInput(\'main-form\', \'id_project\', 20);\
-    addInput(\'main-form\', \'id_version\', 20);\
- }).then(function() {\
-    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
- });\
- ">Roule galette</a>\
-        </li></ul>\
-</li><li class="dropdown dropdown-submenu"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">German grammars</a>\
-<ul class="dropdown-menu">        <li><a href="javascript:;" onclick="\
-promise.then(function() {\
-    removeInputs(\'main-form\');\
-    addInput(\'main-form\', \'id_project\', 38);\
-    addInput(\'main-form\', \'id_version\', 38);\
- }).then(function() {\
-    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
- });\
- ">LFG&apos;02</a>\
-        </li></ul>\
-</li><li class="dropdown dropdown-submenu"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Antillean French Creole</a>\
-<ul class="dropdown-menu">        <li><a href="javascript:;" onclick="\
-promise.then(function() {\
-    removeInputs(\'main-form\');\
-    addInput(\'main-form\', \'id_project\', 1441);\
-    addInput(\'main-form\', \'id_version\', 2027);\
- }).then(function() {\
-    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
- });\
- ">kréyòl gwadloupéyen (thanks to Emmanuel Schang @Univ Orleans France)</a>\
-        </li></ul>\
-</li><li class="dropdown dropdown-submenu"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Arabic grammars</a>\
-<ul class="dropdown-menu">        <li><a href="javascript:;" onclick="\
-promise.then(function() {\
-    removeInputs(\'main-form\');\
-    addInput(\'main-form\', \'id_project\', 14);\
-    addInput(\'main-form\', \'id_version\', 14);\
- }).then(function() {\
-    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
- });\
- ">A little Arabic grammar</a>\
-        </li></ul>\
-</li><li class="dropdown dropdown-submenu"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">Unit Test</a>\
-<ul class="dropdown-menu">        <li><a href="javascript:;" onclick="\
-promise.then(function() {\
-    removeInputs(\'main-form\');\
-    addInput(\'main-form\', \'id_project\', 1439);\
-    addInput(\'main-form\', \'id_version\', 2025);\
- }).then(function() {\
-    form_task(\'main-form\', \'manage-project\', \'form-content\', true);\
- });\
- ">Unit test</a>\
-        </li></ul>\
-</li>');
-//]]>
-</script>  <div class="container-fluid" style="background-color:#fcfcfc;">
-    <div id="form-content" class="row">    </div>
-  </div>
-  <div class="footer navbar-fixed-bottom"><center>
-  <small>
-    <em class="hidden-print">Lionel Clément - </em><em>XLFG Copyright 2014-2022 </em><em class="hidden-print"><a href="http://www.labri.fr">LaBRI</a>, CNRS (UMR 5800), the University of Bordeaux, and the Bordeaux INP</em>
-  </small>
-</center>  </div>
-<div class="modal fade" id="please-wait">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-body">
-				<H2>
-					<span id="please-wait-content" class="text-info"><span class="glyphicon glyphicon-hourglass"></span>&nbsp;Please wait...</span>
-				</H2>
-			</div>
-		</div>
-	</div>
-</div>
-
-<script type="text/javascript">
-//<![CDATA[
-$('#please-wait').modal('hide');
-//]]>
-</script>
-<div class="modal fade modal-md" id="message">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-body">
-				<div id="message-body"></div>
-			</div>
-			<div class="modal-footer">
-				<button id="btn-close" class="btn btn-primary btn-close"
-					type="button" data-dismiss="modal" onclick="$('#message').hide();">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<script type="text/javascript">
-//<![CDATA[
-$.getScript('js/message.js');
-//]]>
-</script><div class="modal fade" id="privacy">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel"></h4>
-			</div>
-			<div class="modal-body">
-				<div>
-
-  <H1>Privacy</H1>
-  <p>Here at XLFG, we value your privacy.</p>
-
-  <p>In order to run optimally, the site records and saves the cookies from each log-in session.</p>
-
-  <p>Your personal information, including your name and e-mail, are not shared with other members of the community without your approbation, but are saved on the server.</p>
-
-  <p>The XLFG grammar and lexicon are shared at your discretion.</p> 
-
-  <p>To best update and manage the software, we record and save the XLFG grammar, lexicon,
-and sample sentences.<p>
-
-
-  <HR>
-
-  <H1>Warning</H1>
-
-  <p>The XLFG administrator does not provide data safety.</p>
-
-  <p>It's wise to save your projects and versions by exporting it on your personal device.</p>
-
-				</div>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-			</div>
-
-		</div>
-	</div>
-</div><script type="text/javascript">
-//<![CDATA[
-  $('#privacy').modal('show');
-//]]>
-</script>  </body>
-</html>
