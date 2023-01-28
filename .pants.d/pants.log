@@ -1,59 +1,31 @@
-13:49:18.14 [INFO] handling request: `--pants-bin-name=./pants --pants-version=2.14.1 --version`
-13:49:18.31 [INFO] request completed: `--pants-bin-name=./pants --pants-version=2.14.1 --version`
-13:49:59.21 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {"", ".pants.toml.swp"}
-13:49:59.21 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {".pants.toml.swp"}
-13:49:59.21 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {"", ".pants.toml.swp"}
-13:49:59.21 [INFO] Filesystem changed during run: retrying `Snapshot` in 500ms...
-13:50:21.82 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {".pants.toml.swp", ""}
-13:50:38.28 [INFO] Extending leases
-13:50:38.28 [INFO] Done extending leases
-13:51:58.28 [INFO] Extending leases
-13:51:58.28 [INFO] Done extending leases
-13:52:59.79 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {".pants.toml.swp", ""}
-13:52:59.79 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {".pants.toml.swp"}
-13:52:59.79 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {"", ".pants.toml.swp"}
-13:52:59.79 [INFO] Filesystem changed during run: retrying `Snapshot` in 500ms...
-13:53:06.58 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {"", ".pants.toml.swp"}
-13:53:06.58 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {"", ".pants.toml.swp"}
-13:53:06.58 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {".pants.toml.swp"}
-13:53:06.58 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {"", ".pants.toml.swp"}
-13:53:18.28 [INFO] Extending leases
-13:53:18.28 [INFO] Done extending leases
-13:54:38.29 [INFO] Extending leases
-13:54:38.29 [INFO] Done extending leases
-13:55:58.29 [INFO] Extending leases
-13:55:58.29 [INFO] Done extending leases
-13:57:18.29 [INFO] Extending leases
-13:57:18.29 [INFO] Done extending leases
-13:58:38.29 [INFO] Extending leases
-13:58:38.29 [INFO] Done extending leases
-13:59:58.29 [INFO] Extending leases
-13:59:58.29 [INFO] Done extending leases
-14:01:18.30 [INFO] Extending leases
-14:01:18.30 [INFO] Done extending leases
-14:02:38.30 [INFO] Extending leases
-14:02:38.30 [INFO] Done extending leases
-14:03:58.30 [INFO] Extending leases
-14:03:58.30 [INFO] Done extending leases
-14:05:18.30 [INFO] Extending leases
-14:05:18.30 [INFO] Done extending leases
-14:06:38.30 [INFO] Extending leases
-14:06:38.30 [INFO] Done extending leases
-14:06:46.14 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {"pants.toml"}
-14:06:46.14 [INFO] Filesystem changed during run: retrying `Snapshot` in 500ms...
-14:06:46.14 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {"pants.toml"}
-14:06:46.14 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"pants.toml"}
-14:06:46.14 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"pants.toml"}
-14:06:46.14 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {"", "pants.toml"}
-14:06:46.14 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"", "pants.toml"}
-14:06:46.61 [ERROR] saw filesystem changes covered by invalidation globs: content changed (Digest('9cab038733f40985fe4a4a28b949e9c43bb55e15df569b8dde7689292e028dcf', 85) fs Digest('3fc56aa638581c9ef94a830bc9618501334b5a1c0a082fa12ce5a2bdf8cdac7a', 84)). terminating the daemon.
-14:06:47.07 [ERROR] service failure for <pants.pantsd.service.scheduler_service.SchedulerService object at 0x7fde6c05b370>.
-14:06:47.07 [INFO] Waiting for ongoing runs to complete before exiting...
-14:06:47.07 [INFO] Server exiting with Ok(())
-14:06:47.07 [INFO] Waiting for Sessions to complete before exiting...
-14:06:47.07 [INFO] Waiting for shutdown of: ["scheduler_service_session", "store_gc_service_session"]
-14:06:47.07 [INFO] Shutdown completed: "scheduler_service_session"
-14:06:47.07 [INFO] Shutdown completed: "store_gc_service_session"
-14:06:47.07 [INFO] Exiting pantsd
-14:06:47.07 [WARN] File watcher exiting with: The watcher was shut down.
-14:06:47.10 [WARN] File watcher exiting with: The watcher was shut down.
+14:41:22.60 [INFO] handling request: `--pants-bin-name=./pants --pants-version=2.14.1 tailor ::`
+14:41:23.51 [INFO] notify invalidation: cleared 1 and dirtied 77 nodes for: {"", "BUILD"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"BUILD"}
+14:41:23.51 [INFO] notify invalidation: cleared 1 and dirtied 77 nodes for: {"BUILD", ""}
+14:41:23.51 [INFO] notify invalidation: cleared 1 and dirtied 54 nodes for: {"PyLFG/BUILD", "PyLFG"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/BUILD"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/BUILD", "PyLFG"}
+14:41:23.51 [INFO] notify invalidation: cleared 1 and dirtied 33 nodes for: {"PyLFG/TUI/BUILD", "PyLFG/TUI"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/TUI/BUILD"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/TUI", "PyLFG/TUI/BUILD"}
+14:41:23.51 [INFO] notify invalidation: cleared 1 and dirtied 40 nodes for: {"PyLFG/WebUI/BUILD", "PyLFG/WebUI"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/WebUI/BUILD"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/WebUI/BUILD", "PyLFG/WebUI"}
+14:41:23.51 [INFO] notify invalidation: cleared 1 and dirtied 33 nodes for: {"PyLFG/WebUI/views/BUILD", "PyLFG/WebUI/views"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/WebUI/views/BUILD"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/WebUI/views", "PyLFG/WebUI/views/BUILD"}
+14:41:23.51 [INFO] notify invalidation: cleared 1 and dirtied 33 nodes for: {"tests/BUILD", "tests"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/BUILD"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/BUILD", "tests"}
+14:41:23.51 [INFO] notify invalidation: cleared 1 and dirtied 33 nodes for: {"transfer", "transfer/BUILD"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"transfer/BUILD"}
+14:41:23.51 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"transfer/BUILD", "transfer"}
+14:41:23.51 [INFO] request completed: `--pants-bin-name=./pants --pants-version=2.14.1 tailor ::`
+14:42:43.35 [INFO] Extending leases
+14:42:43.35 [INFO] Done extending leases
+14:43:01.77 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG", "PyLFG/.BUILD.swp"}
+14:43:01.77 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/.BUILD.swp"}
+14:43:01.77 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/.BUILD.swp", "PyLFG"}
+14:43:09.87 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/.BUILD.swp", "PyLFG"}
+14:44:03.36 [INFO] Extending leases
+14:44:03.36 [INFO] Done extending leases
