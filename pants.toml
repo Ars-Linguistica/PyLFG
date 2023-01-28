@@ -2,6 +2,9 @@
 pants_version = "2.14.1"
 backend_packages = [
   "pants.backend.shell",
+  "pants.backend.experimental.python.packaging.pyoxidizer",
+  "pants.backend.experimental.python.lint.pyupgrade",
+  "pants.backend.codegen.protobuf.python",
   "pants.backend.python",
   "pants.backend.python.mixed_interpreter_constraints",
   "pants.backend.python.lint.bandit",
@@ -20,3 +23,6 @@ root_patterns = [
   '/PyLFG/',
   '/tests/',
 ]
+
+[test]
+use_coverage = true
