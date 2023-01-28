@@ -384,21 +384,41 @@ class FStructure:
         return self.attributes
     
     def add_constraint(self, constraint: str):
+        """
+        Add a new constraint to the f-structure
+        :param constraint: (str) the constraint to be added
+        """
         self.constraints.append(constraint)
     
     def remove_constraint(self, constraint: str):
+        """
+        Remove the specified constraint from the f-structure
+        :param constraint: (str) the constraint to be removed
+        """
         self.constraints.remove(constraint)
     
     def check_constraints(self):
+        """
+        Check if all the constraints are satisfied
+        :return: (bool) True if all constraints are satisfied, False otherwise
+        """
         for constraint in self.constraints:
             if not constraint(self.attributes):
                 return False
         return True
         
     def add_f_structure(self, f_structure: dict):
+        """
+        Add a new f-structure to the current f-structure
+        :param f_structure: (dict) the f-structure to be added
+        """
         self.f_structures.append(f_structure)
         
     def get_f_structures(self):
+        """
+        Get all f-structures
+        :return: (list) all f-structures
+        """
         return self.f_structures
     
     def generate_sentence(self) -> str:
@@ -414,16 +434,17 @@ class FStructure:
                 sentence += value + " "
         return sentence.strip()
         
-        def transfer_language(self, transfer_rules: dict):
+    def transfer_language(self, transfer_rules: dict):
         """
         Transfer the f-structure to a different language using the provided transfer rules.
         :param transfer_rules: (Dict[str, str]) A dictionary where keys are the attributes in the original language,
             and values are the corresponding attributes in the target language.
+            :return: (dict) the transfered attributes
         """
         new_attributes = {}
         for attribute, value in self.attributes.items():
             if attribute in transfer_rules:
                 new_attribute = transfer_rules[attribute]
                 new_attributes[new_attribute] = value
-        self.attributes = new_attributes
+        return new_attributes
 
