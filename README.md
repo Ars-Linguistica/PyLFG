@@ -19,7 +19,18 @@ Open science is the best way of spreading and furthering knowledge, and PyLFG ai
 ### Important note
 PyLFG is still in early development and has not yet reached a stable release state.
 
+## Features
+PyLFG is designed to be a comprehensive tool for working within the Lexical Functional Grammar (LFG) formalism, providing a range of features that make it a valuable tool for researchers and practitioners alike.
 
+- Modularity: PyLFG is fully modular, allowing researchers to easily replace all parts of the LFG parsing pipeline, from tokenizing sentences to the rich visualizations of the x-structures. This allows for flexibility in trying new ideas and improving existing ones, making it a valuable tool for advancing knowledge in the field of linguistics.
+- Parsing and generation: PyLFG is not only able to parse sentences but also generate sentences from f-structures, which is an essential capability for automated translation and language learning applications.
+- Transfer capabilities: PyLFG has transfer capabilities which allow it to do automated translation between languages, making it a useful tool for researchers and practitioners working on natural language processing.
+- User-friendly interface: PyLFG provides both a TUI (Terminal User Interface) and a WebUI for easy interaction, making it accessible to a wide range of users, including students and professors who are taught Python in university.
+- Open-source: PyLFG is an open-source project, meaning that the source code is freely available for anyone to view and modify. This allows for greater transparency and reproducibility in research, and also enables collaboration and contributions from the wider community.
+- Suitable for linguistics students and professors: PyLFG is written in Python, which is a widely used programming language in the field of linguistics research. This makes it perfectly suited for linguistics students and professors, as well as python programmers in general.
+- Valuable tool for documenting under-resourced languages: PyLFG provides a valuable tool for documenting under-resourced languages, which is essential for preserving and studying these languages.
+
+In summary, PyLFG is a comprehensive and user-friendly tool that provides a range of features that make it a valuable tool for linguistics students and professors, language learning applications, and documenting under-resourced languages. Its open-source nature and transfer capabilities make it a valuable tool for advancing knowledge in the field of linguistics.
 
 ## Usage
 The package provides helper functions for loading grammar rules and lexicon from files, and a `LFGParseTree` and `LFGParseTreeNode` class for representing and visualizing parse trees. Here is an example of how to use the package:
