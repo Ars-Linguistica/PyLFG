@@ -952,3 +952,56 @@
 23:28:22.01 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"", "PyLFG"}
 23:29:17.50 [INFO] Extending leases
 23:29:17.50 [INFO] Done extending leases
+23:30:37.50 [INFO] Extending leases
+23:30:37.50 [INFO] Done extending leases
+23:31:56.31 [INFO] notify invalidation: cleared 1 and dirtied 191 nodes for: {"README.md", ""}
+23:31:56.32 [INFO] notify invalidation: cleared 1 and dirtied 191 nodes for: {"", "README.rst"}
+23:31:56.32 [INFO] Filesystem changed during run: retrying `Snapshot` in 500ms...
+23:31:56.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"README.rst"}
+23:31:56.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"README.rst", ""}
+23:31:57.50 [INFO] Extending leases
+23:31:57.50 [INFO] Done extending leases
+23:33:17.50 [INFO] Extending leases
+23:33:17.51 [INFO] Done extending leases
+23:34:37.51 [INFO] Extending leases
+23:34:37.51 [INFO] Done extending leases
+23:35:57.51 [INFO] Extending leases
+23:35:57.51 [INFO] Done extending leases
+23:37:17.51 [INFO] Extending leases
+23:37:17.51 [INFO] Done extending leases
+23:38:37.51 [INFO] Extending leases
+23:38:37.51 [INFO] Done extending leases
+23:39:57.52 [INFO] Extending leases
+23:39:57.52 [INFO] Done extending leases
+23:41:17.52 [INFO] Extending leases
+23:41:17.52 [INFO] Done extending leases
+23:42:37.52 [INFO] Extending leases
+23:42:37.52 [INFO] Done extending leases
+23:43:57.52 [INFO] Extending leases
+23:43:57.52 [INFO] Done extending leases
+23:45:17.52 [INFO] Extending leases
+23:45:17.53 [INFO] Done extending leases
+23:46:37.53 [INFO] Extending leases
+23:46:37.53 [INFO] Done extending leases
+23:47:57.53 [INFO] Extending leases
+23:47:57.53 [INFO] Done extending leases
+23:49:17.53 [INFO] Extending leases
+23:49:17.53 [INFO] Done extending leases
+23:50:37.53 [INFO] Extending leases
+23:50:37.53 [INFO] Done extending leases
+23:51:57.54 [INFO] Extending leases
+23:51:57.54 [INFO] Done extending leases
+23:53:17.54 [INFO] Extending leases
+23:53:17.54 [INFO] Done extending leases
+23:54:37.54 [INFO] Extending leases
+23:54:37.54 [INFO] Done extending leases
+23:55:57.54 [INFO] Extending leases
+23:55:57.54 [INFO] Done extending leases
+23:57:17.54 [INFO] Extending leases
+23:57:17.55 [INFO] Done extending leases
+23:58:15.74 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"README.rst"}
+23:58:15.74 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"README.rst"}
+23:58:15.74 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"README.rst"}
+23:58:15.74 [INFO] notify invalidation: cleared 1 and dirtied 191 nodes for: {"README.rst", ""}
+23:58:37.55 [INFO] Extending leases
+23:58:37.55 [INFO] Done extending leases
