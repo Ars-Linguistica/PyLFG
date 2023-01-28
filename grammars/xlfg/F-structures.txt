@@ -1,0 +1,227 @@
+5 XLFG F-structures
+A functional structure is a set of attribute–value pairs noted [attr1 : val1, attr2 : val2 . . . attrk : valk ]. Excepted for PRED, LEXEME and SUBCAT which are special features that we will see later, the features are not typed, that is, their possible values are not induced by their name.
+The possible values for a feature may be
+• A PRED, LEXEME or SUBCAT
+• An atom, which is an identifier without any space or special character. The maximal number of atoms per grammar is 255.
+• A disjunction of atoms separated by "|" symbol;
+• An F-structure;
+• A disjunction of F-structures separated by "|" symbol;
+• A set of features-structures marked with "{. . . }" symbols
+• A litteral, which is an identifier without any space or special character marked with simple quots ’. . . ’. An unlimited number of literals can be used, but they can’t be combined with atoms or other literals.
+The following are some exemples of possible F-structures. These exemples are just written to illustrate the F-structure content, not the syntactic assump- tions used to build them.
+• A F-structure that may be the result for the parsing of John sees a man with glasses.:
+   [PRED: ’TO_SEE<SUBJ.agent, OBJ.patient>’, SUBJ: [PRED:’JOHN’,
+number: sg], OBJ: [PRED:’MAN’,
+number: sg,
+def: false,
+MOD: { [PRED:’WITH<OBJ.object>’,
+OBJ: [PRED:’GLASSES’, number: pl,
+def: false ]}]]
+ • The possible lexical entry for the verbal form snore:
+14
+
+   [PRED: TO_SNORE<SUBJ>’,
+TENSE: present,
+MOOD: indicative,
+SUBJ: [number: sg, person: 1|2] | [number: pl]]]
+ • The possible lexical entry for the verbal form kick in the phraseological unit to kick the bucket:
+   [PRED: ’TO_DIE<SUBJ.Agent>OBJ’, TENSE: present,
+MOOD: indicative,
+SUBJ: [number: sg, person: 1|2] | [number: pl], OBJ: [LEXEME:’BUCKET’,
+number: sg, def: true, modified: false]]
+ • The possible lexical entry for the verbal form look in the verbal phrase to look for:
+   [PRED: ’TO_LOOK_FOR<SUBJ.Agent, OBJ.Theme>’, TENSE: present,
+MOOD: indicative,
+SUBJ: [number: sg, person: 1|2] | [number: pl], OBJ:[prep_form:’for’]]
+ 5.1 A F-structure as a set of F-structures
+([Kaplan and Maxwell, 1988]) proposed an unstructured sets of F-structures used as the functional representation of coordinate constructions.
+The rule used to construct such a set is the following: V→V conj V
+↓∈↑ ↓∈↑
+They also indicated the paradox between a functional representation of the conjunction and a set. If we add ↑=↓ to the previous rule, the conjunction will be distributed to the embedded elements of the set and then, the F-structure as a whole will be inconsistent. The solution adopted by ([Kaplan and Maxwell, 1988])
+15
+
+to represent the conjunction was to do not construct a predicate as the head of a F-structure, but a semantic projection of it.
+In ([Clément, 2019]), we defend the idea of reclaiming the main predicate of coordination structures and we discarded the possibility of incoherent result with unlike conjunctions with a new definition of F-structures.
+The following rule is available in XLFG:
+V → V conj V { ↓1 ∈ ↑;
+↓2 = ↑; ↓3 ∈ ↑; }
+In XLFG, as we said, the formal definition of F-structure has been modified. It is no longer only a set of features, it is a structure that also can contain a distinct set of F-structures.
+The following shows an extract of such a F-structure which contains a pred- icate for the conjunction and, and a set of two F-structures for the analysis of Lucy can finish her work and John its shopping:
+   [PRED: ’AND’,
+{ [PRED: ’CAN_FINISH<SUBJ.agent, OBJ.patient>’,
+SUBJ: [PRED: ’LUCY’, . . . ], OBJ: [PRED: ’WORK’, . . . ], ... ],
+[PRED: ’CAN_FINISH<SUBJ.agent, OBJ.patient>’, SUBJ: [PRED: ’JOHN’, . . . ],
+OBJ: [PRED: ’SHOPPING’, . . . ],
+... ]}]
+ 5.2 Shared F-structures
+As well as constituent-structures, the F-structures which result of a parsing are in an exponential number, given the length of the text. In order to construct a polynomial algorithm upon the length of the sentence with LFG theory, XLFG represents a compact version of F-structures.
+We therefore need a new definition of a F-structure:
+• A set of features, that are the shared features;
+• A set of F-Structures written with {} characters, that is the coordinated F-structures (also shared);
+16
+
+• A set of F-Structures written without {} delimiters and separated with the "|" character. This set defines the distributive part of the F-structure. Since each F-structure may contains such a set of F-structure, an expo- nential number of F-structures may be described by this way.
+The figure 7 is the shared F-structure that result of the parsing of John sees a man with a telescope, where the subject is shared between several analyses:
+Figure 7: The shared F-structure for John sees a man with a telescope 5.3 The feature PRED
+While the attribute is PRED, the value is written between two single quotes. A regular lexeme is noted with a single symbol followed by sub-categorization information.
+Following LFG conventions, the grammatical function list is noted between chevrons for those which correspond to a thematic argument, and after for those which do not. Optional grammatical functions are noted with [ ] brackets.
+(2) a. The Commission would like to give some of the results that are in- cluded in the document.
+b. The Commission seems to give the shareholders some of the results.
+If a list of grammatical functions is allowed for the same syntactic position, the grammatical functions are separated with | symbol.
+Here, SUBJ, OBJ, and XCOMP are grammatical functions that are the argu- ments required by the verb. OBLtheme is an argument that is not mandatory but in the syntactic position of on oblique grammatical function. SUBJ is also a grammatical function for the verb to seem that is in the position of a subject, but it isn’t associated with a thematic argument.
+(3) a. The conclusions say that a new approach is needed. 17
+    PRED: ’TO_GIVE < SUBJ, OBJ, [OBLtheme] >’ PRED: ’TO_SEEM < XCOMP > SUBJ’
+ 
+b. The Commission is unable to say the degree of progress.
+This attribute is central to the analysis of an utterance. The PRED feature of an F-structure is projected from lexical entry — for instance a particular reading of a polysemous lexeme —.
+XLFG lexica are simple, and do not allow us to apply lexical rules, nor α projections. We assume the lexica used for XLFG come from time-deferred applications not included in XLFG parser, but in an other software.
+However, the user can associate grammatical functions with particular argu- ments through PRED specifications and assign them thematic roles as requested in LFG theory.
+(4) a. The Commission wants to place the shareholder at the center of his commitment.
+Here is a sample PRED feature in the XLFG notation:
+In this example the lexeme is to place. It combines with three arguments corresponding to the three functions SUBJ, OBJ, OBL. Each one is associated with a thematic role: respectively Agent, Patient, and Location. In this case, the OBL locative complement is not mandatory.
+Functions that do not instantiate a thematic argument of the predicate should be listed outside the angled brackets. This is the case e.g. for the impersonal subject of weather verbs such as rain:
+or for subjects of raising verbs such as seem:
+18
+   PRED: ’TO_SAY < SUBJ, [ OBJ | SCOMP ] >’
+    PRED: ’TO_PLACE < SUBJ . Agent, OBJ . Patient, [OBL . Location] >’
+    PRED: ’TO_RAIN <> SUBJ’
+    PRED: TO_SEEM < XCOMP . theme > SUBJ’
+ 
+In other cases, a single function may correspond to different arguments of the predicate. For instance in the following examples, the subject of crash corresponds either to the agent or the patient argument.
+(5) a. The computer crashed.
+b. Luke crashed the computer.
+In XLFG one may explicitly annotate a function with the name of the role of the argument it realizes.
+The links constructed by such thematic relations are displayed as a depen- dency graph. This graph may serve as a first step towards a semantic represen- tation.
+Figure 8: The computer crashed – Luke crashed the computer
+5.4 Complexe predicates
+A feature of LFG is that it is impossible to unify two structures with distinct PRED features. This is the standard way of ensuring that each grammati- cal function is instantiated no more than once by PRED-bearing constituents, without barring the possibility that distinct constituents contribute to the de- scription of an F-structure.
+Let consider these sentences:
+(6) a. Mary promised to come.
+b. Mary promised that she would come.
+c. *Maryi promised [heri to come].
+This feature of LFG can be put to use, for instance, to ensure that controlled infinitives will not get a C-structure subject. The simplified F-structure of 6a is:
+19
+   PRED: ’TO_CRASH < SUBJ . patient >’
+PRED: ’TO_CRASH < SUBJ . agent, OBJ . patient >’
+   
+ PRED ’promise<SUBJ, XCOMP>’ 
+ 􏰂PRED ’Mary’􏰃  SUBJ 1...  
+ 􏰂PRED ’come<SUBJ>′ 􏰃 XCOMP SUBJ 1
+Notice that the matrix and embedded SUBJ are identified, thanks to a con- trol specification originating in the lexical entry of promise:
+(↑ XCOMP SUJ) = (↑ SUJ) By contrast, the F-structure of 6b is:
+ PRED 
+’promise<SUBJ, COMP>’  􏰂 PRED ’Mary’ 􏰃 
+ SUBJ 
+... 
+  PRED ’come<SUBJ>′  
+COMP  􏰂PRED ’PRO’􏰃 SUBJ ...
+Here the two subjects have distinct F-structures corresponding to distinct PRED values (the fact that they might be co-indexed semantically is a separate issue that we do not model here).
+Now let us consider what the F-structure of the agrammatical sentence 6c. Assuming that a well-formed C-structure could be assigned to this sentence, its F-structure would be:
+ PRED ’promise<SUBJ, XCOMP>’   􏰂PRED ’Mary’􏰃 
+SUBJ 1...  
+  PRED ’come<SUBJ>′   XCOMP  􏰂PRED ’PRO’􏰃
+This F-structure is ill-formed, because the PRED values ’PRO’ cannot sub- sume — a fortiori unify — ‘Mary’, despite the fact that the F-structures they occur in are constrained to being identified by the control equation.
+This said, it is well known that complex predicate constructions rest on a situation where two distinct constituents contribute to the specification of a PRED value. Particle verbs, support verb constructions, decomposable idioms, and serial verb constructions are examples of cases that may be modeled as complex predicates.
+To model such cases, XLFG supports an operator prefix or suffix “-” that derives a PRED value from two other PRED values. The lexeme is the combi- nation of the two lexemes.
+20
+SUBJ 1| ...
+
+   PRED: ’ lexeme < ...> ...’ LEXEME: ’ prefix - ’ LEXEME: ’ - suffix ’
+ Let us illustrate this situation with a support verb construction: give a lecture. This is a partially grammaticalized construction: both give and lecture seem to have their usual meaning, but (i) something must be said to the effect that give is used rather than other candidate verbs such as make or do, and (ii) the verb seems to inherit something from a valence requirement originating in the noun: in the following sentence, on the subject is a complement of the verb, but it is the noun lecture and not the verb give that is lexically specified for an oblique complement in on.
+The lecture he gave on the subject in Salzburg was judged as one of the turning points in the evolution of theoretical physics. (A. Calaprice & T. Lipscombe, Albert Einstein: a biography, p. 46, Greenwood Publishing Group 2005)
+The first tentative result for the lexical entries are as follow (the XLFG syntax of this tentative is not correct, a PRED feature doesn’t support prefix or suffix lexemes, see later the LEXEME feature).
+The two structures may unify to produce an appropriate F-structure for the sentence above:
+   give V [PRED: ’GIVE_ - <SUBJ>’, tense: present];
+lecture N [PRED:’LECTURE<[onOBL]>’, number: singular];
+  PRED 
+’GIVE_LECTURE<SUBJ, [onOBL]>’  􏰂 PRED ’PRO’ 􏰃 
+ SUBJ 
+...   onOBL 􏰀 PRED ’SUBJECT’ 􏰁 
+...
+Here, in summary, are the various combinations for unification between two PRED attributes in XLFG:
+  Prefix
+Suffix Lexeme
+Prefix Suffix None None None None Lexeme Lexeme
+Lexeme Lexeme Lexeme ⊥
+   As one can see, it is always possible to unify more than two PRED, thanks to the idempotence property of unification of a lexeme with a prefix or suffix
+21
+
+lexeme. This possibility may happily be used for serial verb analysis, taking care of operation’s order.
+Lexical entries for Complexe Predicates
+In many cases where the predicate depends on a combination of two components, the meaning and the argument structure depend on a indecomposable idiom. That is the case for a particule verb for exemple ([Clément and Diao, 2016]).
+The predicate of the particule verb to give up is GIVE_UP that don’t be the combination between to give something to someone and the particule up. Moreover, the subcategorization of to give up doesn’t result on the combination between the lexical entries of the verb to give and the adverb up. So the pre- vious combination between to give and lecture which resulted in the PRED ’GIVE_LECTURE<SUBJ, [onOBL]>’ is not an universal rule which may be systematically applied.
+(7) a. He gave a toy to a child.
+b. He gave me his phone number.
+c. He gave a concert.
+d. They gave up their personal possessions.
+In order to validate this new lexical entry from such a combination, XLFG uses the # symbol followed by the new lexeme as follow:
+Given the lexical entries for the main verb to give and the particule up encoded as follow:
+   # TO_GIVE_UP [SUBCAT: ’< SUBJ, [XCOMP | OBLon] >’];
+    give V [PRED: ’TO_GIVE<SUBJ, OBJ, [OBLto | OBL]>’, mode: indicative,
+tense: present];
+up VERB_PART [LEXEME:’ - _UP’,
+part_form: ’up’];
+ The feature-structure that has resulted from unification is the following:
+• the lexeme is the combination between the two lexemes TO_GIVE and -_UP, that is “TO_GIVE_UP”
+22
+
+• The subcategorization is given only by the # lexical entry,
+• The others features are given by the unification of the three lexical entries
+(verb, particule, verbal particule)
+In XLFG, each complex lexical entry is explicitly described with a # that adds the sub-categorization, and some specific features for the complex lexical entry.
+This explicit lexical entries are also useful to detect the correct lexical combi- nations and reject some unspeakable constructions between verbs and particules like XXX (trouver une expression de type to look down ou to look after,mais qui n’existe pas.
+5.5 The feature LEXEME
+By contrast, idiomatic syntactic constructions are not the combination of several lexemes, but a specific lexical entry for an head which constraints its comple- ments.
+(8) a. Mary kicks the bucket. b. Mary kicks the buckets.
+c. Mary kicks a bucket.
+d. Mary kicks a yellow bucket.
+e. Mary kicks a bucket of water.
+f. Mary kicks the habit of smoking.
+g. How to naturally kick the smoking habit?
+In 11a, the semantic value of the phraseme to kick the bucket is to die, but the idiomatic multi-word expression is very constrained: the complement bucket must be singular, not modified, without any complement and definite, as one can see in 8b – 8e
+One possible lexical entry for the form to kick the bucket witch contains the lexeme bucket and its constraints is the following:
+23
+   [PRED: ’TO_GIVE_UP < SUBJ, [XCOMP | OBLon] >’, mode: indicative,
+tense: present,
+part_form: ’up’];
+ 
+   kicks [PRED: ’TO_DIE < SUBJ> OBJ’, mode: indicative,
+tense: present,
+OBJ: [LEXEME: ’BUCKET’,
+number: sg, def: true, mod: false];
+ In 8f, , the phraseme to kick the habit of sth is constrained with the lexeme habit and other constraints, but, furthermore, its sub-categorization is not a combination between the sub-categorizations of its parts.
+A possible lexical entry for the form kicks is the following:
+   kicks v [PRED:’TO_KICK_THE_HABIT<SUBJ.AGENT, [OFVing.THEMA]>OBJ’,
+OBJ:[LEXEME:’HABIT’, number:sg, mod:false, def: true]]
+{
+(↑ OFVing SUBJ) = (↑ SUBJ); }
+ An F-structure that contains a LEXEME feature is not completed, which means that such a F-structure must be unified with another F-structure to build a PRED feature in place of it. Considering this constraint, the lexical entry kicks for the word phrase to kick to habit of doing sth is not possible without the form habit as an object.
+5.6 The feature SUBCAT
+If they want to add a lexical entry without any lexeme but with a constraint on sub-categorization. It can be added a SUBCAT feature with only this property. In this case the feature SUBCAT can unified with any PRED without a combination of lexemes.
+Here, in summary, are the various combinations for unification between PRED, LEXEME and SUBCAT attributes in XLFG:
+   PRED:A<B>C
+  LEXEME: A
+ LEXEME: A-
+ LEXEME: -A
+SUBCAT: <B>C
+PRED:X<Y>Z
+⊥
+⊥
+PRED:AX<Y>Z
+    PRED:XA<Y>Z
+PRED:X<B U Y>C U Z
+LEXEME:X
+⊥
+⊥
+LEXEME:AX
+ LEXEME:XA
+PRED:X<B>C
+24
+LEXEME:X- LEXEME:-X PRED:XA<B>C PRED:AX<B>C LEXEME:XA LEXEME:AX ⊥ ⊥
+⊥ ⊥
+⊥ ⊥
+SUBCAT:<Y>Z PRED:A<B U Y>C U Z PRED:A<Y>Z
+⊥
+⊥ SUBCAT:<B U Y>C U Z
+     
+In this table, X U A refers to the unification between lexemes that is possible (if one of them is a prefix or a suffix) or not. ⊥ (bottom symbol) refers to an unification failure.

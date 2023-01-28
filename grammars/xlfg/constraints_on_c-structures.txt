@@ -1,0 +1,29 @@
+7 Constraints on F-structures
+A sentence is considered grammatical if the grammar can copy it with at least one constituent structure, and the Φ projection of that C-structure is a coherent, complete, extended coherent and consistent F-structure. These criteria result from implicit constraints of the theory, to which parochial constraints associated to lexical items or C-structure rules can be added.
+7.1 Coherence
+A functional structure is coherent if the attributes of all the governable functions it includes are specified on the PRED value, and all embedded F-structures are coherent.
+Here is an example of an incoherent F-structure:
+*Mary sleeps her bed.
+    PRED ’sleep<SUBJ>’  
+ 􏰂 PRED ’Mary’ 􏰃   SUBJ ... 
+  
+ 􏰂PRED ’bed’􏰃  OBJ ...
+ 7.2 Completeness
+An F-structure is complete if all the attributes specified in its PRED value occur and are instantiated locally, and if all embedded F-structures are complete.
+Here is an example of an incomplete F-structure.
+*Mary precedes.
+7.3 Extended Coherence
+A functional structure is extended coherent if all the governable functions include a PRED value.
+39
+    PRED ’precede<SUBJ, OBJ>’  
+ 􏰂PRED ’Mary’􏰃  SUBJ ...
+ 
+Here is an example of an extended incoherent F-structure: *sleeps well.
+7.4 Consistency
+An F-structure is consistent if each local attribute has a unique value, and each embedded F-structure is consistent.
+Here is an example of an inconsistent structure.
+    PRED ’sleep<SUBJ>’  
+SUBJ 􏰀 PERSON 3 􏰁
+ *The children sleeps.
+    PRED ’sleep<SUBJ>’  
+  PRED ’child’    SUBJ  NUMBER

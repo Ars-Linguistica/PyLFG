@@ -1,0 +1,328 @@
+PARGRAM   ENGLISH   CONFIG (1.0)
+  ROOTCAT   S.
+  REPARSECAT FRAGMENTS.
+  FILES  eng-pargram-lex.lfg
+         common.templates.lfg
+         common.features.lfg.  "the common files are part of the
+                                pargram project"
+  LEXENTRIES   (PARGRAM ENGLISH).
+  RULES   (PARGRAM ENGLISH).
+  MORPHOLOGY (PARGRAM ENGLISH).
+
+ "templates and features from the common files (STANDARD COMMON) have lower
+ priority than those defined in this grammar"
+  TEMPLATES   (STANDARD COMMON) (PARGRAM ENGLISH). 
+  FEATURES (STANDARD COMMON) (PARGRAM ENGLISH).
+
+  GOVERNABLERELATIONS    SUBJ OBJ OBJ-TH COMP XCOMP OBL.
+  SEMANTICFUNCTIONS    ADJUNCT MOD TOPIC STANDARD.
+  NONDISTRIBUTIVES    NUM PERS COORD-FORM.
+  EPSILON   e.
+
+OPTIMALITYORDER NOGOOD *Fragment "disprefer fragments and mark with *"
+                       +OblAg. "prefer by obliques in passives"
+
+GENOPTIMALITYORDER GenBadPunct NOGOOD "do not generate these"
+                   +GenGoodPunct. "prefer these"
+
+"This grammar is to be used with the information for those starting up
+pargram grammars (or others interested in this type of grammar).  It
+illustrates a number of the facilities provided by xle which the more
+theoretically trained grammar writers may not be familiar with.  There
+are comments throughout this file and the accompanying lexicon, but
+see the documentation file for more details.
+
+Please send any comments or suggestions to Tracy Holloway King
+Tracy.King@microsoft.com"
+
+----
+
+PARGRAM ENGLISH FEATURES (1.0)
+
+"This feature declaration modifies the shared pargram one
+(common.features.lfg)." 
+
+"note that this feature declaration allows many
+of the features in the common declaration to go through even though
+they are not  ever used."
+
+&CASE: -> $ { nom acc }. "use only nom and acc"
+&TENSE: -> $ { pres past }. " use only pres and past"
+!ANIM: -> $ {}. "delete ANIM"
+COORD-FORM: -> $ { and or }. "coordinating conjunction"
+CHECK: -> << [ _AUX ].
+_AUX: -> $ { + }. "used to partly control auxes with participles"
+
+FIRST.
+REST.
+TOKEN.
+
+o::. "have to declare projections"
+----
+
+"loads up the FST tokenizer and morphology"
+
+PARGRAM ENGLISH MORPHOLOGY (1.0)
+
+TOKENIZE:
+P!basic-parse-tok.fst G!default-gen-tokenizer.fst
+
+ANALYZE:
+eng-pargram-morph.fst
+
+----
+
+PARGRAM   ENGLISH   RULES (1.0)
+
+"top level category"
+
+   S --> "COM{EX RULE S: the girl pushes the boys.}"
+
+ 	 e: @(DEFAULT (^ TNS-ASP TENSE) pres)
+	    "provide pres as a default value to TENSE"
+	    @(DEFAULT (^ STMT-TYPE) decl)
+	    "provide decl as default value to STMT-TYPE";
+
+ 	 ("topicalized NP; COM{EX RULES S: bananas, I devour.}"
+ 	  NP: (^ XCOMP* {OBJ|OBJ-TH})=!
+	      (^ TOPIC)=!;
+ 	  COMMA "obligatory comma")
+
+ 	 NP: @SUBJ "obligatory subject noun phrase"
+	     (! CASE)=nom;
+
+ 	 { VP: @(PASSIVE -) "passives go through Vaux"
+ 	  |VPaux} 
+ 	 (PUNCT: @(OT-MARK GenGoodPunct) "prefer in generation").
+
+   VP --> V
+	  (NP: @OBJ  "direct object"
+	       (! CASE)=acc)
+	  (NP: @OBJ-TH  "second object"
+	       (! CASE)=acc)
+          (PP: @OBL) "subcategorized oblique, including passive agents"
+                     "COM{EX RULES S: a boy is pushed by a girl.}"
+ 	  PP*: @ADJUNCT "PP adjuncts"
+                     "COM{EX RULES S: they sleep with the telescope.}".
+
+   VPaux --> AUX
+	     VP.
+
+   NP --> (D) "optional determiner"
+          N*: @MOD; "noun noun modifiers; COM{EX RULES NP: a banana cake}"
+ 	  N  "head noun"
+ 	  PP*: @ADJUNCT.
+
+   PP --> "prepositional phrases; COM{EX RULES PP: in the cake}"
+          P
+	  NP: @OBJ
+	     (! CASE)=acc.
+
+
+  METARULEMACRO(_CAT _BASECAT _RHS) = "applies to all rules in the grammar"
+
+    { "just use the rule as stated"
+      "don't do anything to it; ALWAYS include this option"
+
+      _RHS
+
+     |"if it is an NP or an N, pass it to the NP
+      coordination rule"
+      "COM{EX RULE NP: the girl and the boy}"
+
+      e: _CAT $c { NP N };
+      @(NPCOORD _CAT)
+
+     |"if it is any other category, pass it to
+      the same category coordination rule"
+      "COM{EX RULE S: the girl sleeps and walks.}"
+      "COM{EX RULE PP: with the girl and in the park}"
+
+      e: _CAT ~$ { NP N };
+      @(SCCOORD _CAT)
+
+     |"allow bracketing around any category"
+      "COM{EX RULE S: [the girl] sleeps.}"
+      "COM{EX RULE S: boys baked [the bananas in the cake].}"
+
+      LB: @(OT-MARK GenBadPunct); "preceding quote mark"
+                                  "disprefer in generation"
+      _CAT: @PUSHUP; "this pushes the quotes to the top
+                      to avoid vacuous ambiguity for things like:
+                      COM{EX RULES NP: [cakes])"
+      RB "following quote mark"}.
+
+"Coordination rules"
+
+NPCOORD(_CAT) = "coordination of nominals"
+   "COM{EX RULE NP: girls and boys}"
+   "This differs from SCCOORD in that the conjunction provides NUM pl to
+   the resulting coordinated f-structure and the person features are
+   resolved for the noun phrase."
+
+   _CAT: @IN-SET  "first nominal"
+         @NP-CONJUNCT; "calls person resolution template"
+
+   CONJnp: @PUSHUP; "conjunction"
+           "PUSHUP avoids vacuous ambiguity in constructions like:
+            COM{EX RULES NP: girls and boys}"
+
+   _CAT: @IN-SET "second nominal"
+         @NP-CONJUNCT.
+
+SCCOORD(_CAT) = "coordination of non-nominals"
+  "COM{EX RULES PP: with girls and with boys}"
+  "COM{EX RULES S: girls sleep and boys sleep.}"
+  "no features other than a COORD-FORM are provided to the coordinated
+  f-structure."
+
+   _CAT: @IN-SET; "first constituent"
+   (COMMA: @(OT-MARK GenBadPunct)) "optional comma; 
+                                    disprefered in generation"
+                       "COM{EX RULES S: girls sleep, and boys sleep.}"
+
+   CONJ: @PUSHUP; "conjunction"
+         "PUSHUP avoids vacuous ambiguity in constructions like:
+         COM{EX RULES S: boys walk and sleep.}" 
+
+   _CAT: @IN-SET "second constituent".
+
+"Fragment rule for robust parsing"
+"This rule will only be tried if no complete parse is found."
+"COM{EX RULES the the girl slept.}"
+"COM{EX RULES sleeps ! the girl}"
+
+FRAGMENTS -->
+   { NP: (^ FIRST)=!
+         @(OT-MARK Fragment) "disprefer Fragments"
+            "This ensures that the smallest number of Fragments
+             will be built"
+   |PP: (^ FIRST)=!
+         @(OT-MARK Fragment)
+   |VP: (^ FIRST)=!
+        (! SUBJ PRED)='pro' "have to provide subject for completeness"
+         @(OT-MARK Fragment)
+   |S: (^ FIRST)=!
+        @(OT-MARK Fragment)
+   |TOKEN: (^ FIRST)=! "use token if cannot match to anything"
+         @(OT-MARK Fragment)@(OT-MARK Fragment) "doubly penalize tokens"}
+   ("optionally include another fragment"
+    FRAGMENTS: (^ REST)=!).
+
+"Sublexical rules"
+"These rules build up the surface N and V forms from the information
+in the morphology.  The main trick to writing sublexical rules is that
+the category listed in the lexicon must have _BASE put after it.  This
+information will allow XLE to properly display the tree.
+
+Here all of the nodes are ^=!.  It is possible, but rarely necessary,
+to have more complicated annotations on the sublexical rules."
+
+V --> V_BASE "stem form"
+      V_SFX_BASE+ "as many tags as the morphology provides".
+
+N --> N_BASE "stem form"
+      N_SFX_BASE+ "as many tags as the morphology provides".
+
+P --> P_BASE "stem form"
+      P_SFX_BASE "+Prep tag".
+
+----
+PARGRAM   ENGLISH   TEMPLATES (1.0)
+
+
+   NOUN(_P) = "nouns and pronouns"
+     "COM{EX TEMPLATES NP: the girls}"
+     "COM(EX TEMPLATES NP: us}"
+
+             @(PRED _P) 
+
+     "provide default 3rd person since pronouns and
+      nouns only get tags for 1st and 2nd person"
+             @(DEFAULT (^ PERS) 3).
+
+   PREP(_P) = "semantic preposition; COM{EX TEMPLATES PP: with them}"
+	     (^ PRED)='_P<(^ OBJ)>'.
+
+   DET(_P _T) = "determiner"
+         (^ SPEC DET PRED)='_P'
+         (^ SPEC DET DET-TYPE)=_T.
+
+   V3SG = "third singular verb form; COM{EX TEMPLATES S: he sleeps.}"
+	  (^ SUBJ NUM)=c sg
+	  (^ SUBJ PERS)=c 3.
+
+   NONV3SG = "non third singular verb form; COM{EX TEMPLATES S: boys sleep.}"
+	     { (^ SUBJ NUM)=c pl
+	      |(^ SUBJ NUM)=c sg
+	       (^ SUBJ PERS)~=3}.
+
+   V1SG = "1st person singular subject; for auxiliaries"
+          "COM{EX TEMPLATES S: I am sleeping.}"
+          (^ SUBJ PERS)=c 1 
+          (^ SUBJ NUM)=c sg.
+
+   VPL = " plural subject "
+	 
+	 (^ SUBJ NUM)=c pl.
+
+   V2SG = "second person subject"
+	  (^ SUBJ PERS)=c 2 
+	  (^ SUBJ NUM)=c sg.
+
+   V-SUBJ(_P) = "intransitive verb" 
+                "COM{EX TEMPLATES S: they sleep.}"
+                @(SUBJ_core _P).
+
+   V-SUBJ-OBJ(_P) = "transitive verb; calls passive"
+                    "COM{EX TEMPLATES S: the girl devours a banana.}"
+                    "COM{EX TEMPLATES S: a banana is devoured.}"
+
+                  @(PASS @(SUBJ-OBJ_core _P)).
+
+   V-SUBJ-OBJ-OBJTH(_P) = "double object verbs; calls passive"
+             "COM{EX TEMPLATES S: we baked the girls a cake.}"
+             "COM{EX TEMPLATES S: the girls were baked a cake.}"
+
+             @(PASS  @(SUBJ-OBJ-OBJTH_core _P)).
+
+   PASS(_SCHEMATA) = "passive lexical rule"
+                   "COM{EX TEMPLATES S: the girl devours a banana.}"
+                   "COM{EX TEMPLATES S: a banana is devoured.}"
+
+      { "active version"
+        _SCHEMATA
+        (^ PASSIVE)=-
+       |"passive version"
+        _SCHEMATA
+        (^ PASSIVE)=c +
+        { (^ SUBJ) --> NULL "wipe out the subject"
+         |(^ SUBJ) --> (^ OBL)  "make into an oblique by phrase"
+          @(OT-MARK OblAg)} "COM{EX TEMPLATES S: a banana is devoured by the girls.}"
+        (^ OBJ) --> (^ SUBJ) "make the object the subject"}.
+
+   NP-CONJUNCT = "provides person resolution features for nominal
+                 coordination" 
+  
+      { "if either conjunct is 1st person; the whole NP is"
+        "COM{EX TEMPLATES NP: the boys and me}"
+        (! PERS)=c 1
+        (^ PERS)=1
+       |"if a conjunct is 2nd person and the NP is not
+        already 1st person, make it 2nd person"
+        (! PERS)=c 2
+        { (^ PERS)=c 1 "one conjunct was 1st person"
+                       "COM{EX TEMPLATES NP: you and I}"
+         |(^ PERS)=2 } "else assign 2nd person"
+                       "COM{EX TEMPLATES NP: you and the boys}"
+       |"otherwise, the NP is 3rd person"
+        "COM{EX TEMPLATES NP: the boys and her}"
+        (^ PERS)=3}.
+
+   DEFAULT(_FEAT _VAL) = "provides a default value for a feature"
+
+              { _FEAT "feature exists but with a different value"
+                _FEAT ~= _VAL
+              |_FEAT = _VAL "assign the default value"
+                            "it will unify if it already exists"}.
+----

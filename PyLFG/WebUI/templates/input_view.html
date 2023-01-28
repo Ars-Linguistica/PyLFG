@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PyLFG Input</title>
+        <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.3/webcomponents-bundle.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/htmx.org@0.0.24/dist/htmx.min.js"></script>
+    </head>
+    <body>
+        <form accept-charset="utf-8" id="main-form" action="/analyze" method="POST" hx-post="results_view.html">
+            <div class="form-group">
+                <label for="sentence-input">Enter Sentence:</label>
+                <input type="text" class="form-control" id="sentence-input" name="sentence-input" required hx-target="#result-container" hx-swap="outerHTML">
+            </div>
+            <div class="form-group">
+                <label for="grammar-select">Select Grammar:</label>
+                <select class="form-control" id="grammar-select" name="grammar-select" required hx-target="#result-container" hx-swap="outerHTML">
+                    <option value="">Select Grammar</option>
+                    <option value="english">English</option>
+                    <option value="french">French</option>
+                    <option value="german">German</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="c-structure-checkbox">C-Structure</label>
+                <input type="checkbox" class="form-control" id="c-structure-checkbox" name="c-structure-checkbox" hx-target="#result-container" hx-swap="outerHTML">
+            </div>
+            <div class="form-group">
+                <label for="f-structure-checkbox">F-Structure</label>
+                <input type="checkbox" class="form-control" id="f-structure-checkbox" name="f-structure-checkbox" hx-target="#result-container" hx-swap="outerHTML">
+            </div>
+            <div class="form-group">
+                <label for="predicate-argument-checkbox">Predicate-Argument Structure</label>
+                <input type="checkbox" class="form-control" id="predicate-argument-checkbox" name="predicate-argument-checkbox" hx-target="#result-container" hx-swap="outerHTML">
+            </div>
+            <button type="submit" class="btn btn-primary">Analyze</button>
+        </form>
+        <div id="result-container"></div>
+    </body>
+</html>

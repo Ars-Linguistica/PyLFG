@@ -1,0 +1,35 @@
+2 The web interface
+The web interface is very intuitive, just go with the flow! The “How to” list may also helps you to learn about the software features.
+2.1 Accounts
+Checking in is not mandatory for trying XLFG. However, registration allows users to share their work and save it on the server.
+Creating an account is fast, free and easy. Just sign-up by completing a form, including a username, an email address and a password.
+To complete the signup process, we need to confirm that the email address you’re using is your own: a confirmation by email will be sent to you to confirm your registration for the website.
+2.2 Workshops
+Any recorded user can create a workshop. Workshops are designed for organize classes. A teacher or a lecturer can create a workshop, the projects related to it and assigns the rights for these projects according to the individual member whose part of the project is readable, editable or not. The goal is to share
+5
+
+projects or parts of them to all the membres of a workshop in order to organize a LFG lesson.
+There are two ways to enrole students to a workshop: a) The lecturer invites students who have to accept the invitation to join the workshop. b) The students ask to join the workshop. The workshop’s owner will receive a notification and will accept or not the application.
+To find the student login name, you can use the menu users that is the who’s who of XLFG. You will find the login names associated with the student name. However, this information is available only if the student didn’t remain it secret.
+2.3 Pro jects
+A project consists in a form with a title, an optional description, an input, and output parameters which provide information for what will be the result of the parsing process.
+The input consists in a set of grammatical or ungrammatical sentences, op- tional declarations, a grammar and a lexicon.
+The projet’s owner may assign each project to one of their workshops and then accords privileges for each part of the project: three levels of privilege are available for any workshop member: Hidden, Read-only access, Read-write access. Obviously, any user may build a project without attaching it to his or her workshops to remain it private. In any case, XLFG grants privileged access to the user’s own projects.
+When a project is shared in a workshop, only copies of it are editable by each member. Thus, the workshop owner may supervise a project and read or correct the different changes introduced by each member to the original.
+Each individual copy of project is called a version. At any time it is possible to save the current version and to retrieve the recorded versions archived on the web.
+A practical example of using projects and workshops would be to organise a tutorial as follows:
+• The teacher creates a workshop and invites the students to enroll. Then he produces a project including a grammar with read-only access and a lexicon with read-write access in our example.
+• Each student makes a personal version of the project and may change the lexicon entries by following the teacher’s guidelines without any possibility of changing anything else. They can try the parsing process, correct and save their work.
+• The teacher will change to read-only the lexicon access to prevent any late modification by the students after a dealine. He can then quietly read and correct each student work.
+6
+
+The following provides a summary of access rights for each part of a shared project in a workshop. The shared data is the original project created by the teacher. The individual data are the student’s versions copied from this project.
+ Privilege hidden read-only read-write
+Privilege hidden read-only read-write
+User enrolled in the Workshop (i.e. student)
+the project data is not visible, even if it is present the project data is visible but not editable
+the version data is editable
+Workshop Owner (i.e. teacher)
+the project data is editable
+the project data is editable
+the project data and the version data are editable

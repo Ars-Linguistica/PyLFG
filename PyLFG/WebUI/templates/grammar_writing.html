@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PyLFG Grammar & Lexicon Editor</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css" integrity="sha512-lCjOjOivb+aJjG8gjGjE2CjCj7VYUoIqHl1/lW6sJGZmWf1s+A5E/9lK2LXKf+PuEjQqcgRpqcjUJ7m/Nb/fAw==" crossorigin="anonymous" />
+    </head>
+    <body>
+        <div class="container is-fluid">
+            <div class="tabs">
+                <ul>
+                    <li class="is-active"><a>Grammar</a></li>
+                    <li><a>Lexicon</a></li>
+                </ul>
+            </div>
+            <div class="columns">
+                <div class="column is-6">
+                    <div class="box">
+                        <h4 class="title is-4">Phrase Structure Rules</h4>
+                        <textarea class="textarea" id="grammar-rules" name="grammar-rules"></textarea>
+                    </div>
+                </div>
+                <div class="column is-6">
+                    <div class="box">
+                        <h4 class="title is-4">Lexicon</h4>
+                        <textarea class="textarea" id="lexicon-entries" name="lexicon-entries"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column is-12">
+                    <div class="field is-grouped is-grouped-centered">
+                        <div class="control">
+                            <button class="button is-primary" id="save-btn" hx-post="save_grammar_and_lexicon.php">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

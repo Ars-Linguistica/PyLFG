@@ -1,0 +1,127 @@
+PARGRAM ENGLISH LEXICON (1.0)
+
+"The auxiliary, and conjunction do not go through the
+morphology; this is indicated by the * morphcode.  These will only get
+the information in the lexical entry that is here and can only appear
+in the form listed here."
+
+"passive/progressive auxiliaries
+It would have been good to put these in the morphology to avoid having
+to list so many forms."
+
+is 	  AUX * @(TENSE pres) @V3SG 
+		{ @(PROG +) | @(PASSIVE +) } (^ CHECK _AUX)=c + "feature provided by participle".
+am 	  AUX * @(TENSE pres) @V1SG
+                { @(PROG +) | @(PASSIVE +) } (^ CHECK _AUX)=c + "feature provided by participle".
+was 	  AUX * @(TENSE past) 
+                { @V3SG  | @V1SG }
+                { @(PROG +) | @(PASSIVE +) } (^ CHECK _AUX)=c + "feature provided by participle".
+were      AUX * @(TENSE past) 
+                { @VPL  | @V2SG }
+                { @(PROG +) | @(PASSIVE +) } (^ CHECK _AUX)=c + "feature provided by participle".
+are      AUX * @(TENSE past) 
+                { @VPL  | @V2SG }
+                { @(PROG +) | @(PASSIVE +) } (^ CHECK _AUX)=c + "feature provided by participle".
+
+the 	  D * @(DET %stem def).
+
+a 	  D * @(DET %stem indef)
+	      @(NUM sg).
+
+and  CONJ * @(COORD-FORM %stem);
+     CONJnp * @(COORD-FORM %stem) @(NUM pl).
+
+"Nouns and verbs go through sublexical rules because these have
+entries in the morphology.  This is indicated by the XLE morphcode in
+place of the * morphcode that is used for forms that do not go through
+the morphology (e.g., the entries for the determiners)."
+
+"-unknown will match any form in the morphology.  The sublexical rules
+will constrain these to only pick up the correct entry (e.g., -uknown
+will build N and P lexical entries for prepositions, but the +Prep tag
+will only be compatible with an analysis whereby they are
+prepositions)"
+
+"Nouns known to this morphology: girl, boy, banana, park, telescope,
+   sheep, cake, I, he, she, you"
+"Prepositions known to this morphology: in, with, by"
+
+-unknown N XLE @(NOUN %stem);
+         P XLE @(PREP %stem).
+
+"-token is a special form used to match +Token forms"
+"It is used in this grammar for Fragment parses when a form cannot be
+given a complete analysis."
+
+-token  TOKEN * (^ TOKEN)=%stem.
+
+"Verbs need to have lexical entries even when they are known to the
+morphology because their subcategorization frame is not
+predictable. However, only the stem form needs to be listed."
+
+devour   V XLE @(V-SUBJ-OBJ %stem).
+
+push 	  V XLE @(V-SUBJ-OBJ %stem).
+
+sleep  V XLE @(V-SUBJ %stem).
+
+walk 	  V XLE { @(V-SUBJ %stem)
+                 |@(V-SUBJ-OBJ %stem)}.
+
+bake V XLE { @(V-SUBJ %stem)
+            |@(V-SUBJ-OBJ %stem)
+            |@(V-SUBJ-OBJ-OBJTH %stem)}.
+
+"Entries for the tags provided by the morphology; these are exactly
+like lexical entries for the stems."
+
++Noun N_SFX XLE @(PERS 3) @(NSYN common).
+
++Pronoun  N_SFX XLE @(PRON-TYPE pers) "personal pronoun"
+		    ~(^ SPEC) "no determiner allowed".
+
++Sg N_SFX XLE @(NUM sg).
+
++Pl N_SFX XLE @(NUM pl).
+
++1Pers N_SFX XLE @(PERS 1).
+
++2Pers N_SFX XLE @(PERS 3).
+
++Nom N_SFX XLE @(CASE nom).
+
++Acc N_SFX XLE @(CASE acc).
+
++Verb V_SFX XLE @(VTYPE main).
+
++Pres V_SFX XLE @(TENSE pres).
+
++Past 	  V_SFX XLE { "past tense form; COM{EX LEXICON S: the boys walked.}"
+		      @(TENSE past) @(PASSIVE -)
+		     |"passive participle; 
+		      COM{EX LEXICON S: the banana is devoured.}"
+		      (^ PASSIVE)=c +
+		      @(CHECK _AUX +) "puts in a feature that the auxes need"}.
+
++Prog V_SFX XLE (^ TNS-ASP PROG)=c +.
+
++3Sg V_SFX XLE @V3SG.
+
++Non3Sg V_SFX XLE @NONV3SG.
+
++Prep P_SFX XLE @(PTYPE sem).
+
+"punctuation"
+"Punctuation has to be parsed just as regular lexical items are and so
+they need lexical entries as well."
+
+`.        PUNCT * @(STMT-TYPE decl). 
+     "period needs escape character in front of it"
+[ LB *. "left bracket for bracketing constituents"
+] RB *. "right bracket for bracketing constituents"
+,         COMMA *.
+
+
+
+----
+

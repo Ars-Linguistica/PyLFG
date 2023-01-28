@@ -1,0 +1,1289 @@
+STANDARD COMMON TEMPLATES (1.0)
+
+"Common templates"
+
+"=========================================================="
+
+"Templates assigning basic features"
+"The default version assumes ^ as the path; the _desig version allows
+you to provide a path."
+"Will also need some for set valued features as we get those."
+
+   ADJUNCT-TYPE(_val) = "provide value for ^ ADJUNCT-TYPE"
+
+     @(ADJUNCT-TYPE_desig ^ _val).
+
+   ADJUNCT-TYPE_desig(_path _val) = "provide value for path's
+	  ADJUNCT-TYPE"
+
+	  (_path ADJUNCT-TYPE)=_val.
+
+   ADV-TYPE(_val) = "provide value for ^ ADV-TYPE"
+	  
+	  @(ADV-TYPE_desig ^ _val).
+
+   ADV-TYPE_desig(_path _val) = "provide value for path's
+	  ADV-TYPE"
+
+	  (_path ADV-TYPE)=_val.
+
+   ANIM(_val) = "provide value for ^ ANIM"
+	  
+	  @(ANIM_desig ^ _val).
+
+   ANIM_desig(_path _val) = "provide value for path's ANIM"
+	  
+	  (_path ANIM) = _val.
+
+   ATYPE(_val) = "provide value for ^ ATYPE"
+	  
+	  @(ATYPE_desig ^ _val).
+
+   ATYPE_desig(_path _val) = "provide value for path's ATYPE"
+	  
+	  (_path ATYPE) = _val.
+
+   CASE(_val) = "provide value for ^ CASE"
+	  
+	  @(CASE_desig ^ _val).
+
+   CASE_desig(_path _val) = "provide value for path's CASE"
+	  
+	  (_path CASE) = _val.
+
+   CLAUSE-TYPE(_val) = "provide value for ^ CLAUSE-TYPE"
+	  
+	  @(CLAUSE-TYPE_desig ^ _val).
+
+   CLAUSE-TYPE_desig(_path _val) = "provide value for path's CLAUSE-TYPE"
+	  
+	  (_path CLAUSE-TYPE) = _val.
+
+   COMP-FORM(_val) = "provide value for ^ COMP-FORM"
+	  
+	  @(COMP-FORM_desig ^ _val).
+
+   COMP-FORM_desig(_path _val) = "provide value for path's COMP-FORM"
+	  
+	  (_path COMP-FORM) = _val.
+
+   COORD-FORM(_val) = "provide value for ^ COORD-FORM"
+	  
+	  @(COORD-FORM_desig ^ _val).
+
+   COORD-FORM_desig(_path _val) = "provide value for path's COORD-FORM"
+	  
+	  (_path COORD-FORM) = _val.
+
+   DEG-DIM(_val) = "provide value for ^ DEG-DIM"
+	  
+	  @(DEG-DIM_desig ^ _val).
+
+   DEG-DIM_desig(_path _val) = "provide value for path's DEG-DIM"
+	  
+	  (_path DEG-DIM) = _val.
+
+   DEGREE(_val) = "provide value for ^ DEGREE"
+	  
+	  @(DEGREE_desig ^ _val).
+
+   DEGREE_desig(_path _val) = "provide value for path's DEGREE"
+	  
+	  (_path DEGREE) = _val.
+
+   GEND(_val) = "provide value for ^ GEND"
+	  
+	  @(GEND_desig ^ _val).
+
+   GEND_desig(_path _val) = "provide value for path's GEND"
+	  
+	  (_path GEND) = _val.
+
+   GEND-SEM(_val) = "provide value for ^ GEND-SEM"
+	  
+	  @(GEND-SEM_desig ^ _val).
+
+   GEND-SEM_desig(_path _val) = "provide value for path's GEND-SEM"
+	  
+	  (_path GEND-SEM) = _val.
+
+   HUMAN(_val) = "provide value for ^ HUMAN"
+	  
+	  @(HUMAN_desig ^ _val).
+
+   HUMAN_desig(_path _val) = "provide value for path's HUMAN"
+	  
+	  (_path HUMAN) = _val.
+
+   NUM(_val) = "provide value for ^ NUM"
+	  
+	  @(NUM_desig ^ _val).
+
+   NUM_desig(_path _val) = "provide value for path's NUM"
+	  
+	  (_path NUM) = _val.
+
+   NUMBER-TYPE(_val) = "provide value for ^ NUMBER-TYPE"
+	  
+	  @(NUMBER-TYPE_desig ^ _val).
+
+   NUMBER-TYPE_desig(_path _val) = "provide value for path's NUMBER-TYPE"
+	  
+	  (_path NUMBER-TYPE) = _val.
+
+   PASSIVE(_val) = "provide value for ^ PASSIVE"
+	  
+	  @(PASSIVE_desig ^ _val).
+
+   PASSIVE_desig(_path _val) = "provide value for path's PASSIVE"
+	  
+	  (_path PASSIVE) = _val.
+
+
+   PERS(_val) = "provide value for ^ PERS"
+	  
+	  @(PERS_desig ^ _val).
+
+   PERS_desig(_path _val) = "provide value for path's PERS"
+	  
+	  (_path PERS) = _val.
+
+
+   PFORM(_val) = "provide value for ^ PFORM"
+	  
+	  @(PFORM_desig ^ _val).
+
+   PFORM_desig(_path _val) = "provide value for path's PFORM"
+	  
+	  (_path PFORM) = _val.
+
+
+   PRECOORD-FORM(_val) = "provide value for ^ PRECOORD-FORM"
+	  
+	  @(PRECOORD-FORM_desig ^ _val).
+
+   PRECOORD-FORM_desig(_path _val) = "provide value for path's PRECOORD-FORM"
+	  
+	  (_path PRECOORD-FORM) = _val.
+
+
+   PRON-FORM(_val) = "provide value for ^ PRON-FORM"
+	  
+	  @(PRON-FORM_desig ^ _val).
+
+   PRON-FORM_desig(_path _val) = "provide value for path's PRON-FORM"
+	  
+	  (_path PRON-FORM) = _val.
+
+
+   PRON-TYPE(_val) = "provide value for ^ PRON-TYPE"
+	  
+	  @(PRON-TYPE_desig ^ _val).
+
+   PRON-TYPE_desig(_path _val) = "provide value for path's PRON-TYPE"
+	  
+	  (_path PRON-TYPE) = _val.
+
+   PRT-FORM(_val) = "provide value for ^ PRT-FORM"
+	  
+	  @(PRT-FORM_desig ^ _val).
+
+   PRT-FORM_desig(_path _val) = "provide value for path's PRT-FORM"
+	  
+	  (_path PRT-FORM) = _val.
+
+   PSEM(_val) = "provide value for ^ PSEM"
+	  
+	  @(PSEM_desig ^ _val).
+
+   PSEM_desig(_path _val) = "provide value for path's PSEM"
+	  
+	  (_path PSEM) = _val.
+
+   PTYPE(_val) = "provide value for ^ PTYPE"
+	  
+	  @(PTYPE_desig ^ _val).
+
+   PTYPE_desig(_path _val) = "provide value for path's PTYPE"
+	  
+	  (_path PTYPE) = _val.
+
+   STMT-TYPE(_val) = "provide value for ^ STMT-TYPE"
+	  
+	  @(STMT-TYPE_desig ^ _val).
+
+   STMT-TYPE_desig(_path _val) = "provide value for path's STMT-TYPE"
+	  
+	  (_path STMT-TYPE) = _val.
+
+   VTYPE(_val) = "provide value for ^ VTYPE"
+	  
+	  @(VTYPE_desig ^ _val).
+
+   VTYPE_desig(_path _val) = "provide value for path's VTYPE"
+	  
+	  (_path VTYPE) = _val.
+
+"=========================================================="
+
+"Templates for complex features (i.e. ones embedded under other
+features like TENSE under TNS-ASP)"
+
+"TNS-ASP: TENSE, MOOD, PERF, PROG"
+
+   TNS-ASP(_attr _val) = "provide value for ^ TNS-ASP attr" 
+	  "usually call the associated template, but this one may
+	  occassionally be needed for new attributes within TNS-ASP"
+	  
+	  @(TNS-ASP_desig ^ _attr _val).
+
+   TNS-ASP_desig(_path _attr _val) = "provide value for path's TNS-ASP attr"
+	  
+	  (_path TNS-ASP _attr) = _val.
+
+   TENSE(_val) = "provide value for TENSE in ^ TNS-ASP"
+	  
+	  @(TNS-ASP TENSE _val).
+
+   TENSE_desig(_path _val) = "provide value for TENSE in path TNS-ASP"
+	  
+	  @(TNS-ASP_desig _path TENSE _val).
+
+   MOOD(_val) = "provide value for MOOD in ^ TNS-ASP"
+	  
+	  @(TNS-ASP MOOD _val).
+
+   MOOD_desig(_path _val) = "provide value for MOOD in path TNS-ASP"
+	  
+	  @(TNS-ASP_desig _path MOOD _val).
+
+   PERF(_val) = "provide value for PERF in ^ TNS-ASP"
+	  
+	  @(TNS-ASP PERF _val).
+
+   PERF_desig(_path _val) = "provide value for PERF in path TNS-ASP"
+	  
+	  @(TNS-ASP_desig _path PERF _val).
+
+   PROG(_val) = "provide value for PROG in ^ TNS-ASP"
+	  
+	  @(TNS-ASP PROG _val).
+
+   PROG_desig(_path _val) = "provide value for PROG in path TNS-ASP"
+	  
+	  @(TNS-ASP_desig _path PROG _val).
+
+"CHECK: no subfeatures specified"
+
+   CHECK(_attr _val) = "provide value for ^ CHECK attr" 
+	  "don't have specific ones for CHECK, just general one"
+	  
+	  @(CHECK_desig ^ _attr _val).
+
+   CHECK_desig(_path _attr _val) = "provide value for path's CHECK attr"
+	  
+	  (_path CHECK _attr) = _val.
+
+"NTYPE: NSYN, COMMON, PROPER-TYPE, LOCATION-TYPE, NAME-TYPE, TIME"
+"NUMBER-TYPE is not done here because it is also used elsewhere; use
+the NUMBER-TYPE_desig template to do this"
+
+   NTYPE(_attr _val) = "provide value for ^ NTYPE attr" 
+	  
+	  @(NTYPE_desig ^ _attr _val).
+
+
+   NTYPE_desig(_path _attr _val) = "provide NTYPE value; attr names will
+	  be quite complex due to internal structure"
+	  
+	  (_path NTYPE _attr) = _val.
+
+
+   NSYN(_val) =
+	  
+	  @(NTYPE NSYN _val).
+
+
+   NSYN_desig(_path _val) =
+	  
+	  @(NTYPE_desig _path NSYN _val).
+
+
+   COMMON(_val) =
+	  
+	  @(COMMON_desig ^ _val).
+
+
+   COMMON_desig(_path _val) =
+	  
+	  (_path NTYPE NSEM COMMON)=_val.
+
+
+
+   TIME(_val) =
+	  
+	  @(TIME_desig ^ _val).
+
+
+   TIME_desig(_path _val) =
+	  
+	  (_path NTYPE NSEM TIME) = _val.
+
+
+
+   PROPER-TYPE(_val) =
+	  
+	  @(PROPER-TYPE_desig ^ _val).
+
+
+   PROPER-TYPE_desig(_path _val) =
+	  
+	  (_path NTYPE NSEM PROPER PROPER-TYPE) = _val.
+
+
+
+   LOCATION-TYPE(_val) =
+	  
+	  @(LOCATION-TYPE_desig ^ _val).
+
+
+   LOCATION-TYPE_desig(_path _val) =
+	  
+	 (_path NTYPE NSEM PROPER LOCATION-TYPE) = _val.
+
+
+
+   NAME-TYPE(_val) =
+	  
+	  @(NAME-TYPE_desig ^ _val).
+
+
+   NAME-TYPE_desig(_path _val) =
+	  
+	  (_path NTYPE NSEM PROPER NAME-TYPE) = _val.
+
+
+"SPEC: AQUANT, DET, NUMBER, QUANT"
+"These come in two sets: one with the SPEC prefix that assumes they
+are called from outside the SPEC annotation and one without which
+assumes they are already inside SPEC"
+
+   SPEC-TYPE(_val) = "provides value of SPEC-TYPE"
+	  
+	  @(SPEC-TYPE_desig ^ _val).
+
+
+   SPEC-TYPE_desig(_path _val) =
+	  
+	  (_path SPEC-TYPE) = _val.
+
+
+   SPEC-SPEC-TYPE(_val) =
+	  
+	  @(SPEC-TYPE_desig (^ SPEC) _val).
+
+
+
+   SPEC-SPEC-TYPE_desig(_path _val) =
+	  
+	  @(SPEC-TYPE_desig (_path SPEC) _val).
+
+
+"DET: DET-TYPE, DEIXIS, PRED (called DET-PRED in the template name)"
+
+   DET(_attr _val) = "provide value for ^ DET attr" 
+	  
+	  @(DET_desig ^ _attr _val).
+
+
+   DET_desig(_path _attr _val) = "provide DET value; attr names will
+	  be quite complex due to internal structure"
+	  
+	  (_path DET _attr) = _val.
+
+
+   DET-TYPE(_val) =
+	  
+	  @(DET DET-TYPE _val).
+
+
+   DET-TYPE_desig(_path _val) =
+	  
+	  @(DET_desig _path DET-TYPE _val).
+
+
+
+   DEIXIS(_val) =
+	  
+	  @(DET DEIXIS _val).
+
+
+   DEIXIS_desig(_path _val) =
+	  
+	  @(DET_desig _path DEIXIS _val).
+
+
+
+   DET-PRED(_val) = "assigns PRED value in DET; note that the name of the
+	  template is not a direct reflection of the name of the attribute in
+	  this case"
+	  
+	  @(DET_desig ^  PRED _val).
+
+
+   DET-PRED_desig(_path _val) = "assigns PRED value in DET; note that the name of the
+	  template is not a direct reflection of the name of the attribute in
+	  this case"
+	  
+	  @(DET_desig _path PRED '_val').
+
+
+
+   SPEC-DET-TYPE(_val) = "assigns value to SPEC DET-TYPE"
+	  
+	  @(DET_desig (^ SPEC) DET-TYPE _val).
+ "assigns value to SPEC DET-TYPE"
+
+   SPEC-DET-TYPE_desig(_path _val) = "THK: not sure this path with work"
+	  
+	  @(DET_desig (_path SPEC) DET-TYPE _val).
+
+
+
+   SPEC-DEIXIS(_val) =
+	  
+	  @(DET_desig (^ SPEC) DEIXIS _val).
+
+
+   SPEC-DEIXIS_desig(_path _val) =
+	  
+	  @(DET_desig (_path SPEC) DEIXIS _val).
+
+
+
+   SPEC-DET-PRED(_val) = "assigns PRED value in SPEC DET; note that the name of the
+	  template is not a direct reflection of the name of the attribute in
+	  this case"
+	  
+	  @(SPEC-DET-PRED_desig ^  _val).
+
+
+   SPEC-DET-PRED_desig(_path _val) = "assigns PRED value in SPEC DET; note that the name of the
+	  template is not a direct reflection of the name of the attribute in
+	  this case"
+	  
+	  (_path SPEC DET PRED) = '_val'.
+
+
+
+"QUANT: QUANT-TYPE, PRED (called QUANT-PRED in the template name)"
+
+   QUANT(_attr _val) = "provide value for ^ QUANT attr" 
+	  
+	  @(QUANT_desig ^ _attr _val).
+
+
+   QUANT_desig(_path _attr _val) = "provide QUANT value; attr names will
+	  be quite complex due to internal structure"
+	  
+	  (_path QUANT _attr) = _val.
+
+
+   QUANT-TYPE(_val) =
+	  
+	  @(QUANT QUANT-TYPE _val).
+
+
+   QUANT-TYPE_desig(_path _val) =
+	  
+	  @(QUANT_desig _path QUANT-TYPE _val).
+
+
+   QUANT-PRED(_val) =
+	  
+	  @(QUANT PRED '_val').
+
+
+   QUANT-PRED_desig(_path _val) =
+	  
+	  @(QUANT_desig _path PRED '_val').
+
+
+
+   SPEC-QUANT-TYPE(_val) =
+	  
+	  @(QUANT_desig (^ SPEC) QUANT-TYPE _val).
+
+
+   SPEC-QUANT-TYPE_desig(_path _val) =
+	  
+	  @(QUANT_desig (_path SPEC) QUANT-TYPE _val).
+
+
+   SPEC-QUANT-PRED(_val) =
+	  
+	  @(QUANT_desig (^ SPEC) PRED '_val').
+
+
+   SPEC-QUANT-PRED_desig(_path _val) =
+	  
+	  @(QUANT_desig (_path SPEC) PRED '_val').
+
+
+"AQUANT: QUANT-TYPE (called AQUANT-TYPE in the template name), PRED
+(called AQUANT-PRED in the template name)"
+
+
+   AQUANT(_attr _val) = "provide value for ^ AQUANT attr" 
+	  
+	  @(AQUANT_desig ^ _attr _val).
+
+
+   AQUANT_desig(_path _attr _val) = "provide AQUANT value; attr names will
+	  be quite complex due to internal structure"
+	  
+	  (_path AQUANT _attr) = _val.
+
+
+   AQUANT-TYPE(_val) =
+	  
+	  @(AQUANT QUANT-TYPE _val).
+
+
+   AQUANT-TYPE_desig(_path _val) =
+	  
+	  @(AQUANT_desig _path QUANT-TYPE _val).
+
+
+   AQUANT-PRED(_val) =
+	  
+	  @(AQUANT PRED '_val').
+
+
+   AQUANT-PRED_desig(_path _val) =
+	  
+	  @(AQUANT_desig _path  PRED '_val').
+
+
+
+   SPEC-AQUANT-TYPE(_val) =
+	  
+	  @(AQUANT_desig (^ SPEC) QUANT-TYPE _val).
+
+
+   SPEC-AQUANT-TYPE_desig(_path _val) =
+	  
+	  @(AQUANT_desig (_path SPEC) QUANT-TYPE _val).
+
+
+   SPEC-AQUANT-PRED(_val) =
+	  
+	  @(AQUANT_desig (^ SPEC)  PRED '_val').
+
+
+   SPEC-AQUANT-PRED_desig(_path _val) =
+	  
+	  @(AQUANT_desig (_path SPEC)  PRED '_val').
+
+
+"NUMBER:  PRED (called NUMBER-PRED in the template name),
+CLASSIFIER-FORM"
+"There is no NUMBER-TYPE because this is defined above for the simple
+features; not all things with NUMBER-TYPE occur in NUMBER.
+"
+"Use NUMBER-TYPE_desig instead or SPEC-NUMBER-TYPE.
+"
+
+
+   NUMBER(_attr _val) = "provide value for ^ NUMBER attr" 
+	  
+	  @(NUMBER_desig ^ _attr _val).
+
+
+   NUMBER_desig(_path _attr _val) = "provide NUMBER value; attr names will
+	  be quite complex due to internal structure"
+	  
+	  (_path NUMBER _attr) = _val.
+
+
+
+   CLASSIFIER-FORM(_val) =
+	  
+	  @(NUMBER CLASSIFIER-FORM _val).
+
+
+   CLASSIFIER-FORM_desig(_path _val) =
+	  
+	  @(NUMBER_desig _path CLASSIFIER-FORM _val).
+
+
+   "NUMBER-PRED(_val) =
+	  
+	  @(NUMBER NUMBER-PRED '_val').
+
+
+   NUMBER-PRED_desig(_path _val) =
+	  
+	  @(NUMBER_desig _path NUMBER-PRED '_val')."
+
+   NUMBER-PRED(_val) =
+	  
+	  @(NUMBER PRED '_val').
+
+
+   NUMBER-PRED_desig(_path _val) =
+	  
+	  @(NUMBER_desig _path PRED '_val').
+
+
+
+
+  "PLAIN NUMBER-TYPE OCCURS IN NON-SPEC"
+
+   SPEC-NUMBER-TYPE(_val) =
+	  
+	  @(NUMBER_desig (^ SPEC) NUMBER-TYPE _val).
+
+
+   SPEC-NUMBER-TYPE_desig(_path _val) =
+	  
+	  @(NUMBER_desig (_path SPEC) NUMBER-TYPE _val).
+
+
+ "  SPEC-NUMBER-PRED(_val) =
+	  
+	  @(NUMBER_desig (^ SPEC) NUMBER-PRED '_val').
+
+
+   SPEC-NUMBER-PRED_desig(_path _val) =
+	  
+	  @(NUMBER_desig (_path SPEC) NUMBER-PRED '_val')."
+
+   SPEC-NUMBER-PRED(_val) =
+	  
+	  @(NUMBER_desig (^ SPEC) PRED '_val').
+
+
+   SPEC-NUMBER-PRED_desig(_path _val) =
+	  
+	  @(NUMBER_desig (_path SPEC) PRED '_val').
+
+
+   SPEC-CLASSIFIER-FOR(_val) =
+	  
+	  @(NUMBER_desig (^ SPEC) CLASSIFIER-FORM _val).
+
+
+   SPEC-CLASSIFIER-FORM_desig(_path _val) =
+	  
+	  @(NUMBER_desig (_path SPEC) CLASSIFIER-FORM _val).
+
+
+"=========================================================="
+
+"Templates assinging basic grammatical functions"
+"These are primarily invoked in the rules themselves."
+"For example: S --> NP: @SUBJ; ..."
+
+"NON-SET GFS"
+
+"SUBJ, OBJ, OBL, OBJ-TH, COMP"
+
+   GF(_gf) = "standard GF"
+	  "probably won't be used much since need paths and/or already specialized"
+	  
+	  @(GF_desig ^ _gf !).
+
+   GF_desig(_path1 _gf _path2) = "standard GF with paths"
+	  
+	  (_path1 _gf) = _path2.
+
+   SUBJ = "standard subject (^ SUBJ)=!"
+	  
+	  @(SUBJ_desig ^ !).
+
+   SUBJ_desig(_path1 _path2) = "assign subject with path"
+	  
+	  @(GF_desig _path1 SUBJ _path2).
+
+   OBJ = "standard object (^ OBJ)=!"
+	 
+	 @(OBJ_desig ^ !).
+
+   OBJ_desig(_path1 _path2) = "assign object with path"
+	  
+	  @(GF_desig _path1 OBJ _path2).
+
+   OBJ-TH = "standard secondary object (^ OBJ-TH)=!"
+	  
+	  @(OBJ-TH_desig ^ !).
+
+   OBJ-TH_desig(_path1 _path2) = "assign secondary object with path"
+	  
+	  @(GF_desig _path1 OBJ-TH _path2).
+
+   OBL = "standard oblique (^ OBL)=!"
+	 
+	 @(OBL_desig ^ !).
+
+   OBL_desig(_path1 _path2) = "assign oblique with path"
+	  
+	  @(GF_desig _path1 OBL _path2).
+
+   COMP = "standard complement clause (^ COMP)=!"
+	  
+	  @(COMP_desig ^ !).
+
+   COMP_desig(_path1 _path2) = "assign complement clause with path"
+	  
+	  @(GF_desig _path1 COMP _path2).
+
+   COMPEX = "standard complement clause (^ COMP)=!"
+	  
+	  @(COMPEX_desig ^ !).
+
+   COMPEX_desig(_path1 _path2) = "assign complement clause with path"
+	  
+	  @(GF_desig _path1 COMP _path2).
+
+   XCOMP = "standard open complement clause (^ XCOMP)=!"
+	  
+	  @(XCOMP_desig ^ !).
+
+   XCOMP_desig(_path1 _path2) = "assign open complement clause with path"
+	  
+	  @(GF_desig _path1 XCOMP _path2).
+
+"SET VALUED GRAMMATICAL FUNCTIONS"
+
+"Default is to call with scoping; note that only one type of scoping is provided here ($<h>s)."
+
+
+   GF-SET(_gf) = "standard GF which involves sets"
+	  "scopes left to right"
+	  
+	  @(GF-SET_desig ! ^ _gf).
+
+   GF-SET_desig(_path1 _path2 _gf) = "standard GF with paths which
+	  involve sets"
+	  "scopes left to right"
+	  
+	  _path1 $<h>s (_path2 _gf).
+
+
+   GF-SET-NOSCOPE(_gf) = "standard GF which involves sets"
+	  
+	  @(GF-SET-NOSCOPE_desig ! ^ _gf).
+
+   GF-SET-NOSCOPE_desig(_path1 _path2 _gf) = "standard GF with paths which
+	  involve sets"
+	  
+	  _path1 $ (_path2 _gf).
+
+   IN-SET = "member of a coordinate set"
+	  
+	  ! $<h>s ^.
+
+   IN-SET-NOSCOPE = "member of a coordinate set; no scoping marked"
+	  
+	  ! $ ^.
+
+
+   ADJUNCT = "member of the adjunct set; scoping marked"
+	  
+	  @(GF-SET ADJUNCT).
+
+   ADJUNCT-NOSCOPE = "member of the adjunct set; no scoping"
+
+          @(GF-SET-NOSCOPE ADJUNCT).
+
+   MOD = "member of the mod set (in noun compounds); scoping marked"
+	  
+	  @(GF-SET MOD).
+
+   MOD-NOSCOPE ="member of the mod set (in noun compounds); no scoping"
+
+          @(GF-SET-NOSCOPE MOD).
+
+
+   APP = "member of the appositives set; scoping marked"
+	  
+	  @(GF-SET APP).
+
+   APP-NOSCOPE = "member of the appositives set; no scoping"
+
+          @(GF-SET-NOSCOPE APP).
+
+   NAME-MOD = "member of the mod set (in personal names); scoping marked"
+	  
+	  @(GF-SET NAME-MOD).
+
+   NAME-MOD-NOSCOPE = "member of the mod set (in personal names); no scoping"
+
+          @(GF-SET-NOSCOPE NAME-MOD).
+
+	
+
+"=========================================================="
+
+"Subcat frames (without additional constraints)"
+"These will largely be used by verbs but can be used by other POSs as well."
+
+"The naming schema works as follows:
+
+ list of arguments: argument names are in capitals;
+                    information modifying an argument follows it and
+                    is lowercased (SUBJexpl for expletive SUBJ);
+                    arguments are separated by hyphens
+                    SUBJ is the first argument, if present
+                    hyphens in argument names are removed (OBJ-TH -> OBJTH)"
+
+
+   PRED(_pred) = "assigns simple PRED"
+	  
+	  @(PRED_desig ^ _pred).
+
+   PRED_desig(_path _pred) = "assigns PRED over path"
+	  
+	  (_path PRED) = '_pred'.
+
+
+
+"Subcat frames with a SUBJ argument"
+			       
+   SUBJ-COMPEX_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ COMP)>'.
+
+   SUBJ-COMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ COMP)>'.
+
+   SUBJ-OBJ-COMPEX_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)(^ COMP)>'.
+
+   SUBJ-OBJ-COMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)(^ COMP)>'.
+
+   SUBJ-OBJ-OBJTH-COMPEX_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)(^ OBJ-TH)(^ COMP)>'.
+
+   SUBJ-OBJ-OBJTH_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)(^ OBJ-TH)>'.
+
+   SUBJ-OBJ-OBJTHexpl_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)>(^ OBJ-TH)'.
+
+   SUBJ-OBJ-OBLDIR_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)(^ OBL-DIR)>'.
+
+   SUBJ-OBJ-OBLLOC_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)(^ OBL-LOC)>'.
+
+   SUBJ-OBJ-OBLOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)(^ OBL OBJ)>'.
+
+   SUBJ-OBJ-OBL_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)(^ OBL)>'.
+
+   SUBJ-OBJ-VCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)(^ VCOMP)>'.
+
+   SUBJ-OBJ-XCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)(^ XCOMP)>'.
+
+   SUBJ-OBJTH-COMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ-TH)(^ COMP)>'.
+
+   SUBJ-OBJTH-OBLDIR_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ-TH)(^ OBL-DIR)>'.
+
+   SUBJ-OBJTH-OBLMANNER_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ-TH)(^ OBL-MANNER)>'.
+
+   SUBJ-OBJTH-OBLOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ-TH)(^ OBL OBJ)>'.
+
+   SUBJ-OBJTH-VCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ-TH)(^ VCOMP)>'.
+
+   SUBJ-OBJTH_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ-TH)>'.
+
+   SUBJ-OBJTHexpl-COMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ COMP)>(^ OBJ-TH)'.
+
+   SUBJ-OBJTHexpl-OBLOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL OBJ)>(^ OBJ-TH)'.
+
+   SUBJ-OBJTHexpl-VCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ VCOMP)>(^ OBJ-TH)'.
+
+   SUBJ-OBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ)>'.
+
+   SUBJ-OBJexpl-COMPEX_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ COMP)>(^ OBJ)'.
+
+   SUBJ-OBJexpl-COMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ COMP)>(^ OBJ)'.
+
+   SUBJ-OBJexpl-OBJTH_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBJ-TH)>(^ OBJ)'.
+
+   SUBJ-OBJexpl-OBLOBJ-OBLMANNER_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL OBJ)(^ OBL-MANNER)>(^ OBJ)'.
+
+   SUBJ-OBJexpl-OBLDIR_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL-DIR)>(^ OBJ)'.
+
+   SUBJ-OBJexpl-OBLLOC_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL-LOC)>(^ OBJ)'.
+
+   SUBJ-OBJexpl-OBLMANNER_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL-MANNER)>(^ OBJ)'.
+
+   SUBJ-OBJexpl-OBLOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL OBJ)>(^ OBJ)'.
+
+   SUBJ-OBJexpl-VCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ VCOMP)>(^ OBJ)'.
+
+   SUBJ-OBJexpl-XCOMPPRED_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ XCOMP-PRED)>(^ OBJ)'.
+
+   SUBJ-OBJexpl-XCOMPPREDOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ XCOMP-PRED OBJ)>(^ OBJ)'.
+
+   SUBJ-OBJexpl-XCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ XCOMP)>(^ OBJ)'.
+
+   SUBJ-OBJexpl_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)>(^ OBJ)'.
+
+   SUBJ-OBL-COMPEX_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL)(^ COMP)>'.
+
+   SUBJ-OBL-COMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL)(^ COMP)>'.
+
+   SUBJ-OBLOBJ-OBLMANNER_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL OBJ)(^ OBL-MANNER)>'.
+
+   SUBJ-OBL-XCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL)(^ XCOMP)>'.
+
+   SUBJ-OBLDIR_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL-DIR)>'.
+
+   SUBJ-OBLLOC_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL-LOC)>'.
+
+   SUBJ-OBLMANNER_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL-MANNER)>'.
+
+   SUBJ-OBLOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ OBL OBJ)>'.
+
+   SUBJ-OBL_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ) (^OBL)>'.
+
+   SUBJ-VCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ VCOMP)>'.
+
+   SUBJ-XCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)(^ XCOMP)>'.
+
+   SUBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ SUBJ)>'.
+
+   SUBJexpl-COMPEX_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ COMP)>(^ SUBJ)'.
+
+   SUBJexpl-COMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ COMP)>(^ SUBJ)'.
+
+   SUBJexpl-OBJ-COMPEX_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ)(^ COMP)>(^ SUBJ)'.
+
+   SUBJexpl-OBJTH-COMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ-TH)(^ COMP)>(^ SUBJ)'.
+
+   SUBJexpl-OBJTH-OBLDIR_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ-TH)(^ OBL-DIR)>(^ SUBJ)'.
+
+   SUBJexpl-OBJTH-OBLMANNER_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ-TH)(^ OBL-MANNER)>(^ SUBJ)'.
+
+   SUBJexpl-OBJTH-OBLOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ-TH)(^ OBL OBJ)>(^ SUBJ)'.
+
+   SUBJexpl-OBJTH-VCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ-TH)(^ VCOMP)>(^ SUBJ)'.
+
+   SUBJexpl-OBJTH-XCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ-TH)(^ XCOMP)>(^ SUBJ)'.
+
+   SUBJexpl-OBJTH_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ-TH)>(^ SUBJ)'.
+
+   SUBJexpl-OBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ)>(^ SUBJ)'.
+
+   SUBJexpl-OBJexpl-OBLOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBL OBJ)>(^ SUBJ)(^ OBJ)'.
+
+   SUBJexpl-OBJexpl-VCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ VCOMP)>(^ SUBJ)(^ OBJ)'.
+
+   SUBJexpl-OBJexpl-XCOMPPRED_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ XCOMP OBJ)>(^ SUBJ)(^ OBJ)'.
+
+   SUBJexpl-OBJexpl-XCOMPPREDOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ XCOMP-PRED OBJ)>(^ SUBJ)(^ OBJ)'.
+
+   SUBJexpl-OBJexpl-XCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ XCOMP)>(^ SUBJ)(^ OBJ)'.
+
+   SUBJexpl-OBJexpl_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<>(^ SUBJ)(^ OBJ)'.
+
+   SUBJexpl-OBL-COMPEX_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBL)(^ COMP)>(^ SUBJ)'.
+
+   SUBJexpl-OBLDIR_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBL-DIR)>(^ SUBJ)'.
+
+   SUBJexpl-OBLLOC_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBL-LOC)>(^ SUBJ)'.
+
+   SUBJexpl-OBLMANNER_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBL-MANNER)>(^ SUBJ)'.
+
+   SUBJexpl-OBLOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBL OBJ)>(^ SUBJ)'.
+
+   SUBJexpl-VCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ VCOMP)>(^ SUBJ)'.
+
+   SUBJexpl-XCOMP-COMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ XCOMP)(^ COMP)>(^ SUBJ)'.
+
+   SUBJexpl-XCOMPPRED_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ XCOMP-PRED)>(^ SUBJ)'.
+
+   SUBJexpl-XCOMPPREDOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ XCOMP-PRED OBJ)>(^ SUBJ)'.
+
+   SUBJexpl-XCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ XCOMP)>(^ SUBJ)'.
+
+   SUBJexpl_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<>(^ SUBJ)'.
+
+
+"Subcat frames with no SUBJ argument."
+
+   COMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ COMP)>'.
+
+   COMPEX_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ COMP)>'.
+
+   OBJTH-OBLOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ-TH)(^ OBL OBJ)>'.
+
+   OBJTH-VCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ-TH)(^ VCOMP)>'.
+
+   OBJTH_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ-TH)>'.
+
+   OBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBJ)>'.
+
+   OBLOBJ_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBL OBJ)>'.
+
+   OBL_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBL)>'.
+
+   OBLCOMPAR_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ OBL-COMPAR)>'.
+
+   VCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ VCOMP)>'.
+
+   XCOMPPRED_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ XCOMP-PRED)>'.
+ 
+   XCOMP_core(_pred) = 
+	  
+	  (^ PRED) = '_pred<(^ XCOMP)>'.
+   
+
+"=========================================================="
+
+"Various other shortcuts that seem to be useful"
+"These can be expanded over time as different grammars suggest things"
+
+   SUBJ-SUBJ-CONTROL = 
+	  
+	  (^ SUBJ)=(^ XCOMP SUBJ).
+
+   OBJ-SUBJ-CONTROL = 
+	  
+	  (^ OBJ)=(^ XCOMP SUBJ).
+
+   NULL-PRONOUN(_path) =
+	  
+	  (_path PRED)='pro'
+	  @(PRON-TYPE_desig _path null)
+	  @(NSYN_desig _path pronoun).
+
+   NSG = "assigns NUM sg PERS 3"
+	 
+	 @(NUM sg)
+	 @(PERS 3).
+
+   NPL = "assigns NUM pl PERS 3"
+	 
+	 @(NUM pl)
+	 @(PERS 3).
+
+
+   PUSHUP = "used by METARULEMACRO to push up application"
+	  
+	  { (* MOTHER LEFT_SISTER) "cannot push higher due 
+	    to left branch above"
+	   |(* MOTHER RIGHT_SISTER) "cannot push higher due 
+	    to right branch above"
+	    ~(* MOTHER LEFT_SISTER)
+	   |~(* MOTHER MOTHER) "already high"}.
+
+  OT-MARK(_mark) = "assigns an OT mark"
+
+       _mark $ o::*.
+	
+"=========================================================="
+
+"Standard Notation Templates"
+
+
+   DEFAULT(D V) = "V is the default value for the designator D"
+	  { D
+	    D~=V
+	   |D=V }.
+
+   IF(P Q) = "If P then Q"
+             { ~P
+              |"~~ makes everything sub-c"
+               ~~P   Q}.
+
+   IFF(P Q) = "P if and only Q"
+              {P Q | ~P ~Q}.
+
+   OPT(TAG SCHEMATA) = "Optimality marks"
+                       { SCHEMATA
+                        |~SCHEMATA
+                         TAG$o::*}.
+
+   SUB-C(SCHEMATA) = "constraining equation"
+          ~~SCHEMATA.
+
+
+"THINGS TO CONSIDER FOR LATER"
+
+"subordinating complementizers"
+"that/whether complementizers"
+"passive"
+"negative existentials"
+"existentials"
+
+----
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PyLFG Input</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css" integrity="sha512-lCjOjOivb+aJjG8gjGjE2CjCj7VYUoIqHl1/lW6sJGZmWf1s+A5E/9lK2LXKf+PuEjQqcgRpqcjUJ7m/Nb/fAw==" crossorigin="anonymous" />
+    </head>
+    <body>
+        <div class="container has-text-centered">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <form accept-charset="utf-8" id="main-form" action="/analyze" method="POST" hx-post="results_view.html">
+                        <div class="field">
+                            <label class="label">Enter Sentence:</label>
+                            <div class="control">
+                                <input class="input" type="text" id="sentence-input" name="sentence-input" required hx-target="#result-container" hx-swap="outerHTML">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Select Grammar:</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select id="grammar-select" name="grammar-select" required hx-target="#result-container" hx-swap="outerHTML">
+                                        <option value="">Select Grammar</option>
+                                        <option value="english">English</option>
+                                        <option value="french">French</option>
+                                        <option value="german">German</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="c-structure-checkbox" name="c-structure-checkbox" hx-target="#result-container" hx-swap="outerHTML">
+                                    C-Structure
+                                </label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="f-structure-checkbox" name="f-structure-checkbox" hx-target="#result-container" hx-swap="outerHTML">
+                                    F-Structure
+                                </label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="predicate-argument-checkbox" name="predicate-argument-checkbox" hx-target="#result-container" hx-swap="outerHTML">
+                                    Predicate Argument
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Analyze</button>
+        </form>
+        <div id="result-container"></div>
+    </body>
+</html>

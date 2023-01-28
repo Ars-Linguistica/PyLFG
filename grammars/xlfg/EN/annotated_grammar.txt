@@ -1,0 +1,85 @@
+// Production rules
+
+// Simple sentences
+S → NP VP [Adv] {
+    ↑ = [PRED:↓1, SUBJ:↓1];
+    (↑ MOD) = [MOD:↓3];
+    (↑ VP) = (↓2 SUBJ:↓1);
+}
+
+S → NP VP PP [Adv] {
+    ↑ = [PRED:↓1, SUBJ:↓1];
+    (↑ MOD) = [MOD:↓4];
+    (↑ VP) = [PRED:'VP PP', OBJ:(↓2 SUBJ:↓1)];
+}
+
+// Noun Phrases
+NP → D [NP|Pro] {
+    ↑ = [NOUN:↓2];
+}
+
+VP → V [NP] [Adv] [PP] [NP] [Adv] {
+    ↑ = [PRED:↓1, SUBJ:↓2];
+    (↑ MOD) = [MOD:(↓3)];
+    (↑ OBJ) = (↓4);
+    (↑ ADV) = (↓5);
+}
+
+PP → P NP {
+    ↑ = [PRED:↓1, OBJ:↓2];
+}
+
+// Compound sentences
+S → S Conj S {
+    ↑ = [PRED:↓1, SUBJ:↓2];
+    (↑ MOD) = [MOD:(↓3)];
+}
+
+// Complex sentences
+S → S Conj VP {
+    ↑ = [PRED:↓1, SUBJ:↓2];
+    (↑ MOD) = [MOD:(↓3)];
+}
+
+S → S Conj NP VP {
+    ↑ = [PRED:↓1, SUBJ:↓2];
+    (↑ MOD) = [MOD:(↓3)];
+}
+
+S → S Conj NP VP Adv {
+    ↑ = [PRED:↓1, SUBJ:↓2];
+    (↑ MOD) = [MOD:(↓4)];
+}
+
+S → S Conj NP VP PP {
+    ↑ = [PRED:↓1, SUBJ:↓2];
+    (↑ MOD) = [MOD:(↓3)];
+}
+
+S → S Conj NP VP PP Adv {
+    ↑ = [PRED:↓1, SUBJ:↓2];
+    (↑ MOD) = [MOD:(↓5)];
+}
+
+Coord → NP Conj NP {
+    ↑ = [PRED:'Coord', SUBJ:↓1, OBJ:↓3];
+    (↑ MOD) = [MOD:↓2];
+}
+
+NP → NP RelCl {
+    ↑ = [NOUN:↓1, MOD:↓2];
+}
+RelCl → RelPro NP VP {
+    ↑ = [PRED:'RelCl', SUBJ:↓2, OBJ:↓3];
+    (↑ MOD) = [MOD:↓1];
+}
+
+// Modal auxiliaries
+VP → Mod V [NP] [Adv] [PP] [NP] [Adv] {
+    ↑ = [PRED:↓2, SUBJ:↓3];
+    (↑ MOD) = [MOD:(↓1)];
+    (↑ OBJ) = (↓4);
+    (↑ ADV) = (↓5);
+}
+
+Mod

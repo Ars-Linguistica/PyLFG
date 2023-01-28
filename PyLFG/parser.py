@@ -1,256 +1,368 @@
+"""
+PyLFG is a package for parsing sentences using Lexical Functional Grammar (LFG).
+This module provides an implementation of the Earley parsing algorithm for building parse trees
+from sentences and grammar rules specified in LFG.
+
+The primary entry point for the module is the `LfgParser` class and it's main methode parse(sentence), which takes a sentence string
+and a set of grammar rules and lexicon and returns a list of parse trees for the sentence.
+
+The package also provides helper functions for loading grammar rules and lexicon from files,
+and a `LFGParseTree` and `LFGParseTreeNode` class for representing and visualizing parse trees,
+as well as a FStructure class to represent the f-structure of the analyzed sentence.
+"""
+
 import re
+from typing import List, Dict, Tuple
+from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
+from .parser_gen import CompiledLfgParser
+import xlfg.parse_grammar
+import xlfg.parse_lexicon
+import xle.parse_grammar
+import xle.parse_lexicon
 
-from .parse_tree import LFGParseTree, LFGParseTreeNode
 
-def build_parse_tree(tokens: List[str], grammar: Dict[str, List[str]]) -> LFGParseTree:
-    """
-    Build a parse tree for a given list of tokens using the specified grammar rules.
+
+class CompiledXlfgParser(CompiledLfgParser):
+    def __init__(self):
+        super().__init__("xlfg", xlfg.parse_grammar.parse(), xlfg.parse_lexicon.parse())
+
+
+
+class LfgParser:
+    def __init__(self, grammar_format):
+        self.grammar_format = grammar_format
     
-    Args:
-    - tokens: list of strings, representing the words in the sentence to parse
-    - grammar: dictionary containing the grammar rules, where keys are non-terminal symbols and values
-    are lists of strings representing the productions for that non-terminal symbol
+    def parse(sentence: str) -> list:
+        # Calls the required buid_parse_trees method corresponding to grammar_format
+        pass
+
+class XlfgParser(LfgParser):
+    def __init__(self, grammar: dict, lexicon: Lexicon):
+        self.grammar = grammar
+        self.lexicon = lexicon
+
     
-    Returns:
-    - LFGParseTree: object representing the parse tree for the input sentence
-    
-    """
-    # Initialize list of parse tree nodes, with a dummy node at the beginning
-    nodes = [LFGParseTreeNode(None, None)]
-    
-    # Iterate through the list of tokens
-    for token in tokens:
-        # Find all productions that can be created using the current token
-        next_productions = []
-        for non_terminal, productions in grammar.items():
-            for production in productions:
-                # Check if the current token matches the RHS of the production
-                if isinstance(production, str) and production == token:
-                    next_productions.append(non_terminal)
-                # Check if the current token matches a functional annotation
-                elif isinstance(production, tuple) and len(production) == 2:
-                    annotation, rhs = production
-                    if rhs == token:
-                        next_productions.append((non_terminal, annotation))
+    def build_parse_trees(sentence: str) -> list:
+        grammar = self.grammar.parse()
+        lexicon = self.lexicon.parse()
+        all_trees = []
+        stack = ["0", "S"]
+        tokens = sentence.split()
+        i = 0
+        while stack:
+            top = stack[-1]
+            if top in grammar:
+                if i < len(tokens) and tokens[i] in lexicon:
+                    stack.append(tokens[i])
+                    i += 1
+                else:
+                    found = False
+                    for rule in grammar[top]:
+                        rule_lhs, rule_rhs, rule_c_constraints, rule_f_constraints = parse_rule(rule)
+                        if i < len(tokens) and tokens[i] in lexicon:
+                            lexicon_entry = lexicon[tokens[i]]
+                            lexicon_entry_c, lexicon_entry_f = parse_lexicon_entry(lexicon_entry)
+                            if match_c_constraints(rule_c_constraints, tokens, i) and match_f_constraints(rule_f_constraints, lexicon_entry_f):
+                                children = []
+                                for child in rule_rhs:
+                                    child_node = None
+                                    if child in lexicon:
+                                        child_node = LFGParseTreeNodeF(child, None)
+                                    else:
+                                        child_node = LFGParseTreeNodeF(child, None)
+                                    children.append(child_node)
+                                non_term_node = LFGParseTreeNodeF(top, None, children=children)
+                                stack.pop()
+                                for child in reversed(children):
+                                    stack.append(child)
+                                stack.append(non_term_node)
+                                found = True
+                                break
+                    if not found:
+                        stack.pop()
+            else:
+                if top in lexicon:
+                    leaf_node = LFGParseTreeNodeF(lexicon[top], top)
+                    stack.pop()
+                    stack.append(leaf_node)
+                elif isinstance(top, LFGParseTreeNodeF):
+                    non_term_node = top
+                    children = top.children
+                    stack.pop()
+                    if stack and stack[-1] == non_term_node.label:
+                        stack.pop()
+                        stack.extend(reversed(children))
+                        if stack[-1].label == "S":
+                            all_trees.append(LFGParseTree(stack[-1]))
+                            stack.pop()
         
-        # If no productions were found, this is a parse error
-        if not next_productions:
-            raise ValueError(f"No productions found for token: {token}")
+        # Integrate Optimality Theory marks
+        for i, tree in enumerate(all_trees):
+            tree.integrate_optimality_theory_marks()
         
-         # Create new parse tree nodes for each possible production
-        new_nodes = []
-        for production in next_productions:
-            if isinstance(production, str):
-                new_node = LFGParseTreeNode(production, token)
-            elif isinstance(production, tuple):
-                new_node = LFGParseTreeNode(production[0], token, functional_annotation=production[1])
-            elif isinstance(production, list):
-                new_node = LFGParseTreeNode(production, token)
-            new_nodes.append(new_node)
+        return all_trees
+
+    
+
+class XleParser(LfgParser):
+    def __init__(self, template_file, features_file, grammar_file, lexicon_file, fst_dir):
+        self.templates = load_templates(template_file)
+        self.features = load_features(features_file)
+        self.grammar = parse_grammar(grammar_file)
+        self.lexicon = load_lexicon(lexicon_file)
+        self.fst_dir = fst_dir
+
+    def build_parse_trees(self, sentence):
+        """
+        Use the resources from the lexicon, grammar, and FSTs to build parse trees for the given sentence.
+        """
+        # Tokenize the sentence
+        tokens = tokenize(sentence)
+        # Look up the lexical entries for each token in the lexicon
+        lexical_entries = [self.lexicon[token] for token in tokens]
+        # Use the FSTs in the fst_dir directory to disambiguate the lexical entries
+        disambiguated_entries = disambiguate_entries(lexical_entries, self.fst_dir)
+        # Use the grammar and templates to build the parse trees
+        parse_trees = build_trees(disambiguated_entries, self.grammar, self.templates)
+        return parse_trees
+
+
+class Grammar:
+    def __init__(self, grammar_format: str, grammar: dict):
+        self.grammar_format = grammar_format
+        self.grammar = grammar
+
+    def parse(self):
+        if self.grammar_format == "XLFG":
+            return XlfgGrammar(self.grammar).parse_grammar()
+        elif self.grammar_format == "XLE":
+            return XleGrammar(self.grammar).parse_grammar()
+        else:
+            raise ValueError(f"Unsupported grammar format: {self.grammar_format}")
+
+
+class Lexicon:
+    def __init__(self, lexicon_format: str, lexicon: dict):
+        self.lexicon_format = lexicon_format
+        self.lexicon = lexicon
+
+    def parse(self):
+        if self.lexicon_format == "XLFG":
+            return XlfgLexicon(self.lexicon).parse_lexicon()
+        elif self.lexicon_format == "XLE":
+            return XleLexicon(self.lexicon).parse_lexicon()
+        else:
+            raise ValueError(f"Unsupported lexicon format: {self.lexicon_format}")
+
+class XlfgGrammar:
+    def __init__(self, grammar_file: str):
+        self.grammar = self.parse_grammar(grammar_file)
+    
+    @staticmethod
+    def parse_grammar(grammar_file: str) -> dict:
+        """
+        Given a file containing XLFG grammar rules, returns a dictionary
+        with the nonterminals as keys and lists of rules as values.
+
+        :param grammar_file: the file containing XLFG grammar rules
+        :return: a dictionary with the nonterminals as keys and lists of rules as values
+        """
         
-        # Add the new nodes to the list of parse tree
-        nodes.extend(new_nodes)
-    return LFGParseTree(nodes[0])
+        return xlfg.parse_grammar(grammar_file)
 
 
-def validate_parse_tree(tree: LFGParseTree, grammar: dict) -> bool:
-"""Validate a parse tree according to the given grammar rules.
-Parameters:
-tree (LFGParseTree): The parse tree to validate.
-grammar (dict): A dictionary of the grammar rules. The keys are the left-hand sides of the rules and the values are the lists of right-hand sides.
+class XlfgLexicon:
+    def __init__(self, lexicon_file: str):
+        self.lexicon = self.parse_lexicon(lexicon_file)
+    
+    @staticmethod
+    def parse_lexicon(lexicon_file: str) -> dict:
+        """
+        Given a file containing XLFG lexicon entries, returns a dictionary
+        with the words as keys and lexicon entries as values.
 
-Returns:
-bool: True if the parse tree is valid according to the grammar, False otherwise.
-"""
-# Base case: If the tree is a leaf node, it must be a terminal symbol
-if tree.is_leaf():
-    return tree.label in grammar["terminals"]
-
-# Recursive case: Check that the node's label is a non-terminal and that its children's labels are in the list of valid rules
-if tree.label in grammar["nonterminals"]:
-    return all(validate_parse_tree(child, grammar) for child in tree.children)
-
-# If the tree is neither a leaf node nor a non-terminal, it is invalid
-return False
+        :param lexicon_file: the file containing XLFG lexicon entries
+        :return: a dictionary with the words as keys and lexicon entries as values
+        """
+        
+        return xlfg.parse_lexicon(lexicon_file)
 
 
-def cyk_parse(sentence, grammar):
-"""
-Parse a sentence using the CYK algorithm.
-Parameters:
-sentence (str): The sentence to parse.
-grammar (dict): A dictionary of production rules, where the keys are the left-hand sides of the rules and the values are lists of right-hand sides.
+class XleGrammar(Grammar):
+    def __init__(self, grammar_file: str):
+        super().__init__(grammar_file)
 
-Returns:
-list[LFGParseTree]: A list of parse trees, one for each valid parse of the sentence. If the sentence is not in the language defined by the grammar, an empty list is returned.
-"""
+    def parse(self):
+        """
+        Parse the grammar in XLE format and return a dictionary in the format 
+        {non_terminal: List[Tuple[str, List[str], Dict[str, str], Dict[str, str]]]}
+        """
+        # Code for parsing XLE grammar format and returning the dictionary 
+        # in the required format goes here
+        return xle.parse_grammar(grammar_file)
 
-# Tokenize the input
-words = sentence.split()
-n = len(words)
+class XleLexicon(Lexicon):
+    def __init__(self, lexicon_file: str):
+        super().__init__(lexicon_file)
 
-# Initialize the parse table
-table = [[set() for i in range(n - j)] for j in range(n)]
+    def parse(self):
+        """
+        Parse the lexicon in XLE format and return a dictionary in the format 
+        {token: Tuple[List[Tuple[str, str]], Dict[str, str]]}
+        """
+        # Code for parsing XLE lexicon format and returning the dictionary 
+        # in the required format goes here
+        return xle.parse_lexicon(lexicon_file)
 
-# Fill in the base cases
-for i in range(n):
-    for production in grammar.values():
-        for rhs in production:
-            if rhs == words[i]:
-                table[0][i].add(rhs)
+import os
 
-# Fill in the rest of the table
-for j in range(1, n):
-    for i in range(n - j):
-        for k in range(j):
-            for symbol1 in table[k][i]:
-                for symbol2 in table[j - k - 1][i + k + 1]:
-                    for lhs, rhs in grammar.items():
-                        if (symbol1, symbol2) in rhs:
-                            table[j][i].add(lhs)
-
-# Generate the parse trees
-parse_trees = []
-for lhs in table[-1][0]:
-    parse_tree = build_parse_tree(words, table, lhs, 0, n - 1, grammar)
-    if parse_tree is not None:
-        parse_trees.append(parse_tree)
-
-return parse_trees
-
-
-
-def parse_lfg(sentence: str, grammar: dict, memo: dict = {}) -> Iterator[LFGParseTree]:
+def tokenize(sentence, fst_tokenizer_path):
     """
-    Parse the given sentence using the given context-free grammar.
-    Yields all valid parse trees as LFGParseTree objects.
-    Uses memoization to avoid recomputing parse trees for the same input.
+    Tokenize the given sentence using an FST tokenizer if present in the given directory,
+    otherwise use a default string split method.
     """
-    if sentence in memo:
-        yield from memo[sentence]
-    elif not sentence:
-        yield LFGParseTree(symbol="ROOT")
+    
+    if os.path.exists(fst_tokenizer_path):
+        # Use the FST tokenizer to tokenize the sentence
+        tokens = fst_tokenize(sentence, fst_tokenizer_path)
     else:
-        for i, word in enumerate(sentence.split()):
-            if word in grammar:
-                for production in grammar[word]:
-                    for parse in parse_lfg(sentence[i + 1:], grammar, memo):
-                        yield LFGParseTree(symbol=production, children=(LFGParseTree(symbol=word), parse))
-        memo[sentence] = list(parse_lfg(sentence, grammar, memo))
+        # Use a default string split method to tokenize the sentence
+        tokens = sentence.split()
+    return tokens
 
-
-def parse_sentence(sentence: str, lexicon: dict, grammar: dict) -> List[LFGParseTree]:
+def fst_tokenize(sentence, fst_path):
     """
-    Parse a given sentence and return a list of all possible valid parse trees.
-    If the sentence is invalid or there are no valid parse trees, return an empty list.
-    
-    Parameters:
-    sentence (str): The sentence to parse.
-    lexicon (dict): The lexicon for the parser, mapping words to a list of possible parts of speech.
-    grammar (dict): The grammar rules for the parser, mapping parts of speech to a list of possible production rules.
-    
-    Returns:
-    List[LFGParseTree]: A list of all valid parse trees for the given sentence.
+    Tokenize the given sentence using the FST at the given path.
     """
-    
-    # Tag the sentence with parts of speech
-    tagged_sentence = pos_tagger(sentence, lexicon)
-    
-    # Parse the tagged sentence using our LFG parser
-    parse_trees = parse_lfg(tagged_sentence, grammar)
-    
-    # Validate all parse trees to ensure they are valid
-    valid_trees = []
-    for tree in parse_trees:
-        if validate_parse_tree(tree, grammar):
-            valid_trees.append(tree)
-    
-    # Return the list of valid parse trees
-    return valid_trees
+    # Load the FST and tokenize the sentence
+    tokenizer = fst.Fst.read(fst_path)
+    tokenized_sentence = tokenizer.transduce(sentence)
+    # Extract the tokens from the tokenized sentence
+    tokens = [tokenized_sentence[i].split("\t")[1] for i in range(len(tokenized_sentence))]
+    return tokens
 
-
-
-def pos_tagger(sentence: str, lexicon: dict) -> str:
+def build_trees(disambiguated_entries, grammar, templates):
     """
-    Generate all possible parses for the given sentence by considering all possible parts of speech for each word.
-
-    Args:
-    - sentence: the sentence to parse, a string
-    - lexicon: a dictionary with words as keys and a list of parts of speech tags as values
-
-    Returns:
-    - a generator yielding all possible parses for the sentence, as LFG parse trees
+    Build parse trees from the disambiguated entries using the provided grammar and templates.
     """
-    words = sentence.split()
-    tags = []
-    for word in words:
-        if word in lexicon:
-            tags.append((word, lexicon[word]))
-        else:
-            # Default to noun if unknown word
-            tags.append((word, "N"))
+    # Initialize an empty list to store the parse trees
+    parse_trees = []
+    # Iterate through the disambiguated entries
+    for entry in disambiguated_entries:
+        # Get the non-terminal symbol for the entry
+        non_terminal = entry[0]
+        # Get the corresponding grammar rule for the non-terminal symbol
+        rule = grammar[non_terminal]
+        # Get the c-structure and f-structure constraints for the rule
+        c_constraints = rule[2]
+        f_constraints = rule[3]
+        # Initialize an empty string to store the template
+        template = ""
+        # Iterate through the c-structure constraints
+        for constraint in c_constraints:
+            # Replace the constraint in the template with the corresponding value from the entry
+            template = template.replace("{" + constraint + "}", entry[c_constraints[constraint]])
+        # Iterate through the f-structure constraints
+        for constraint in f_constraints:
+            # Replace the constraint in the template with the corresponding value from the entry
+            template = template.replace("{" + constraint + "}", entry[f_constraints[constraint]])
+        # Use the template to build the parse tree for the entry
+        parse_tree = templates[template]
+        # Add the parse tree to the list of parse trees
+        parse_trees.append(parse_tree)
+    # Return the list of parse trees
+    return parse_trees
 
-    def generate_parses(tags, index=0):
-        if index == len(tags):
-            yield "(S)"
-        else:
-            word, possibles = tags[index]
-            for pos in possibles:
-                for parse in generate_parses(tags, index + 1):
-                    yield f"(S ({pos} {word}){parse}"
 
-    return generate_parses(tags)
+class LCFRSGrammar:
+    def __init__(self):
+        self.rules = []
+        self.nonterminals = set()
+        self.terminals = set()
 
-def parse_lexicon(filename: str) -> Dict[str, List[str]]:
-    """
-    Load the lexicon from the given file and return it as a dictionary.
-    
-    The file is expected to contain one word and its part of speech tag per line, separated by a colon.
-    Lines starting with '#' and empty lines are ignored.
-    
-    If a word appears multiple times in the file, all its tags are stored in a list in the dictionary.
-    
-    Args:
-        filename (str): The name of the file to load the lexicon from.
-    
-    Returns:
-        Dict[str, List[str]]: The lexicon as a dictionary.
-    
-    Examples:
-        >>> parse_lexicon('lexicon.txt')
-        {'the': ['D'], 'cat': ['N'], 'sat': ['V'], 'on': ['P'], 'mat': ['N'], 'fish': ['V', 'N']}
-    """
-    lexicon = {}
-    with open(filename, 'r') as f:
-        for line in f:
-            # Ignore empty lines and lines starting with '#'
-            if not line.strip() or line.startswith('#'):
-                continue
+    def add_rule(self, lhs, rhs, weight=1.0):
+        self.rules.append((lhs, rhs, weight))
+        self.nonterminals.add(lhs)
+        for symbol in rhs:
+            if symbol in self.nonterminals:
+                self.terminals.add(symbol)
 
-            word, pos = line.split(':')
-            word = word.strip()
-            pos = pos.strip()
+    def parse(self, sentence):
+        chart = [[[] for _ in range(len(sentence) + 1)] for _ in range(len(sentence) + 1)]
+        for i in range(len(sentence)):
+            for lhs, rhs, weight in self.rules:
+                if rhs[0] == sentence[i]:
+                    chart[i][i+1].append((lhs, weight, []))
 
-            if word in lexicon:
-                lexicon[word].append(pos)
+        for span in range(2, len(sentence) + 1):
+            for start in range(len(sentence) - span + 1):
+                end = start + span
+                for mid in range(start + 1, end):
+                    for lhs1, weight1, children1 in chart[start][mid]:
+                        for lhs2, weight2, children2 in chart[mid][end]:
+                            for lhs, rhs, weight in self.rules:
+                                if rhs == [lhs1, lhs2]:
+                                    chart[start][end].append((lhs, weight * weight1 * weight2, [children1, children2]))
+        parses = []
+        for lhs, weight, children in chart[0][len(sentence)]:
+            if lhs == "S":
+                parses.append((weight, children))
+        return parses
+
+
+class LexicalizedLFG:
+    def init(self, grammar: dict, lexicon: Lexicon):
+    self.grammar = grammar
+    self.lexicon = lexicon
+    def build_parse_trees(sentence: str) -> list:
+    all_trees = []
+    stack = ["0", "S"]
+    tokens = sentence.split()
+    i = 0
+    while stack:
+        top = stack[-1]
+        if top in self.grammar:
+            if i < len(tokens) and tokens[i] in self.lexicon:
+                stack.append(tokens[i])
+                i += 1
             else:
-                lexicon[word] = [pos]
-    return lexicon
-
-def parse_grammar(filename):
-    grammar = {}
-    with open(filename, 'r') as f:
-        for line in f:
-            # Ignore empty lines and lines starting with '#'
-            if not line.strip() or line.startswith('#'):
-                continue
-
-            lhs, rhs = line.split('->')
-            lhs = lhs.strip()
-            rhs = rhs.strip()
-
-            if lhs in grammar:
-                grammar[lhs].append(rhs)
-            else:
-                grammar[lhs] = [rhs]
-    return grammar
+                found = False
+                for rule in self.grammar[top]:
+                    rule_lhs, rule_rhs, rule_c_constraints, rule_f_constraints = parse_rule(rule)
+                    if i < len(tokens) and tokens[i] in self.lexicon:
+                        lexicon_entry = self.lexicon[tokens[i]]
+                        lexicon_entry_c, lexicon_entry_f = parse_lexicon_entry(lexicon_entry)
+                        if match_c_constraints(rule_c_constraints, tokens, i) and match_f_constraints(rule_f_constraints, lexicon_entry_f):
+                            children = []
+                            for child in rule_rhs:
+                                child_node = None
+                                if child in self.lexicon:
+                                    child_node = LFGParseTreeNodeF(child, None)
+                                else:
+                                    child_node = LFGParseTreeNodeF(child, None)
+                                children.append(child_node)
+                            non_term_node = LFGParseTreeNodeF(top, None, children=children)
+                            stack.pop()
+                            for child in reversed(children):
+                                stack.append(child)
+                            stack.append(non_term_node)
+                            found = True
+                            break
+                if not found:
+                    stack.pop()
+        else:
+            if top in self.lexicon:
+                leaf_node = LFGParseTreeNodeF(self.lexicon[top], top)
+                stack.pop()
+                stack.append(leaf_node)
+            elif isinstance(top, LFGParseTreeNodeF):
+                non_term_node = top
+                stack.pop()
+                if non_term_node.label == "S":
+                    all_trees.append(non_term_node)
+                else:
+                    for parent in stack:
+                        if isinstance(parent, LFGParseTreeNodeF):
+                            parent.add_child(non_term_node)
+                            break
+    return all_trees

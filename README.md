@@ -1,41 +1,39 @@
-# PyLFG
+# PyLFG - A Python package for parsing sentences using Lexical Functional Grammar (LFG)
 
-## To use PyLFG to analyze sentences from a text file, follow these steps:
+## Introduction
+PyLFG is a package for parsing sentences using Lexical Functional Grammar (LFG). This package provides an implementation of the Earley parsing algorithm for building parse trees from sentences and grammar rules specified in LFG. The primary entry point for the module is the `build_parse_trees` function, which takes a sentence string and a set of grammar rules and lexicon and returns a list of parse trees for the sentence.
 
-### Import the parse_sentence function from the PyLFG package:
+## Installation
+To install PyLFG, use the following command:
+    pip install pylfg
 
-Copy code
-from PyLFG import parse_sentence
 
-Open the text file containing the sentences you want to analyze. You can do this using the built-in open function:
+## Usage
+The package provides helper functions for loading grammar rules and lexicon from files, and a `LFGParseTree` and `LFGParseTreeNode` class for representing and visualizing parse trees. Here is an example of how to use the package:
 
-Copy code
-with open('path/to/text/file.txt', 'r') as f:
-    text = f.read()
+```python
+from pylfg import build_parse_trees
 
-Split the text into a list of sentences using the split method:
-Copy code
-sentences = text.split('.')
-Iterate over the list of sentences and pass each one to the parse_sentence function:
-Copy code
-for sentence in sentences:
-    parse_tree = parse_sentence(sentence)
-    print(parse_tree)
-The parse_sentence function returns an object of type LFGParseTree, which can be used to access the various components of the parse tree. For example, you can access the root node of the parse tree using the root attribute:
-Copy code
-root_node = parse_tree.root
-You can also access the children of a node using the children attribute:
-Copy code
-children = root_node.children
-Each node in the parse tree has a label attribute, which indicates the type of the node (e.g. noun, verb, preposition). You can use this attribute to access specific parts of the parse tree:
-Copy code
-for node in children:
-    if node.label == 'Noun':
-        # do something with the noun node
-    elif node.label == 'Verb':
-        # do something with the verb node
-    ...
-You can also use the is_leaf method to check if a node is a leaf node (i.e. a terminal symbol):
-Copy code
-if node.is_leaf():
-    # do something with the leaf node
+
+sentence = "the cat sits on the mat"
+
+# load grammar and lexicon
+grammar = load_grammar("path/to/grammar.txt")
+lexicon = load_lexicon("path/to/lexicon.txt")
+
+# parse sentence
+trees = build_parse_trees(sentence, grammar, lexicon)
+
+# print the first parse tree
+print(trees[0])
+```
+
+You can also use the LFGParseTree.to_f_structure method to export the f-structure of the sentence in latex format, as shown in this example
+
+```python
+f_structure = trees[0].to_f_structure()
+
+# write f-structure to a latex file
+with open("f_structure.tex", "w") as f:
+    f.write(f_structure)
+```
