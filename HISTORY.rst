@@ -3,7 +3,7 @@ History
 =======
 
 
-0.1.0 (2023-26-01)
+0.1.0 (2023-28-01)
 ------------------
 
 PyLFG version 0.1.0 alpha is now available! This release includes the following features:
