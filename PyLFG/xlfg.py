@@ -1,3 +1,7 @@
+"""
+The file xlfg.py contains several functions that pertain to processing and manipulating phrase structure rules and lexicon entries in the eXtended Lexical Functional Grammar (XLFG) formalism.
+"""
+
 def parse_rule(rule: str) -> Tuple[str, List[str]]:
     """
     Given a string representation of a XLFG phrase structure rule, returns a tuple of 
@@ -31,6 +35,12 @@ def parse_lexicon_entry(lexicon_entry: str) -> dict:
     return functional_labels
 
 def match_constraints(rule: str, lexicon_entry: dict) -> bool:
+    """
+    Given a rule and lexicon entry, check if the constraints in the rule are satisfied by the lexicon entry.
+    :param rule: the rule to check constraints against
+    :param lexicon_entry: the lexicon entry to check against the rule's constraints
+    :return: True if the constraints are satisfied, False otherwise
+    """
     # Extract the functional constraints from the rule
     match = re.search(f"\\{{(.*?)\\}}", rule)
     if match:
@@ -40,6 +50,13 @@ def match_constraints(rule: str, lexicon_entry: dict) -> bool:
         return True
 
 def match_c_constraints(rule, tokens, i):
+    """
+    Given a rule, a list of tokens, and an index, check if the c-structure constraints in the rule are satisfied by the token at the given index.
+    :param rule: the rule to check constraints against
+    :param tokens: a list of tokens
+    :param i: the index of the token to check against the rule's c-structure constraints
+    :return: True if the constraints are satisfied, False otherwise
+    """
     c_structure_constraints = rule.c_structure_constraints
     for constraint in c_structure_constraints:
         match = re.search(constraint, tokens[i])
@@ -48,6 +65,12 @@ def match_c_constraints(rule, tokens, i):
     return True
 
 def match_f_constraints(rule, lexicon_entry):
+    """
+    Given a rule and a lexicon entry, check if the f-structure constraints in the rule are satisfied by the lexicon entry.
+    :param rule: the rule to check constraints against
+    :param lexicon_entry: the lexicon entry to check against the rule's f-structure constraints
+    :return: True if the constraints are satisfied, False otherwise
+    """
     f_structure_constraints = rule[2]
     for constraint in f_structure_constraints:
         if not constraint.is_valid(lexicon_entry):
@@ -84,6 +107,11 @@ def remove_unused_constraints(node: LFGParseTreeNodeF):
             remove_unused_constraints(child)
 
 def parse_lexicon(file):
+    """
+    Given a file path, read the lexicon from the file and return the lexicon entries as a dictionary.
+    :param file: the path of the file containing the lexicon
+    :return: a dictionary of lexicon entries
+    """
     entries = {}
     with open(file) as f:
         for line in f:
