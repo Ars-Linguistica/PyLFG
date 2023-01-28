@@ -22,27 +22,54 @@ import xle.parse_lexicon
 
 
 
-class CompiledXlfgParser(CompiledLfgParser):
-    def __init__(self):
-        super().__init__("xlfg", xlfg.parse_grammar.parse(), xlfg.parse_lexicon.parse())
+
 
 
 
 class LfgParser:
+    """
+    LFG Parser that uses a specified grammar format to parse sentences and build parse trees.
+    :param grammar_format: str. The format of the grammar to be used for parsing, such as "Xlfg" or "Lfgg".
+    :ivar grammar_format: str. The format of the grammar used for parsing.
+    """
     def __init__(self, grammar_format):
         self.grammar_format = grammar_format
     
     def parse(sentence: str) -> list:
-        # Calls the required buid_parse_trees method corresponding to grammar_format
+        """
+        Parses a given sentence using the specified grammar format and returns a list of parse trees.
+        :param sentence: str. The sentence to be parsed.
+        :return: list of LFGParseTree objects representing the possible parse trees for the sentence.
+        """
         pass
 
+
 class XlfgParser(LfgParser):
+    """
+    XlfgParser is a class that inherits from LfgParser and implements a parser for the XLFG format.
+    XLFG is a fast, accurate deep parser for LFG grammar. These outputs are phrase structures, predicate-argument structures and predicate-thematic relationships.
+    It takes in a grammar in the form of a dictionary and a lexicon object as input and uses them to build parse trees for a given sentence.
+    :param grammar: dict. A dictionary containing the X-bar LFG grammar rules in the form of a string.
+    :param lexicon: Lexicon. A lexicon object containing the lexical entries for the words in the language.
+    :ivar grammar: dict. A dictionary containing the X-bar LFG grammar rules in the form of a string.
+    :ivar lexicon: Lexicon. A lexicon object containing the lexical entries for the words in the language.
+    :method build_parse_trees(sentence: str) -> list:
+    Builds a parse tree for a given sentence using the grammar and lexicon provided in the class.
+        :param sentence: str. Sentence to be parsed.
+        :return: list. A list of LFGParseTree objects representing the possible parse trees for the given sentence."
+
+    """
     def __init__(self, grammar: dict, lexicon: Lexicon):
         self.grammar = grammar
         self.lexicon = lexicon
 
     
     def build_parse_trees(sentence: str) -> list:
+        """
+        Builds parse trees for a given sentence using the grammar and lexicon provided to the XlfgParser object.
+        :param sentence: string. The sentence to be parsed.
+        :return: list. A list of LFGParseTree objects representing the possible parse trees for the sentence.
+        """
         grammar = self.grammar.parse()
         lexicon = self.lexicon.parse()
         all_trees = []
@@ -105,6 +132,20 @@ class XlfgParser(LfgParser):
     
 
 class XleParser(LfgParser):
+    """
+    Initialize the XleParser with the necessary resources.
+        
+    :param template_file: str
+        file path of the template file.
+    :param features_file: str
+        file path of the features file.
+    :param grammar_file: str
+        file path of the grammar file.
+    :param lexicon_file: str
+        file path of the lexicon file.
+    :param fst_dir: str
+        directory containing the finite state transducers (FSTs) for disambiguation.
+        """
     def __init__(self, template_file, features_file, grammar_file, lexicon_file, fst_dir):
         self.templates = load_templates(template_file)
         self.features = load_features(features_file)
@@ -115,6 +156,10 @@ class XleParser(LfgParser):
     def build_parse_trees(self, sentence):
         """
         Use the resources from the lexicon, grammar, and FSTs to build parse trees for the given sentence.
+        :param sentence: str
+            Sentence to parse.
+        :return: List[str]
+            List of parse trees for the given sentence.
         """
         # Tokenize the sentence
         tokens = tokenize(sentence)
