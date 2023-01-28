@@ -61,3 +61,14 @@ API Reference for the classes in fst.py
     :members:
     :private-members:
     :show-inheritance:
+
+
+API Reference for the classes in transfer.translator.py
+----------------------------------------------
+
+.. automodule:: pylfg.transfer.translator
+    :member-order: bysource
+    :members:
+    :private-members:
+    :show-inheritance:
+
