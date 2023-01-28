@@ -3,10 +3,15 @@
 ## Introduction
 PyLFG is a package for parsing sentences using Lexical Functional Grammar (LFG). This package provides an implementation of the Earley parsing algorithm for building parse trees from sentences and grammar rules specified in LFG. The primary entry point for the module is the `build_parse_trees` function, which takes a sentence string and a set of grammar rules and lexicon and returns a list of parse trees for the sentence.
 
+### Important note
+PyLFG is still in early development and has not yet reached a stable release state.
+
 ## Installation
 To install PyLFG, use the following command:
-    pip install pylfg
 
+```python
+pip install pylfg
+```
 
 ## Usage
 The package provides helper functions for loading grammar rules and lexicon from files, and a `LFGParseTree` and `LFGParseTreeNode` class for representing and visualizing parse trees. Here is an example of how to use the package:
