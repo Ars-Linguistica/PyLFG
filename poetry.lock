@@ -1219,6 +1219,21 @@ files = [
 ]
 
 [[package]]
+name = "pyupgrade"
+version = "3.3.1"
+description = "A tool to automatically upgrade syntax for newer versions."
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "pyupgrade-3.3.1-py2.py3-none-any.whl", hash = "sha256:3b93641963df022d605c78aeae4b5956a5296ea24701eafaef9c487527b77e60"},
+    {file = "pyupgrade-3.3.1.tar.gz", hash = "sha256:f88bce38b0ba92c2a9a5063c8629e456e8d919b67d2d42c7ecab82ff196f9813"},
+]
+
+[package.dependencies]
+tokenize-rt = ">=3.2.0"
+
+[[package]]
 name = "requests"
 version = "2.28.2"
 description = "Python HTTP for Humans."
@@ -1258,50 +1273,6 @@ pygments = ">=2.14.0,<3.0.0"
 
 [package.extras]
 jupyter = ["ipywidgets (>=7.5.1,<9)"]
-
-[[package]]
-name = "rustfst-python"
-version = "0.13.1"
-description = "Library for constructing, combining, optimizing, and searching weighted finite-state transducers (FSTs). Re-implementation of OpenFst in Rust."
-category = "main"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "rustfst_python-0.13.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:bcec7ad0eaf5f25132b07c64db91121b146a22848bd1c7a5aa7b00a608d01059"},
-    {file = "rustfst_python-0.13.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:8eaa52f7f85a6852dfc372375ea056b45c392392f78ce121655d89d2e2aa6ef3"},
-    {file = "rustfst_python-0.13.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:323b0474d2e254b052773636e771f6bca35cf0ae75dc5f479387ddfb1a773552"},
-    {file = "rustfst_python-0.13.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ca6aa9e699e4202dd3817b485a516f0c4b00e36867544ddb85318e7e2231835c"},
-    {file = "rustfst_python-0.13.1-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:06f9cd60433088985470fec0b8c2a8d9968e95f353c6adbd08738175a6dfcbd9"},
-    {file = "rustfst_python-0.13.1-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:8af16e00b64622ee9571e61a8912a98e3fae6b0bf578947694c7f783406e946d"},
-    {file = "rustfst_python-0.13.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:5ad4e118856ddd39b7e21a50c2ee32e12bd2d988f3c0e4b1e9d1bd4e47c52119"},
-    {file = "rustfst_python-0.13.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:57ee61ac30c33ffb0b4c7d59d7c9a674e9d6b5486319f9ffa327c59a723b4650"},
-    {file = "rustfst_python-0.13.1-cp37-cp37m-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:af6444c89a58b20210ac8572d1e40abf649c4c4deca0478e634b349fe0fe53f6"},
-    {file = "rustfst_python-0.13.1-cp37-cp37m-musllinux_1_1_x86_64.whl", hash = "sha256:2d42730cd1c283a0f7e6c4d48ead712ec3cab8342ea91fd7e535a5c1238611fb"},
-    {file = "rustfst_python-0.13.1-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:2872b5965f451ba706733c718360393247ce7a9fc56fd44d71c872f2ad62de67"},
-    {file = "rustfst_python-0.13.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:29a301ff7d84a0a8bb0522c8407a750196d1443f56037649067880f333fb8e00"},
-    {file = "rustfst_python-0.13.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:f6cb2ef31c6f99bbe4506befda6957ec28a81f91bf3629c2037fe182cc78b736"},
-    {file = "rustfst_python-0.13.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:42f112ff4c4d52400a3dae14803c06d3eaea02d6c2406e6c401d626004dbf74a"},
-    {file = "rustfst_python-0.13.1-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:403c94fe7551987e21f3a30119a5b4e0939eeb5704757b31eaa158a535fef426"},
-    {file = "rustfst_python-0.13.1-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:c89cae5555496c47b11a23fb29edba95f6fe9df2622f043d53bb8597e57dc7bc"},
-    {file = "rustfst_python-0.13.1-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:33a73fd8c876dab227deca96cf0566920852f5c4705a3c618f84cef8a5470b84"},
-    {file = "rustfst_python-0.13.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:955f20df5b61e30f1f2cc2511de00cf62f58d2140294231f317c9e658342a30b"},
-    {file = "rustfst_python-0.13.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:5ca95eec9cd2a17dba9cad782ead802cba4e450d6123714af3ed43bdeefffafe"},
-    {file = "rustfst_python-0.13.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:450c30934e6a65ba39d462bcb6e6c519cf96dc1bfb47fb3698ea092084a0ca07"},
-    {file = "rustfst_python-0.13.1-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:d698b383cccc39d7f18a598bb71b68064225ee25100fc63432ab961d66139c78"},
-    {file = "rustfst_python-0.13.1-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:e677070fa88964c890a026340161f05744470055335b717fcd7225d889988213"},
-    {file = "rustfst_python-0.13.1-pp37-pypy37_pp73-macosx_10_9_x86_64.whl", hash = "sha256:ce317c0537718bf4ee9fdf2df914c5e0dc89a0697d09f48ecffebf43b1d04080"},
-    {file = "rustfst_python-0.13.1-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:958c78c37c18564fc883610b9aa3cb0fa90ad4f995a3d94ad01541674c0ad407"},
-    {file = "rustfst_python-0.13.1-pp37-pypy37_pp73-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:113385698482790383bd4409ca144ad8ea653518b9de9474d823ab24b3b9b17d"},
-    {file = "rustfst_python-0.13.1-pp38-pypy38_pp73-macosx_10_9_x86_64.whl", hash = "sha256:919bd23394ad8eeb3c3040a2d47c6bb1d2ab80d54c780464d747e074206f5195"},
-    {file = "rustfst_python-0.13.1-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d4d00c46dc1d7b10f61d3027e07f85a8a87558cf17efb7b15c8a94de8893d068"},
-    {file = "rustfst_python-0.13.1-pp38-pypy38_pp73-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:de1dd64e0cc9088c5fdac5788c3c621f298e3a36150f6ace11b401738f4fdc17"},
-    {file = "rustfst_python-0.13.1-pp39-pypy39_pp73-macosx_10_9_x86_64.whl", hash = "sha256:05c6426dae98b10767a9d00dc3551f6426acb81ca26632816c45fbc7044100ed"},
-    {file = "rustfst_python-0.13.1-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f13f9e505e7740f68f7d7cf1f71540752e39d12075b9f27ca852a6ee88ad7b34"},
-    {file = "rustfst_python-0.13.1-pp39-pypy39_pp73-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:3734a76c8bb122fb6ccdb6fb16e495518409cf93de26e2df88565e9547e4ccd8"},
-]
-
-[package.extras]
-tests = ["pytest (>=6,<7)"]
 
 [[package]]
 name = "six"
@@ -1555,6 +1526,18 @@ rich = ">=13.0.0"
 textual = ">=0.9.1"
 
 [[package]]
+name = "tokenize-rt"
+version = "5.0.0"
+description = "A wrapper around the stdlib `tokenize` which roundtrips."
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "tokenize_rt-5.0.0-py2.py3-none-any.whl", hash = "sha256:c67772c662c6b3dc65edf66808577968fb10badfc2042e3027196bed4daf9e5a"},
+    {file = "tokenize_rt-5.0.0.tar.gz", hash = "sha256:3160bc0c3e8491312d0485171dea861fc160a240f5f5766b72a1165408d10740"},
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.4.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
@@ -1602,4 +1585,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "de2ef316b2254b9deb08b2955b1b003d825b972861c59b2343508d46050453ad"
+content-hash = "ca372af3036e1803cefc420643ccf41002bb2c4ce7e658eae5f45378cdc29f81"
