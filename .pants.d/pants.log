@@ -776,3 +776,149 @@
 21:59:57.35 [INFO] Done extending leases
 22:01:17.35 [INFO] Extending leases
 22:01:17.35 [INFO] Done extending leases
+22:02:37.35 [INFO] Extending leases
+22:02:37.35 [INFO] Done extending leases
+22:03:57.36 [INFO] Extending leases
+22:03:57.36 [INFO] Done extending leases
+22:05:17.36 [INFO] Extending leases
+22:05:17.36 [INFO] Done extending leases
+22:06:37.36 [INFO] Extending leases
+22:06:37.36 [INFO] Done extending leases
+22:07:57.36 [INFO] Extending leases
+22:07:57.36 [INFO] Done extending leases
+22:09:17.37 [INFO] Extending leases
+22:09:17.37 [INFO] Done extending leases
+22:10:37.37 [INFO] Extending leases
+22:10:37.37 [INFO] Done extending leases
+22:11:57.37 [INFO] Extending leases
+22:11:57.37 [INFO] Done extending leases
+22:13:17.37 [INFO] Extending leases
+22:13:17.37 [INFO] Done extending leases
+22:14:37.37 [INFO] Extending leases
+22:14:37.38 [INFO] Done extending leases
+22:15:57.38 [INFO] Garbage collecting store. target_size=28,800,000,000
+22:15:57.38 [INFO] Done garbage collecting store
+22:15:57.38 [INFO] Extending leases
+22:15:57.38 [INFO] Done extending leases
+22:17:17.38 [INFO] Extending leases
+22:17:17.38 [INFO] Done extending leases
+22:18:37.38 [INFO] Extending leases
+22:18:37.38 [INFO] Done extending leases
+22:19:57.38 [INFO] Extending leases
+22:19:57.38 [INFO] Done extending leases
+22:21:17.39 [INFO] Extending leases
+22:21:17.39 [INFO] Done extending leases
+22:22:37.39 [INFO] Extending leases
+22:22:37.39 [INFO] Done extending leases
+22:23:57.39 [INFO] Extending leases
+22:23:57.39 [INFO] Done extending leases
+22:25:17.39 [INFO] Extending leases
+22:25:17.39 [INFO] Done extending leases
+22:26:37.39 [INFO] Extending leases
+22:26:37.40 [INFO] Done extending leases
+22:27:57.40 [INFO] Extending leases
+22:27:57.40 [INFO] Done extending leases
+22:29:17.40 [INFO] Extending leases
+22:29:17.40 [INFO] Done extending leases
+22:30:37.40 [INFO] Extending leases
+22:30:37.40 [INFO] Done extending leases
+22:31:57.40 [INFO] Extending leases
+22:31:57.40 [INFO] Done extending leases
+22:33:17.41 [INFO] Extending leases
+22:33:17.41 [INFO] Done extending leases
+22:34:37.41 [INFO] Extending leases
+22:34:37.41 [INFO] Done extending leases
+22:35:57.41 [INFO] Extending leases
+22:35:57.41 [INFO] Done extending leases
+22:37:17.41 [INFO] Extending leases
+22:37:17.41 [INFO] Done extending leases
+22:38:37.41 [INFO] Extending leases
+22:38:37.41 [INFO] Done extending leases
+22:39:57.42 [INFO] Extending leases
+22:39:57.42 [INFO] Done extending leases
+22:41:17.42 [INFO] Extending leases
+22:41:17.42 [INFO] Done extending leases
+22:42:37.42 [INFO] Extending leases
+22:42:37.42 [INFO] Done extending leases
+22:43:57.42 [INFO] Extending leases
+22:43:57.42 [INFO] Done extending leases
+22:45:17.43 [INFO] Extending leases
+22:45:17.43 [INFO] Done extending leases
+22:46:37.43 [INFO] Extending leases
+22:46:37.43 [INFO] Done extending leases
+22:47:57.43 [INFO] Extending leases
+22:47:57.43 [INFO] Done extending leases
+22:49:17.43 [INFO] Extending leases
+22:49:17.43 [INFO] Done extending leases
+22:50:37.43 [INFO] Extending leases
+22:50:37.43 [INFO] Done extending leases
+22:51:57.44 [INFO] Extending leases
+22:51:57.44 [INFO] Done extending leases
+22:53:17.44 [INFO] Extending leases
+22:53:17.44 [INFO] Done extending leases
+22:54:37.44 [INFO] Extending leases
+22:54:37.44 [INFO] Done extending leases
+22:55:57.44 [INFO] Extending leases
+22:55:57.44 [INFO] Done extending leases
+22:57:17.45 [INFO] Extending leases
+22:57:17.45 [INFO] Done extending leases
+22:58:37.45 [INFO] Extending leases
+22:58:37.45 [INFO] Done extending leases
+22:59:57.45 [INFO] Extending leases
+22:59:57.45 [INFO] Done extending leases
+23:01:17.45 [INFO] Extending leases
+23:01:17.45 [INFO] Done extending leases
+23:02:37.45 [INFO] Extending leases
+23:02:37.45 [INFO] Done extending leases
+23:03:57.46 [INFO] Extending leases
+23:03:57.46 [INFO] Done extending leases
+23:05:17.46 [INFO] Extending leases
+23:05:17.46 [INFO] Done extending leases
+23:06:37.46 [INFO] Extending leases
+23:06:37.46 [INFO] Done extending leases
+23:07:57.46 [INFO] Extending leases
+23:07:57.46 [INFO] Done extending leases
+23:09:17.46 [INFO] Extending leases
+23:09:17.46 [INFO] Done extending leases
+23:10:37.47 [INFO] Extending leases
+23:10:37.47 [INFO] Done extending leases
+23:11:57.47 [INFO] Extending leases
+23:11:57.47 [INFO] Done extending leases
+23:13:17.47 [INFO] Extending leases
+23:13:17.47 [INFO] Done extending leases
+23:14:37.47 [INFO] Extending leases
+23:14:37.47 [INFO] Done extending leases
+23:14:57.05 [INFO] notify invalidation: cleared 2 and dirtied 39 nodes for: {"transfer", "transfer/BUILD"}
+23:14:57.05 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"transfer/BUILD", "transfer"}
+23:14:57.05 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"transfer", "transfer/BUILD"}
+23:14:57.05 [INFO] notify invalidation: cleared 1 and dirtied 27 nodes for: {"transfer/transfer_rules", "transfer/transfer_rules/EN_FR_sample.lfg"}
+23:14:57.05 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"transfer", "transfer/translator.py"}
+23:14:57.05 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"transfer", "transfer/transfer_rules"}
+23:14:57.05 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"transfer", "transfer/transfer_rules"}
+23:14:57.05 [INFO] notify invalidation: cleared 1 and dirtied 191 nodes for: {"transfer", ""}
+23:14:57.05 [INFO] Filesystem changed during run: retrying `Snapshot` in 500ms...
+23:14:57.05 [INFO] notify invalidation: cleared 1 and dirtied 191 nodes for: {"", "transfer"}
+23:14:57.05 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG", "PyLFG/parser_gen.py"}
+23:14:57.05 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/parser_gen.py", "PyLFG"}
+23:14:57.06 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/parser_gen.py"}
+23:14:57.06 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG", "PyLFG/parser_gen.py"}
+23:14:57.06 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG", "PyLFG/transfer"}
+23:14:57.06 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG", "PyLFG/xle.py"}
+23:14:57.06 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG", "PyLFG/xle.py"}
+23:14:57.06 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/xle.py"}
+23:14:57.06 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/xle.py", "PyLFG"}
+23:14:57.06 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/xlfg.py", "PyLFG"}
+23:14:57.06 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/xlfg.py", "PyLFG"}
+23:14:57.06 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG/xlfg.py"}
+23:14:57.06 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"PyLFG", "PyLFG/xlfg.py"}
+23:15:57.48 [INFO] Garbage collecting store. target_size=28,800,000,000
+23:15:57.48 [INFO] Done garbage collecting store
+23:15:57.48 [INFO] Extending leases
+23:15:57.48 [INFO] Done extending leases
+23:17:17.48 [INFO] Extending leases
+23:17:17.48 [INFO] Done extending leases
+23:17:50.90 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"pyproject.toml"}
+23:17:50.90 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"pyproject.toml"}
+23:17:50.90 [INFO] notify invalidation: cleared 1 and dirtied 191 nodes for: {"pyproject.toml", ""}
+23:18:37.48 [INFO] Extending leases
+23:18:37.48 [INFO] Done extending leases
