@@ -30,7 +30,7 @@ PyLFG is designed to be a comprehensive tool for working within the Lexical Func
 - Suitable for linguistics students and professors: PyLFG is written in Python, which is a widely used programming language in the field of linguistics research. This makes it perfectly suited for linguistics students and professors, as well as python programmers in general.
 - Valuable tool for documenting under-resourced languages: PyLFG provides a valuable tool for documenting under-resourced languages, which is essential for preserving and studying these languages.
 
-In summary, PyLFG is a comprehensive and user-friendly tool that provides a range of features that make it a valuable tool for linguistics students and professors, language learning applications, and documenting under-resourced languages. Its open-source nature and transfer capabilities make it a valuable tool for advancing knowledge in the field of linguistics.
+In summary, PyLFG is a comprehensive and user-friendly open-source tool that provides a range of features that make it valuable for linguistics students and professors, language learning applications, and documenting under-resourced languages.
 
 ## Usage
 The package provides helper functions for loading grammar rules and lexicon from files, and a `LFGParseTree` and `LFGParseTreeNode` class for representing and visualizing parse trees. Here is an example of how to use the package:
