@@ -1,0 +1,2 @@
+15:15:55.63 [INFO] handling request: `--pants-bin-name=./pants --pants-version=2.14.1 tailor ::`
+15:15:56.62 [INFO] request completed: `--pants-bin-name=./pants --pants-version=2.14.1 tailor ::`

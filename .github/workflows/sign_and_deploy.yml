@@ -1,0 +1,82 @@
+name: Build source and wheels packages and upload them to PyPI
+
+# Build on every branch push, tag push, and pull request change:
+# on: [workflow_dispatch]
+# Alternatively, to publish when a (published) GitHub Release is created, use the following:
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+
+jobs:
+    build_wheels_with_poetry:
+        name: Build poetry packages on ${{ matrix.os }}
+        runs-on: ${{ matrix.os }}
+        permissions: write-all
+         #  id-token: write
+        defaults:
+            run:
+                shell: bash
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ ubuntu-latest ]
+                include:
+                    -   os: ubuntu-latest
+                        path: ~/.cache/pip
+                python-version: [ 3.9 ]
+
+        steps:
+            - name: Harden Runner
+              uses: step-security/harden-runner@18bf8ad2ca49c14cbb28b91346d626ccfb00c518 # v2.1.0
+              with:
+                egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
+            -   uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+
+            -   uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435 # v4.5.0
+                with:
+                    python-version: ${{ matrix.python-version }}
+
+            -   name: Install Poetry
+                uses: snok/install-poetry@d45b6d76012debf457ab49dffc7fb7b2efe8071d # v1.3.3
+                with:
+                    virtualenvs-create: true
+                    virtualenvs-in-project: true
+            -   name: Load cached venv
+                id: cached-pip-wheels
+                uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
+                with:
+                    path: ~/.cache
+                    key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+            -   name: Install dependencies
+                run: poetry install --no-interaction --no-root
+            -   name: Install Package
+                run: poetry install --no-interaction
+            -   run: |
+                   source $VENV
+                   poetry --version
+            -   name: Run Type Checker
+                run: |
+                    poetry run pip install types-setuptools
+                    poetry run mypy
+            -   name: Run Pytest with coverage
+                run: poetry run pytest --cov=./mlconjug3/
+            -   name: Upload coverage artifacts to codecov
+                run: poetry run codecov --token=secrets.CODECOV_TOKEN
+            -   name: Build Package
+                run: poetry build
+            -   name: Sign with sigstore
+                uses: sigstore/gh-action-sigstore-python@6b203deb6739fa707744be136400b8fccb1a72bd # v1.0.0
+                with:
+                  upload-signing-artifacts: true
+                  release-signing-artifacts: true
+                  inputs: dist/*.tar.gz dist/*.whl
+            -   name: Upload Package to PyPi
+                run: |
+                    poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
+                    poetry publish
