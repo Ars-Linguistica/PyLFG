@@ -44,9 +44,6 @@ jobs:
                 with:
                     virtualenvs-create: true
                     virtualenvs-in-project: true
-            -   run: |
-                   source $VENV
-                   poetry --version
             -   name: Load cached venv
                 id: cached-pip-wheels
                 uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
@@ -54,6 +51,9 @@ jobs:
                 with:
                     path: ~/.cache
                     key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+            -   run: |
+                   source $VENV
+                   poetry --version
             -   name: Install dependencies
                 run: poetry install --no-interaction --no-root
             -   name: Install Package
