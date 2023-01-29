@@ -3,6 +3,7 @@ The file xlfg.py contains several functions that pertain to processing and manip
 """
 
 from typing import *
+from .parse_tree import *
 
 def parse_rule(rule: str) -> Tuple[str, List[str]]:
     """
