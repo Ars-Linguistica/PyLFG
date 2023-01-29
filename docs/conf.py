@@ -216,7 +216,7 @@ latex_elements = {
 latex_documents = [
     ('index', 'pylfg.tex',
      u'PyLFG Documentation',
-     u'SekouDiaoNlp', 'manual'),
+     u'Sekou Diao, ARS LInguistica', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at
@@ -247,7 +247,7 @@ latex_documents = [
 man_pages = [
     ('index', 'pylfg',
      u'PyLFG Documentation',
-     [u'SekouDiaoNlp'], 1)
+     [u'Sekou Diao, ARS LInguistica'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -262,7 +262,7 @@ man_pages = [
 texinfo_documents = [
     ('index', 'pylfg',
      u'PyLFG Documentation',
-     u'SekouDiaoNlp',
+     u'Sekou Diao, ARS LInguistica',
      'pylfg',
      'One line description of project.',
      'Miscellaneous'),
