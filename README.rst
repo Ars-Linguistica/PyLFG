@@ -6,8 +6,8 @@ Introduction
 
 PyLFG (Python Library for Lexical Functional Grammar) is a new
 open-source project that aims to provide a comprehensive set of tools
-for working within the Lexical Functional Grammar (LFG) formalism. LFG
-is a syntactic theory that represents the structure of natural language
+for working within the Lexical Functional Grammar (LFG) formalism, developed by ARS Linguistica.
+LFG is a syntactic theory that represents the structure of natural language
 using a combination of lexical and functional information. This project
 provides a set of classes and methods for representing and manipulating
 LFG structures, including lexical functional structures (f-structures)
