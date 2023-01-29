@@ -1,8 +1,8 @@
 import pytest
-from PyLFG.parser import build_parse_tree, validate_parse_tree, cyk_parse
+from pylfg.parser import build_parse_tree, validate_parse_tree, cyk_parse
 
 # Test data
-from PyLFG.tests.test_sentences import test_sentences
+from pylfg.tests.test_sentences import test_sentences
 
 # Load grammar and lexicon
 with open("EN/grammar.txt") as f:

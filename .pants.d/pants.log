@@ -207,3 +207,285 @@
 12:13:34.88 [INFO] Done extending leases
 12:14:54.88 [INFO] Extending leases
 12:14:54.88 [INFO] Done extending leases
+12:16:14.88 [INFO] Extending leases
+12:16:14.88 [INFO] Done extending leases
+12:17:34.89 [INFO] Extending leases
+12:17:34.89 [INFO] Done extending leases
+12:18:54.89 [INFO] Extending leases
+12:18:54.89 [INFO] Done extending leases
+12:20:14.89 [INFO] Extending leases
+12:20:14.89 [INFO] Done extending leases
+12:21:34.89 [INFO] Extending leases
+12:21:34.89 [INFO] Done extending leases
+12:22:54.89 [INFO] Extending leases
+12:22:54.90 [INFO] Done extending leases
+12:24:14.90 [INFO] Extending leases
+12:24:14.90 [INFO] Done extending leases
+12:25:34.90 [INFO] Extending leases
+12:25:34.90 [INFO] Done extending leases
+12:26:54.90 [INFO] Extending leases
+12:26:54.90 [INFO] Done extending leases
+12:28:14.90 [INFO] Extending leases
+12:28:14.90 [INFO] Done extending leases
+12:29:34.91 [INFO] Extending leases
+12:29:34.91 [INFO] Done extending leases
+12:30:54.91 [INFO] Extending leases
+12:30:54.91 [INFO] Done extending leases
+12:32:14.91 [INFO] Extending leases
+12:32:14.91 [INFO] Done extending leases
+12:33:34.91 [INFO] Extending leases
+12:33:34.91 [INFO] Done extending leases
+12:34:54.91 [INFO] Extending leases
+12:34:54.92 [INFO] Done extending leases
+12:36:14.92 [INFO] Extending leases
+12:36:14.92 [INFO] Done extending leases
+12:36:16.42 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {".bandit.yml", ""}
+12:36:16.42 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {".bandit.yml"}
+12:36:16.42 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {"", ".bandit.yml"}
+12:36:16.42 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {"", "pyproject.toml"}
+12:36:16.42 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {"", "pyproject.toml"}
+12:36:16.42 [INFO] Filesystem changed during run: retrying `Snapshot` in 500ms...
+12:36:16.42 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"", "pyproject.toml"}
+12:36:16.42 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"", "pyproject.toml"}
+12:36:16.42 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"pyproject.toml"}
+12:36:16.42 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"", "pyproject.toml"}
+12:37:34.92 [INFO] Extending leases
+12:37:34.92 [INFO] Done extending leases
+12:38:54.92 [INFO] Extending leases
+12:38:54.92 [INFO] Done extending leases
+12:40:14.92 [INFO] Extending leases
+12:40:14.92 [INFO] Done extending leases
+12:41:34.93 [INFO] Extending leases
+12:41:34.93 [INFO] Done extending leases
+12:42:54.93 [INFO] Extending leases
+12:42:54.93 [INFO] Done extending leases
+12:44:14.93 [INFO] Extending leases
+12:44:14.93 [INFO] Done extending leases
+12:45:34.93 [INFO] Extending leases
+12:45:34.93 [INFO] Done extending leases
+12:46:54.93 [INFO] Extending leases
+12:46:54.94 [INFO] Done extending leases
+12:48:14.94 [INFO] Extending leases
+12:48:14.94 [INFO] Done extending leases
+12:49:34.94 [INFO] Extending leases
+12:49:34.94 [INFO] Done extending leases
+12:50:54.94 [INFO] Extending leases
+12:50:54.94 [INFO] Done extending leases
+12:52:14.94 [INFO] Extending leases
+12:52:14.94 [INFO] Done extending leases
+12:53:34.95 [INFO] Extending leases
+12:53:34.95 [INFO] Done extending leases
+12:54:54.95 [INFO] Extending leases
+12:54:54.95 [INFO] Done extending leases
+12:56:14.95 [INFO] Extending leases
+12:56:14.95 [INFO] Done extending leases
+12:57:34.95 [INFO] Extending leases
+12:57:34.95 [INFO] Done extending leases
+12:58:54.95 [INFO] Extending leases
+12:58:54.96 [INFO] Done extending leases
+13:00:14.96 [INFO] Extending leases
+13:00:14.96 [INFO] Done extending leases
+13:00:42.32 [INFO] notify invalidation: cleared 1 and dirtied 136 nodes for: {"pylfg", "pylfg/fst.py"}
+13:00:42.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"pylfg/fst.py", "pylfg"}
+13:00:42.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"pylfg/fst.py"}
+13:00:42.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"pylfg/fst.py", "pylfg"}
+13:01:25.25 [INFO] notify invalidation: cleared 1 and dirtied 51 nodes for: {"tests/.test_lfg_parser.py.swp", "tests"}
+13:01:25.25 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_lfg_parser.py.swp"}
+13:01:25.25 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_lfg_parser.py.swp", "tests"}
+13:01:34.96 [INFO] Extending leases
+13:01:34.96 [INFO] Done extending leases
+13:01:40.88 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_lfg_parser.py.swp", "tests"}
+13:01:40.88 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_lfg_parser.py.swp"}
+13:01:40.88 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_lfg_parser.py.swp"}
+13:01:40.88 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_lfg_parser.py.swp"}
+13:02:00.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/test_lfg_parser.py"}
+13:02:00.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/test_lfg_parser.py"}
+13:02:00.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/test_lfg_parser.py"}
+13:02:02.07 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_lfg_parser.py.swp", "tests"}
+13:02:52.66 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_parse_tree.py.swp"}
+13:02:52.66 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_parse_tree.py.swp"}
+13:02:52.66 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_parse_tree.py.swp", "tests"}
+13:02:54.96 [INFO] Extending leases
+13:02:54.96 [INFO] Done extending leases
+13:03:02.50 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_parse_tree.py.swp", "tests"}
+13:03:02.50 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_parse_tree.py.swp"}
+13:03:02.50 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_parse_tree.py.swp"}
+13:03:02.50 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_parse_tree.py.swp"}
+13:04:08.40 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/test_parse_tree.py"}
+13:04:08.40 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/test_parse_tree.py"}
+13:04:08.41 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/test_parse_tree.py", "tests"}
+13:04:09.87 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_parse_tree.py.swp"}
+13:04:14.96 [INFO] Extending leases
+13:04:14.96 [INFO] Done extending leases
+13:04:28.78 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_parser.py.swp", "tests"}
+13:04:28.78 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_parser.py.swp"}
+13:04:28.78 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_parser.py.swp", "tests"}
+13:04:36.31 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_parser.py.swp", "tests"}
+13:04:36.31 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_parser.py.swp"}
+13:04:36.31 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_parser.py.swp"}
+13:04:36.31 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_parser.py.swp"}
+13:04:59.08 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/test_parser.py"}
+13:04:59.08 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/test_parser.py"}
+13:04:59.09 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/test_parser.py"}
+13:05:01.80 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_parser.py.swp"}
+13:05:34.97 [INFO] Extending leases
+13:05:34.97 [INFO] Done extending leases
+13:05:36.71 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_PyLFG.py.swp", "tests"}
+13:05:36.71 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_PyLFG.py.swp"}
+13:05:36.71 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_PyLFG.py.swp", "tests"}
+13:05:44.77 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_PyLFG.py.swp"}
+13:05:44.77 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_PyLFG.py.swp", "tests"}
+13:05:44.77 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_PyLFG.py.swp"}
+13:05:44.77 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_PyLFG.py.swp"}
+13:06:05.31 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/test_PyLFG.py"}
+13:06:05.31 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/test_PyLFG.py"}
+13:06:05.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/test_PyLFG.py"}
+13:06:07.16 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_PyLFG.py.swp"}
+13:06:49.15 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_sentences.py.swp", "tests"}
+13:06:49.15 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.test_sentences.py.swp"}
+13:06:49.15 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_sentences.py.swp"}
+13:06:54.97 [INFO] Extending leases
+13:06:54.97 [INFO] Done extending leases
+13:06:57.62 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.test_sentences.py.swp"}
+13:07:37.98 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521", "tests"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521", "tests"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:37.99 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521", "tests"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521", "tests"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage.ip-172-31-38-131.497669.769521"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage", "tests"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage", "tests"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage", "tests"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage", "tests"}
+13:07:38.00 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497669.769521", "tests"}
+13:07:38.04 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {".pytest_cache", ""}
+13:08:01.90 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783", "tests"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783", "tests"}
+13:08:03.32 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783", "tests"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783", "tests"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage.ip-172-31-38-131.497710.174783", "tests"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage", "tests"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests/.coverage", "tests"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage"}
+13:08:03.33 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"tests", "tests/.coverage.ip-172-31-38-131.497710.174783"}
+13:08:14.97 [INFO] Extending leases
+13:08:14.97 [INFO] Done extending leases
+13:09:34.97 [INFO] Extending leases
+13:09:34.97 [INFO] Done extending leases
+13:10:54.97 [INFO] Extending leases
+13:10:54.98 [INFO] Done extending leases
+13:12:14.98 [INFO] Extending leases
+13:12:14.98 [INFO] Done extending leases
+13:13:34.98 [INFO] Garbage collecting store. target_size=28,800,000,000
+13:13:34.98 [INFO] Done garbage collecting store
+13:13:34.98 [INFO] Extending leases
+13:13:34.98 [INFO] Done extending leases
+13:14:54.98 [INFO] Extending leases
+13:14:54.98 [INFO] Done extending leases

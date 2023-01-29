@@ -1,6 +1,6 @@
 import pytest
-from PyLFG.parse_tree import LFGParseTreeNode, LFGParseTree, FStructure
-from PyLFG import parser, parse_tree
+from pylfg.parse_trees import LFGParseTreeNode, LFGParseTree, FStructure
+from pylfg import parser, parse_trees
 
 def test_LFGParseTreeNode_init():
     tree = LFGParseTreeNode("label", "token", {"key": "value"}, [])

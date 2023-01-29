@@ -1,5 +1,5 @@
-from PyLFG.parser import build_parse_trees, parse_grammar, parse_lexicon
-from PyLFG.parse_tree import LFGParseTree, LFGParseTreeNodeF
+from pylfg.parser import build_parse_trees, parse_grammar, parse_lexicon
+from pylfg.parse_tree import LFGParseTree, LFGParseTreeNodeF
 from pathlib import Path
 import pytest
 
