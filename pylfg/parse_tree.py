@@ -265,7 +265,7 @@ class LFGParseTreeNodeE(LFGParseTreeNode):
         """
         self.lexical_head = head
 
-    def get_lexical_head
+    def get_lexical_head(self):
         """
         Get the lexical head for this parse tree node
         """
@@ -280,7 +280,7 @@ class LFGParseTreeNodeE(LFGParseTreeNode):
         """
         self.logical_form = form
 
-    def get_logical_form
+    def get_logical_form(self):
         """
         Get the logical form for this parse tree node
         """
