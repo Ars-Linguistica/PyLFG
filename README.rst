@@ -1,6 +1,9 @@
 PyLFG - A Python package for parsing sentences using Lexical Functional Grammar (LFG)
 =====================================================================================
 
+.. image:: https://zenodo.org/badge/586289901.svg
+   :target: https://zenodo.org/badge/latestdoi/586289901
+
 Introduction
 ------------
 
