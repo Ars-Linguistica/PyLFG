@@ -57,8 +57,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'PyLFG'
-author = u'SekouDiaoNlp'
-copyright = u"2023, SekouDiaoNlp"
+author = u'Sekou Diao, ARS LInguistica'
+copyright = u"2023, Sekou Diao, ARS LInguistica"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -99,7 +99,8 @@ exclude_patterns = ['_build']
 show_authors = True
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'native'
+pygments_style = "sphinx"
+pygments_dark_style = "monokai"
 
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
@@ -155,7 +156,7 @@ html_last_updated_fmt = '%b %d, %Y'
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
-#html_use_smartypants = True
+html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
 #html_sidebars = {}
