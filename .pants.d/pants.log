@@ -1005,3 +1005,83 @@
 23:58:15.74 [INFO] notify invalidation: cleared 1 and dirtied 191 nodes for: {"README.rst", ""}
 23:58:37.55 [INFO] Extending leases
 23:58:37.55 [INFO] Done extending leases
+23:59:57.55 [INFO] Extending leases
+23:59:57.55 [INFO] Done extending leases
+00:01:17.56 [INFO] Extending leases
+00:01:17.56 [INFO] Done extending leases
+00:02:37.56 [INFO] Extending leases
+00:02:37.56 [INFO] Done extending leases
+00:03:57.56 [INFO] Extending leases
+00:03:57.56 [INFO] Done extending leases
+00:05:17.56 [INFO] Extending leases
+00:05:17.56 [INFO] Done extending leases
+00:06:37.56 [INFO] Extending leases
+00:06:37.56 [INFO] Done extending leases
+00:07:57.57 [INFO] Extending leases
+00:07:57.57 [INFO] Done extending leases
+00:09:17.57 [INFO] Extending leases
+00:09:17.57 [INFO] Done extending leases
+00:10:37.57 [INFO] Extending leases
+00:10:37.57 [INFO] Done extending leases
+00:11:57.57 [INFO] Extending leases
+00:11:57.57 [INFO] Done extending leases
+00:13:17.57 [INFO] Extending leases
+00:13:17.58 [INFO] Done extending leases
+00:14:37.58 [INFO] Extending leases
+00:14:37.58 [INFO] Done extending leases
+00:15:57.59 [INFO] Garbage collecting store. target_size=28,800,000,000
+00:15:57.59 [INFO] Done garbage collecting store
+00:15:57.59 [INFO] Extending leases
+00:15:57.59 [INFO] Done extending leases
+00:17:17.59 [INFO] Extending leases
+00:17:17.59 [INFO] Done extending leases
+00:18:37.59 [INFO] Extending leases
+00:18:37.59 [INFO] Done extending leases
+00:19:57.59 [INFO] Extending leases
+00:19:57.59 [INFO] Done extending leases
+00:21:17.59 [INFO] Extending leases
+00:21:17.60 [INFO] Done extending leases
+00:22:37.60 [INFO] Extending leases
+00:22:37.60 [INFO] Done extending leases
+00:23:57.60 [INFO] Extending leases
+00:23:57.60 [INFO] Done extending leases
+00:25:17.60 [INFO] Extending leases
+00:25:17.60 [INFO] Done extending leases
+00:26:37.60 [INFO] Extending leases
+00:26:37.60 [INFO] Done extending leases
+00:27:57.61 [INFO] Extending leases
+00:27:57.61 [INFO] Done extending leases
+00:29:17.61 [INFO] Extending leases
+00:29:17.61 [INFO] Done extending leases
+00:30:37.61 [INFO] Extending leases
+00:30:37.61 [INFO] Done extending leases
+00:31:57.61 [INFO] Extending leases
+00:31:57.61 [INFO] Done extending leases
+00:33:17.61 [INFO] Extending leases
+00:33:17.62 [INFO] Done extending leases
+00:34:37.62 [INFO] Extending leases
+00:34:37.62 [INFO] Done extending leases
+00:35:57.62 [INFO] Extending leases
+00:35:57.62 [INFO] Done extending leases
+00:37:17.62 [INFO] Extending leases
+00:37:17.62 [INFO] Done extending leases
+00:38:37.62 [INFO] Extending leases
+00:38:37.62 [INFO] Done extending leases
+00:39:57.63 [INFO] Extending leases
+00:39:57.63 [INFO] Done extending leases
+00:41:17.63 [INFO] Extending leases
+00:41:17.63 [INFO] Done extending leases
+00:42:37.63 [INFO] Extending leases
+00:42:37.63 [INFO] Done extending leases
+00:43:57.63 [INFO] Extending leases
+00:43:57.63 [INFO] Done extending leases
+00:45:17.63 [INFO] Extending leases
+00:45:17.63 [INFO] Done extending leases
+00:46:37.64 [INFO] Extending leases
+00:46:37.64 [INFO] Done extending leases
+00:47:57.64 [INFO] Extending leases
+00:47:57.64 [INFO] Done extending leases
+00:49:17.64 [INFO] Extending leases
+00:49:17.64 [INFO] Done extending leases
+00:50:37.64 [INFO] Extending leases
+00:50:37.64 [INFO] Done extending leases
