@@ -16,10 +16,8 @@ import re
 from typing import List, Dict, Tuple
 from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
 from .parser_gen import CompiledLfgParser
-import xlfg.parse_grammar
-import xlfg.parse_lexicon
-import xle.parse_grammar
-import xle.parse_lexicon
+import .xlfg
+import .xle
 
 
 class LfgParser:
