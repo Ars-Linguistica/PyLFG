@@ -6,6 +6,7 @@ as well as functional annotations in the lexical items.
 
 import networkx as nx
 import matplotlib.pyplot as plt
+from typing import *
 
 
 class LFGParseTreeNode:
