@@ -61,7 +61,7 @@ class FstMorph:
     
         words = string.split()
         morph_decomposition = []
-            for word in words:
+        for word in words:
             self.morph_analyzer.set_input_str(word)
             self.morph_analyzer.set_output_str(word)
             self.morph_analyzer.compose(self.morph_analyzer)
