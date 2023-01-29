@@ -67,7 +67,7 @@ class LFGParseTreeNode:
         """
         return self.functional_labels
     
-   def calculate_e_structure(self):
+    def calculate_e_structure(self):
         """
         Calculate the e-structure representation of the parse tree node
         """
