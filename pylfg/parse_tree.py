@@ -67,7 +67,7 @@ class LFGParseTreeNode:
         """
         return self.functional_labels
     
-   def calculate_e_structure(self):
+    def calculate_e_structure(self):
         """
         Calculate the e-structure representation of the parse tree node
         """
@@ -92,7 +92,7 @@ class LFGParseTreeNodeF(LFGParseTreeNode):
     """
     Class representing a node in a LFG parse tree. This class is a child class of LFGParseTreeNode and adds functionality for storing and manipulating an F-structure.
     """
-        def add_to_f_structure(self, attribute: str, value: str):
+    def add_to_f_structure(self, attribute: str, value: str):
         """
         Add a new attribute and value to the f_structure of the node.
         """
@@ -265,7 +265,7 @@ class LFGParseTreeNodeE(LFGParseTreeNode):
         """
         self.lexical_head = head
 
-    def get_lexical_head
+    def get_lexical_head(self):
         """
         Get the lexical head for this parse tree node
         """
@@ -280,7 +280,7 @@ class LFGParseTreeNodeE(LFGParseTreeNode):
         """
         self.logical_form = form
 
-    def get_logical_form
+    def get_logical_form(self):
         """
         Get the logical form for this parse tree node
         """
