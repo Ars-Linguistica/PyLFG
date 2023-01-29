@@ -16,10 +16,8 @@ import re
 from typing import List, Dict, Tuple
 from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
 from .parser_gen import CompiledLfgParser
-import xlfg.parse_grammar
-import xlfg.parse_lexicon
-import xle.parse_grammar
-import xle.parse_lexicon
+from pylfg import xlfg
+from pylfg import xle
 
 
 class LfgParser:
@@ -59,7 +57,7 @@ class XlfgParser(LfgParser):
         :return: list. A list of LFGParseTree objects representing the possible parse trees for the given sentence."
 
     """
-    def __init__(self, grammar: dict, lexicon: Lexicon):
+    def __init__(self, grammar: dict, lexicon: dict):
         self.grammar = grammar
         self.lexicon = lexicon
 

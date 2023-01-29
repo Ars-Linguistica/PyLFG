@@ -2,6 +2,9 @@
 The file xlfg.py contains several functions that pertain to processing and manipulating phrase structure rules and lexicon entries in the eXtended Lexical Functional Grammar (XLFG) formalism.
 """
 
+from typing import *
+from .parse_tree import *
+
 def parse_rule(rule: str) -> Tuple[str, List[str]]:
     """
     Given a string representation of a XLFG phrase structure rule, returns a tuple of 

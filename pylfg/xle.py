@@ -6,7 +6,9 @@ The parse_grammar function takes a grammar file as an input, parse an XLE gramma
 The parse_lexicon function takes a lexicon file as an input, parse a lexicon file and return a dictionary of lexical entries, where the keys are words and the values are tuples of the form (morph, features).
 """
 
-import openfst as fst
+# import openfst as fst
+from typing import *
+from .parse_tree import *
 
 
 def load_templates(template_file):
@@ -110,19 +112,20 @@ def parse_grammar(grammar_file: str) -> Dict[str, List[Tuple[str, List[str], Dic
             lexicon[word] = (morph, features)
     return lexicon
 
-def load_fst(fst_path: str) -> fst.Fst:
-    """
-    Loads a finite state transducer from the specified file path and returns it as an fst.Fst object.
-    """
-    fst = fst.Fst.read(fst_path)
-    return fst
+# def load_fst(fst_path: str) -> fst.Fst:
+#     """
+#     Loads a finite state transducer from the specified file path and returns it as an fst.Fst object.
+#     """
+#     fst = fst.Fst.read(fst_path)
+#     return fst
     
 def integrate_lfg(lexicon, grammar):
+    """
     Integrates a lexicon and grammar into a LFG (Lexical Functional Grammar) format.
     It loads templates, feature declaration, morphconfig and rules from specific files.
     Replaces placeholders in the templates with the parsed lexicon and grammar.
-Returns the LFG in string format.
-"""
+    Returns the LFG in string format.
+    """
     # Load the templates from common.templates.lfg
     with open('common.templates.lfg', 'r') as f:
         templates = f.read()
