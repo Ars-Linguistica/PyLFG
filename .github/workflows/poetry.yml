@@ -51,13 +51,13 @@ jobs:
                 with:
                     path: ~/.cache
                     key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
-            -   run: |
-                   source $VENV
-                   poetry --version
             -   name: Install dependencies
                 run: poetry install --no-interaction --no-root
             -   name: Install Package
                 run: poetry install --no-interaction
+            -   run: |
+                   source $VENV
+                   poetry --version
             -   name: Run Bandit
                 run: poetry run bandit -r pylexique/ -c .bandit.yml
             # -   name: Run Type Checker
