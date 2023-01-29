@@ -15,22 +15,25 @@ class ParserGenerator:
         self.grammar_format = grammar_format
 
     def convert_grammar(self, grammar: dict) -> str:
-    """Convert the LFG grammar format to the format required by the parser generator"""
-    if self.grammar_format != "xlfg":
-        raise ValueError(f"Unsupported grammar format for this method: {self.grammar_format}")
-    converted_grammar = ""
-    for lhs, rhs_list in grammar.items():
-        for rhs in rhs_list:
-            c_constraints, f_constraints = rhs[2], rhs[3]
-            c_constraints_str = " ".join(c_constraints)
-            f_constraints_str = " ".join(f_constraints)
-            rule = f"{lhs} -> {rhs[0]} {rhs[1]} [c: {c_constraints_str}] [f: {f_constraints_str}]"
-            converted_grammar += rule + "\n"
-    return converted_grammar
+        """
+        Convert the LFG grammar format to the format required by the parser generator
+        """
+        if self.grammar_format != "xlfg":
+            raise ValueError(f"Unsupported grammar format for this method: {self.grammar_format}")
+        converted_grammar = ""
+        for lhs, rhs_list in grammar.items():
+            for rhs in rhs_list:
+                c_constraints, f_constraints = rhs[2], rhs[3]
+                c_constraints_str = " ".join(c_constraints)
+                f_constraints_str = " ".join(f_constraints)
+                rule = f"{lhs} -> {rhs[0]} {rhs[1]} [c: {c_constraints_str}] [f: {f_constraints_str}]"
+                converted_grammar += rule + "\n"
+        return converted_grammar
 
 
-        def convert_lexicon(self, lexicon: dict) -> str:
-        """Convert the current lexicon format to the format required by the parser generator"""
+    def convert_lexicon(self, lexicon: dict) -> str:
+        """Convert the current lexicon format to the format required by the parser generator
+        """
         if self.grammar_format == "xlfg":
             lexicon_str = ""
             for word, entries in lexicon.items():
