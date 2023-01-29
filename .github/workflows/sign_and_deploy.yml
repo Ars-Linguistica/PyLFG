@@ -28,7 +28,7 @@ jobs:
                 include:
                     -   os: ubuntu-latest
                         path: ~/.cache/pip
-                python-version: [ 3.9 ]
+                python-version: [ 3.11 ]
 
         steps:
             - name: Harden Runner
