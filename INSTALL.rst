@@ -60,13 +60,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/SekouDiaoNlp/PyLFG
+    $ git clone git://github.com/Ars-Linguistica/PyLFG
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/SekouDiaoNlp/PyLFG/tarball/master
+    $ curl  -OL https://github.com/Ars-Linguistica/PyLFG/tarball/master
 
 Once you have a copy of the source, get in the source directory and you can install it with:
 
@@ -83,6 +83,6 @@ Alternatively, you can use poetry to install the software:
     $ poetry install
 
 
-.. _Github repo: https://github.com/SekouDiaoNlp/PyLFG
-.. _tarball: https://github.com/SekouDiaoNlp/PyLFG/tarball/master
+.. _Github repo: https://github.com/Ars-Linguistica/PyLFG
+.. _tarball: https://github.com/Ars-Linguistica/PyLFG/tarball/master
 
