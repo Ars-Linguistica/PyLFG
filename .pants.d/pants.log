@@ -489,3 +489,36 @@
 13:13:34.98 [INFO] Done extending leases
 13:14:54.98 [INFO] Extending leases
 13:14:54.98 [INFO] Done extending leases
+13:16:14.98 [INFO] Extending leases
+13:16:14.99 [INFO] Done extending leases
+13:17:34.99 [INFO] Extending leases
+13:17:34.99 [INFO] Done extending leases
+13:18:54.99 [INFO] Extending leases
+13:18:54.99 [INFO] Done extending leases
+13:19:07.39 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {"..gitignore.swp", ""}
+13:19:07.39 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"..gitignore.swp"}
+13:19:07.39 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {"", "..gitignore.swp"}
+13:19:07.39 [INFO] Filesystem changed during run: retrying `Snapshot` in 500ms...
+13:19:19.07 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {"", "..gitignore.swp"}
+13:19:19.07 [INFO] Filesystem changed during run: retrying `Snapshot` in 500ms...
+13:19:19.07 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {"..gitignore.swp", ""}
+13:19:19.07 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"..gitignore.swp"}
+13:19:19.07 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"", "..gitignore.swp"}
+13:20:03.75 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {".gitignore"}
+13:20:03.75 [INFO] Filesystem changed during run: retrying `Snapshot` in 500ms...
+13:20:03.75 [INFO] notify invalidation: cleared 1 and dirtied 2 nodes for: {".gitignore"}
+13:20:03.75 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {".gitignore"}
+13:20:03.75 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {".gitignore"}
+13:20:03.76 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {"", ".gitignore"}
+13:20:03.76 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {".gitignore", ""}
+13:20:03.79 [ERROR] saw filesystem changes covered by invalidation globs: content changed (Digest('b5fe34e6e8e7dab52ef303d22d4ef6c106590abc40fc8b5cbfd09396d2c5a90d', 169) fs Digest('09d69c28ad58f06d743d69e293fd89ee3db97293070da9d839521dcf57ed5ed6', 169)). terminating the daemon.
+13:20:04.73 [ERROR] service failure for <pants.pantsd.service.scheduler_service.SchedulerService object at 0x7f3c51d4f070>.
+13:20:04.73 [INFO] Waiting for ongoing runs to complete before exiting...
+13:20:04.73 [INFO] Server exiting with Ok(())
+13:20:04.73 [INFO] Waiting for Sessions to complete before exiting...
+13:20:04.73 [INFO] Waiting for shutdown of: ["scheduler_service_session", "store_gc_service_session", "pants_run_2023_01_29_10_13_34_771_1ece7809ecb547c7a7245097ceb412f3"]
+13:20:04.73 [INFO] Shutdown completed: "scheduler_service_session"
+13:20:04.73 [INFO] Shutdown completed: "store_gc_service_session"
+13:20:04.73 [INFO] Shutdown completed: "pants_run_2023_01_29_10_13_34_771_1ece7809ecb547c7a7245097ceb412f3"
+13:20:04.73 [INFO] Exiting pantsd
+13:20:04.74 [WARN] File watcher exiting with: The watcher was shut down.
