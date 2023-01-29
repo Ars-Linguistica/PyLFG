@@ -59,13 +59,13 @@ jobs:
                    source $VENV
                    poetry --version
             -   name: Run Bandit
-                run: poetry run bandit -r mlconjug3/ -c .bandit.yml
+                run: poetry run bandit -r pylexique/ -c .bandit.yml
             -   name: Run Type Checker
                 run: |
                    poetry run pip install types-setuptools
                    poetry run mypy
             -   name: Run Pytest with coverage
-                run: poetry run pytest --cov=./mlconjug3/
+                run: poetry run pytest --cov=./pylexique/
             -   name: Build Package
                 run: poetry build
             -   name: Upload coverage artifacts to codecov
