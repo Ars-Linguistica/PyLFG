@@ -57,7 +57,7 @@ class XlfgParser(LfgParser):
         :return: list. A list of LFGParseTree objects representing the possible parse trees for the given sentence."
 
     """
-    def __init__(self, grammar: dict, lexicon: Lexicon):
+    def __init__(self, grammar: dict, lexicon: dict):
         self.grammar = grammar
         self.lexicon = lexicon
 
