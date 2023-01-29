@@ -1,7 +1,18 @@
-import openfst_python as fst
+"""
+The above docstrings describe the functions of the xle.py module, which includes loading templates, features, grammar, and lexicon from files.
+The load_templates function takes a template file as an input and returns a dictionary of templates, where the keys are the template names and the values are the template strings.
+The load_features function takes a features file as an input and returns a dictionary of features, where the keys are the feature names and the values are lists of feature values.
+The parse_grammar function takes a grammar file as an input, parse an XLE grammar file and return a dictionary of grammar rules, where the keys are non-terminal symbols and the values are lists of tuples representing the corresponding grammar rules in the form (lhs, rhs, c_constraints, f_constraints).
+The parse_lexicon function takes a lexicon file as an input, parse a lexicon file and return a dictionary of lexical entries, where the keys are words and the values are tuples of the form (morph, features).
+"""
+
+import openfst as fst
 
 
 def load_templates(template_file):
+    """
+    Loads templates from a given file and returns a dictionary of templates, where the keys are the template names and the values are the template strings.
+    """
     templates = {}
     with open(template_file, 'r') as f:
         template_str = f.read()
@@ -20,6 +31,9 @@ def load_templates(template_file):
     return templates
 
 def load_features(features_file):
+    """
+    Loads features from a given file and returns a dictionary of features, where the keys are the feature names and the values are lists of feature values.
+    """
     with open(features_file, 'r') as f:
         feature_data = f.read()
     # Do some processing of the feature data, such as splitting it into lines and parsing it
@@ -76,6 +90,9 @@ def parse_grammar(grammar_file: str) -> Dict[str, List[Tuple[str, List[str], Dic
     return grammar
     
     def parse_lexicon(file: str) -> Dict[str, Tuple[str, Dict[str, str]]]:
+        """
+        Parse a lexicon file and return a dictionary of lexical entries, where the keys are words and the values are tuples of the form (morph, features).
+        """
     lexicon = {}
     with open(file) as f:
         for line in f:
@@ -93,11 +110,19 @@ def parse_grammar(grammar_file: str) -> Dict[str, List[Tuple[str, List[str], Dic
             lexicon[word] = (morph, features)
     return lexicon
 
-def load_fst(fst_path: str):
+def load_fst(fst_path: str) -> fst.Fst:
+    """
+    Loads a finite state transducer from the specified file path and returns it as an fst.Fst object.
+    """
     fst = fst.Fst.read(fst_path)
-    return
+    return fst
     
 def integrate_lfg(lexicon, grammar):
+    Integrates a lexicon and grammar into a LFG (Lexical Functional Grammar) format.
+    It loads templates, feature declaration, morphconfig and rules from specific files.
+    Replaces placeholders in the templates with the parsed lexicon and grammar.
+Returns the LFG in string format.
+"""
     # Load the templates from common.templates.lfg
     with open('common.templates.lfg', 'r') as f:
         templates = f.read()

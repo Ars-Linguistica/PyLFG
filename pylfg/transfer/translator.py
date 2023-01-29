@@ -1,4 +1,13 @@
+"""
+Module for performing LFG (Lexical Functional Grammar) based translations.
+
+This module contains the LfgTranslator class, which uses LFG grammars and lexicons to translate sentences from one language to another. The class takes in source and target language information, as well as source and target grammars and lexicons, and uses these to parse and translate sentences.
+"""
+
 class LfgTranslator:
+    """
+    The LfgTranslator class is used to translate sentences from one language to another using LFG (Lexical-Functional Grammar) theory.
+    """
     def __init__(self, source_language: str, target_language: str, source_grammar: dict, target_grammar: dict, source_lexicon: dict, target_lexicon: dict):
         self.source_language = source_language
         self.target_language = target_language
