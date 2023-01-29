@@ -16,8 +16,8 @@ import re
 from typing import List, Dict, Tuple
 from .parse_tree import LFGParseTree, LFGParseTreeNode, LFGParseTreeNodeF
 from .parser_gen import CompiledLfgParser
-import .xlfg
-import .xle
+from pylfg import xlfg
+from pylfg import xle
 
 
 class LfgParser:
