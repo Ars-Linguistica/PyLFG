@@ -8,6 +8,7 @@ The parse_lexicon function takes a lexicon file as an input, parse a lexicon fil
 
 import openfst as fst
 from typing import *
+from .parse_tree import *
 
 
 def load_templates(template_file):
