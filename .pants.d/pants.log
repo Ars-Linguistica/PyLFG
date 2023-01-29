@@ -12,3 +12,198 @@
 10:13:35.14 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"docs/BUILD"}
 10:13:35.14 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"docs/BUILD", "docs"}
 10:13:35.14 [INFO] request completed: `--pants-bin-name=./pants --pants-version=2.14.1 tailor ::`
+10:14:54.67 [INFO] Extending leases
+10:14:54.68 [INFO] Done extending leases
+10:16:14.68 [INFO] Extending leases
+10:16:14.68 [INFO] Done extending leases
+10:17:34.68 [INFO] Extending leases
+10:17:34.68 [INFO] Done extending leases
+10:18:54.68 [INFO] Extending leases
+10:18:54.68 [INFO] Done extending leases
+10:20:14.68 [INFO] Extending leases
+10:20:14.68 [INFO] Done extending leases
+10:21:34.69 [INFO] Extending leases
+10:21:34.69 [INFO] Done extending leases
+10:22:54.69 [INFO] Extending leases
+10:22:54.69 [INFO] Done extending leases
+10:24:14.69 [INFO] Extending leases
+10:24:14.69 [INFO] Done extending leases
+10:25:34.69 [INFO] Extending leases
+10:25:34.69 [INFO] Done extending leases
+10:26:54.70 [INFO] Extending leases
+10:26:54.70 [INFO] Done extending leases
+10:28:14.70 [INFO] Extending leases
+10:28:14.70 [INFO] Done extending leases
+10:29:34.70 [INFO] Extending leases
+10:29:34.70 [INFO] Done extending leases
+10:30:54.70 [INFO] Extending leases
+10:30:54.70 [INFO] Done extending leases
+10:32:14.70 [INFO] Extending leases
+10:32:14.71 [INFO] Done extending leases
+10:33:34.71 [INFO] Extending leases
+10:33:34.71 [INFO] Done extending leases
+10:34:54.71 [INFO] Extending leases
+10:34:54.71 [INFO] Done extending leases
+10:36:14.71 [INFO] Extending leases
+10:36:14.71 [INFO] Done extending leases
+10:37:34.71 [INFO] Extending leases
+10:37:34.71 [INFO] Done extending leases
+10:38:54.72 [INFO] Extending leases
+10:38:54.72 [INFO] Done extending leases
+10:40:14.72 [INFO] Extending leases
+10:40:14.72 [INFO] Done extending leases
+10:41:34.72 [INFO] Extending leases
+10:41:34.72 [INFO] Done extending leases
+10:42:54.72 [INFO] Extending leases
+10:42:54.72 [INFO] Done extending leases
+10:44:14.72 [INFO] Extending leases
+10:44:14.73 [INFO] Done extending leases
+10:45:34.73 [INFO] Extending leases
+10:45:34.73 [INFO] Done extending leases
+10:46:54.73 [INFO] Extending leases
+10:46:54.73 [INFO] Done extending leases
+10:48:14.73 [INFO] Extending leases
+10:48:14.73 [INFO] Done extending leases
+10:49:34.73 [INFO] Extending leases
+10:49:34.73 [INFO] Done extending leases
+10:50:54.74 [INFO] Extending leases
+10:50:54.74 [INFO] Done extending leases
+10:52:14.74 [INFO] Extending leases
+10:52:14.74 [INFO] Done extending leases
+10:53:34.74 [INFO] Extending leases
+10:53:34.74 [INFO] Done extending leases
+10:54:54.74 [INFO] Extending leases
+10:54:54.74 [INFO] Done extending leases
+10:56:14.75 [INFO] Extending leases
+10:56:14.75 [INFO] Done extending leases
+10:57:34.75 [INFO] Extending leases
+10:57:34.75 [INFO] Done extending leases
+10:58:54.75 [INFO] Extending leases
+10:58:54.75 [INFO] Done extending leases
+11:00:14.75 [INFO] Extending leases
+11:00:14.75 [INFO] Done extending leases
+11:01:34.75 [INFO] Extending leases
+11:01:34.76 [INFO] Done extending leases
+11:02:54.76 [INFO] Extending leases
+11:02:54.76 [INFO] Done extending leases
+11:04:14.76 [INFO] Extending leases
+11:04:14.76 [INFO] Done extending leases
+11:05:34.76 [INFO] Extending leases
+11:05:34.76 [INFO] Done extending leases
+11:06:54.76 [INFO] Extending leases
+11:06:54.76 [INFO] Done extending leases
+11:08:14.77 [INFO] Extending leases
+11:08:14.77 [INFO] Done extending leases
+11:09:34.77 [INFO] Extending leases
+11:09:34.77 [INFO] Done extending leases
+11:10:54.77 [INFO] Extending leases
+11:10:54.77 [INFO] Done extending leases
+11:12:14.77 [INFO] Extending leases
+11:12:14.77 [INFO] Done extending leases
+11:13:34.78 [INFO] Garbage collecting store. target_size=28,800,000,000
+11:13:34.78 [INFO] Done garbage collecting store
+11:13:34.78 [INFO] Extending leases
+11:13:34.78 [INFO] Done extending leases
+11:14:54.78 [INFO] Extending leases
+11:14:54.78 [INFO] Done extending leases
+11:16:14.78 [INFO] Extending leases
+11:16:14.78 [INFO] Done extending leases
+11:17:34.78 [INFO] Extending leases
+11:17:34.78 [INFO] Done extending leases
+11:18:54.78 [INFO] Extending leases
+11:18:54.79 [INFO] Done extending leases
+11:20:14.79 [INFO] Extending leases
+11:20:14.79 [INFO] Done extending leases
+11:21:34.79 [INFO] Extending leases
+11:21:34.79 [INFO] Done extending leases
+11:22:54.79 [INFO] Extending leases
+11:22:54.79 [INFO] Done extending leases
+11:24:14.79 [INFO] Extending leases
+11:24:14.79 [INFO] Done extending leases
+11:25:34.80 [INFO] Extending leases
+11:25:34.80 [INFO] Done extending leases
+11:26:54.80 [INFO] Extending leases
+11:26:54.80 [INFO] Done extending leases
+11:28:14.80 [INFO] Extending leases
+11:28:14.80 [INFO] Done extending leases
+11:29:34.80 [INFO] Extending leases
+11:29:34.80 [INFO] Done extending leases
+11:30:54.81 [INFO] Extending leases
+11:30:54.81 [INFO] Done extending leases
+11:32:14.81 [INFO] Extending leases
+11:32:14.81 [INFO] Done extending leases
+11:33:34.81 [INFO] Extending leases
+11:33:34.81 [INFO] Done extending leases
+11:34:54.81 [INFO] Extending leases
+11:34:54.81 [INFO] Done extending leases
+11:36:14.81 [INFO] Extending leases
+11:36:14.82 [INFO] Done extending leases
+11:37:34.82 [INFO] Extending leases
+11:37:34.82 [INFO] Done extending leases
+11:38:54.82 [INFO] Extending leases
+11:38:54.82 [INFO] Done extending leases
+11:40:14.82 [INFO] Extending leases
+11:40:14.82 [INFO] Done extending leases
+11:41:34.82 [INFO] Extending leases
+11:41:34.83 [INFO] Done extending leases
+11:42:54.83 [INFO] Extending leases
+11:42:54.83 [INFO] Done extending leases
+11:44:14.83 [INFO] Extending leases
+11:44:14.83 [INFO] Done extending leases
+11:45:34.83 [INFO] Extending leases
+11:45:34.83 [INFO] Done extending leases
+11:46:54.83 [INFO] Extending leases
+11:46:54.83 [INFO] Done extending leases
+11:48:14.84 [INFO] Extending leases
+11:48:14.84 [INFO] Done extending leases
+11:49:34.84 [INFO] Extending leases
+11:49:34.84 [INFO] Done extending leases
+11:50:54.84 [INFO] Extending leases
+11:50:54.84 [INFO] Done extending leases
+11:52:14.84 [INFO] Extending leases
+11:52:14.84 [INFO] Done extending leases
+11:53:34.84 [INFO] Extending leases
+11:53:34.85 [INFO] Done extending leases
+11:54:54.85 [INFO] Extending leases
+11:54:54.85 [INFO] Done extending leases
+11:56:14.85 [INFO] Extending leases
+11:56:14.85 [INFO] Done extending leases
+11:57:34.85 [INFO] Extending leases
+11:57:34.85 [INFO] Done extending leases
+11:58:54.85 [INFO] Extending leases
+11:58:54.86 [INFO] Done extending leases
+12:00:14.86 [INFO] Extending leases
+12:00:14.86 [INFO] Done extending leases
+12:01:34.86 [INFO] Extending leases
+12:01:34.86 [INFO] Done extending leases
+12:02:54.86 [INFO] Extending leases
+12:02:54.86 [INFO] Done extending leases
+12:04:14.86 [INFO] Extending leases
+12:04:14.86 [INFO] Done extending leases
+12:05:09.89 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"poetry.lock"}
+12:05:09.89 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"poetry.lock"}
+12:05:09.89 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {"", "poetry.lock"}
+12:05:16.80 [INFO] notify invalidation: cleared 1 and dirtied 54 nodes for: {"pyproject.toml"}
+12:05:16.80 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"pyproject.toml"}
+12:05:16.80 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"pyproject.toml"}
+12:05:16.80 [INFO] notify invalidation: cleared 0 and dirtied 0 nodes for: {"pyproject.toml"}
+12:05:16.80 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {"", "pyproject.toml"}
+12:05:16.80 [INFO] notify invalidation: cleared 1 and dirtied 211 nodes for: {"pyproject.toml", ""}
+12:05:34.87 [INFO] Extending leases
+12:05:34.87 [INFO] Done extending leases
+12:06:54.87 [INFO] Extending leases
+12:06:54.87 [INFO] Done extending leases
+12:08:14.87 [INFO] Extending leases
+12:08:14.87 [INFO] Done extending leases
+12:09:34.87 [INFO] Extending leases
+12:09:34.87 [INFO] Done extending leases
+12:10:54.87 [INFO] Extending leases
+12:10:54.88 [INFO] Done extending leases
+12:12:14.88 [INFO] Extending leases
+12:12:14.88 [INFO] Done extending leases
+12:13:34.88 [INFO] Garbage collecting store. target_size=28,800,000,000
+12:13:34.88 [INFO] Done garbage collecting store
+12:13:34.88 [INFO] Extending leases
+12:13:34.88 [INFO] Done extending leases
+12:14:54.88 [INFO] Extending leases
+12:14:54.88 [INFO] Done extending leases
