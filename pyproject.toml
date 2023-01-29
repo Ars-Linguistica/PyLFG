@@ -33,3 +33,21 @@ bandit = "^1.7.4"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.bandit]
+skips = ["B311"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+
+[tool.mypy]
+warn_unused_configs = true
+strict = true
+ignore_missing_imports = true
+show_error_codes = true
+files = "pylfg/"
