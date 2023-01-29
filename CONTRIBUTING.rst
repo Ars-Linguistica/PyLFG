@@ -16,7 +16,7 @@ Types of Contributions
 Report Bugs
 ~~~~~~~~~~~
 
-Report bugs at https://github.com/SekouDiaoNlp/PyLFG/issues.
+Report bugs at https://github.com/Ars-Linguistica/PyLFG/issues.
 
 If you are reporting a bug, please include:
 
@@ -46,7 +46,7 @@ articles, and such.
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
-The best way to send feedback is to file an issue at https://github.com/SekouDiaoNlp/PyLFG/issues.
+The best way to send feedback is to file an issue at https://github.com/Ars-Linguistica/PyLFG/issues.
 
 If you are proposing a feature:
 
@@ -63,7 +63,7 @@ You can do this by running the following commands in your terminal:
 
 .. code-block:: console
 
-    $ git clone git@github.com:SekouDiaoNlp/PyLFG.git
+    $ git clone git@github.com:Ars-Linguistica/PyLFG.git
 
 We recommend using poetry as our build manager and the pyproject.toml file to manage our dependencies. Make sure you have poetry installed, then
 

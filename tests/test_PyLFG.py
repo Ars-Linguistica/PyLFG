@@ -1,8 +1,8 @@
 import pytest
 
-from PyLFG import parser
-from PyLFG.parse_tree import LFGParseTree
-from PyLFG.EN import grammar, lexicon
+from pylfg import parser
+from pylfg.parse_tree import LFGParseTree
+from pylfg.EN import grammar, lexicon
 from test_sentences import test_sentences
 
 # Test build_parse_tree()

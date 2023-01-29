@@ -2,7 +2,7 @@
 name = "pylfg"
 version = "0.1.1a0"
 description = "PyLFG is a Python library for working within the Lexical Functional Grammar (LFG) formalism. It provides a set of classes and methods for representing and manipulating LFG structures, including lexical functional structures (f-structures) and c-structures."
-authors = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
+authors = ["SekouDiaoNlp, ARS LInguistica <diao.sekou.nlp@gmail.com>"]
 license = "MIT"
 readme = "README.rst"
 
@@ -28,7 +28,27 @@ docutils = "^0.19"
 sphinx = "^6.1.3"
 furo = "^2022.12.7"
 pyupgrade = "^3.3.1"
+bandit = "^1.7.4"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.bandit]
+skips = ["B311"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+
+[tool.mypy]
+warn_unused_configs = true
+strict = true
+ignore_missing_imports = true
+show_error_codes = true
+files = "pylfg/"
+exclude = ["pylfg/TUI/", "pylfg/WebUI/"]

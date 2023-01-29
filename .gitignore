@@ -2,3 +2,5 @@
 /.pants.*
 /dist/
 /.pids
+/*/__pycache__/
+/tests/.coverage
