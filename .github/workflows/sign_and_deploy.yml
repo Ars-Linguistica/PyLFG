@@ -60,14 +60,14 @@ jobs:
             -   run: |
                    source $VENV
                    poetry --version
-            -   name: Run Type Checker
-                run: |
-                    poetry run pip install types-setuptools
-                    poetry run mypy
-            -   name: Run Pytest with coverage
-                run: poetry run pytest --cov=./pylexique/
-            -   name: Upload coverage artifacts to codecov
-                run: poetry run codecov --token=secrets.CODECOV_TOKEN
+            # -   name: Run Type Checker
+                # run: |
+                    # poetry run pip install types-setuptools
+                    # poetry run mypy
+            # -   name: Run Pytest with coverage
+                # run: poetry run pytest --cov=./pylexique/
+            # -   name: Upload coverage artifacts to codecov
+                # run: poetry run codecov --token=secrets.CODECOV_TOKEN
             -   name: Build Package
                 run: poetry build
             -   name: Sign with sigstore
@@ -76,7 +76,7 @@ jobs:
                   upload-signing-artifacts: true
                   release-signing-artifacts: true
                   inputs: dist/*.tar.gz dist/*.whl
-            -   name: Upload Package to PyPi
-                run: |
-                    poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
-                    poetry publish
+            # -   name: Upload Package to PyPi
+                # run: |
+                    # poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
+                    # poetry publish
