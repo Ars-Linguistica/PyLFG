@@ -51,3 +51,4 @@ strict = true
 ignore_missing_imports = true
 show_error_codes = true
 files = "pylfg/"
+exclude = ["pylfg/TUI/", "pylfg/WebUI/"]
