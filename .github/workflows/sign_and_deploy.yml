@@ -65,7 +65,7 @@ jobs:
                     poetry run pip install types-setuptools
                     poetry run mypy
             -   name: Run Pytest with coverage
-                run: poetry run pytest --cov=./pylexique/
+                run: poetry run pytest --cov=./pylfg/
             -   name: Upload coverage artifacts to codecov
                 run: poetry run codecov --token=secrets.CODECOV_TOKEN
             -   name: Build Package
